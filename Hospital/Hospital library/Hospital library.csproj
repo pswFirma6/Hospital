@@ -1,0 +1,28 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <RootNamespace>Hospital_library</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="GraphicalEditor\Model\" />
+    <Folder Include="GraphicalEditor\Service\" />
+    <Folder Include="GraphicalEditor\Repository\" />
+    <Folder Include="MedicalRecords\Model\" />
+    <Folder Include="MedicalRecords\Repository\" />
+    <Folder Include="RoomsAndEquipment\Model\" />
+    <Folder Include="RoomsAndEquipment\Repository\" />
+    <Folder Include="RoomsAndEquipment\Service\" />
+    <Folder Include="Schedule\Model\" />
+    <Folder Include="Schedule\Repository\" />
+    <Folder Include="Schedule\Service\" />
+    <Folder Include="SharedModel\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="5.0.10" />
+    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL.Design" Version="1.1.0" />
+  </ItemGroup>
+
+</Project>

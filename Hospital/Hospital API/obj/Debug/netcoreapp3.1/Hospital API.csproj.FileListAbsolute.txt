@@ -1,0 +1,48 @@
+C:\Users\Lenovo\Desktop\pswLocal\pswLocal\Hospital\Hospital API\bin\Debug\netcoreapp3.1\appsettings.Development.json
+C:\Users\Lenovo\Desktop\pswLocal\pswLocal\Hospital\Hospital API\bin\Debug\netcoreapp3.1\appsettings.json
+C:\Users\Lenovo\Desktop\pswLocal\pswLocal\Hospital\Hospital API\bin\Debug\netcoreapp3.1\Hospital API.exe
+C:\Users\Lenovo\Desktop\pswLocal\pswLocal\Hospital\Hospital API\bin\Debug\netcoreapp3.1\Hospital API.deps.json
+C:\Users\Lenovo\Desktop\pswLocal\pswLocal\Hospital\Hospital API\bin\Debug\netcoreapp3.1\Hospital API.runtimeconfig.json
+C:\Users\Lenovo\Desktop\pswLocal\pswLocal\Hospital\Hospital API\bin\Debug\netcoreapp3.1\Hospital API.runtimeconfig.dev.json
+C:\Users\Lenovo\Desktop\pswLocal\pswLocal\Hospital\Hospital API\bin\Debug\netcoreapp3.1\Hospital API.dll
+C:\Users\Lenovo\Desktop\pswLocal\pswLocal\Hospital\Hospital API\bin\Debug\netcoreapp3.1\Hospital API.pdb
+C:\Users\Lenovo\Desktop\pswLocal\pswLocal\Hospital\Hospital API\bin\Debug\netcoreapp3.1\AutoMapper.dll
+C:\Users\Lenovo\Desktop\pswLocal\pswLocal\Hospital\Hospital API\bin\Debug\netcoreapp3.1\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
+C:\Users\Lenovo\Desktop\pswLocal\pswLocal\Hospital\Hospital API\bin\Debug\netcoreapp3.1\Hospital-PSW.dll
+C:\Users\Lenovo\Desktop\pswLocal\pswLocal\Hospital\Hospital API\bin\Debug\netcoreapp3.1\Humanizer.dll
+C:\Users\Lenovo\Desktop\pswLocal\pswLocal\Hospital\Hospital API\bin\Debug\netcoreapp3.1\Microsoft.EntityFrameworkCore.dll
+C:\Users\Lenovo\Desktop\pswLocal\pswLocal\Hospital\Hospital API\bin\Debug\netcoreapp3.1\Microsoft.EntityFrameworkCore.Abstractions.dll
+C:\Users\Lenovo\Desktop\pswLocal\pswLocal\Hospital\Hospital API\bin\Debug\netcoreapp3.1\Microsoft.EntityFrameworkCore.Design.dll
+C:\Users\Lenovo\Desktop\pswLocal\pswLocal\Hospital\Hospital API\bin\Debug\netcoreapp3.1\Microsoft.EntityFrameworkCore.Relational.dll
+C:\Users\Lenovo\Desktop\pswLocal\pswLocal\Hospital\Hospital API\bin\Debug\netcoreapp3.1\Microsoft.EntityFrameworkCore.Relational.Design.dll
+C:\Users\Lenovo\Desktop\pswLocal\pswLocal\Hospital\Hospital API\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Caching.Abstractions.dll
+C:\Users\Lenovo\Desktop\pswLocal\pswLocal\Hospital\Hospital API\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Caching.Memory.dll
+C:\Users\Lenovo\Desktop\pswLocal\pswLocal\Hospital\Hospital API\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Configuration.Abstractions.dll
+C:\Users\Lenovo\Desktop\pswLocal\pswLocal\Hospital\Hospital API\bin\Debug\netcoreapp3.1\Microsoft.Extensions.DependencyInjection.dll
+C:\Users\Lenovo\Desktop\pswLocal\pswLocal\Hospital\Hospital API\bin\Debug\netcoreapp3.1\Microsoft.Extensions.DependencyInjection.Abstractions.dll
+C:\Users\Lenovo\Desktop\pswLocal\pswLocal\Hospital\Hospital API\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Logging.dll
+C:\Users\Lenovo\Desktop\pswLocal\pswLocal\Hospital\Hospital API\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Logging.Abstractions.dll
+C:\Users\Lenovo\Desktop\pswLocal\pswLocal\Hospital\Hospital API\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Options.dll
+C:\Users\Lenovo\Desktop\pswLocal\pswLocal\Hospital\Hospital API\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Primitives.dll
+C:\Users\Lenovo\Desktop\pswLocal\pswLocal\Hospital\Hospital API\bin\Debug\netcoreapp3.1\Npgsql.dll
+C:\Users\Lenovo\Desktop\pswLocal\pswLocal\Hospital\Hospital API\bin\Debug\netcoreapp3.1\Npgsql.EntityFrameworkCore.PostgreSQL.dll
+C:\Users\Lenovo\Desktop\pswLocal\pswLocal\Hospital\Hospital API\bin\Debug\netcoreapp3.1\Npgsql.EntityFrameworkCore.PostgreSQL.Design.dll
+C:\Users\Lenovo\Desktop\pswLocal\pswLocal\Hospital\Hospital API\bin\Debug\netcoreapp3.1\System.Collections.Immutable.dll
+C:\Users\Lenovo\Desktop\pswLocal\pswLocal\Hospital\Hospital API\bin\Debug\netcoreapp3.1\System.ComponentModel.Annotations.dll
+C:\Users\Lenovo\Desktop\pswLocal\pswLocal\Hospital\Hospital API\bin\Debug\netcoreapp3.1\System.Diagnostics.DiagnosticSource.dll
+C:\Users\Lenovo\Desktop\pswLocal\pswLocal\Hospital\Hospital API\bin\Debug\netcoreapp3.1\Hospital library.dll
+C:\Users\Lenovo\Desktop\pswLocal\pswLocal\Hospital\Hospital API\bin\Debug\netcoreapp3.1\Hospital library.pdb
+C:\Users\Lenovo\Desktop\pswLocal\pswLocal\Hospital\Hospital API\obj\Debug\netcoreapp3.1\Hospital API.csprojAssemblyReference.cache
+C:\Users\Lenovo\Desktop\pswLocal\pswLocal\Hospital\Hospital API\obj\Debug\netcoreapp3.1\Hospital API.AssemblyInfoInputs.cache
+C:\Users\Lenovo\Desktop\pswLocal\pswLocal\Hospital\Hospital API\obj\Debug\netcoreapp3.1\Hospital API.AssemblyInfo.cs
+C:\Users\Lenovo\Desktop\pswLocal\pswLocal\Hospital\Hospital API\obj\Debug\netcoreapp3.1\Hospital API.csproj.CoreCompileInputs.cache
+C:\Users\Lenovo\Desktop\pswLocal\pswLocal\Hospital\Hospital API\obj\Debug\netcoreapp3.1\Hospital API.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\Lenovo\Desktop\pswLocal\pswLocal\Hospital\Hospital API\obj\Debug\netcoreapp3.1\Hospital API.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\Lenovo\Desktop\pswLocal\pswLocal\Hospital\Hospital API\obj\Debug\netcoreapp3.1\staticwebassets\Hospital API.StaticWebAssets.Manifest.cache
+C:\Users\Lenovo\Desktop\pswLocal\pswLocal\Hospital\Hospital API\obj\Debug\netcoreapp3.1\staticwebassets\Hospital API.StaticWebAssets.xml
+C:\Users\Lenovo\Desktop\pswLocal\pswLocal\Hospital\Hospital API\obj\Debug\netcoreapp3.1\scopedcss\bundle\Hospital API.styles.css
+C:\Users\Lenovo\Desktop\pswLocal\pswLocal\Hospital\Hospital API\obj\Debug\netcoreapp3.1\Hospital API.RazorTargetAssemblyInfo.cache
+C:\Users\Lenovo\Desktop\pswLocal\pswLocal\Hospital\Hospital API\obj\Debug\netcoreapp3.1\Hospital API.csproj.CopyComplete
+C:\Users\Lenovo\Desktop\pswLocal\pswLocal\Hospital\Hospital API\obj\Debug\netcoreapp3.1\Hospital API.dll
+C:\Users\Lenovo\Desktop\pswLocal\pswLocal\Hospital\Hospital API\obj\Debug\netcoreapp3.1\Hospital API.pdb
+C:\Users\Lenovo\Desktop\pswLocal\pswLocal\Hospital\Hospital API\obj\Debug\netcoreapp3.1\Hospital API.genruntimeconfig.cache
