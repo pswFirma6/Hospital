@@ -1,12 +1,10 @@
+*.log
+.DS_Store
+node_modules
+dist
 
 .vs
 /Hospital/Hospital API/bin
 /Hospital/Hospital API/obj
 /Hospital/Hospital library/bin
 /Hospital/Hospital library/obj
-
-
-*.log
-.DS_Store
-dist
-
