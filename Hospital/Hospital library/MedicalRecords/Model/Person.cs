@@ -18,9 +18,11 @@ namespace Hospital_library.Model
         public string Email { get; set; }
         public string Username { get; set; }
         public string Password { get; set; }
-        public Gender gender { get; set; }
+        public Gender Gender { get; set; }
+        public string City { get; set; } 
+        public string Country { get; set; }
 
-        public Person(string id,string name, string surname, DateTime birthDate, string jmbg, string address, string phone, string email, string username, string password, Gender gender)
+        public Person(string id,string name, string surname, DateTime birthDate, string jmbg, string address, string phone, string email, string username, string password, Gender gender, string city, string country)
         {
             Id = id;
             Name = name;
@@ -32,7 +34,9 @@ namespace Hospital_library.Model
             Email = email;
             Username = username;
             Password = password;
-            this.gender = gender;
+            Gender = gender;
+            City = city;
+            Country = country;
         }
     }
 }
