@@ -1,5 +1,6 @@
 ﻿using Hospital_API.DTO;
 using Hospital_API.Repository;
+using Hospital_library.MedicalRecords.Model;
 using Hospital_library.MedicalRecords.Model.Enums;
 using Hospital_library.MedicalRecords.Service;
 using Hospital_library.Model;
@@ -38,12 +39,12 @@ namespace Hospital_API.Service
             _repositoryFactory.GetPersonRepository().Add(person1);
             */
             List<Feedback> feedbacks = _repositoryFactory.GetFeedbackRepository().GetAll();
-            List<Person> persons = _repositoryFactory.GetPersonRepository().GetAll();
+            List<Patient> patients = _repositoryFactory.GetPatientRepository().GetAll();
             List<ViewFeedbackDTO> feedbackDTOs = new List<ViewFeedbackDTO>();
 
             foreach (Feedback feedback in feedbacks)
             {
-                Person person = persons.Find(id => id.Id == feedback.PersonId);
+                Patient patient = patients.Find(id => id.Id == feedback.PersonId);
                 if (feedback.State == FeedbackState.approved)
                 {
                     if (feedback.Anonymous)
@@ -52,7 +53,7 @@ namespace Hospital_API.Service
                     }
                     else
                     {
-                        feedbackDTOs.Add(new ViewFeedbackDTO(person.Name + " " + person.Surname, feedback.Text, feedback.Date));
+                        feedbackDTOs.Add(new ViewFeedbackDTO(patient.Name + " " + patient.Surname, feedback.Text, feedback.Date));
                     }
                 }
             }

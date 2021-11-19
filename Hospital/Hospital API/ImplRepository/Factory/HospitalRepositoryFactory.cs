@@ -13,7 +13,7 @@ namespace Hospital_API.Repository
             _context = context;
         }
         public FeedbackRepository FeedbackRepository { get; set; }
-        public PersonRepository PersonRepository { get; set; }
+        public PatientRepository PersonRepository { get; set; }
 
         public override FeedbackRepository GetFeedbackRepository()
         {
@@ -23,10 +23,10 @@ namespace Hospital_API.Repository
                 return FeedbackRepository;
         }
 
-        public override PersonRepository GetPersonRepository()
+        public override PatientRepository GetPatientRepository()
         {
             if (PersonRepository == null)
-                return new PersonRepository(_context);
+                return new PatientRepository(_context);
             else
                 return PersonRepository;
         }

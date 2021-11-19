@@ -1,7 +1,4 @@
-﻿
-
-
-using Hospital_API.ImplRepository;
+﻿using Hospital_API.ImplRepository;
 
 namespace Hospital_API.Repository
 {
@@ -9,6 +6,6 @@ namespace Hospital_API.Repository
     {
         public abstract FeedbackRepository GetFeedbackRepository();
 
-        public abstract PersonRepository GetPersonRepository();
+        public abstract PatientRepository GetPatientRepository();
     }
 }
