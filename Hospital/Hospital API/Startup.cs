@@ -1,8 +1,10 @@
 using AutoMapper;
+using Hospital_API.ImplRepository;
 using Hospital_API.Repository;
 using Hospital_API.Service;
 using Hospital_library.MedicalRecords.Repository;
 using Hospital_library.MedicalRecords.Repository.Interface;
+using Hospital_library.MedicalRecords.Repository.Repository.Interface;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -53,7 +55,7 @@ namespace Hospital_API
             services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
 
             services.AddScoped<HospitalRepositoryFactory>();
-
+            services.AddScoped<IPatientRepository, PatientRepository>();
             // Connection with PostgreSQL
             services.AddControllers();
 

@@ -13,8 +13,6 @@
     <Folder Include="GraphicalEditor\Model\" />
     <Folder Include="GraphicalEditor\Service\" />
     <Folder Include="GraphicalEditor\Repository\" />
-    <Folder Include="MedicalRecords\Model\" />
-    <Folder Include="MedicalRecords\Repository\" />
     <Folder Include="RoomsAndEquipment\Model\" />
     <Folder Include="RoomsAndEquipment\Repository\" />
     <Folder Include="RoomsAndEquipment\Service\" />

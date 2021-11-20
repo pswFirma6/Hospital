@@ -1,9 +1,0 @@
-C:\Users\Lenovo\Desktop\pswLocal\pswLocal\Hospital\Hospital library\bin\Debug\netcoreapp3.1\Hospital library.deps.json
-C:\Users\Lenovo\Desktop\pswLocal\pswLocal\Hospital\Hospital library\bin\Debug\netcoreapp3.1\Hospital library.dll
-C:\Users\Lenovo\Desktop\pswLocal\pswLocal\Hospital\Hospital library\bin\Debug\netcoreapp3.1\Hospital library.pdb
-C:\Users\Lenovo\Desktop\pswLocal\pswLocal\Hospital\Hospital library\obj\Debug\netcoreapp3.1\Hospital library.csprojAssemblyReference.cache
-C:\Users\Lenovo\Desktop\pswLocal\pswLocal\Hospital\Hospital library\obj\Debug\netcoreapp3.1\Hospital library.AssemblyInfoInputs.cache
-C:\Users\Lenovo\Desktop\pswLocal\pswLocal\Hospital\Hospital library\obj\Debug\netcoreapp3.1\Hospital library.AssemblyInfo.cs
-C:\Users\Lenovo\Desktop\pswLocal\pswLocal\Hospital\Hospital library\obj\Debug\netcoreapp3.1\Hospital library.csproj.CoreCompileInputs.cache
-C:\Users\Lenovo\Desktop\pswLocal\pswLocal\Hospital\Hospital library\obj\Debug\netcoreapp3.1\Hospital library.dll
-C:\Users\Lenovo\Desktop\pswLocal\pswLocal\Hospital\Hospital library\obj\Debug\netcoreapp3.1\Hospital library.pdb
