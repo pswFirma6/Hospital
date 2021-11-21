@@ -3,15 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31019.35
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IntegrationAPI", "IntegrationAPI\IntegrationAPI.csproj", "{FAD27339-3E84-4E81-AF5F-ED4206E469BD}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hospital API", "Hospital API\Hospital API.csproj", "{54B86949-B956-4F6E-BD63-3ECBFA2207FA}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Integration library", "Integration library\Integration library.csproj", "{4AE92CFA-8FF5-48CC-B0A1-31120ABAC7FE}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hospital library", "Hospital library\Hospital library.csproj", "{0D6AEA12-DA04-49E4-9F86-1D03DFE3AA0F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HospitalTests", "HospitalTests\HospitalTests.csproj", "{5F8AA262-933B-49F8-985B-35A8023E77ED}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HospitalTests", "HospitalTests\HospitalTests.csproj", "{5F8AA262-933B-49F8-985B-35A8023E77ED}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -19,18 +15,10 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{FAD27339-3E84-4E81-AF5F-ED4206E469BD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{FAD27339-3E84-4E81-AF5F-ED4206E469BD}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{FAD27339-3E84-4E81-AF5F-ED4206E469BD}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{FAD27339-3E84-4E81-AF5F-ED4206E469BD}.Release|Any CPU.Build.0 = Release|Any CPU
 		{54B86949-B956-4F6E-BD63-3ECBFA2207FA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{54B86949-B956-4F6E-BD63-3ECBFA2207FA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{54B86949-B956-4F6E-BD63-3ECBFA2207FA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{54B86949-B956-4F6E-BD63-3ECBFA2207FA}.Release|Any CPU.Build.0 = Release|Any CPU
-		{4AE92CFA-8FF5-48CC-B0A1-31120ABAC7FE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{4AE92CFA-8FF5-48CC-B0A1-31120ABAC7FE}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{4AE92CFA-8FF5-48CC-B0A1-31120ABAC7FE}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{4AE92CFA-8FF5-48CC-B0A1-31120ABAC7FE}.Release|Any CPU.Build.0 = Release|Any CPU
 		{0D6AEA12-DA04-49E4-9F86-1D03DFE3AA0F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{0D6AEA12-DA04-49E4-9F86-1D03DFE3AA0F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0D6AEA12-DA04-49E4-9F86-1D03DFE3AA0F}.Release|Any CPU.ActiveCfg = Release|Any CPU
