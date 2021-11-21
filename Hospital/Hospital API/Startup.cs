@@ -57,6 +57,8 @@ namespace Hospital_API
 
             services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
 
+            services.AddScoped<SurveyService>();
+
             services.AddScoped<HospitalRepositoryFactory>();
             services.AddScoped<IPatientRepository, PatientRepository>();
             // Connection with PostgreSQL

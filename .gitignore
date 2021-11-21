@@ -6,6 +6,9 @@
 /Hospital/Hospital library/obj
 /Hospital/HospitalTests/bin
 /Hospital/HospitalTests/obj
+/Hospital/HospitalIntegrationTests/obj
+/Hospital/HospitalIntegrationTests/bin
+
 
 *.log
 .DS_Store
