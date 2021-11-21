@@ -4,6 +4,8 @@
 /Hospital/Hospital API/obj
 /Hospital/Hospital library/bin
 /Hospital/Hospital library/obj
+/Hospital/HospitalTests/bin
+/Hospital/HospitalTests/obj
 
 *.log
 .DS_Store
