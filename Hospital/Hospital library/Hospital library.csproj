@@ -1,8 +1,12 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
+	<PackageId>HospitalLibrary</PackageId>
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <RootNamespace>Hospital_library</RootNamespace>
+	<RepositoryType>git</RepositoryType>
+	<RepositoryUrl>https://github.com/pswFirma6/Hospital.git</RepositoryUrl>
+	<IsPackable>true</IsPackable>
   </PropertyGroup>
 
   <ItemGroup>
