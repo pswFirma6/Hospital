@@ -11,7 +11,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Integration library", "Inte
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hospital library", "Hospital library\Hospital library.csproj", "{0D6AEA12-DA04-49E4-9F86-1D03DFE3AA0F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HospitalTests", "HospitalTests\HospitalTests.csproj", "{5F8AA262-933B-49F8-985B-35A8023E77ED}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HospitalUnitTests", "HospitalTests\HospitalUnitTests.csproj", "{5F8AA262-933B-49F8-985B-35A8023E77ED}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HospitalIntegrationTests", "HospitalIntegrationTests\HospitalIntegrationTests.csproj", "{23B2576D-40E4-4DC5-9575-CB401C40F2E0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{5F8AA262-933B-49F8-985B-35A8023E77ED}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5F8AA262-933B-49F8-985B-35A8023E77ED}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5F8AA262-933B-49F8-985B-35A8023E77ED}.Release|Any CPU.Build.0 = Release|Any CPU
+		{23B2576D-40E4-4DC5-9575-CB401C40F2E0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{23B2576D-40E4-4DC5-9575-CB401C40F2E0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{23B2576D-40E4-4DC5-9575-CB401C40F2E0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{23B2576D-40E4-4DC5-9575-CB401C40F2E0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

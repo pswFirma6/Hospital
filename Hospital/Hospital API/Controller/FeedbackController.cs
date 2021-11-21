@@ -18,10 +18,7 @@ namespace Hospital_API.Controller
         // Create a field to store the mapper object
         private readonly IMapper _mapper;
 
-        private List<FeedbackResponseDTO> feedbacks = new List<FeedbackResponseDTO>();
-
         // Assign the object in the constructor for dependency injection
-
         public FeedbackController(FeedbackService feedbackService, IMapper mapper)
         {
             _feedbackService = feedbackService;

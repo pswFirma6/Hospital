@@ -1,8 +1,6 @@
 using Hospital_API.ImplService;
-using Hospital_API.Repository;
 using Hospital_library.MedicalRecords.Model;
 using Hospital_library.MedicalRecords.Model.Enums;
-using Hospital_library.MedicalRecords.Repository.Interface;
 using Hospital_library.MedicalRecords.Repository.Repository.Interface;
 using Moq;
 using Shouldly;
@@ -18,7 +16,7 @@ namespace HospitalTests.UnitTests
         [Fact]
         public void Check_Existing_Patient()
         {
-            // Arange //
+            // Arrange //
             Doctor doctor = new Doctor();
             List<Allergy> allergies = new List<Allergy>();
             Patient newPatient = new Patient("2", "Mira", "Miric", DateTime.Now,
@@ -39,7 +37,7 @@ namespace HospitalTests.UnitTests
         [Fact]
         public void Check_Not_Existing_Patient()
         {   
-            // Arange //
+            // Arrange //
             Doctor doctor = new Doctor();
             List<Allergy> allergies = new List<Allergy>();
             Patient newPatient = new Patient("2", "Mira", "Miric", DateTime.Now,
