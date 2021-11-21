@@ -1,10 +1,5 @@
-using Hospital_API;
-using Hospital_API.ImplRepository;
-using Hospital_API.ImplService;
 using Hospital_library.MedicalRecords.Model;
 using Hospital_library.MedicalRecords.Model.Enums;
-using Hospital_library.MedicalRecords.Repository.Repository.Interface;
-using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -26,28 +21,21 @@ namespace HospitalIntegrationTests
 
         [Fact]
         public async Task Checks_Successful_RegistrationAsync()
-        {
-            //var service = (PatientService) injection.ServiceProvider.GetService(typeof(PatientService));
-            //service.Register(new Patient());
-            
-            var url = "api/registration";
+        {   /* How to call service in integration test
+              var service = (PatientService) injection.ServiceProvider.GetService(typeof(PatientService));
+              service.Register(new Patient());
+            */
 
-            Doctor doctor = new Doctor();
-            List<Allergy> allergies = new List<Allergy>();
-
-            Patient newPatient = new Patient("2", "Mira", "Miric", DateTime.Now,
-                "0542369712546", "Partizanskih baza 7.", "0666423599", "marko@gmail.com",
-                "Mirami", "mira123", Hospital_library.Model.Enumeration.Gender.female,
-                "Novi Sad", "Serbia", UserType.patient, BloodType.B, RhFactor.positive,
-                189, 85, doctor, allergies);
-
-            var json = JsonConvert.SerializeObject(newPatient);
+            // Arrange //
+            var json = JsonConvert.SerializeObject(CreateNewPatient());
             var data = new StringContent(json, Encoding.UTF8, "application/json");
-
-            var response = await injection.Client.PostAsync(url, data);
+            var url = "api/registration";
 
             // expected result from rest service
             var expectedJMBG = "0542369712546";
+
+            // Act //
+            var response = await injection.Client.PostAsync(url, data);
 
             // Assert
             // This makes sure, you return a success http code back in case of 4xx status codes 
@@ -59,6 +47,21 @@ namespace HospitalIntegrationTests
 
             Assert.Equal(result.Jmbg, expectedJMBG);
 
+        }
+
+        public Patient CreateNewPatient()
+        {
+            Doctor doctor = new Doctor();
+            doctor.Id = "1";
+            List<Allergy> allergies = new List<Allergy>();
+
+            Patient newPatient = new Patient("2", "Mira", "Miric", DateTime.Now,
+                "0542369712546", "Partizanskih baza 7.", "0666423599", "marko@gmail.com",
+                "Mirami", "mira123", Hospital_library.Model.Enumeration.Gender.female,
+                "Novi Sad", "Serbia", UserType.patient, BloodType.B, RhFactor.positive,
+                189, 85, doctor, allergies);
+
+            return newPatient;
         }
     }
 }

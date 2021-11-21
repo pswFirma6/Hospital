@@ -2,6 +2,7 @@
 using Hospital_API.DTO;
 using Hospital_API.ImplService;
 using Hospital_API.Service;
+using Hospital_API.Validation;
 using Hospital_library.MedicalRecords.Model;
 using Hospital_library.MedicalRecords.Model.Enums;
 using Hospital_library.MedicalRecords.Service;
@@ -18,22 +19,34 @@ namespace Hospital_API.Controller
     {
         private PatientService _patientService;
 
-        // Create a field to store the mapper object
+        private RegistrationValidation _registrationValidation; 
+        
         private readonly IMapper _mapper;
 
-        public RegistrationController(PatientService patientService, IMapper mapper)
+        public RegistrationController(PatientService patientService, IMapper mapper, RegistrationValidation registrationValidation)
         {
             _patientService = patientService;
             _mapper = mapper;
+            _registrationValidation = registrationValidation;
         }
 
         [HttpPost]
-        public IActionResult Register(Patient patient)
+        public IActionResult Register(PatientDTO patientDTO)
         {
-            // TODO: this controller method will accept patient DTO and map it to patient and send to service
-            Patient registeredPatient =_patientService.Register(patient);
+            if (!_registrationValidation.IsValid(patientDTO))
+            {
+                return BadRequest();
+            }
+            var model = _mapper.Map<Patient>(patientDTO);
+            Patient registeredPatient =_patientService.Register(model);
+
+            if (registeredPatient.Equals(null))
+            {
+                return Conflict(new { message = $"An existing record patient was already found." });
+            }
 
             return Ok(registeredPatient);
         }
+
     }
 }

@@ -4,6 +4,7 @@ using Hospital_API;
 using Hospital_API.ImplRepository;
 using Hospital_API.ImplService;
 using Hospital_API.Repository;
+using Hospital_API.Validation;
 using Hospital_library.MedicalRecords.Repository.Repository.Interface;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -16,6 +17,7 @@ using System.Collections.Generic;
 using System.Reflection;
 using System.Text;
 using static Hospital_API.Mapper.FeedbackMapper;
+using static Hospital_API.Mapper.PatientMapper;
 
 namespace HospitalIntegrationTests
 {
@@ -39,19 +41,30 @@ namespace HospitalIntegrationTests
             services.AddMvc().AddApplicationPart(Assembly.Load(new AssemblyName("Hospital API"))); //"HospitalAPI" is your original project name
 
             // Auto Mapper Configurations
-            var mapperConfig = new MapperConfiguration(mc =>
+            var mapperConfigFeedback = new MapperConfiguration(mc =>
             {
-                mc.AddProfile(new MappingProfile());
+                mc.AddProfile(new FeedbackMappingProfile());
             });
 
-            IMapper mapper = mapperConfig.CreateMapper();
-            services.AddSingleton(mapper);
+            IMapper mapperFeedback = mapperConfigFeedback.CreateMapper();
+            services.AddSingleton(mapperFeedback);
+
+            var mapperConfigPatient = new MapperConfiguration(mc =>
+            {
+                mc.AddProfile(new PatientMappingProfile());
+            });
+
+            IMapper mapperPatient = mapperConfigPatient.CreateMapper();
+            services.AddSingleton(mapperPatient);
 
             services.AddMvc();
 
             // The AddScoped method registers the service with a scoped lifetime, the lifetime of a single request
             services.AddScoped<FeedbackService>();
             services.AddScoped<PatientService>();
+
+            // Validation
+            services.AddScoped<RegistrationValidation>();
 
             services.AddScoped<HospitalRepositoryFactory>();
             services.AddScoped<IPatientRepository, PatientRepository>();

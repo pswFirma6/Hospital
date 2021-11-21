@@ -3,6 +3,7 @@ using Hospital_API.ImplRepository;
 using Hospital_API.ImplService;
 using Hospital_API.Repository;
 using Hospital_API.Service;
+using Hospital_API.Validation;
 using Hospital_library.MedicalRecords.Repository;
 using Hospital_library.MedicalRecords.Repository.Interface;
 using Hospital_library.MedicalRecords.Repository.Repository.Interface;
@@ -13,6 +14,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using static Hospital_API.Mapper.FeedbackMapper;
+using static Hospital_API.Mapper.PatientMapper;
 
 namespace Hospital_API
 {
@@ -41,13 +43,21 @@ namespace Hospital_API
             });
 
             // Auto Mapper Configurations
-            var mapperConfig = new MapperConfiguration(mc =>
+            var mapperConfigFeedback = new MapperConfiguration(mc =>
             {
-                mc.AddProfile(new MappingProfile());
+                mc.AddProfile(new FeedbackMappingProfile());
             });
 
-            IMapper mapper = mapperConfig.CreateMapper();
-            services.AddSingleton(mapper);
+            IMapper mapperFeedback = mapperConfigFeedback.CreateMapper();
+            services.AddSingleton(mapperFeedback);
+
+            var mapperConfigPatient = new MapperConfiguration(mc =>
+            {
+                mc.AddProfile(new PatientMappingProfile());
+            });
+
+            IMapper mapperPatient = mapperConfigPatient.CreateMapper();
+            services.AddSingleton(mapperPatient);
 
             services.AddMvc();
 
@@ -55,6 +65,11 @@ namespace Hospital_API
             services.AddScoped<FeedbackService>();
             services.AddScoped<PatientService>();
 
+            // Need to AddScoped for every dependency injection validation
+            services.AddScoped<FeedbackValidation>();
+            services.AddScoped<RegistrationValidation>();
+
+            // Repository dependency injection
             services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
 
             services.AddScoped<HospitalRepositoryFactory>();

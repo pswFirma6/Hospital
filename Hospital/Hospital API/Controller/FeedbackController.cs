@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Hospital_API.DTO;
 using Hospital_API.Service;
+using Hospital_API.Validation;
 using Hospital_library.MedicalRecords.Model.Enums;
 using Hospital_library.Model;
 using Microsoft.AspNetCore.Mvc;
@@ -15,14 +16,15 @@ namespace Hospital_API.Controller
     {
         private FeedbackService _feedbackService;
 
-        // Create a field to store the mapper object
         private readonly IMapper _mapper;
 
-        // Assign the object in the constructor for dependency injection
-        public FeedbackController(FeedbackService feedbackService, IMapper mapper)
+        private FeedbackValidation _feedbackValidation;
+
+        public FeedbackController(FeedbackService feedbackService, IMapper mapper, FeedbackValidation feedbackValidation)
         {
             _feedbackService = feedbackService;
             _mapper = mapper;
+            _feedbackValidation = feedbackValidation;
         }
 
         [HttpGet]
@@ -35,7 +37,7 @@ namespace Hospital_API.Controller
         [HttpPost]
         public IActionResult Add(FeedbackDTO dto) 
         {
-            if (dto.Text.Length <= 0 || String.IsNullOrEmpty(dto.PersonId)) 
+            if (!_feedbackValidation.IsValid(dto)) 
             {
                 return BadRequest();   
             }

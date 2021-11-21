@@ -1,4 +1,5 @@
 ﻿
+using Hospital_API.DTO;
 using Hospital_library.MedicalRecords.Model;
 using Hospital_library.MedicalRecords.Repository.Repository.Interface;
 using Hospital_library.MedicalRecords.Service;
