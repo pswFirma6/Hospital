@@ -1,15 +1,9 @@
 ﻿using AutoMapper;
 using Hospital_API.DTO;
 using Hospital_API.ImplService;
-using Hospital_API.Service;
 using Hospital_API.Validation;
 using Hospital_library.MedicalRecords.Model;
-using Hospital_library.MedicalRecords.Model.Enums;
-using Hospital_library.MedicalRecords.Service;
-using Hospital_library.Model;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
 
 namespace Hospital_API.Controller
 {
