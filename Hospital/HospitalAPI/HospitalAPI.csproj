@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
-    <RootNamespace>Hospital_API</RootNamespace>
+    <RootNamespace>HospitalAPI</RootNamespace>
     <NoWin32Manifest>true</NoWin32Manifest>
   </PropertyGroup>
 
@@ -30,7 +30,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Hospital library\Hospital library.csproj" />
+    <ProjectReference Include="..\HospitalLibrary\HospitalLibrary.csproj" />
   </ItemGroup>
 
 
