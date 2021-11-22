@@ -16,8 +16,7 @@ using System;
 using System.Collections.Generic;
 using System.Reflection;
 using System.Text;
-using static Hospital_API.Mapper.FeedbackMapper;
-using static Hospital_API.Mapper.PatientMapper;
+using static Hospital_API.Mapper.Mapper;
 
 namespace HospitalIntegrationTests
 {
@@ -41,21 +40,13 @@ namespace HospitalIntegrationTests
             services.AddMvc().AddApplicationPart(Assembly.Load(new AssemblyName("Hospital API"))); //"HospitalAPI" is your original project name
 
             // Auto Mapper Configurations
-            var mapperConfigFeedback = new MapperConfiguration(mc =>
+            var mapperConfig = new MapperConfiguration(mc =>
             {
-                mc.AddProfile(new FeedbackMappingProfile());
+                mc.AddProfile(new MappingProfile());
             });
 
-            IMapper mapperFeedback = mapperConfigFeedback.CreateMapper();
-            services.AddSingleton(mapperFeedback);
-
-            var mapperConfigPatient = new MapperConfiguration(mc =>
-            {
-                mc.AddProfile(new PatientMappingProfile());
-            });
-
-            IMapper mapperPatient = mapperConfigPatient.CreateMapper();
-            services.AddSingleton(mapperPatient);
+            IMapper mapper = mapperConfig.CreateMapper();
+            services.AddSingleton(mapper);
 
             services.AddMvc();
 
