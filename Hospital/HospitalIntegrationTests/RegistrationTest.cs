@@ -19,25 +19,23 @@ namespace HospitalIntegrationTests
             this.injection = injection;
         }
 
-        [Fact]
-        public async Task Checks_Successful_RegistrationAsync()
+        [Theory]
+        [MemberData(nameof(Data))]
+        public async Task Checks_Successful_RegistrationAsync(Patient newPatient, string expectedJMBG)
         {   /* How to call service in integration test
               var service = (PatientService) injection.ServiceProvider.GetService(typeof(PatientService));
               service.Register(new Patient());
             */
 
             // Arrange //
-            var json = JsonConvert.SerializeObject(CreateNewPatient());
+            var json = JsonConvert.SerializeObject(newPatient);
             var data = new StringContent(json, Encoding.UTF8, "application/json");
             var url = "api/registration";
-
-            // expected result from rest service
-            var expectedJMBG = "0542369712546";
 
             // Act //
             var response = await injection.Client.PostAsync(url, data);
 
-            // Assert
+            // Assert //
             // This makes sure, you return a success http code back in case of 4xx status codes 
             // or exceptions (5xx codes) it throws an exception
             response.EnsureSuccessStatusCode();
@@ -48,9 +46,10 @@ namespace HospitalIntegrationTests
             Assert.Equal(result.Jmbg, expectedJMBG);
 
         }
-
-        public Patient CreateNewPatient()
+        public static IEnumerable<object[]> Data() 
         {
+            var retVal = new List<object[]>();
+
             Doctor doctor = new Doctor();
             doctor.Id = "1";
             List<Allergy> allergies = new List<Allergy>();
@@ -61,7 +60,13 @@ namespace HospitalIntegrationTests
                 "Novi Sad", "Serbia", UserType.patient, BloodType.B, RhFactor.positive,
                 189, 85, doctor, allergies);
 
-            return newPatient;
+            // expected result from rest service
+            var expectedJMBG = "0542369712546";
+
+            retVal.Add(new object[] { newPatient, expectedJMBG });
+
+            return retVal;
         }
+
     }
 }

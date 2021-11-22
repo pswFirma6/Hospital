@@ -13,8 +13,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using static Hospital_API.Mapper.FeedbackMapper;
-using static Hospital_API.Mapper.PatientMapper;
+using static Hospital_API.Mapper.Mapper;
 
 namespace Hospital_API
 {
@@ -43,21 +42,13 @@ namespace Hospital_API
             });
 
             // Auto Mapper Configurations
-            var mapperConfigFeedback = new MapperConfiguration(mc =>
+            var mapperConfig = new MapperConfiguration(mc =>
             {
-                mc.AddProfile(new FeedbackMappingProfile());
+                mc.AddProfile(new MappingProfile());
             });
 
-            IMapper mapperFeedback = mapperConfigFeedback.CreateMapper();
-            services.AddSingleton(mapperFeedback);
-
-            var mapperConfigPatient = new MapperConfiguration(mc =>
-            {
-                mc.AddProfile(new PatientMappingProfile());
-            });
-
-            IMapper mapperPatient = mapperConfigPatient.CreateMapper();
-            services.AddSingleton(mapperPatient);
+            IMapper mapper = mapperConfig.CreateMapper();
+            services.AddSingleton(mapper);
 
             services.AddMvc();
 
