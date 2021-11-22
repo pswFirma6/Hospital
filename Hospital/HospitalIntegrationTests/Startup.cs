@@ -11,11 +11,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.DependencyInjection.Extensions;
-using System;
-using System.Collections.Generic;
 using System.Reflection;
-using System.Text;
 using static Hospital_API.Mapper.Mapper;
 
 namespace HospitalIntegrationTests
@@ -37,7 +33,7 @@ namespace HospitalIntegrationTests
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc().AddApplicationPart(Assembly.Load(new AssemblyName("Hospital API"))); //"HospitalAPI" is your original project name
+            services.AddMvc().AddApplicationPart(Assembly.Load(new AssemblyName("HospitalAPI"))); //"HospitalAPI" is your original project name
 
             // Auto Mapper Configurations
             var mapperConfig = new MapperConfiguration(mc =>
