@@ -10,9 +10,9 @@ namespace Hospital_API.Mapper
 {
     public class FeedbackMapper
     {
-        public class MappingProfile : Profile
+        public class FeedbackMappingProfile : Profile
         {
-            public MappingProfile()
+            public FeedbackMappingProfile()
             {
                 // Add as many of these lines as you need to map your objects
                 CreateMap<Feedback, FeedbackDTO>();
