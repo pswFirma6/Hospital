@@ -9,11 +9,7 @@ namespace Hospital_library.MedicalRecords.Model
 {
     public class Patient : User
     {
-        public BloodType BloodType { get; set; }
-        public RhFactor RhFactor { get; set; }
-        public int Height { get; set; }
-        public int Weight { get; set; }
-        public List<Allergy> Allergies { get; set; }
+        public MedicalRecord medicalRecord { get; set; }
         public Doctor Doctor { get; set; }
 
         public Patient() 
