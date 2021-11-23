@@ -1,11 +1,11 @@
 ﻿using AutoMapper;
-using Hospital_API.DTO;
-using Hospital_API.ImplService;
-using Hospital_API.Validation;
-using Hospital_library.MedicalRecords.Model;
+using HospitalAPI.DTO;
+using HospitalAPI.ImplService;
+using HospitalAPI.Validation;
+using HospitalLibrary.MedicalRecords.Model;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Hospital_API.Controller
+namespace HospitalAPI.Controller
 {
     [Route("api/[controller]")]
     [ApiController]

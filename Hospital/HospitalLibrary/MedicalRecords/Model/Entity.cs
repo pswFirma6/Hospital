@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
-namespace Hospital_library.MedicalRecords.Model
+namespace HospitalLibrary.MedicalRecords.Model
 {
     public class Entity
     {

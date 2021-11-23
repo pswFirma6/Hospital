@@ -1,7 +1,7 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace Hospital_API.Migrations
+namespace HospitalAPI.Migrations
 {
     public partial class PatiensMigation : Migration
     {

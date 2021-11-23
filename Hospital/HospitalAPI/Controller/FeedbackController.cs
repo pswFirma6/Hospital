@@ -1,14 +1,14 @@
 ﻿using AutoMapper;
-using Hospital_API.DTO;
-using Hospital_API.Service;
-using Hospital_API.Validation;
-using Hospital_library.MedicalRecords.Model.Enums;
-using Hospital_library.Model;
+using HospitalAPI.DTO;
+using HospitalAPI.Service;
+using HospitalAPI.Validation;
+using HospitalLibrary.MedicalRecords.Model.Enums;
+using HospitalLibrary.Model;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 
-namespace Hospital_API.Controller
+namespace HospitalAPI.Controller
 {
     [Route("api/[controller]")]
     [ApiController]

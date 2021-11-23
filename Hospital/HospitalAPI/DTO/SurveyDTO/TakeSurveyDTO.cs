@@ -1,19 +1,21 @@
-﻿using HospitalLibrary.MedicalRecords.Model.Enums;
+using HospitalLibrary.MedicalRecords.Model;
+using HospitalLibrary.MedicalRecords.Model.Enums;
 using System;
 using System.Collections.Generic;
-using System.Text;
+using System.Linq;
+using System.Threading.Tasks;
 
-namespace HospitalLibrary.MedicalRecords.Model
+namespace HospitalAPI.DTO.SurveyDTO
 {
-    public class SurveyQuestion : Entity
+    public class TakeSurveyDTO
     {
-        public SurveyQuestion(string questionText, SurveyQuestionCategory category)
+        public TakeSurveyDTO(string questionText, SurveyQuestionCategory category)
         {
             QuestionText = questionText;
             Category = category;
         }
 
-        public SurveyQuestion() { }
+        public TakeSurveyDTO() { }
         public string PersonId { get; set; }
         public string QuestionText { get; set; }
         public int Rate { get; set; }

@@ -1,8 +1,8 @@
-﻿using Hospital_library.MedicalRecords.Model;
-using Hospital_library.Model;
+﻿using HospitalLibrary.MedicalRecords.Model;
+using HospitalLibrary.Model;
 using Microsoft.EntityFrameworkCore;
 
-namespace Hospital_API
+namespace HospitalAPI
 {
     public class MyDbContext : DbContext
     {

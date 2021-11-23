@@ -1,18 +1,18 @@
 ﻿using AutoMapper;
 using Hospital.Service;
-using Hospital_API;
-using Hospital_API.ImplRepository;
-using Hospital_API.ImplService;
-using Hospital_API.Repository;
-using Hospital_API.Validation;
-using Hospital_library.MedicalRecords.Repository.Repository.Interface;
+using HospitalAPI;
+using HospitalAPI.ImplRepository;
+using HospitalAPI.ImplService;
+using HospitalAPI.Repository;
+using HospitalAPI.Validation;
+using HospitalLibrary.MedicalRecords.Repository.Repository.Interface;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System.Reflection;
-using static Hospital_API.Mapper.Mapper;
+using static HospitalAPI.Mapper.Mapper;
 
 namespace HospitalIntegrationTests
 {
