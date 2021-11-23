@@ -1,11 +1,11 @@
 ﻿
-using Hospital_API.DTO;
-using Hospital_library.MedicalRecords.Model;
-using Hospital_library.MedicalRecords.Repository.Repository.Interface;
-using Hospital_library.MedicalRecords.Service;
+using HospitalAPI.DTO;
+using HospitalLibrary.MedicalRecords.Model;
+using HospitalLibrary.MedicalRecords.Repository.Repository.Interface;
+using HospitalLibrary.MedicalRecords.Service;
 using System.Linq;
 
-namespace Hospital_API.ImplService
+namespace HospitalAPI.ImplService
 {
     public class PatientService : IPatientService
     {

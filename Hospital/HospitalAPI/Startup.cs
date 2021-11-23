@@ -1,21 +1,21 @@
 using AutoMapper;
-using Hospital_API.ImplRepository;
-using Hospital_API.ImplService;
-using Hospital_API.Repository;
-using Hospital_API.Service;
-using Hospital_API.Validation;
-using Hospital_library.MedicalRecords.Repository;
-using Hospital_library.MedicalRecords.Repository.Interface;
-using Hospital_library.MedicalRecords.Repository.Repository.Interface;
+using HospitalAPI.ImplRepository;
+using HospitalAPI.ImplService;
+using HospitalAPI.Repository;
+using HospitalAPI.Service;
+using HospitalAPI.Validation;
+using HospitalLibrary.MedicalRecords.Repository;
+using HospitalLibrary.MedicalRecords.Repository.Interface;
+using HospitalLibrary.MedicalRecords.Repository.Repository.Interface;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using static Hospital_API.Mapper.Mapper;
+using static HospitalAPI.Mapper.Mapper;
 
-namespace Hospital_API
+namespace HospitalAPI
 {
     public class Startup
     {
@@ -62,6 +62,8 @@ namespace Hospital_API
 
             // Repository dependency injection
             services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
+
+            services.AddScoped<SurveyService>();
 
             services.AddScoped<HospitalRepositoryFactory>();
             services.AddScoped<IPatientRepository, PatientRepository>();

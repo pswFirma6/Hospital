@@ -4,10 +4,10 @@ using System.Text;
 
 namespace HospitalLibrary.MedicalRecords.Model.Enums
 {
-    public enum FeedbackState
+    public enum SurveyQuestionCategory
     {
-        approved,
-        rejected,
-        pending
+        hospital,
+        staff,
+        application
     }
 }

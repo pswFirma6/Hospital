@@ -1,9 +1,9 @@
-﻿using Hospital_API.DTO;
-using Hospital_library.MedicalRecords.Model.Enums;
-using Hospital_library.Model.Enumeration;
+﻿using HospitalAPI.DTO;
+using HospitalLibrary.MedicalRecords.Model.Enums;
+using HospitalLibrary.Model.Enumeration;
 using System;
 
-namespace Hospital_API.Validation
+namespace HospitalAPI.Validation
 {
     public class RegistrationValidation
     {

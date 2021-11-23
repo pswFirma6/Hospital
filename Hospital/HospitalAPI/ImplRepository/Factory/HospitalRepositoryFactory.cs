@@ -1,9 +1,9 @@
-﻿using Hospital_API.ImplRepository;
-using Hospital_library.MedicalRecords.Repository;
-using Hospital_library.MedicalRecords.Repository.Interface;
+﻿using HospitalAPI.ImplRepository;
+using HospitalLibrary.MedicalRecords.Repository;
+using HospitalLibrary.MedicalRecords.Repository.Interface;
 
 
-namespace Hospital_API.Repository
+namespace HospitalAPI.Repository
 {
     public class HospitalRepositoryFactory : RepositoryFactory
     {
@@ -14,6 +14,7 @@ namespace Hospital_API.Repository
         }
         public FeedbackRepository FeedbackRepository { get; set; }
         public PatientRepository PersonRepository { get; set; }
+        public SurveyRepository SurveyRepository { get; set; }
 
         public override FeedbackRepository GetFeedbackRepository()
         {
@@ -29,6 +30,14 @@ namespace Hospital_API.Repository
                 return new PatientRepository(_context);
             else
                 return PersonRepository;
+        }
+
+        public override SurveyRepository GetSurveyRepository()
+        {
+            if (SurveyRepository == null)
+                return new SurveyRepository(_context);
+            else
+                return SurveyRepository;
         }
 
     }

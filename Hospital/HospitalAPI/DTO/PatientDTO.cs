@@ -1,12 +1,12 @@
-﻿using Hospital_library.MedicalRecords.Model;
-using Hospital_library.MedicalRecords.Model.Enums;
-using Hospital_library.Model.Enumeration;
+﻿using HospitalLibrary.MedicalRecords.Model;
+using HospitalLibrary.MedicalRecords.Model.Enums;
+using HospitalLibrary.Model.Enumeration;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Hospital_API.DTO
+namespace HospitalAPI.DTO
 {
     public class PatientDTO
     {

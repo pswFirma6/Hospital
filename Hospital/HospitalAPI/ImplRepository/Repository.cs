@@ -1,12 +1,12 @@
-﻿using Hospital_API;
-using Hospital_library.MedicalRecords.Repository.Interface;
+﻿using HospitalAPI;
+using HospitalLibrary.MedicalRecords.Repository.Interface;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
 
-namespace Hospital_library.MedicalRecords.Repository
+namespace HospitalLibrary.MedicalRecords.Repository
 {
     public class Repository<Entity> : IRepository<Entity> where Entity : Model.Entity
     {

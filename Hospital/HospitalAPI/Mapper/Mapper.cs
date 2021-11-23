@@ -1,13 +1,14 @@
 ﻿using AutoMapper;
-using Hospital_API.DTO;
-using Hospital_library.MedicalRecords.Model;
-using Hospital_library.Model;
+using HospitalAPI.DTO;
+using HospitalAPI.DTO.SurveyDTO;
+using HospitalLibrary.MedicalRecords.Model;
+using HospitalLibrary.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Hospital_API.Mapper
+namespace HospitalAPI.Mapper
 {
     public class Mapper
     {
@@ -25,6 +26,8 @@ namespace Hospital_API.Mapper
                 CreateMap<Patient, PatientDTO>();
                 CreateMap<PatientDTO, Patient>();
 
+                CreateMap<SurveyQuestion, TakeSurveyDTO>();
+                CreateMap<TakeSurveyDTO, SurveyQuestion>();
             }
         }
     } 
