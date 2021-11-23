@@ -4,18 +4,15 @@ using Hospital_API;
 using Hospital_API.ImplRepository;
 using Hospital_API.ImplService;
 using Hospital_API.Repository;
+using Hospital_API.Validation;
 using Hospital_library.MedicalRecords.Repository.Repository.Interface;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.DependencyInjection.Extensions;
-using System;
-using System.Collections.Generic;
 using System.Reflection;
-using System.Text;
-using static Hospital_API.Mapper.FeedbackMapper;
+using static Hospital_API.Mapper.Mapper;
 
 namespace HospitalIntegrationTests
 {
@@ -36,7 +33,7 @@ namespace HospitalIntegrationTests
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc().AddApplicationPart(Assembly.Load(new AssemblyName("Hospital API"))); //"HospitalAPI" is your original project name
+            services.AddMvc().AddApplicationPart(Assembly.Load(new AssemblyName("HospitalAPI"))); //"HospitalAPI" is your original project name
 
             // Auto Mapper Configurations
             var mapperConfig = new MapperConfiguration(mc =>
@@ -52,6 +49,9 @@ namespace HospitalIntegrationTests
             // The AddScoped method registers the service with a scoped lifetime, the lifetime of a single request
             services.AddScoped<FeedbackService>();
             services.AddScoped<PatientService>();
+
+            // Validation
+            services.AddScoped<RegistrationValidation>();
 
             services.AddScoped<HospitalRepositoryFactory>();
             services.AddScoped<IPatientRepository, PatientRepository>();

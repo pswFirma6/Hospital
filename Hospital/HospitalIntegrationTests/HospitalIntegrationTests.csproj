@@ -24,8 +24,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Hospital API\Hospital API.csproj" />
-    <ProjectReference Include="..\Hospital library\Hospital library.csproj" />
+    <ProjectReference Include="..\HospitalAPI\HospitalAPI.csproj" />
+    <ProjectReference Include="..\HospitalLibrary\HospitalLibrary.csproj" />
   </ItemGroup>
 
 </Project>
