@@ -8,6 +8,7 @@ namespace HospitalAPI
     {
         public DbSet<Patient> Patients { get; set; }
         public DbSet<Feedback> Feedbacks { get; set; }
+        public DbSet<SurveyQuestion> SurveyQuestion { get; set; }
         public MyDbContext(DbContextOptions<MyDbContext> options) : base(options) { }   
     }
 }

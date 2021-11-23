@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace HospitalAPI.Migrations
 {
-    public partial class PatiensMigation : Migration
+    public partial class SurveyMigration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -46,6 +46,21 @@ namespace HospitalAPI.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Feedbacks", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "SurveyQuestion",
+                columns: table => new
+                {
+                    Id = table.Column<string>(type: "text", nullable: false),
+                    PersonId = table.Column<string>(type: "text", nullable: true),
+                    QuestionText = table.Column<string>(type: "text", nullable: true),
+                    Rate = table.Column<int>(type: "integer", nullable: false),
+                    Category = table.Column<int>(type: "integer", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_SurveyQuestion", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -120,6 +135,9 @@ namespace HospitalAPI.Migrations
 
             migrationBuilder.DropTable(
                 name: "Feedbacks");
+
+            migrationBuilder.DropTable(
+                name: "SurveyQuestion");
 
             migrationBuilder.DropTable(
                 name: "Patients");

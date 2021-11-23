@@ -15,5 +15,13 @@ namespace HospitalAPI.ImplService
         {
             _repositoryFactory = repositoryFactory;
         }
+
+        public void Add(List<SurveyQuestion> surveyQuestions)
+        {
+            foreach(SurveyQuestion surveyQuestion in surveyQuestions)
+            {
+                _repositoryFactory.GetSurveyRepository().Add(surveyQuestion);
+            }
+        }
     }
 }

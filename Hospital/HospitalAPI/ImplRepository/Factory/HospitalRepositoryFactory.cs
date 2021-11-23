@@ -14,6 +14,7 @@ namespace HospitalAPI.Repository
         }
         public FeedbackRepository FeedbackRepository { get; set; }
         public PatientRepository PersonRepository { get; set; }
+        public SurveyRepository SurveyRepository { get; set; }
 
         public override FeedbackRepository GetFeedbackRepository()
         {
@@ -29,6 +30,14 @@ namespace HospitalAPI.Repository
                 return new PatientRepository(_context);
             else
                 return PersonRepository;
+        }
+
+        public override SurveyRepository GetSurveyRepository()
+        {
+            if (SurveyRepository == null)
+                return new SurveyRepository(_context);
+            else
+                return SurveyRepository;
         }
 
     }

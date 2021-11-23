@@ -7,5 +7,7 @@ namespace HospitalAPI.Repository
         public abstract FeedbackRepository GetFeedbackRepository();
 
         public abstract PatientRepository GetPatientRepository();
+
+        public abstract SurveyRepository GetSurveyRepository();
     }
 }

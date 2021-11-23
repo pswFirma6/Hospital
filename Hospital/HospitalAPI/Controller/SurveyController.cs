@@ -72,15 +72,23 @@ namespace HospitalAPI.Controller
 
         [HttpPost]
         [Route("TakeSurvey")]
-        public IActionResult TakeSurvey(List<TakeSurveyDTO> surveyQuestions)
+        public IActionResult TakeSurvey(List<TakeSurveyDTO> surveyQuestionsDTO)
         {
-            foreach (TakeSurveyDTO question in surveyQuestions)
+            List<SurveyQuestion> surveyQuestions = new List<SurveyQuestion>();
+            foreach (TakeSurveyDTO questionDTO in surveyQuestionsDTO)
             {
-                if (question.Rate == 0)
+                if (questionDTO.Rate == 0)
                 {
                     return BadRequest();
                 }
+                else
+                {
+                    var model = _mapper.Map<SurveyQuestion>(questionDTO);
+                    surveyQuestions.Add(model);
+                }
             }
+
+            _surveyService.Add(surveyQuestions);
             return Ok();
         }
     }
