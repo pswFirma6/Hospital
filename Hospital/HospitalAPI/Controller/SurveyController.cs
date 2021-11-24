@@ -96,26 +96,14 @@ namespace HospitalAPI.Controller
         [Route("GetAllSurveys")]
         public IActionResult GetAllSurveys()
         {
+            return Ok(_surveyService.GetGroupedByQuestion());
+        }
 
-            var rates = _surveyService.GetGroupedByQuestion();
-            return Ok(rates);
-            /*SurveyQuestion surveyQuestionHospital2 = new SurveyQuestion("HospitalQuestion2", HospitalLibrary.MedicalRecords.Model.Enums.SurveyQuestionCategory.hospital, 5, "111");
-            SurveyQuestion surveyQuestionHospital3 = new SurveyQuestion("HospitalQuestion3", HospitalLibrary.MedicalRecords.Model.Enums.SurveyQuestionCategory.hospital, 5, "111");
-            SurveyQuestion surveyQuestionHospital4 = new SurveyQuestion("HospitalQuestion4", HospitalLibrary.MedicalRecords.Model.Enums.SurveyQuestionCategory.hospital, 5, "111");
-            SurveyQuestion surveyQuestionHospital1 = new SurveyQuestion("HospitalQuestion1", HospitalLibrary.MedicalRecords.Model.Enums.SurveyQuestionCategory.hospital, 5, "111");
-            SurveyQuestion surveyQuestionHospital5 = new SurveyQuestion("HospitalQuestion5", HospitalLibrary.MedicalRecords.Model.Enums.SurveyQuestionCategory.hospital, 5, "111");
-
-
-            List<SurveyQuestion> survey = new List<SurveyQuestion>();
-            survey.AddRange(new List<SurveyQuestion>() {
-                surveyQuestionHospital1,
-                surveyQuestionHospital2,
-                surveyQuestionHospital3,
-                surveyQuestionHospital4,
-                surveyQuestionHospital5,
-
-            });
-            return Ok(survey);*/
+        [HttpGet]
+        [Route("GetAllSurveyCategoryRates")]
+        public IActionResult GetAllSurveyCategoryRates()
+        {
+            return Ok(_surveyService.GetGroupedByCategory());
         }
     }
 }
