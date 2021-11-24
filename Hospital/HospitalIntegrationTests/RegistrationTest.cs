@@ -1,3 +1,4 @@
+using Hospital_API.DTO;
 using Hospital_library.MedicalRecords.Model;
 using Hospital_library.MedicalRecords.Model.Enums;
 using Newtonsoft.Json;
@@ -21,27 +22,25 @@ namespace HospitalIntegrationTests
 
         [Theory]
         [MemberData(nameof(Data))]
-        public async Task Checks_Successful_RegistrationAsync(Patient newPatient, string expectedJMBG)
-        {   /* How to call service in integration test
-              var service = (PatientService) injection.ServiceProvider.GetService(typeof(PatientService));
-              service.Register(new Patient());
-            */
+        public async Task Checks_Successful_RegistrationAsync(PatientRegistrationDTO newPatient, string expectedJMBG)
+        {  
 
             // Arrange //
             var json = JsonConvert.SerializeObject(newPatient);
             var data = new StringContent(json, Encoding.UTF8, "application/json");
             var url = "api/registration";
 
+
             // Act //
-            var response = await injection.Client.PostAsync(url, data);
+            var response = await injection.Client.PostAsync(url, data); // We use async beacuse http is async ( don't wait for response )
 
             // Assert //
             // This makes sure, you return a success http code back in case of 4xx status codes 
             // or exceptions (5xx codes) it throws an exception
             response.EnsureSuccessStatusCode();
 
-            var resultString = await response.Content.ReadAsStringAsync();
-            var result = JsonConvert.DeserializeObject<Patient>(resultString);
+            var resultString = await response.Content.ReadAsStringAsync(); // Here we get response content, Patient.
+            var result = JsonConvert.DeserializeObject<Patient>(resultString); // Convert to json
 
             Assert.Equal(result.Jmbg, expectedJMBG);
 
@@ -54,11 +53,11 @@ namespace HospitalIntegrationTests
             doctor.Id = "1";
             List<Allergy> allergies = new List<Allergy>();
 
-            Patient newPatient = new Patient("2", "Mira", "Miric", DateTime.Now,
-                "0542369712546", "Partizanskih baza 7.", "0666423599", "marko@gmail.com",
+            PatientRegistrationDTO newPatient = new PatientRegistrationDTO("Mira", "Miric", DateTime.Now,
+                "0542369712546", "Partizanskih baza 7.", "0666423599", "pacijentmira@gmail.com",
                 "Mirami", "mira123", Hospital_library.Model.Enumeration.Gender.female,
                 "Novi Sad", "Serbia", UserType.patient, BloodType.B, RhFactor.positive,
-                189, 85, doctor, allergies);
+                189, 85, allergies, doctor, "http://localhost:4200/authentication/emailconfirmation");
 
             // expected result from rest service
             var expectedJMBG = "0542369712546";

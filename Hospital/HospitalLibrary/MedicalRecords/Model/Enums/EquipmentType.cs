@@ -1,9 +1,9 @@
 ﻿
 namespace Hospital_library.MedicalRecords.Model.Enums
 {
-    public enum RhFactor
+    public enum EquipmentType
     {
-        positive,
-        negative
+        stationary,
+        dinamic
     }
 }

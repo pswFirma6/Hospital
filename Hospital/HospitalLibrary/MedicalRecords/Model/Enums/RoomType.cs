@@ -1,9 +1,10 @@
 ﻿
 namespace Hospital_library.MedicalRecords.Model.Enums
 {
-    public enum RhFactor
+    public enum RoomType
     {
-        positive,
-        negative
+        ordination,
+        hall,
+        room
     }
 }

@@ -1,14 +1,13 @@
 ﻿using Hospital_library.MedicalRecords.Model;
 using Hospital_library.MedicalRecords.Model.Enums;
 using Hospital_library.Model.Enumeration;
+using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
-namespace Hospital_API.DTO
+namespace HospitalLibrary.MedicalRecords.Model
 {
-    public class PatientDTO
+    public class PatientRegistration : IdentityUser
     {
         public string Name { get; set; }
         public string Surname { get; set; }
@@ -16,7 +15,6 @@ namespace Hospital_API.DTO
         public string Jmbg { get; set; }
         public string Address { get; set; }
         public string Phone { get; set; }
-        public string Email { get; set; }
         public string Username { get; set; }
         public string Password { get; set; }
         public Gender Gender { get; set; }
@@ -29,5 +27,7 @@ namespace Hospital_API.DTO
         public int Weight { get; set; }
         public List<Allergy> Allergies { get; set; }
         public Doctor Doctor { get; set; }
+        public string ClientURI { get; set; }
+
     }
 }

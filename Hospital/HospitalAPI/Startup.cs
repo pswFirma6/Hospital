@@ -4,11 +4,16 @@ using Hospital_API.ImplService;
 using Hospital_API.Repository;
 using Hospital_API.Service;
 using Hospital_API.Validation;
+using Hospital_library.MedicalRecords.Model;
 using Hospital_library.MedicalRecords.Repository;
 using Hospital_library.MedicalRecords.Repository.Interface;
 using Hospital_library.MedicalRecords.Repository.Repository.Interface;
+using Hospital_library.MedicalRecords.Service;
+using HospitalAPI.ImplService;
+using HospitalLibrary.MedicalRecords.Model;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -53,8 +58,8 @@ namespace Hospital_API
             services.AddMvc();
 
             // The AddScoped method registers the service with a scoped lifetime, the lifetime of a single request
-            services.AddScoped<FeedbackService>();
-            services.AddScoped<PatientService>();
+            services.AddScoped<IFeedbackService, FeedbackService>();
+            services.AddScoped<IPatientService, PatientService>();
 
             // Need to AddScoped for every dependency injection validation
             services.AddScoped<FeedbackValidation>();
@@ -62,9 +67,25 @@ namespace Hospital_API
 
             // Repository dependency injection
             services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
+           
+            services.AddIdentity<PatientRegistration, IdentityRole>(options =>
+            {
+                options.User.RequireUniqueEmail = false;
+            })
+           .AddEntityFrameworkStores<MyDbContext>()
+           .AddDefaultTokenProviders();
 
+            // Registration 
+            var emailConfig = Configuration
+               .GetSection("EmailConfiguration")
+               .Get<EmailConfiguration>();
+            services.AddSingleton(emailConfig);
+            services.AddScoped<IEmailSender, EmailSender>();
+
+            // Repository
             services.AddScoped<HospitalRepositoryFactory>();
             services.AddScoped<IPatientRepository, PatientRepository>();
+
             // Connection with PostgreSQL
             services.AddControllers();
 

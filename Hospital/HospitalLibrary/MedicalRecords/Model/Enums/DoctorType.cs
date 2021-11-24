@@ -1,9 +1,9 @@
 ﻿
 namespace Hospital_library.MedicalRecords.Model.Enums
 {
-    public enum RhFactor
+    public enum DoctorType
     {
-        positive,
-        negative
+        generalPractitioner,
+        surgeon
     }
 }
