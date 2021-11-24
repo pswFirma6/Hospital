@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Hospital_library.MedicalRecords.Model
+﻿
+namespace HospitalLibrary.MedicalRecords.Model
 {
     public class EmailConfiguration
     {

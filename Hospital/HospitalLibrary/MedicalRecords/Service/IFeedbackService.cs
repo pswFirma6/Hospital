@@ -1,4 +1,4 @@
-﻿using HospitalLibrary.Model;
+﻿using HospitalLibrary.MedicalRecords.Model;
 
 namespace HospitalLibrary.MedicalRecords.Service
 {

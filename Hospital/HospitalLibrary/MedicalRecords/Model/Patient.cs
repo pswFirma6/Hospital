@@ -1,9 +1,7 @@
 ﻿using HospitalLibrary.MedicalRecords.Model.Enums;
-using HospitalLibrary.Model;
-using HospitalLibrary.Model.Enumeration;
+using HospitalLibrary.Model.Enums;
 using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace HospitalLibrary.MedicalRecords.Model
 {

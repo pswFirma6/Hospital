@@ -1,10 +1,7 @@
-﻿using Hospital_library.MedicalRecords.Model;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using HospitalLibrary.MedicalRecords.Model;
 using System.Threading.Tasks;
 
-namespace Hospital_library.MedicalRecords.Service
+namespace HospitalLibrary.MedicalRecords.Service
 {
     public interface IEmailSender
     {

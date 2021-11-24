@@ -1,10 +1,6 @@
 ﻿using HospitalLibrary.MedicalRecords.Model.Enums;
-using HospitalLibrary.Model;
-using HospitalLibrary.Model.Enumeration;
+using HospitalLibrary.Model.Enums;
 using System;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using Microsoft.AspNetCore.Identity;
 
 namespace HospitalLibrary.MedicalRecords.Model
 {

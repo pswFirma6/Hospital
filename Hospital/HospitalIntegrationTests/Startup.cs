@@ -1,24 +1,14 @@
 ﻿using AutoMapper;
-using Hospital.Service;
-using Hospital_API;
-using Hospital_API.ImplRepository;
-using Hospital_API.ImplService;
-using Hospital_API.Repository;
-using Hospital_API.Validation;
-using Hospital_library.MedicalRecords.Model;
-using Hospital_library.MedicalRecords.Repository.Repository.Interface;
-using Hospital_library.MedicalRecords.Service;
-using HospitalAPI.ImplService;
-using HospitalLibrary.MedicalRecords.Model;
 using HospitalAPI;
 using HospitalAPI.ImplRepository;
 using HospitalAPI.ImplService;
 using HospitalAPI.Repository;
 using HospitalAPI.Validation;
 using HospitalLibrary.MedicalRecords.Model;
-using HospitalLibrary.MedicalRecords.Model.Enums;
 using HospitalLibrary.MedicalRecords.Repository.Repository.Interface;
-using HospitalLibrary.Model.Enumeration;
+using HospitalLibrary.MedicalRecords.Service;
+using HospitalLibrary.MedicalRecords.Model.Enums;
+using HospitalLibrary.Model.Enums;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
@@ -28,6 +18,7 @@ using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Reflection;
 using static HospitalAPI.Mapper.Mapper;
+using System.Collections.Generic;
 
 namespace HospitalIntegrationTests
 {
@@ -132,14 +123,14 @@ namespace HospitalIntegrationTests
                 "054236971333", "Partizanskih baza 8.", "0666423699", "slavko@gmail.com",
                 "slavko", "slavko123", Gender.male,
                 "Novi Sad", "Serbia", UserType.patient, BloodType.B, RhFactor.positive,
-                189, 85, doctor, allergies);
+                189, 85, allergies, doctor);
 
 
             Patient newPatientB2 = new Patient("3", "Marko", "Markovic", DateTime.Now,
                 "0542369712546", "Partizanskih baza 7.", "0666423599", "marko@gmail.com",
                 "SeekEquilibrium", "mira123", Gender.female,
                 "Novi Sad", "Serbia", UserType.patient, BloodType.A, RhFactor.negative,
-                180, 85, doctor, allergies);
+                180, 85, allergies, doctor);
 
             listOfPatients.Add(newPatientA1);
             listOfPatients.Add(newPatientB2);

@@ -1,5 +1,5 @@
 ﻿
-namespace HospitalLibrary.Model.Enumeration
+namespace HospitalLibrary.Model.Enums
 {
     public enum Gender
     {

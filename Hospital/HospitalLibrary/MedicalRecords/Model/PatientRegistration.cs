@@ -1,6 +1,5 @@
-﻿using Hospital_library.MedicalRecords.Model;
-using Hospital_library.MedicalRecords.Model.Enums;
-using Hospital_library.Model.Enumeration;
+﻿using HospitalLibrary.MedicalRecords.Model.Enums;
+using HospitalLibrary.Model.Enums;
 using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;

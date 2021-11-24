@@ -3,7 +3,6 @@ using HospitalAPI.DTO.SurveyDTO;
 using HospitalAPI.ImplService;
 using HospitalLibrary.MedicalRecords.Model;
 using Microsoft.AspNetCore.Mvc;
-using System;
 using System.Collections.Generic;
 
 namespace HospitalAPI.Controller

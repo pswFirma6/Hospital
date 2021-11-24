@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Hospital_library.MedicalRecords.Model
+namespace HospitalLibrary.MedicalRecords.Model
 {
     public class Appointment : Entity
     {

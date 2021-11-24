@@ -1,5 +1,5 @@
-﻿using Hospital_library.MedicalRecords.Model;
-using Hospital_library.MedicalRecords.Service;
+﻿using HospitalLibrary.MedicalRecords.Model;
+using HospitalLibrary.MedicalRecords.Service;
 using MailKit.Net.Smtp;
 using MimeKit;
 using System.Threading.Tasks;

@@ -1,24 +1,17 @@
-﻿using AutoMapper;
-using Hospital_library.MedicalRecords.Model;
-using Hospital_library.MedicalRecords.Repository.Repository.Interface;
-using Hospital_library.MedicalRecords.Service;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.WebUtilities;
-using System.Collections.Generic;
+﻿using HospitalLibrary.MedicalRecords.Model;
+using HospitalLibrary.MedicalRecords.Repository.Repository.Interface;
+using HospitalLibrary.MedicalRecords.Service;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace HospitalAPI.ImplService
 {
     public class PatientService : IPatientService
     {
         private IPatientRepository _patientRepository;
-        private readonly IMapper _mapper;
 
-        public PatientService(IPatientRepository patientRepository, IMapper mapper)
+        public PatientService(IPatientRepository patientRepository)
         {
             _patientRepository = patientRepository;
-            _mapper = mapper;
         }
 
         public bool CheckExisting(Patient patient)

@@ -1,11 +1,5 @@
-﻿using HospitalAPI;
-using HospitalLibrary.MedicalRecords.Model;
-using HospitalLibrary.MedicalRecords.Model.Enums;
+﻿using HospitalLibrary.MedicalRecords.Model;
 using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Net.Http;
-using System.Text;
 using System.Threading.Tasks;
 using Xunit;
 

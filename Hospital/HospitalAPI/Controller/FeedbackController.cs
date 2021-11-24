@@ -2,10 +2,8 @@
 using HospitalAPI.DTO;
 using HospitalAPI.Service;
 using HospitalAPI.Validation;
-using HospitalLibrary.MedicalRecords.Model.Enums;
-using HospitalLibrary.Model;
+using HospitalLibrary.MedicalRecords.Model;
 using Microsoft.AspNetCore.Mvc;
-using System;
 using System.Collections.Generic;
 
 namespace HospitalAPI.Controller

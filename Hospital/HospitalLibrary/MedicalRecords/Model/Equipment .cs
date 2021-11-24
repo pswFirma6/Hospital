@@ -1,7 +1,7 @@
-﻿using Hospital_library.MedicalRecords.Model.Enums;
+﻿using HospitalLibrary.MedicalRecords.Model.Enums;
 using System;
 
-namespace Hospital_library.MedicalRecords.Model
+namespace HospitalLibrary.MedicalRecords.Model
 {
     public class Equipment : Entity
     {

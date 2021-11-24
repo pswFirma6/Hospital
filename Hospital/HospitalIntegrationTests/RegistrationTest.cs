@@ -1,6 +1,7 @@
-using Hospital_API.DTO;
-using Hospital_library.MedicalRecords.Model;
-using Hospital_library.MedicalRecords.Model.Enums;
+using HospitalAPI.DTO;
+using HospitalLibrary.MedicalRecords.Model;
+using HospitalLibrary.MedicalRecords.Model.Enums;
+using HospitalLibrary.Model.Enums;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -55,7 +56,7 @@ namespace HospitalIntegrationTests
 
             PatientRegistrationDTO newPatient = new PatientRegistrationDTO("Mira", "Miric", DateTime.Now,
                 "0542369712546", "Partizanskih baza 7.", "0666423599", "pacijentmira@gmail.com",
-                "Mirami", "mira123", Hospital_library.Model.Enumeration.Gender.female,
+                "Mirami", "mira123", Gender.female,
                 "Novi Sad", "Serbia", UserType.patient, BloodType.B, RhFactor.positive,
                 189, 85, allergies, doctor, "http://localhost:4200/authentication/emailconfirmation");
 

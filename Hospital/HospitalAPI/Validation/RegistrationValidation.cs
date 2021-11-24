@@ -1,6 +1,6 @@
 ﻿using HospitalAPI.DTO;
 using HospitalLibrary.MedicalRecords.Model.Enums;
-using HospitalLibrary.Model.Enumeration;
+using HospitalLibrary.Model.Enums;
 using System;
 
 namespace HospitalAPI.Validation

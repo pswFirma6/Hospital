@@ -1,8 +1,6 @@
-﻿using Hospital_API.DTO;
-using Hospital_library.MedicalRecords.Model;
-using Hospital_library.MedicalRecords.Repository.Repository.Interface;
-using Hospital_library.MedicalRecords.Service;
-using HospitalLibrary.MedicalRecords.Model;
+﻿using HospitalLibrary.MedicalRecords.Model;
+using HospitalLibrary.MedicalRecords.Repository.Repository.Interface;
+using HospitalLibrary.MedicalRecords.Service;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.WebUtilities;
 using System.Collections.Generic;
