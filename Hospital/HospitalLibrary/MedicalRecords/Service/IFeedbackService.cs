@@ -1,6 +1,6 @@
-﻿using Hospital_library.Model;
+﻿using HospitalLibrary.Model;
 
-namespace Hospital_library.MedicalRecords.Service
+namespace HospitalLibrary.MedicalRecords.Service
 {
 
     public interface IFeedbackService

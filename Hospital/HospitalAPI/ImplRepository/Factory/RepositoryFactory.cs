@@ -1,11 +1,13 @@
-﻿using Hospital_API.ImplRepository;
+﻿using HospitalAPI.ImplRepository;
 
-namespace Hospital_API.Repository
+namespace HospitalAPI.Repository
 {
     public abstract class RepositoryFactory
     {
         public abstract FeedbackRepository GetFeedbackRepository();
 
         public abstract PatientRepository GetPatientRepository();
+
+        public abstract SurveyRepository GetSurveyRepository();
     }
 }

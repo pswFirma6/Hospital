@@ -1,7 +1,6 @@
-﻿using Hospital_library.MedicalRecords.Model;
-using System.Threading.Tasks;
+﻿using HospitalLibrary.MedicalRecords.Model;
 
-namespace Hospital_library.MedicalRecords.Service
+namespace HospitalLibrary.MedicalRecords.Service
 {
     public interface IPatientService
     {

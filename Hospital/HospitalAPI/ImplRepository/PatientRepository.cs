@@ -1,8 +1,8 @@
-﻿using Hospital_library.MedicalRecords.Repository;
-using Hospital_library.MedicalRecords.Model;
-using Hospital_library.MedicalRecords.Repository.Repository.Interface;
+﻿using HospitalLibrary.MedicalRecords.Repository;
+using HospitalLibrary.MedicalRecords.Model;
+using HospitalLibrary.MedicalRecords.Repository.Repository.Interface;
 
-namespace Hospital_API.ImplRepository
+namespace HospitalAPI.ImplRepository
 {
     public class PatientRepository : Repository<Patient>, IPatientRepository
     {

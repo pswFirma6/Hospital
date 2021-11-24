@@ -1,10 +1,10 @@
-﻿using Hospital_API.DTO;
+﻿using HospitalAPI.DTO;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Hospital_API.Validation
+namespace HospitalAPI.Validation
 {
     public class FeedbackValidation
     {

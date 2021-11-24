@@ -1,5 +1,5 @@
 ﻿
-namespace Hospital_library.MedicalRecords.Model
+namespace HospitalLibrary.MedicalRecords.Model
 {
     public class Allergy : Entity
     {

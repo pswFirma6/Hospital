@@ -10,6 +10,15 @@ using Hospital_library.MedicalRecords.Repository.Repository.Interface;
 using Hospital_library.MedicalRecords.Service;
 using HospitalAPI.ImplService;
 using HospitalLibrary.MedicalRecords.Model;
+using HospitalAPI;
+using HospitalAPI.ImplRepository;
+using HospitalAPI.ImplService;
+using HospitalAPI.Repository;
+using HospitalAPI.Validation;
+using HospitalLibrary.MedicalRecords.Model;
+using HospitalLibrary.MedicalRecords.Model.Enums;
+using HospitalLibrary.MedicalRecords.Repository.Repository.Interface;
+using HospitalLibrary.Model.Enumeration;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
@@ -18,7 +27,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Reflection;
-using static Hospital_API.Mapper.Mapper;
+using static HospitalAPI.Mapper.Mapper;
 
 namespace HospitalIntegrationTests
 {
@@ -86,7 +95,56 @@ namespace HospitalIntegrationTests
             {
                 options.UseInMemoryDatabase("InMemoryDbForTesting");
             });
-            
+            var serviceProvider = services.BuildServiceProvider();
+
+            using (var scope = serviceProvider.CreateScope())
+            {
+                using (var db = scope.ServiceProvider.GetRequiredService<MyDbContext>())
+                    try
+                    {
+
+
+                        db.Database.EnsureCreated();
+                        InitializeDbForTests(db);
+                    }
+                    catch (Exception ex)
+                    {
+                        throw;
+                    }
+            }
+        }
+
+
+        public static void InitializeDbForTests(MyDbContext db)
+        {
+            CreatePatients();
+            db.SaveChanges();
+        }
+
+        public static List<Patient> CreatePatients()
+        {
+            List<Patient> listOfPatients = new List<Patient>();
+            Doctor doctor = new Doctor();
+            doctor.Id = "1";
+            List<Allergy> allergies = new List<Allergy>();
+
+            Patient newPatientA1 = new Patient("2", "Slavko", "Vranjes", DateTime.Now,
+                "054236971333", "Partizanskih baza 8.", "0666423699", "slavko@gmail.com",
+                "slavko", "slavko123", Gender.male,
+                "Novi Sad", "Serbia", UserType.patient, BloodType.B, RhFactor.positive,
+                189, 85, doctor, allergies);
+
+
+            Patient newPatientB2 = new Patient("3", "Marko", "Markovic", DateTime.Now,
+                "0542369712546", "Partizanskih baza 7.", "0666423599", "marko@gmail.com",
+                "SeekEquilibrium", "mira123", Gender.female,
+                "Novi Sad", "Serbia", UserType.patient, BloodType.A, RhFactor.negative,
+                180, 85, doctor, allergies);
+
+            listOfPatients.Add(newPatientA1);
+            listOfPatients.Add(newPatientB2);
+
+            return listOfPatients;
         }
 
         public void Configure(IApplicationBuilder app)
@@ -106,5 +164,5 @@ namespace HospitalIntegrationTests
             });
         }
     }
-    
+
 }

@@ -8,7 +8,7 @@ using HospitalLibrary.MedicalRecords.Model;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 
-namespace Hospital_API.Controller
+namespace HospitalAPI.Controller
 {
     [Route("api/[controller]")]
     [ApiController]

@@ -23,7 +23,7 @@ namespace HospitalTests.UnitTests
             List<Allergy> allergies = new List<Allergy>();
             Patient newPatient = new Patient("2", "Mira", "Miric", DateTime.Now,
                 "0542369712546", "Partizanskih baza 7.", "0666423599", "marko@gmail.com",
-                "Mirami", "mira123", Hospital_library.Model.Enumeration.Gender.female,
+                "Mirami", "mira123", HospitalLibrary.Model.Enumeration.Gender.female,
                 "Novi Sad", "Serbia", UserType.patient, BloodType.B, RhFactor.positive,
                 189, 85, allergies, doctor);
 
@@ -46,7 +46,7 @@ namespace HospitalTests.UnitTests
             List<Allergy> allergies = new List<Allergy>();
             Patient newPatient = new Patient("2", "Mira", "Miric", DateTime.Now,
             "0542369719085", "Partizanskih baza 7.", "0666423599", "mara@gmail.com",
-            "Mirami", "mira123", Hospital_library.Model.Enumeration.Gender.female,
+            "Mirami", "mira123", HospitalLibrary.Model.Enumeration.Gender.female,
             "Novi Sad", "Serbia", UserType.patient, BloodType.B, RhFactor.positive,
             189, 85, allergies, doctor);
 
@@ -68,7 +68,7 @@ namespace HospitalTests.UnitTests
             List<Allergy> allergies = new List<Allergy>();
             Patient existingPatient = new Patient("1", "Marko", "Markovic", DateTime.Now,
                 "0542369712546", "Maksima Gorkog 7.", "0656423599", "marko@gmail.com",
-                "Markoni", "marko123", Hospital_library.Model.Enumeration.Gender.male,
+                "Markoni", "marko123", HospitalLibrary.Model.Enumeration.Gender.male,
                 "Novi Sad", "Serbia", UserType.patient, BloodType.A, RhFactor.positive,
                 189, 85, allergies, doctor);
             List<Patient> patients = new List<Patient>();

@@ -1,14 +1,15 @@
-﻿
+
 using HospitalLibrary.MedicalRecords.Repository.Interface;
 using HospitalLibrary.Model;
 using HospitalAPI;
 using HospitalLibrary.MedicalRecords.Repository;
+using HospitalLibrary.MedicalRecords.Model;
 
 namespace HospitalAPI.Repository
 {
-    public class FeedbackRepository : Repository<Feedback>, IFeedbackRepository
+    public class SurveyRepository : Repository<SurveyQuestion>, IFeedbackRepository
     {
-        public FeedbackRepository(MyDbContext context)
+        public SurveyRepository(MyDbContext context)
             : base(context)
         { }
     }

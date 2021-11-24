@@ -1,13 +1,13 @@
-﻿using Hospital_API.DTO;
-using Hospital_API.Repository;
-using Hospital_library.MedicalRecords.Model;
-using Hospital_library.MedicalRecords.Model.Enums;
-using Hospital_library.MedicalRecords.Service;
-using Hospital_library.Model;
+﻿using HospitalAPI.DTO;
+using HospitalAPI.Repository;
+using HospitalLibrary.MedicalRecords.Model;
+using HospitalLibrary.MedicalRecords.Model.Enums;
+using HospitalLibrary.MedicalRecords.Service;
+using HospitalLibrary.Model;
 using System;
 using System.Collections.Generic;
 
-namespace Hospital_API.Service
+namespace HospitalAPI.Service
 {
 
     public class FeedbackService : IFeedbackService

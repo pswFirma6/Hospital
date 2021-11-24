@@ -3,7 +3,7 @@ using Hospital_library.Model.Enumeration;
 using System;
 using System.Collections.Generic;
 
-namespace Hospital_library.MedicalRecords.Model
+namespace HospitalLibrary.MedicalRecords.Model
 {
     public class Doctor : User
     {

@@ -1,11 +1,12 @@
-﻿using Hospital_library.MedicalRecords.Model.Enums;
-using Hospital_library.Model.Enumeration;
+﻿using HospitalLibrary.MedicalRecords.Model.Enums;
+using HospitalLibrary.Model;
+using HospitalLibrary.Model.Enumeration;
 using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.AspNetCore.Identity;
 
-namespace Hospital_library.MedicalRecords.Model
+namespace HospitalLibrary.MedicalRecords.Model
 {
     public class User : Entity
     {
