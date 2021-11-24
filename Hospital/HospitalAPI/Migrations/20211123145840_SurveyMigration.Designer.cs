@@ -3,15 +3,17 @@ using System;
 using HospitalAPI;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace HospitalAPI.Migrations
 {
     [DbContext(typeof(MyDbContext))]
-    partial class MyDbContextModelSnapshot : ModelSnapshot
+    [Migration("20211123145840_SurveyMigration")]
+    partial class SurveyMigration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -153,6 +155,29 @@ namespace HospitalAPI.Migrations
                     b.HasIndex("DoctorId");
 
                     b.ToTable("Patients");
+                });
+
+            modelBuilder.Entity("HospitalLibrary.MedicalRecords.Model.SurveyQuestion", b =>
+                {
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("text");
+
+                    b.Property<int>("Category")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("PersonId")
+                        .HasColumnType("text");
+
+                    b.Property<string>("QuestionText")
+                        .HasColumnType("text");
+
+                    b.Property<int>("Rate")
+                        .HasColumnType("integer");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("SurveyQuestion");
                 });
 
             modelBuilder.Entity("HospitalLibrary.Model.Feedback", b =>
