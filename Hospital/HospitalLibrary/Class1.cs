@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Hospital_library
+namespace HospitalLibrary
 {
     public class Class1
     {

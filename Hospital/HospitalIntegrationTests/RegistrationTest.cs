@@ -1,5 +1,5 @@
-using Hospital_library.MedicalRecords.Model;
-using Hospital_library.MedicalRecords.Model.Enums;
+using HospitalLibrary.MedicalRecords.Model;
+using HospitalLibrary.MedicalRecords.Model.Enums;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -54,9 +54,9 @@ namespace HospitalIntegrationTests
             doctor.Id = "1";
             List<Allergy> allergies = new List<Allergy>();
 
-            Patient newPatient = new Patient("2", "Mira", "Miric", DateTime.Now,
+            Patient newPatient = new Patient("1", "Mira", "Miric", DateTime.Now,
                 "0542369712546", "Partizanskih baza 7.", "0666423599", "marko@gmail.com",
-                "Mirami", "mira123", Hospital_library.Model.Enumeration.Gender.female,
+                "Mirami", "mira123", HospitalLibrary.Model.Enumeration.Gender.female,
                 "Novi Sad", "Serbia", UserType.patient, BloodType.B, RhFactor.positive,
                 189, 85, doctor, allergies);
 

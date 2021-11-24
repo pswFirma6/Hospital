@@ -31,7 +31,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Hospital library\Hospital library.csproj" />
+    <ProjectReference Include="..\HospitalLibrary\HospitalLibrary.csproj" />
     <Folder Include="Mapper\" />
   </ItemGroup>
 

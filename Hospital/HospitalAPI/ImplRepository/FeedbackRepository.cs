@@ -1,10 +1,10 @@
 ﻿
-using Hospital_library.MedicalRecords.Repository.Interface;
-using Hospital_library.Model;
-using Hospital_API;
-using Hospital_library.MedicalRecords.Repository;
+using HospitalLibrary.MedicalRecords.Repository.Interface;
+using HospitalLibrary.Model;
+using HospitalAPI;
+using HospitalLibrary.MedicalRecords.Repository;
 
-namespace Hospital_API.Repository
+namespace HospitalAPI.Repository
 {
     public class FeedbackRepository : Repository<Feedback>, IFeedbackRepository
     {

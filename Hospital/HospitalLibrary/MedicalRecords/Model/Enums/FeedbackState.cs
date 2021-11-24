@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Hospital_library.MedicalRecords.Model.Enums
+namespace HospitalLibrary.MedicalRecords.Model.Enums
 {
     public enum FeedbackState
     {

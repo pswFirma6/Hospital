@@ -1,9 +1,9 @@
-﻿using Hospital_API.ImplRepository;
-using Hospital_library.MedicalRecords.Repository;
-using Hospital_library.MedicalRecords.Repository.Interface;
+﻿using HospitalAPI.ImplRepository;
+using HospitalLibrary.MedicalRecords.Repository;
+using HospitalLibrary.MedicalRecords.Repository.Interface;
 
 
-namespace Hospital_API.Repository
+namespace HospitalAPI.Repository
 {
     public class HospitalRepositoryFactory : RepositoryFactory
     {

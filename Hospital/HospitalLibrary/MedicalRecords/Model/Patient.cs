@@ -1,17 +1,20 @@
-﻿using Hospital_library.MedicalRecords.Model.Enums;
-using Hospital_library.Model;
-using Hospital_library.Model.Enumeration;
+﻿using HospitalLibrary.MedicalRecords.Model.Enums;
+using HospitalLibrary.Model;
+using HospitalLibrary.Model.Enumeration;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Hospital_library.MedicalRecords.Model
+namespace HospitalLibrary.MedicalRecords.Model
 {
     public class Patient : User
     {
-        public MedicalRecord medicalRecord { get; set; }
+        public BloodType BloodType { get; set; }
+        public RhFactor RhFactor { get; set; }
+        public int Height { get; set; }
+        public int Weight { get; set; }
         public Doctor Doctor { get; set; }
-
+        public List<Allergy> Allergies { get; set; }
         public Patient() 
         {
         }

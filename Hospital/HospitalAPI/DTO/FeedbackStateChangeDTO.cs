@@ -1,10 +1,10 @@
-using Hospital_library.MedicalRecords.Model.Enums;
+using HospitalLibrary.MedicalRecords.Model.Enums;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Hospital_API.DTO
+namespace HospitalAPI.DTO
 {
     public class FeedbackStateChangeDTO
     {

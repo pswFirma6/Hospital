@@ -1,8 +1,8 @@
-﻿using Hospital_library.MedicalRecords.Model;
+﻿using HospitalLibrary.MedicalRecords.Model;
 using System.Collections.Generic;
 
 
-namespace Hospital_library.MedicalRecords.Repository.Repository.Interface
+namespace HospitalLibrary.MedicalRecords.Repository.Repository.Interface
 {
     public interface IPatientRepository
     {
