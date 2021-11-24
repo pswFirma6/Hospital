@@ -10,9 +10,14 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="GraphicalEditor\NewFolder\**" />
+    <EmbeddedResource Remove="GraphicalEditor\NewFolder\**" />
+    <None Remove="GraphicalEditor\NewFolder\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Folder Include="GraphicalEditor\Model\" />
     <Folder Include="GraphicalEditor\Service\" />
-    <Folder Include="GraphicalEditor\Repository\" />
     <Folder Include="RoomsAndEquipment\Model\" />
     <Folder Include="RoomsAndEquipment\Repository\" />
     <Folder Include="RoomsAndEquipment\Service\" />
