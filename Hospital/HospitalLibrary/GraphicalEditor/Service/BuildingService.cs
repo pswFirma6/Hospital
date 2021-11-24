@@ -1,11 +1,11 @@
-﻿using project.Model;
-using project.Repository;
+﻿using HospitalLibrary.GraphicalEditor.Model;
+using HospitalLibrary.GraphicalEditor.Repository;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace project.Service
+namespace HospitalLibrary.GraphicalEditor.Service
 {
     public class BuildingService : IService<Building>
     {

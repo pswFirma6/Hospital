@@ -1,12 +1,12 @@
-﻿using project.Core;
-using project.Model;
-using project.Repository;
+﻿using HospitalLibrary.GraphicalEditor.Core;
+using HospitalLibrary.GraphicalEditor.Model;
+using HospitalLibrary.GraphicalEditor.Repository;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace project.Repository
+namespace HospitalLibrary.GraphicalEditor.Repository
 {
     public class UnitOfWork : IUnitOfWork, IDisposable
     {

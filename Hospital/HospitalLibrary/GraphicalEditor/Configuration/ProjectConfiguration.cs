@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace project.Configuration
+namespace HospitalLibrary.GraphicalEditor.Configuration
 {
     public class ProjectConfiguration : IProjectConfiguration
     {

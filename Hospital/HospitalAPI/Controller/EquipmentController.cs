@@ -1,12 +1,12 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using project.Model;
-using project.Service;
+using HospitalLibrary.GraphicalEditor.Model;
+using HospitalLibrary.GraphicalEditor.Service;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace project.Controllers
+namespace HospitalAPI.Controller
 {
 
     [Route("api/[controller]")]

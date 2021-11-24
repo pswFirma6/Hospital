@@ -1,11 +1,11 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using project.Configuration;
+using HospitalLibrary.GraphicalEditor.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace project.Model
+namespace HospitalLibrary.GraphicalEditor.Model
 {
     public class MyDbContext : DbContext
     {
