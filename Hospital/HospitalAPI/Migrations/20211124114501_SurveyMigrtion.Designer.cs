@@ -10,8 +10,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace HospitalAPI.Migrations
 {
     [DbContext(typeof(MyDbContext))]
-    [Migration("20211123145840_SurveyMigration")]
-    partial class SurveyMigration
+    [Migration("20211124114501_SurveyMigrtion")]
+    partial class SurveyMigrtion
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
