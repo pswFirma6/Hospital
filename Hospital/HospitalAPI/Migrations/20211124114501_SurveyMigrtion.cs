@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace HospitalAPI.Migrations
 {
-    public partial class SurveyMigration : Migration
+    public partial class SurveyMigrtion : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
