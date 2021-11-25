@@ -9,5 +9,6 @@ namespace HospitalLibrary.MedicalRecords.Repository.Repository.Interface
         Patient GetByUniqueFields(string username, string email, string jmbg);
         Patient Add(Patient patient);
         List<Patient> GetAll();
+        Patient GetOne(string id);
     }
 }

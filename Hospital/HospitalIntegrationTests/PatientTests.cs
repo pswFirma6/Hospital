@@ -29,7 +29,7 @@ namespace HospitalIntegrationTests
 
 
 
-            var url = "api/getPatient";
+            var url = "api/patient";
 
             // Act //
             var response = await injection.Client.GetAsync(url);
