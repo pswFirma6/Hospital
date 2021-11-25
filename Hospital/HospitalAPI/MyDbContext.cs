@@ -17,6 +17,8 @@ namespace HospitalAPI
         public DbSet<Floor> Floors { get; set; }
         public DbSet<Building> Buildings { get; set; }
 
+        
+
 
     }
 }
