@@ -6,7 +6,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 
-namespace HospitalLibrary.GraphicalEditor.Repository
+namespace HospitalAPI.EditorRepository
 {
     public class FloorRepository : Repository<Floor>, IFloorRepository
     {

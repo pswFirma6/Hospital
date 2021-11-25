@@ -1,17 +1,23 @@
-﻿using HospitalLibrary.GraphicalEditor.Model;
-using HospitalLibrary.GraphicalEditor.Repository;
+﻿using HospitalAPI.EditorRepository;
+using HospitalLibrary.GraphicalEditor.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace HospitalLibrary.GraphicalEditor.Service
+namespace HospitalAPI.EditorService
 {
     public class FloorService : IService<Floor>
     {
+        private MyDbContext dbContxt;
+
+        public FloorService(MyDbContext dbContxt)
+        {
+            this.dbContxt = dbContxt;
+        }
         public IEnumerable<Floor> getAll()
         {
-            using (UnitOfWork unitOfWork = new UnitOfWork(new MyDbContext()))       //poziva dispose na kraju
+            using (UnitOfWork unitOfWork = new UnitOfWork(dbContxt))       //poziva dispose na kraju
             {
                 return unitOfWork.Floors.GetAll();
             }
@@ -19,7 +25,7 @@ namespace HospitalLibrary.GraphicalEditor.Service
 
         public Floor create(Floor floor)
         {
-            using (UnitOfWork unitOfWork = new UnitOfWork(new MyDbContext()))       //poziva dispose na kraju
+            using (UnitOfWork unitOfWork = new UnitOfWork(dbContxt))       //poziva dispose na kraju
             {
                 unitOfWork.Floors.Add(floor);
                 unitOfWork.Complete();

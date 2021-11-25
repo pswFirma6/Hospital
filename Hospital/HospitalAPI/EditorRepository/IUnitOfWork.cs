@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace HospitalLibrary.GraphicalEditor.Repository
+namespace HospitalAPI.EditorRepository
 {
     public interface IUnitOfWork
     {

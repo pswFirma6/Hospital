@@ -1,10 +1,10 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using HospitalLibrary.GraphicalEditor.Model;
-using HospitalLibrary.GraphicalEditor.Service;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using HospitalAPI.EditorService;
 
 namespace HospitalAPI.Controller
 {
@@ -15,8 +15,11 @@ namespace HospitalAPI.Controller
     {
 
 
-        public FloorService floorService = new FloorService();
-
+        public FloorService floorService;
+        public FloorController(FloorService floorService)
+        {
+            this.floorService = floorService;
+        }
 
         [HttpGet]
         public IActionResult GetAll()

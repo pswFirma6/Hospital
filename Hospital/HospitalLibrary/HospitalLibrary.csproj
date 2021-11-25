@@ -17,6 +17,7 @@
 
   <ItemGroup>
     <Folder Include="GraphicalEditor\Model\" />
+    <Folder Include="GraphicalEditor\Repository\" />
     <Folder Include="GraphicalEditor\Service\" />
     <Folder Include="RoomsAndEquipment\Model\" />
     <Folder Include="RoomsAndEquipment\Repository\" />

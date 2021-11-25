@@ -1,10 +1,10 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using HospitalLibrary.GraphicalEditor.Model;
-using HospitalLibrary.GraphicalEditor.Service;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using HospitalAPI.EditorService;
 
 namespace HospitalAPI.Controller
 {
@@ -13,9 +13,13 @@ namespace HospitalAPI.Controller
     [ApiController]
     public class EquipmentController : ControllerBase
     {
-
-
         public EquipmentService equipmentService;
+
+        public EquipmentController(EquipmentService equipmentService)
+        {
+            this.equipmentService = equipmentService;
+        }
+
 
 
 

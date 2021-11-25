@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace HospitalLibrary.GraphicalEditor.Service
+namespace HospitalAPI.EditorService
 {
     public interface IService<TEntity> where TEntity : class
     {
