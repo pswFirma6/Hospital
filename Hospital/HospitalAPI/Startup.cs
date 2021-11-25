@@ -1,4 +1,5 @@
 using AutoMapper;
+using HospitalAPI.EditorService;
 using HospitalAPI.ImplRepository;
 using HospitalAPI.ImplService;
 using HospitalAPI.Repository;
@@ -56,8 +57,15 @@ namespace HospitalAPI
             services.AddMvc();
 
             // The AddScoped method registers the service with a scoped lifetime, the lifetime of a single request
+
             services.AddScoped<IFeedbackService, FeedbackService>();
             services.AddScoped<IPatientService, PatientService>();
+
+
+            services.AddScoped<BuildingService>();
+            services.AddScoped<EquipmentService>();
+            services.AddScoped<FloorService>();
+            services.AddScoped<RoomService>();
 
             // Need to AddScoped for every dependency injection validation
             services.AddScoped<FeedbackValidation>();
