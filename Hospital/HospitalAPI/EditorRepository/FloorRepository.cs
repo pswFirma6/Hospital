@@ -1,5 +1,6 @@
 ﻿using HospitalLibrary.GraphicalEditor.Core;
 using HospitalLibrary.GraphicalEditor.Model;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,7 +13,10 @@ namespace HospitalAPI.EditorRepository
     {
         public FloorRepository(MyDbContext context) : base(context) { }
 
-
+        public override IEnumerable<Floor> GetAll()
+        {
+            return MyDbContext.Floors.Include(x => x.building).ToList();
+        }
 
 
     }
