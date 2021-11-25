@@ -4,7 +4,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace HospitalAPI.Migrations
 {
-    public partial class Equipments : Migration
+    public partial class RoomAdd : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -137,11 +137,18 @@ namespace HospitalAPI.Migrations
                     Name = table.Column<string>(type: "text", nullable: true),
                     Description = table.Column<string>(type: "text", nullable: true),
                     WorkHour = table.Column<string>(type: "text", nullable: true),
+                    DoctorId = table.Column<string>(type: "text", nullable: true),
                     deleted = table.Column<bool>(type: "boolean", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Rooms", x => x.id);
+                    table.ForeignKey(
+                        name: "FK_Rooms_Doctor_DoctorId",
+                        column: x => x.DoctorId,
+                        principalTable: "Doctor",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Rooms_Floors_floorid",
                         column: x => x.floorid,
@@ -204,6 +211,11 @@ namespace HospitalAPI.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_Patients_DoctorId",
                 table: "Patients",
+                column: "DoctorId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Rooms_DoctorId",
+                table: "Rooms",
                 column: "DoctorId");
 
             migrationBuilder.CreateIndex(

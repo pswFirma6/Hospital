@@ -19,7 +19,7 @@ namespace HospitalAPI.EditorRepository
             Floors = new FloorRepository(this.context);
             Rooms = new RoomRepository(this.context);
             Equipments = new EquipmentRepository(this.context);
-
+            Doctors = new DoctorRepository(this.context);
 
         }
 
@@ -27,6 +27,8 @@ namespace HospitalAPI.EditorRepository
         public IFloorRepository Floors { get; private set; }
         public IRoomRepository Rooms { get; private set; }
         public IEquipmentRepository Equipments { get; private set; }
+
+        public IDoctorRepository Doctors { get; private set; }
 
 
         public MyDbContext Context

@@ -10,8 +10,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace HospitalAPI.Migrations
 {
     [DbContext(typeof(MyDbContext))]
-    [Migration("20211125113700_EquipmentMigration")]
-    partial class EquipmentMigration
+    [Migration("20211125153758_RoomAdd")]
+    partial class RoomAdd
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -93,6 +93,9 @@ namespace HospitalAPI.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("text");
 
+                    b.Property<string>("DoctorId")
+                        .HasColumnType("text");
+
                     b.Property<string>("Name")
                         .HasColumnType("text");
 
@@ -106,6 +109,8 @@ namespace HospitalAPI.Migrations
                         .HasColumnType("integer");
 
                     b.HasKey("id");
+
+                    b.HasIndex("DoctorId");
 
                     b.HasIndex("floorid");
 
@@ -311,9 +316,15 @@ namespace HospitalAPI.Migrations
 
             modelBuilder.Entity("HospitalLibrary.GraphicalEditor.Model.Room", b =>
                 {
+                    b.HasOne("HospitalLibrary.MedicalRecords.Model.Doctor", "Doctor")
+                        .WithMany()
+                        .HasForeignKey("DoctorId");
+
                     b.HasOne("HospitalLibrary.GraphicalEditor.Model.Floor", "floor")
                         .WithMany()
                         .HasForeignKey("floorid");
+
+                    b.Navigation("Doctor");
 
                     b.Navigation("floor");
                 });

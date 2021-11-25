@@ -60,6 +60,7 @@ namespace HospitalAPI
             services.AddScoped<EquipmentService>();
             services.AddScoped<FloorService>();
             services.AddScoped<RoomService>();
+            services.AddScoped<DoctorService>();
             // Need to AddScoped for every dependency injection validation
             services.AddScoped<FeedbackValidation>();
             services.AddScoped<RegistrationValidation>();
