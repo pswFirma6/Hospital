@@ -49,13 +49,13 @@ namespace HospitalIntegrationTests
             // The AddScoped method registers the service with a scoped lifetime, the lifetime of a single request
             services.AddScoped<FeedbackService>();
             services.AddScoped<PatientService>();
-
+            services.AddScoped<SurveyService>();
             // Validation
             services.AddScoped<RegistrationValidation>();
-
+            services.AddScoped<SurveyValidation>();
             services.AddScoped<HospitalRepositoryFactory>();
             services.AddScoped<IPatientRepository, PatientRepository>();
-
+            
             services.AddControllers();
 
             services.AddDbContext<MyDbContext>(options =>

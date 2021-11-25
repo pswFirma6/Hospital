@@ -7,5 +7,6 @@ namespace HospitalLibrary.MedicalRecords.Service
 {
     public interface ISurveyService
     {
+        //void Add(List<SurveyQuestion> surveyQuestions);
     }
 }

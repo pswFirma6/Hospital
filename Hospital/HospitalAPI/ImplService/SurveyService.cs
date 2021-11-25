@@ -10,8 +10,7 @@ namespace HospitalAPI.ImplService
     public class SurveyService : ISurveyService
     {
         public HospitalRepositoryFactory _repositoryFactory;
-
-        public SurveyService(HospitalRepositoryFactory repositoryFactory, MyDbContext aa)
+        public SurveyService(HospitalRepositoryFactory repositoryFactory)
         {
             _repositoryFactory = repositoryFactory;
         }
