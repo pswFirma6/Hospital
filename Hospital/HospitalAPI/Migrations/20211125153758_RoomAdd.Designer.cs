@@ -10,8 +10,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace HospitalAPI.Migrations
 {
     [DbContext(typeof(MyDbContext))]
-    [Migration("20211123145840_SurveyMigration")]
-    partial class SurveyMigration
+    [Migration("20211125153758_RoomAdd")]
+    partial class RoomAdd
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -20,6 +20,102 @@ namespace HospitalAPI.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 63)
                 .HasAnnotation("ProductVersion", "5.0.11")
                 .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+            modelBuilder.Entity("HospitalLibrary.GraphicalEditor.Model.Building", b =>
+                {
+                    b.Property<int>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<string>("Name")
+                        .HasColumnType("text");
+
+                    b.Property<bool>("deleted")
+                        .HasColumnType("boolean");
+
+                    b.HasKey("id");
+
+                    b.ToTable("Buildings");
+                });
+
+            modelBuilder.Entity("HospitalLibrary.GraphicalEditor.Model.Equipment", b =>
+                {
+                    b.Property<int>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<int>("Amount")
+                        .HasColumnType("integer");
+
+                    b.Property<bool>("deleted")
+                        .HasColumnType("boolean");
+
+                    b.Property<string>("name")
+                        .HasColumnType("text");
+
+                    b.Property<int?>("roomid")
+                        .HasColumnType("integer");
+
+                    b.HasKey("id");
+
+                    b.HasIndex("roomid");
+
+                    b.ToTable("Equipments");
+                });
+
+            modelBuilder.Entity("HospitalLibrary.GraphicalEditor.Model.Floor", b =>
+                {
+                    b.Property<int>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<int>("FloorNumber")
+                        .HasColumnType("integer");
+
+                    b.Property<bool>("deleted")
+                        .HasColumnType("boolean");
+
+                    b.HasKey("id");
+
+                    b.ToTable("Floors");
+                });
+
+            modelBuilder.Entity("HospitalLibrary.GraphicalEditor.Model.Room", b =>
+                {
+                    b.Property<int>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<string>("Description")
+                        .HasColumnType("text");
+
+                    b.Property<string>("DoctorId")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("text");
+
+                    b.Property<string>("WorkHour")
+                        .HasColumnType("text");
+
+                    b.Property<bool>("deleted")
+                        .HasColumnType("boolean");
+
+                    b.Property<int?>("floorid")
+                        .HasColumnType("integer");
+
+                    b.HasKey("id");
+
+                    b.HasIndex("DoctorId");
+
+                    b.HasIndex("floorid");
+
+                    b.ToTable("Rooms");
+                });
 
             modelBuilder.Entity("HospitalLibrary.MedicalRecords.Model.Allergy", b =>
                 {
@@ -207,6 +303,30 @@ namespace HospitalAPI.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Feedbacks");
+                });
+
+            modelBuilder.Entity("HospitalLibrary.GraphicalEditor.Model.Equipment", b =>
+                {
+                    b.HasOne("HospitalLibrary.GraphicalEditor.Model.Room", "room")
+                        .WithMany()
+                        .HasForeignKey("roomid");
+
+                    b.Navigation("room");
+                });
+
+            modelBuilder.Entity("HospitalLibrary.GraphicalEditor.Model.Room", b =>
+                {
+                    b.HasOne("HospitalLibrary.MedicalRecords.Model.Doctor", "Doctor")
+                        .WithMany()
+                        .HasForeignKey("DoctorId");
+
+                    b.HasOne("HospitalLibrary.GraphicalEditor.Model.Floor", "floor")
+                        .WithMany()
+                        .HasForeignKey("floorid");
+
+                    b.Navigation("Doctor");
+
+                    b.Navigation("floor");
                 });
 
             modelBuilder.Entity("HospitalLibrary.MedicalRecords.Model.Allergy", b =>
