@@ -8,6 +8,7 @@
 /Hospital/HospitalTests/obj
 /Hospital/HospitalIntegrationTests/bin
 /Hospital/HospitalIntegrationTests/obj
+/Hospital/HospitalAPI/Migrations
 
 *.log
 .DS_Store
