@@ -7,7 +7,7 @@ using HospitalLibrary.MedicalRecords.Model;
 
 namespace HospitalAPI.Repository
 {
-    public class SurveyRepository : Repository<SurveyQuestion>, IFeedbackRepository
+    public class SurveyRepository : Repository<SurveyQuestion>, ISurveyRepository
     {
         public SurveyRepository(MyDbContext context)
             : base(context)
