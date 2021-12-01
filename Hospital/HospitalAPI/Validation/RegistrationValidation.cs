@@ -9,6 +9,11 @@ namespace HospitalAPI.Validation
     {
         public bool IsValid(PatientRegistrationDTO dto)
         {
+            if (dto == null)
+            {
+                return false;
+            }
+
             if (dto.Name.Length <= 0 || dto.Surname.Length <= 0 || dto.BirthDate == null
                     || !dto.Jmbg.Length.Equals(13) || dto.Address.Length <= 0 || dto.Phone.Length <= 0
                     || dto.Email.Length <= 0 || dto.Username.Length <= 0 || dto.Password.Length <= 0
@@ -19,11 +24,8 @@ namespace HospitalAPI.Validation
             {
                 return false;
             }
-            else if (dto == null)
-            {
-                return false;
-            }
-
+            
+            
             return true;
         }
     }
