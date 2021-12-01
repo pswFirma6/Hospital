@@ -19,7 +19,8 @@ namespace HospitalLibrary.MedicalRecords.Model
         public string City { get; set; }
         public string Country { get; set; }
         public UserType UserType { get; set; }
-        
+        public bool Activated { get; set; }
+
         public User() 
         {
         }

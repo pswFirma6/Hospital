@@ -40,9 +40,11 @@ namespace HospitalAPI.Controller
             }
             
             var model = _mapper.Map<Patient>(patientDTO);
-            Patient patient = _patientService.Register(model);
 
-            if (patient.Equals(null))
+            Patient patient = _patientService.Register(model);
+            
+            
+            if (patient == null)
             {
                 return Conflict(new { message = $"An existing record patient was already found." });
             }
@@ -51,6 +53,25 @@ namespace HospitalAPI.Controller
             await _registrationService.EmailVerification(registrated);
 
             return Ok(patient);
+        }
+
+
+        [HttpGet("EmailConfirmation")]
+        public async Task<IActionResult> EmailConfirmation([FromQuery] string email, [FromQuery] string token)
+        {
+            //_registrationService
+            //var user = await _registrationService.FindByEmailAsync(email);
+            var user = _registrationService.FindByEmail(email);
+            if (user == null)
+                return BadRequest("Invalid Email Confirmation Request");
+
+            //IdentityResult confirmResult = await _registrationService.ConfirmEmailAsync(user, token);
+
+            //if (!confirmResult.Succeeded)
+            //    return BadRequest("Invalid Email Confirmation Request");
+
+            _registrationService.ActivateUser(user);
+            return Ok();
         }
     }
 }

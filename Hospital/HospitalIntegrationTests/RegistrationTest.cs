@@ -23,7 +23,8 @@ namespace HospitalIntegrationTests
 
         [Theory]
         [MemberData(nameof(Data))]
-        public async Task Checks_Successful_RegistrationAsync(PatientRegistrationDTO newPatient, string expectedJMBG)
+        public async Task Checks_Successful_RegistrationAsync(PatientRegistrationDTO newPatient, 
+            string expectedJMBG, bool expectedActivated)
         {  
 
             // Arrange //
@@ -44,6 +45,7 @@ namespace HospitalIntegrationTests
             var result = JsonConvert.DeserializeObject<Patient>(resultString); // Convert to json
 
             Assert.Equal(result.Jmbg, expectedJMBG);
+            Assert.Equal(result.Activated, expectedActivated);
 
         }
         public static IEnumerable<object[]> Data() 
@@ -58,12 +60,15 @@ namespace HospitalIntegrationTests
                 "0542369712546", "Partizanskih baza 7.", "0666423599", "pacijentmira@gmail.com",
                 "Mirami", "mira123", Gender.female,
                 "Novi Sad", "Serbia", UserType.patient, BloodType.B, RhFactor.positive,
-                189, 85, allergies, doctor, "http://localhost:4200/authentication/emailconfirmation");
+                189, 85, allergies, doctor.Id, "http://localhost:4200/authentication/emailconfirmation");
 
             // expected result from rest service
             var expectedJMBG = "0542369712546";
 
-            retVal.Add(new object[] { newPatient, expectedJMBG });
+            // user is not yet activated
+            var activated = false;
+
+            retVal.Add(new object[] { newPatient, expectedJMBG, activated });
 
             return retVal;
         }

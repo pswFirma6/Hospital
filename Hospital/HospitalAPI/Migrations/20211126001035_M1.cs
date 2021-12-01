@@ -3,15 +3,16 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace HospitalAPI.Migrations
 {
-    public partial class SurveyMigration : Migration
+    public partial class M1 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Doctor",
+                name: "Doctors",
                 columns: table => new
                 {
                     Id = table.Column<string>(type: "text", nullable: false),
+                    DoctorType = table.Column<int>(type: "integer", nullable: false),
                     Name = table.Column<string>(type: "text", nullable: true),
                     Surname = table.Column<string>(type: "text", nullable: true),
                     BirthDate = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
@@ -24,11 +25,12 @@ namespace HospitalAPI.Migrations
                     Gender = table.Column<int>(type: "integer", nullable: false),
                     City = table.Column<string>(type: "text", nullable: true),
                     Country = table.Column<string>(type: "text", nullable: true),
-                    UserType = table.Column<int>(type: "integer", nullable: false)
+                    UserType = table.Column<int>(type: "integer", nullable: false),
+                    Activated = table.Column<bool>(type: "boolean", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Doctor", x => x.Id);
+                    table.PrimaryKey("PK_Doctors", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -46,6 +48,22 @@ namespace HospitalAPI.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Feedbacks", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Room",
+                columns: table => new
+                {
+                    Id = table.Column<string>(type: "text", nullable: false),
+                    name = table.Column<string>(type: "text", nullable: true),
+                    RoomType = table.Column<int>(type: "integer", nullable: false),
+                    Floor = table.Column<int>(type: "integer", nullable: false),
+                    SquareFootage = table.Column<float>(type: "real", nullable: false),
+                    IsBeingRenovated = table.Column<bool>(type: "boolean", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Room", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -85,15 +103,37 @@ namespace HospitalAPI.Migrations
                     Gender = table.Column<int>(type: "integer", nullable: false),
                     City = table.Column<string>(type: "text", nullable: true),
                     Country = table.Column<string>(type: "text", nullable: true),
-                    UserType = table.Column<int>(type: "integer", nullable: false)
+                    UserType = table.Column<int>(type: "integer", nullable: false),
+                    Activated = table.Column<bool>(type: "boolean", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Patients", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Patients_Doctor_DoctorId",
+                        name: "FK_Patients_Doctors_DoctorId",
                         column: x => x.DoctorId,
-                        principalTable: "Doctor",
+                        principalTable: "Doctors",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Equipment",
+                columns: table => new
+                {
+                    Id = table.Column<string>(type: "text", nullable: false),
+                    Name = table.Column<string>(type: "text", nullable: true),
+                    Type = table.Column<int>(type: "integer", nullable: false),
+                    Quantity = table.Column<int>(type: "integer", nullable: false),
+                    RoomId = table.Column<string>(type: "text", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Equipment", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Equipment_Room_RoomId",
+                        column: x => x.RoomId,
+                        principalTable: "Room",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
@@ -103,7 +143,9 @@ namespace HospitalAPI.Migrations
                 columns: table => new
                 {
                     Id = table.Column<string>(type: "text", nullable: false),
-                    Name = table.Column<string>(type: "text", nullable: true),
+                    Medicine = table.Column<string>(type: "text", nullable: true),
+                    ReactionType = table.Column<string>(type: "text", nullable: true),
+                    ReactionTime = table.Column<string>(type: "text", nullable: true),
                     PatientId = table.Column<string>(type: "text", nullable: true)
                 },
                 constraints: table =>
@@ -117,10 +159,65 @@ namespace HospitalAPI.Migrations
                         onDelete: ReferentialAction.Restrict);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "Appointment",
+                columns: table => new
+                {
+                    Id = table.Column<string>(type: "text", nullable: false),
+                    StartTime = table.Column<string>(type: "text", nullable: true),
+                    Duration = table.Column<double>(type: "double precision", nullable: false),
+                    Date = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    RoomId = table.Column<string>(type: "text", nullable: true),
+                    PatientId = table.Column<string>(type: "text", nullable: true),
+                    DoctorId = table.Column<string>(type: "text", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Appointment", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Appointment_Doctors_DoctorId",
+                        column: x => x.DoctorId,
+                        principalTable: "Doctors",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Appointment_Patients_PatientId",
+                        column: x => x.PatientId,
+                        principalTable: "Patients",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Appointment_Room_RoomId",
+                        column: x => x.RoomId,
+                        principalTable: "Room",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_Allergy_PatientId",
                 table: "Allergy",
                 column: "PatientId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Appointment_DoctorId",
+                table: "Appointment",
+                column: "DoctorId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Appointment_PatientId",
+                table: "Appointment",
+                column: "PatientId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Appointment_RoomId",
+                table: "Appointment",
+                column: "RoomId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Equipment_RoomId",
+                table: "Equipment",
+                column: "RoomId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Patients_DoctorId",
@@ -134,6 +231,12 @@ namespace HospitalAPI.Migrations
                 name: "Allergy");
 
             migrationBuilder.DropTable(
+                name: "Appointment");
+
+            migrationBuilder.DropTable(
+                name: "Equipment");
+
+            migrationBuilder.DropTable(
                 name: "Feedbacks");
 
             migrationBuilder.DropTable(
@@ -143,7 +246,10 @@ namespace HospitalAPI.Migrations
                 name: "Patients");
 
             migrationBuilder.DropTable(
-                name: "Doctor");
+                name: "Room");
+
+            migrationBuilder.DropTable(
+                name: "Doctors");
         }
     }
 }

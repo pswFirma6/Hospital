@@ -18,6 +18,7 @@ namespace HospitalAPI.Mapper
                 CreateMap<FeedbackStateChangeDTO, Feedback>();
 
                 CreateMap<Patient, PatientRegistrationDTO>();
+
                 CreateMap<PatientRegistrationDTO, Patient>();
 
                 CreateMap<PatientRegistration, PatientRegistrationDTO>();

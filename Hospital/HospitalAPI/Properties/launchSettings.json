@@ -18,7 +18,6 @@
     },
     "Hospital_API": {
       "commandName": "Project",
-      "launchBrowser": true,
       "launchUrl": "api/feedback",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"

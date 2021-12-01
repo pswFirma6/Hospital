@@ -1,9 +1,10 @@
-using AutoMapper;
+using HospitalAPI;
 using HospitalAPI.ImplService;
+using HospitalAPI.Repository;
 using HospitalLibrary.MedicalRecords.Model;
 using HospitalLibrary.MedicalRecords.Model.Enums;
-using HospitalLibrary.MedicalRecords.Repository.Repository.Interface;
 using HospitalLibrary.Model.Enums;
+using MimeKit;
 using Moq;
 using System;
 using System.Collections.Generic;
@@ -13,6 +14,28 @@ namespace HospitalTests.UnitTests
 {
     public class RegistrationTest
     {
+        [Fact]
+        public void Check_Create_Email_Message()
+        {
+            // Arrange //
+            List<string> addressesTosend = new List<string>();
+            addressesTosend.Add("address1@gmail.com");
+            Message message = new Message(addressesTosend, "SubjectTest", "Test");
+
+
+            EmailSender emailSender = new EmailSender(CreateEmailConfig());
+
+            // Act //
+            MimeMessage createdMessage = emailSender.CreateEmailMessage(message);
+
+
+            // Assert //
+            Assert.NotNull(createdMessage.Body);
+            Assert.Equal(createdMessage.Subject, message.Subject);
+            Assert.Equal(createdMessage.To, message.To);
+            Assert.NotNull(createdMessage.From);
+        }
+
 
         [Fact]
         public void Check_Existing_Patient()
@@ -57,9 +80,10 @@ namespace HospitalTests.UnitTests
             Assert.False(exists);
         }
 
-        public IPatientRepository CreateStubRepository()
+        public RepositoryFactory CreateStubRepository()
         {
-            var stubRepository = new Mock<IPatientRepository>();
+            var stubRepository = new Mock<RepositoryFactory>();
+
             Doctor doctor = new Doctor();
             List<Allergy> allergies = new List<Allergy>();
             Patient existingPatient = new Patient("1", "Marko", "Markovic", DateTime.Now,
@@ -70,9 +94,21 @@ namespace HospitalTests.UnitTests
             List<Patient> patients = new List<Patient>();
             patients.Add(existingPatient);
 
-            stubRepository.Setup(m => m.GetAll()).Returns(patients);
+            stubRepository.Setup(m => m.GetPatientRepository().GetAll()).Returns(patients);
 
             return stubRepository.Object;
+        }
+        public EmailConfiguration CreateEmailConfig()
+        {
+            var emailConfig = new Mock<EmailConfiguration>();
+
+            emailConfig.Object.From = "HospitalBeyondCare@gmail.com";
+            emailConfig.Object.SmtpServer = "smtp.gmail.com";
+            emailConfig.Object.Port = 465;
+            emailConfig.Object.UserName = "HospitalBeyondCare@gmail.com";
+            emailConfig.Object.Password = "test";
+
+            return emailConfig.Object;
         }
     }
 }

@@ -7,7 +7,7 @@ namespace HospitalLibrary.GraphicalEditor.Model
 {
     public class Equipment : Entity
     {
-        public Room room { get; set; }
+        public virtual Room room { get; set; }
         public String name { get; set; }
 
         public int Amount { get; set; }

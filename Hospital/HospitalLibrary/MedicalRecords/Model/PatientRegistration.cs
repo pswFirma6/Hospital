@@ -10,22 +10,10 @@ namespace HospitalLibrary.MedicalRecords.Model
     {
         public string Name { get; set; }
         public string Surname { get; set; }
-        public DateTime? BirthDate { get; set; }
-        public string Jmbg { get; set; }
-        public string Address { get; set; }
-        public string Phone { get; set; }
+     
         public string Username { get; set; }
         public string Password { get; set; }
-        public Gender Gender { get; set; }
-        public string City { get; set; }
-        public string Country { get; set; }
         public UserType UserType { get; set; }
-        public BloodType BloodType { get; set; }
-        public RhFactor RhFactor { get; set; }
-        public int Height { get; set; }
-        public int Weight { get; set; }
-        public List<Allergy> Allergies { get; set; }
-        public Doctor Doctor { get; set; }
         public string ClientURI { get; set; }
 
     }

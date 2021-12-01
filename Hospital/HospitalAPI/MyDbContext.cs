@@ -9,13 +9,17 @@ namespace HospitalAPI
     {
         public DbSet<Patient> Patients { get; set; }
         public DbSet<Feedback> Feedbacks { get; set; }
+        public DbSet<Doctor> Doctors { get; set; }
+        public DbSet<Allergy> Allergies { get; set; }
         public DbSet<SurveyQuestion> SurveyQuestion { get; set; }
-        public MyDbContext(DbContextOptions<MyDbContext> options) : base(options) { }
-
         public DbSet<Equipment> Equipments { get; set; }
+
         public DbSet<Room> Rooms { get; set; }
         public DbSet<Floor> Floors { get; set; }
         public DbSet<Building> Buildings { get; set; }
+
+        public MyDbContext(DbContextOptions<MyDbContext> options) : base(options) { }
+
 
 
     }

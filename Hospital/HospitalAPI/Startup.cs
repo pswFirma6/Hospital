@@ -1,4 +1,5 @@
 using AutoMapper;
+using Hospital_library.MedicalRecords.Service;
 using HospitalAPI.EditorService;
 using HospitalAPI.ImplRepository;
 using HospitalAPI.ImplService;
@@ -55,11 +56,16 @@ namespace HospitalAPI
             services.AddSingleton(mapper);
 
             services.AddMvc();
+            
 
             // The AddScoped method registers the service with a scoped lifetime, the lifetime of a single request
 
             services.AddScoped<IFeedbackService, FeedbackService>();
             services.AddScoped<IPatientService, PatientService>();
+            services.AddScoped<IAllergyService, AllergyService>();
+            services.AddScoped<IDoctorService, DoctorService>();
+            services.AddScoped<RepositoryFactory, HospitalRepositoryFactory>();
+            services.AddScoped<IRegistrationService, RegistrationService>();
 
 
             services.AddScoped<BuildingService>();
@@ -95,11 +101,14 @@ namespace HospitalAPI
             services.AddScoped<HospitalRepositoryFactory>();
             services.AddScoped<IPatientRepository, PatientRepository>();
 
+            services.AddControllers().AddNewtonsoftJson(options =>
+                options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
+            ); 
+
             // Connection with PostgreSQL
-            services.AddControllers();
 
             services.AddDbContext<MyDbContext>(options => 
-                    options.UseNpgsql(Configuration.GetConnectionString("MyDbContextConnectionString")));
+                    options.UseNpgsql(Configuration.GetConnectionString("MyDbContextConnectionString")).UseLazyLoadingProxies());
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

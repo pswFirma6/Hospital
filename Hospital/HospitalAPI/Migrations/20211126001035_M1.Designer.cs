@@ -10,8 +10,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace HospitalAPI.Migrations
 {
     [DbContext(typeof(MyDbContext))]
-    [Migration("20211123145840_SurveyMigration")]
-    partial class SurveyMigration
+    [Migration("20211126001035_M1")]
+    partial class M1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -27,10 +27,16 @@ namespace HospitalAPI.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("text");
 
-                    b.Property<string>("Name")
+                    b.Property<string>("Medicine")
                         .HasColumnType("text");
 
                     b.Property<string>("PatientId")
+                        .HasColumnType("text");
+
+                    b.Property<string>("ReactionTime")
+                        .HasColumnType("text");
+
+                    b.Property<string>("ReactionType")
                         .HasColumnType("text");
 
                     b.HasKey("Id");
@@ -40,11 +46,49 @@ namespace HospitalAPI.Migrations
                     b.ToTable("Allergy");
                 });
 
+            modelBuilder.Entity("HospitalLibrary.MedicalRecords.Model.Appointment", b =>
+                {
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("text");
+
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<string>("DoctorId")
+                        .HasColumnType("text");
+
+                    b.Property<double>("Duration")
+                        .HasColumnType("double precision");
+
+                    b.Property<string>("PatientId")
+                        .HasColumnType("text");
+
+                    b.Property<string>("RoomId")
+                        .HasColumnType("text");
+
+                    b.Property<string>("StartTime")
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("DoctorId");
+
+                    b.HasIndex("PatientId");
+
+                    b.HasIndex("RoomId");
+
+                    b.ToTable("Appointment");
+                });
+
             modelBuilder.Entity("HospitalLibrary.MedicalRecords.Model.Doctor", b =>
                 {
                     b.Property<string>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("text");
+
+                    b.Property<bool>("Activated")
+                        .HasColumnType("boolean");
 
                     b.Property<string>("Address")
                         .HasColumnType("text");
@@ -57,6 +101,9 @@ namespace HospitalAPI.Migrations
 
                     b.Property<string>("Country")
                         .HasColumnType("text");
+
+                    b.Property<int>("DoctorType")
+                        .HasColumnType("integer");
 
                     b.Property<string>("Email")
                         .HasColumnType("text");
@@ -87,7 +134,61 @@ namespace HospitalAPI.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Doctor");
+                    b.ToTable("Doctors");
+                });
+
+            modelBuilder.Entity("HospitalLibrary.MedicalRecords.Model.Equipment", b =>
+                {
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("text");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("text");
+
+                    b.Property<int>("Quantity")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("RoomId")
+                        .HasColumnType("text");
+
+                    b.Property<int>("Type")
+                        .HasColumnType("integer");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("RoomId");
+
+                    b.ToTable("Equipment");
+                });
+
+            modelBuilder.Entity("HospitalLibrary.MedicalRecords.Model.Feedback", b =>
+                {
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("text");
+
+                    b.Property<bool>("Anonymous")
+                        .HasColumnType("boolean");
+
+                    b.Property<DateTime?>("Date")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<string>("PersonId")
+                        .HasColumnType("text");
+
+                    b.Property<bool>("Publish")
+                        .HasColumnType("boolean");
+
+                    b.Property<int>("State")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("Text")
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Feedbacks");
                 });
 
             modelBuilder.Entity("HospitalLibrary.MedicalRecords.Model.Patient", b =>
@@ -95,6 +196,9 @@ namespace HospitalAPI.Migrations
                     b.Property<string>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("text");
+
+                    b.Property<bool>("Activated")
+                        .HasColumnType("boolean");
 
                     b.Property<string>("Address")
                         .HasColumnType("text");
@@ -157,6 +261,32 @@ namespace HospitalAPI.Migrations
                     b.ToTable("Patients");
                 });
 
+            modelBuilder.Entity("HospitalLibrary.MedicalRecords.Model.Room", b =>
+                {
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("text");
+
+                    b.Property<int>("Floor")
+                        .HasColumnType("integer");
+
+                    b.Property<bool>("IsBeingRenovated")
+                        .HasColumnType("boolean");
+
+                    b.Property<int>("RoomType")
+                        .HasColumnType("integer");
+
+                    b.Property<float>("SquareFootage")
+                        .HasColumnType("real");
+
+                    b.Property<string>("name")
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Room");
+                });
+
             modelBuilder.Entity("HospitalLibrary.MedicalRecords.Model.SurveyQuestion", b =>
                 {
                     b.Property<string>("Id")
@@ -180,35 +310,6 @@ namespace HospitalAPI.Migrations
                     b.ToTable("SurveyQuestion");
                 });
 
-            modelBuilder.Entity("HospitalLibrary.Model.Feedback", b =>
-                {
-                    b.Property<string>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("text");
-
-                    b.Property<bool>("Anonymous")
-                        .HasColumnType("boolean");
-
-                    b.Property<DateTime?>("Date")
-                        .HasColumnType("timestamp without time zone");
-
-                    b.Property<string>("PersonId")
-                        .HasColumnType("text");
-
-                    b.Property<bool>("Publish")
-                        .HasColumnType("boolean");
-
-                    b.Property<int>("State")
-                        .HasColumnType("integer");
-
-                    b.Property<string>("Text")
-                        .HasColumnType("text");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Feedbacks");
-                });
-
             modelBuilder.Entity("HospitalLibrary.MedicalRecords.Model.Allergy", b =>
                 {
                     b.HasOne("HospitalLibrary.MedicalRecords.Model.Patient", null)
@@ -216,18 +317,58 @@ namespace HospitalAPI.Migrations
                         .HasForeignKey("PatientId");
                 });
 
+            modelBuilder.Entity("HospitalLibrary.MedicalRecords.Model.Appointment", b =>
+                {
+                    b.HasOne("HospitalLibrary.MedicalRecords.Model.Doctor", "Doctor")
+                        .WithMany("Appointments")
+                        .HasForeignKey("DoctorId");
+
+                    b.HasOne("HospitalLibrary.MedicalRecords.Model.Patient", "Patient")
+                        .WithMany()
+                        .HasForeignKey("PatientId");
+
+                    b.HasOne("HospitalLibrary.MedicalRecords.Model.Room", "Room")
+                        .WithMany()
+                        .HasForeignKey("RoomId");
+
+                    b.Navigation("Doctor");
+
+                    b.Navigation("Patient");
+
+                    b.Navigation("Room");
+                });
+
+            modelBuilder.Entity("HospitalLibrary.MedicalRecords.Model.Equipment", b =>
+                {
+                    b.HasOne("HospitalLibrary.MedicalRecords.Model.Room", null)
+                        .WithMany("Equipment")
+                        .HasForeignKey("RoomId");
+                });
+
             modelBuilder.Entity("HospitalLibrary.MedicalRecords.Model.Patient", b =>
                 {
                     b.HasOne("HospitalLibrary.MedicalRecords.Model.Doctor", "Doctor")
-                        .WithMany()
+                        .WithMany("Patients")
                         .HasForeignKey("DoctorId");
 
                     b.Navigation("Doctor");
                 });
 
+            modelBuilder.Entity("HospitalLibrary.MedicalRecords.Model.Doctor", b =>
+                {
+                    b.Navigation("Appointments");
+
+                    b.Navigation("Patients");
+                });
+
             modelBuilder.Entity("HospitalLibrary.MedicalRecords.Model.Patient", b =>
                 {
                     b.Navigation("Allergies");
+                });
+
+            modelBuilder.Entity("HospitalLibrary.MedicalRecords.Model.Room", b =>
+                {
+                    b.Navigation("Equipment");
                 });
 #pragma warning restore 612, 618
         }

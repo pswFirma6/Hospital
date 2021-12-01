@@ -19,7 +19,7 @@ namespace HospitalLibrary.MedicalRecords.Repository
             entities = _context.Set<Entity>();
         }
 
-        public List<Entity> GetAll()
+        public virtual List<Entity> GetAll()
         {
             return entities.ToList();
         }

@@ -3,15 +3,17 @@ using System;
 using HospitalAPI;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace HospitalAPI.Migrations
 {
     [DbContext(typeof(MyDbContext))]
-    partial class MyDbContextModelSnapshot : ModelSnapshot
+    [Migration("20211130170051_Registration")]
+    partial class Registration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -354,25 +356,7 @@ namespace HospitalAPI.Migrations
                     b.Navigation("Room");
                 });
 
-            modelBuilder.Entity("HospitalLibrary.GraphicalEditor.Model.Equipment", b =>
-                {
-                    b.HasOne("HospitalLibrary.GraphicalEditor.Model.Room", "room")
-                        .WithMany()
-                        .HasForeignKey("roomid");
-
-                    b.Navigation("room");
-                });
-
-            modelBuilder.Entity("HospitalLibrary.GraphicalEditor.Model.Room", b =>
-                {
-                    b.HasOne("HospitalLibrary.GraphicalEditor.Model.Floor", "floor")
-                        .WithMany()
-                        .HasForeignKey("floorid");
-
-                    b.Navigation("floor");
-                });
-
-            modelBuilder.Entity("HospitalLibrary.MedicalRecords.Model.Allergy", b =>
+            modelBuilder.Entity("HospitalLibrary.MedicalRecords.Model.Equipment", b =>
                 {
                     b.HasOne("HospitalLibrary.MedicalRecords.Model.Room", null)
                         .WithMany("Equipment")

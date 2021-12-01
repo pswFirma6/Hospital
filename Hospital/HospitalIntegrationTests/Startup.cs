@@ -19,6 +19,7 @@ using System;
 using System.Reflection;
 using static HospitalAPI.Mapper.Mapper;
 using System.Collections.Generic;
+using HospitalAPI.Service;
 
 namespace HospitalIntegrationTests
 {
@@ -71,6 +72,8 @@ namespace HospitalIntegrationTests
             // The AddScoped method registers the service with a scoped lifetime, the lifetime of a single request
             services.AddScoped<IRegistrationService,RegistrationService>();
             services.AddScoped<IPatientService,PatientService>();
+            services.AddScoped<IFeedbackService, FeedbackService>();
+            services.AddScoped<RepositoryFactory, HospitalRepositoryFactory>();
 
             // Validation
             services.AddScoped<RegistrationValidation>();
