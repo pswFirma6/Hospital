@@ -10,15 +10,16 @@ namespace HospitalAPI.Validation
     {
         public bool IsValid(FeedbackDTO dto) 
         {
-            if (dto.Text.Length <= 0 || String.IsNullOrEmpty(dto.PersonId))
-            {
-                return false;
-            }
-            else if (dto == null)
+            if (dto == null)
             {
                 return false;
             }
 
+            if (dto.Text.Length <= 0 || String.IsNullOrEmpty(dto.PersonId))
+            {
+                return false;
+            }
+            
             return true;
         }
     }
