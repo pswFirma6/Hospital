@@ -12,8 +12,8 @@ namespace HospitalAPI.ImplService
     public class RegistrationService : IRegistrationService
     {
         private readonly UserManager<PatientRegistration> _userManager;
-        private IEmailSender _emailSender;
-        private RepositoryFactory _factory;
+        private readonly IEmailSender _emailSender;
+        private readonly RepositoryFactory _factory;
 
         public RegistrationService(UserManager<PatientRegistration> userManager, 
             IEmailSender emailSender, RepositoryFactory factory) 
@@ -35,16 +35,16 @@ namespace HospitalAPI.ImplService
         }
 
 
-        public async Task EmailVerification(PatientRegistration registrated)
+        public async Task EmailVerification(PatientRegistration patient)
         {
-            var token = await _userManager.GenerateEmailConfirmationTokenAsync(registrated);
+            var token = await _userManager.GenerateEmailConfirmationTokenAsync(patient);
             var param = new Dictionary<string, string>
             {
                 {"token", token },
-                {"email", registrated.Email }
+                {"email", patient.Email }
             };
             var callback = QueryHelpers.AddQueryString("http://localhost:4200/authentication/emailconfirmation", param);
-            var message = new Message(new string[] { registrated.Email }, "Email Confirmation token", callback);
+            var message = new Message(new string[] { patient.Email }, "Email Confirmation token", callback);
             await _emailSender.SendEmailAsync(message);
         }
 

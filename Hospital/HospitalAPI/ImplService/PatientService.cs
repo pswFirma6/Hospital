@@ -8,7 +8,7 @@ namespace HospitalAPI.ImplService
 {
     public class PatientService : IPatientService
     {
-        private RepositoryFactory _hospitalRepositoryFactory;
+        private readonly RepositoryFactory _hospitalRepositoryFactory;
         public PatientService(RepositoryFactory hospitalRepositoryFactory)
         {
             _hospitalRepositoryFactory = hospitalRepositoryFactory;

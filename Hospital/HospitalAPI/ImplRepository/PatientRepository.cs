@@ -7,7 +7,7 @@ namespace HospitalAPI.ImplRepository
 {
     public class PatientRepository : Repository<Patient>, IPatientRepository
     {
-        private MyDbContext _context;
+        private readonly MyDbContext _context;
         public PatientRepository(MyDbContext context)
             : base(context)
         {

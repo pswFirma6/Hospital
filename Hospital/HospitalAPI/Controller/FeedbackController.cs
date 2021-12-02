@@ -13,7 +13,7 @@ namespace HospitalAPI.Controller
     [ApiController]
     public class FeedbackController : ControllerBase
     {
-        private IFeedbackService _feedbackService;
+        private readonly IFeedbackService _feedbackService;
 
         private readonly IMapper _mapper;
 

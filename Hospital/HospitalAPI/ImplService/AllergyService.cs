@@ -7,7 +7,7 @@ namespace HospitalAPI.ImplService
 {
     public class AllergyService : IAllergyService
     {
-        private RepositoryFactory _hospitalRepositoryFactory;
+        private readonly RepositoryFactory _hospitalRepositoryFactory;
 
         public AllergyService(RepositoryFactory hospitalRepositoryFactory) 
         {

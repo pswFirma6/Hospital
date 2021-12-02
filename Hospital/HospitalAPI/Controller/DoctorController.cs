@@ -9,8 +9,8 @@ namespace HospitalAPI.Controller
     [ApiController]
     public class DoctorController : ControllerBase
     {
-        private DoctorService doctorEditorService;
-        private IDoctorService _doctorService;
+        private readonly DoctorService doctorEditorService;
+        private readonly IDoctorService _doctorService;
         public DoctorController(DoctorService doctorEditorService,
             IDoctorService doctorService)
         {

@@ -13,9 +13,9 @@ namespace HospitalAPI.Controller
     [ApiController]
     public class RegistrationController : ControllerBase
     {
-        private IPatientService _patientService;
+        private readonly IPatientService _patientService;
 
-        private IRegistrationService _registrationService;
+        private readonly IRegistrationService _registrationService;
 
         private RegistrationValidation _registrationValidation; 
         
@@ -57,7 +57,7 @@ namespace HospitalAPI.Controller
 
 
         [HttpGet("EmailConfirmation")]
-        public async Task<IActionResult> EmailConfirmation([FromQuery] string email, [FromQuery] string token)
+        public IActionResult EmailConfirmation([FromQuery] string email, [FromQuery] string token)
         {
             //_registrationService
             //var user = await _registrationService.FindByEmailAsync(email);

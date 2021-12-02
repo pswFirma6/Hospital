@@ -12,7 +12,7 @@ namespace HospitalAPI.Controller
     [ApiController]
     public class AllergyController : ControllerBase
     {
-        private IAllergyService _allergyService;
+        private readonly IAllergyService _allergyService;
 
         public AllergyController(IAllergyService allergyService) 
         {

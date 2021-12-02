@@ -10,7 +10,7 @@ namespace HospitalAPI.ImplService
 {
     public class DoctorService : IDoctorService
     {
-        private RepositoryFactory _hospitalRepositoryFactory;
+        private readonly RepositoryFactory _hospitalRepositoryFactory;
 
         public DoctorService(RepositoryFactory hospitalRepositoryFactory)
         {
