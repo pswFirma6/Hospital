@@ -1,13 +1,20 @@
-﻿using HospitalAPI.ImplRepository;
+﻿using Hospital_library.MedicalRecords.Repository.Repository.Interface;
+using HospitalAPI.ImplRepository;
+using HospitalLibrary.MedicalRecords.Repository.Interface;
+using HospitalLibrary.MedicalRecords.Repository.Repository.Interface;
 
 namespace HospitalAPI.Repository
 {
     public abstract class RepositoryFactory
     {
-        public abstract FeedbackRepository GetFeedbackRepository();
+        public abstract IFeedbackRepository GetFeedbackRepository();
 
-        public abstract PatientRepository GetPatientRepository();
+        public abstract IPatientRepository GetPatientRepository();
 
-        public abstract SurveyRepository GetSurveyRepository();
+        public abstract ISurveyRepository GetSurveyRepository();
+
+        public abstract IAllergyRepository GetAllergyRepository();
+
+        public abstract IDoctorRepository GetDoctorRepository();
     }
 }

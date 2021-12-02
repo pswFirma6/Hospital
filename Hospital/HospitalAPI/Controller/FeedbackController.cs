@@ -2,10 +2,9 @@
 using HospitalAPI.DTO;
 using HospitalAPI.Service;
 using HospitalAPI.Validation;
-using HospitalLibrary.MedicalRecords.Model.Enums;
-using HospitalLibrary.Model;
+using HospitalLibrary.MedicalRecords.Model;
+using HospitalLibrary.MedicalRecords.Service;
 using Microsoft.AspNetCore.Mvc;
-using System;
 using System.Collections.Generic;
 
 namespace HospitalAPI.Controller
@@ -14,13 +13,13 @@ namespace HospitalAPI.Controller
     [ApiController]
     public class FeedbackController : ControllerBase
     {
-        private FeedbackService _feedbackService;
+        private readonly IFeedbackService _feedbackService;
 
         private readonly IMapper _mapper;
 
         private FeedbackValidation _feedbackValidation;
 
-        public FeedbackController(FeedbackService feedbackService, IMapper mapper, FeedbackValidation feedbackValidation)
+        public FeedbackController(IFeedbackService feedbackService, IMapper mapper, FeedbackValidation feedbackValidation)
         {
             _feedbackService = feedbackService;
             _mapper = mapper;

@@ -1,9 +1,6 @@
 ﻿using HospitalLibrary.MedicalRecords.Model.Enums;
-using HospitalLibrary.Model;
-using HospitalLibrary.Model.Enumeration;
+using HospitalLibrary.Model.Enums;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace HospitalLibrary.MedicalRecords.Model
 {
@@ -22,7 +19,8 @@ namespace HospitalLibrary.MedicalRecords.Model
         public string City { get; set; }
         public string Country { get; set; }
         public UserType UserType { get; set; }
-        
+        public bool Activated { get; set; }
+
         public User() 
         {
         }

@@ -1,23 +1,25 @@
 ﻿using AutoMapper;
-using Hospital.Service;
 using HospitalAPI;
 using HospitalAPI.ImplRepository;
 using HospitalAPI.ImplService;
 using HospitalAPI.Repository;
 using HospitalAPI.Validation;
 using HospitalLibrary.MedicalRecords.Model;
-using HospitalLibrary.MedicalRecords.Model.Enums;
 using HospitalLibrary.MedicalRecords.Repository.Repository.Interface;
-using HospitalLibrary.Model.Enumeration;
+using HospitalLibrary.MedicalRecords.Service;
+using HospitalLibrary.MedicalRecords.Model.Enums;
+using HospitalLibrary.Model.Enums;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System;
-using System.Collections.Generic;
 using System.Reflection;
 using static HospitalAPI.Mapper.Mapper;
+using System.Collections.Generic;
+using HospitalAPI.Service;
 
 namespace HospitalIntegrationTests
 {
@@ -51,9 +53,27 @@ namespace HospitalIntegrationTests
 
             services.AddMvc();
 
+
+            services.AddIdentity<PatientRegistration, IdentityRole>(options =>
+            {
+                options.User.RequireUniqueEmail = false;
+            })
+             .AddEntityFrameworkStores<MyDbContext>()
+             .AddDefaultTokenProviders(); 
+
+
+            // Registration 
+            var emailConfig = Configuration
+               .GetSection("EmailConfiguration")
+               .Get<EmailConfiguration>();
+            services.AddSingleton(emailConfig);
+            services.AddScoped<IEmailSender, EmailSender>();
+
             // The AddScoped method registers the service with a scoped lifetime, the lifetime of a single request
-            services.AddScoped<FeedbackService>();
-            services.AddScoped<PatientService>();
+            services.AddScoped<IRegistrationService,RegistrationService>();
+            services.AddScoped<IPatientService,PatientService>();
+            services.AddScoped<IFeedbackService, FeedbackService>();
+            services.AddScoped<RepositoryFactory, HospitalRepositoryFactory>();
 
             // Validation
             services.AddScoped<RegistrationValidation>();
@@ -61,7 +81,9 @@ namespace HospitalIntegrationTests
             services.AddScoped<HospitalRepositoryFactory>();
             services.AddScoped<IPatientRepository, PatientRepository>();
 
-            services.AddControllers();
+            services.AddControllers().AddNewtonsoftJson(options =>
+                options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
+            );
 
             services.AddDbContext<MyDbContext>(options =>
             {
@@ -104,14 +126,14 @@ namespace HospitalIntegrationTests
                 "054236971333", "Partizanskih baza 8.", "0666423699", "slavko@gmail.com",
                 "slavko", "slavko123", Gender.male,
                 "Novi Sad", "Serbia", UserType.patient, BloodType.B, RhFactor.positive,
-                189, 85, doctor, allergies);
+                189, 85, allergies, doctor);
 
 
             Patient newPatientB2 = new Patient("3", "Marko", "Markovic", DateTime.Now,
                 "0542369712546", "Partizanskih baza 7.", "0666423599", "marko@gmail.com",
                 "SeekEquilibrium", "mira123", Gender.female,
                 "Novi Sad", "Serbia", UserType.patient, BloodType.A, RhFactor.negative,
-                180, 85, doctor, allergies);
+                180, 85, allergies, doctor);
 
             listOfPatients.Add(newPatientA1);
             listOfPatients.Add(newPatientB2);
