@@ -66,6 +66,7 @@ namespace HospitalAPI
             services.AddScoped<IDoctorService, HospitalAPI.ImplService.DoctorService>();
             services.AddScoped<RepositoryFactory, HospitalRepositoryFactory>();
             services.AddScoped<IRegistrationService, RegistrationService>();
+            services.AddScoped<ISurveyService, SurveyService>();
 
 
             services.AddScoped<BuildingService>();
@@ -79,8 +80,6 @@ namespace HospitalAPI
 
             // Repository dependency injection
             services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
-
-            services.AddScoped<SurveyService>();
 
            
             services.AddIdentity<PatientRegistration, IdentityRole>(options =>
