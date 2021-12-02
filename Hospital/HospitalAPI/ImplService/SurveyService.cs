@@ -25,34 +25,34 @@ namespace HospitalAPI.ImplService
             }
         }
 
-        public List<SurveyRateDTO> GetGroupedByQuestion()
-        {
-            var allQuestions = _repositoryFactory.GetSurveyRepository().GetAll();
-            var gropedByQuestion = (from q in allQuestions group q by q.QuestionText into g select new { QuestionText = g.Key, Questions = g.ToList() });
+        //public List<SurveyRateDTO> GetGroupedByQuestion()
+        //{
+        //    var allQuestions = _repositoryFactory.GetSurveyRepository().GetAll();
+        //    var gropedByQuestion = (from q in allQuestions group q by q.QuestionText into g select new { QuestionText = g.Key, Questions = g.ToList() });
 
-            List<SurveyRateDTO> lista = new List<SurveyRateDTO>();
+        //    List<SurveyRateDTO> lista = new List<SurveyRateDTO>();
 
-            foreach(var aa in gropedByQuestion)
-            {
-                SurveyRateDTO surveyRateDTO = new SurveyRateDTO { QuestionText = aa.QuestionText, Rate = Math.Round(aa.Questions.Average(x => x.Rate),2), Category = aa.Questions.FirstOrDefault().Category };
-                lista.Add(surveyRateDTO);
-            }
-            return lista;
-        }
+        //    foreach(var aa in gropedByQuestion)
+        //    {
+        //        SurveyRateDTO surveyRateDTO = new SurveyRateDTO { QuestionText = aa.QuestionText, Rate = Math.Round(aa.Questions.Average(x => x.Rate),2), Category = aa.Questions.FirstOrDefault().Category };
+        //        lista.Add(surveyRateDTO);
+        //    }
+        //    return lista;
+        //}
 
-        public List<SurveryCategoryDTO> GetGroupedByCategory()
-        {
-            var allQuestions = _repositoryFactory.GetSurveyRepository().GetAll();
-            var gropedByQuestion = (from q in allQuestions group q by q.Category into g select new { Category = g.Key, Questions = g.ToList() });
+        //public List<SurveryCategoryDTO> GetGroupedByCategory()
+        //{
+        //    var allQuestions = _repositoryFactory.GetSurveyRepository().GetAll();
+        //    var gropedByQuestion = (from q in allQuestions group q by q.Category into g select new { Category = g.Key, Questions = g.ToList() });
 
-            List<SurveryCategoryDTO> lista = new List<SurveryCategoryDTO>();
+        //    List<SurveryCategoryDTO> lista = new List<SurveryCategoryDTO>();
 
-            foreach(var aa in gropedByQuestion)
-            {
-                SurveryCategoryDTO surveyRateDTO = new SurveryCategoryDTO { Category = aa.Category, Rate = Math.Round(aa.Questions.Average(x => x.Rate),2) };
-                lista.Add(surveyRateDTO);
-            }
-            return lista;
-        }
+        //    foreach(var aa in gropedByQuestion)
+        //    {
+        //        SurveryCategoryDTO surveyRateDTO = new SurveryCategoryDTO { Category = aa.Category, Rate = Math.Round(aa.Questions.Average(x => x.Rate),2) };
+        //        lista.Add(surveyRateDTO);
+        //    }
+        //    return lista;
+        //}
     }
 }

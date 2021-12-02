@@ -73,10 +73,12 @@ namespace HospitalIntegrationTests
             services.AddScoped<IRegistrationService,RegistrationService>();
             services.AddScoped<IPatientService,PatientService>();
             services.AddScoped<IFeedbackService, FeedbackService>();
+            services.AddScoped<ISurveyService, SurveyService>();
             services.AddScoped<RepositoryFactory, HospitalRepositoryFactory>();
 
             // Validation
             services.AddScoped<RegistrationValidation>();
+            services.AddScoped<SurveyValidation>();
 
             services.AddScoped<HospitalRepositoryFactory>();
             services.AddScoped<IPatientRepository, PatientRepository>();
