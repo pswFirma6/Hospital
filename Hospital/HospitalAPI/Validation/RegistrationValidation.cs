@@ -15,7 +15,8 @@ namespace HospitalAPI.Validation
                     || !Enum.IsDefined(typeof(Gender), dto.Gender) || dto.City.Length <= 0 ||dto.Country.Length <= 0
                     || !Enum.IsDefined(typeof(UserType), dto.UserType) || !Enum.IsDefined(typeof(BloodType), dto.BloodType) 
                     || !Enum.IsDefined(typeof(RhFactor), dto.RhFactor) || dto.Height <= 0 || dto.Weight <= 0 
-                    || dto.Doctor.Id.Equals(null) ) 
+                    //|| to.Doctor.Id.Equals(null) 
+                    ) 
             {
                 return false;
             }

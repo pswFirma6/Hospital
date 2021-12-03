@@ -18,5 +18,10 @@ namespace HospitalLibrary.MedicalRecords.Model
         {
         
         }
+        public Doctor( string name , string surname)
+        {
+            Name = name;
+            Surname = surname;
+        }
     }
 }

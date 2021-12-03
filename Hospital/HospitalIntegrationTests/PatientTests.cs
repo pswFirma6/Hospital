@@ -1,9 +1,11 @@
 ﻿using HospitalAPI;
+using HospitalAPI.DTO;
 using HospitalLibrary.MedicalRecords.Model;
 using HospitalLibrary.MedicalRecords.Model.Enums;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
@@ -27,22 +29,24 @@ namespace HospitalIntegrationTests
         {
             // Arrange //
 
-
-
-            var url = "api/patient";
+            var url = "api/Patient/2";
 
             // Act //
+
             var response = await injection.Client.GetAsync(url);
 
             // Assert //
             // This makes sure, you return a success http code back in case of 4xx status codes 
             // or exceptions (5xx codes) it throws an exception
+
             response.EnsureSuccessStatusCode();
 
             var resultString = await response.Content.ReadAsStringAsync();
-            var result = JsonConvert.DeserializeObject<Patient>(resultString);
-
-            Assert.Equal("SeekEquilibrium", result.Username);
+            var result = JsonConvert.DeserializeObject<PatientDTO>(resultString);
+            
+            
+            Assert.NotNull(result);
+            Assert.Equal("slavko", result.Username);
 
         }
 

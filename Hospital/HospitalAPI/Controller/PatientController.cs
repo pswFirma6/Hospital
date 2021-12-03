@@ -23,11 +23,19 @@ namespace HospitalAPI.Controller
             _mapper = mapper;
            
         }
-        [HttpGet]
+        [HttpGet("{id}")]
         public IActionResult GetPatient(string id )
         {
             Patient patient = _patientService.GetPatient(id);
-            return Ok(_mapper.Map<PatientDTO>(patient));
+            var model = _mapper.Map<PatientDTO>(patient);
+            return Ok(model);
+        }
+        [HttpGet]
+        public IActionResult GetAllPatient()
+        {
+            List<Patient> patients = _patientService.GetAllPatient();
+            
+            return Ok(patients);
         }
 
     }

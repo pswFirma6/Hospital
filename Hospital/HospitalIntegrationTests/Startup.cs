@@ -74,9 +74,8 @@ namespace HospitalIntegrationTests
                 using (var db = scope.ServiceProvider.GetRequiredService<MyDbContext>())
                     try
                     {
-
-
                         db.Database.EnsureCreated();
+                        
                         InitializeDbForTests(db);
                     }
                     catch (Exception ex)
@@ -89,11 +88,11 @@ namespace HospitalIntegrationTests
 
         public static void InitializeDbForTests(MyDbContext db)
         {
-            CreatePatients();
+            CreatePatients(db);
             db.SaveChanges();
         }
 
-        public static List<Patient> CreatePatients()
+        public static void CreatePatients(MyDbContext db)
         {
             List<Patient> listOfPatients = new List<Patient>();
             Doctor doctor = new Doctor();
@@ -113,10 +112,10 @@ namespace HospitalIntegrationTests
                 "Novi Sad", "Serbia", UserType.patient, BloodType.A, RhFactor.negative,
                 180, 85, doctor, allergies);
 
-            listOfPatients.Add(newPatientA1);
-            listOfPatients.Add(newPatientB2);
+            db.Patients.Add(newPatientA1);
+            db.Patients.Add(newPatientB2);
 
-            return listOfPatients;
+            
         }
 
         public void Configure(IApplicationBuilder app)

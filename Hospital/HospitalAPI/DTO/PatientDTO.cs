@@ -27,7 +27,7 @@ namespace HospitalAPI.DTO
         public RhFactor RhFactor { get; set; }
         public int Height { get; set; }
         public int Weight { get; set; }
-        public List<Allergy> Allergies { get; set; }
-        public Doctor Doctor { get; set; }
+       // public List<Allergy> Allergies { get; set; }
+       // public Doctor Doctor { get; set; }
     }
 }
