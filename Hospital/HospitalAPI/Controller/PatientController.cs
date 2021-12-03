@@ -2,6 +2,7 @@
 using HospitalAPI.DTO;
 using HospitalAPI.ImplService;
 using HospitalLibrary.MedicalRecords.Model;
+using HospitalLibrary.MedicalRecords.Service;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -14,10 +15,10 @@ namespace HospitalAPI.Controller
     [ApiController]
     public class PatientController : ControllerBase
     {
-        private PatientService _patientService;
+        private IPatientService _patientService;
         private readonly IMapper _mapper;
 
-        public PatientController(PatientService patientService, IMapper mapper)
+        public PatientController(IPatientService patientService, IMapper mapper)
         {
             _patientService = patientService;
             _mapper = mapper;
@@ -27,16 +28,10 @@ namespace HospitalAPI.Controller
         public IActionResult GetPatient(string id )
         {
             Patient patient = _patientService.GetPatient(id);
-            var model = _mapper.Map<PatientDTO>(patient);
+            var model = _mapper.Map<PatientRegistrationDTO>(patient);
             return Ok(model);
         }
-        [HttpGet]
-        public IActionResult GetAllPatient()
-        {
-            List<Patient> patients = _patientService.GetAllPatient();
-            
-            return Ok(patients);
-        }
+       
 
     }
 }

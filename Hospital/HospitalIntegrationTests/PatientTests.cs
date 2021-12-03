@@ -43,7 +43,7 @@ namespace HospitalIntegrationTests
             response.EnsureSuccessStatusCode();
 
             var resultString = await response.Content.ReadAsStringAsync();
-            var result = JsonConvert.DeserializeObject<PatientDTO>(resultString);
+            var result = JsonConvert.DeserializeObject<PatientRegistrationDTO>(resultString);
             
             
             Assert.NotNull(result);

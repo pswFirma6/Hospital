@@ -5,7 +5,7 @@ using HospitalLibrary.MedicalRecords.Model;
 using HospitalLibrary.MedicalRecords.Model.Enums;
 using HospitalLibrary.MedicalRecords.Repository.Repository.Interface;
 using HospitalLibrary.MedicalRecords.Service;
-using HospitalLibrary.Model.Enumeration;
+
 using System;
 ﻿using HospitalAPI.Repository;
 using System.Collections.Generic;
@@ -41,13 +41,11 @@ namespace HospitalAPI.ImplService
         }
         public Patient GetPatient(string id)
         {
-            
-            Patient patient = _patientRepository.GetOne(id);
-            return patient;
+            return _hospitalRepositoryFactory.GetPatientRepository().GetOne(id);
         }
         public List<Patient> GetAllPatient()
         {
-            return _patientRepository.GetAll();
+            return _hospitalRepositoryFactory.GetPatientRepository().GetAll();
         }
 
         public Patient MapAllergies(Patient patient) 

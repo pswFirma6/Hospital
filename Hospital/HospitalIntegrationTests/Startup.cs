@@ -7,7 +7,6 @@ using HospitalAPI.Validation;
 using HospitalLibrary.MedicalRecords.Model;
 using HospitalLibrary.MedicalRecords.Model.Enums;
 using HospitalLibrary.MedicalRecords.Repository.Repository.Interface;
-using HospitalLibrary.Model.Enumeration;
 using HospitalLibrary.MedicalRecords.Service;
 using HospitalLibrary.Model.Enums;
 using Microsoft.AspNetCore.Builder;
@@ -102,7 +101,7 @@ namespace HospitalIntegrationTests
                     {
                         db.Database.EnsureCreated();
                         
-                        InitializeDbForTests(db);
+                    //    InitializeDbForTests(db);
                     }
                     catch (Exception ex)
                     {
@@ -111,13 +110,13 @@ namespace HospitalIntegrationTests
             }
         }
 
-
+    /*
         public static void InitializeDbForTests(MyDbContext db)
         {
             CreatePatients(db);
             db.SaveChanges();
         }
-
+    
         public static void CreatePatients(MyDbContext db)
         {
             List<Patient> listOfPatients = new List<Patient>();
@@ -143,7 +142,7 @@ namespace HospitalIntegrationTests
 
             
         }
-
+    */
         public void Configure(IApplicationBuilder app)
         {
             app.UseCors();
