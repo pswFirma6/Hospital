@@ -1,9 +1,4 @@
-using HospitalLibrary.MedicalRecords.Model;
 using HospitalLibrary.MedicalRecords.Model.Enums;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace HospitalAPI.DTO.SurveyDTO
 {
@@ -15,6 +10,13 @@ namespace HospitalAPI.DTO.SurveyDTO
             Category = category;
         }
 
+        public TakeSurveyDTO(string personId, string questionText, int rate, SurveyQuestionCategory category)
+        {
+            PersonId = personId;
+            QuestionText = questionText;
+            Rate = rate;
+            Category = category;
+        }
         public TakeSurveyDTO() { }
         public string PersonId { get; set; }
         public string QuestionText { get; set; }

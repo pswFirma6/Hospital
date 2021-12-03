@@ -1,7 +1,4 @@
 ﻿using HospitalLibrary.MedicalRecords.Model.Enums;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace HospitalLibrary.MedicalRecords.Model
 {
@@ -11,6 +8,14 @@ namespace HospitalLibrary.MedicalRecords.Model
         {
             QuestionText = questionText;
             Category = category;
+        }
+
+        public SurveyQuestion(string questionText, SurveyQuestionCategory category, int rate, string id)
+        {
+            QuestionText = questionText;
+            Category = category;
+            Rate = rate;
+            PersonId = id;
         }
 
         public SurveyQuestion() { }

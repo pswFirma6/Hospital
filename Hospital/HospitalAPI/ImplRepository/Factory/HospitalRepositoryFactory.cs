@@ -1,7 +1,8 @@
-﻿using HospitalAPI.ImplRepository;
+﻿using Hospital_library.MedicalRecords.Repository.Repository.Interface;
+using HospitalAPI.ImplRepository;
 using HospitalLibrary.MedicalRecords.Repository;
 using HospitalLibrary.MedicalRecords.Repository.Interface;
-
+using HospitalLibrary.MedicalRecords.Repository.Repository.Interface;
 
 namespace HospitalAPI.Repository
 {
@@ -12,11 +13,13 @@ namespace HospitalAPI.Repository
         {
             _context = context;
         }
-        public FeedbackRepository FeedbackRepository { get; set; }
-        public PatientRepository PersonRepository { get; set; }
-        public SurveyRepository SurveyRepository { get; set; }
+        public IFeedbackRepository FeedbackRepository { get; set; }
+        public IPatientRepository PersonRepository { get; set; }
+        public ISurveyRepository SurveyRepository { get; set; }
+        public IAllergyRepository AllergyRepository { get; set; }
+        public IDoctorRepository DoctorRepository { get; set; }
 
-        public override FeedbackRepository GetFeedbackRepository()
+        public override IFeedbackRepository GetFeedbackRepository()
         {
             if (FeedbackRepository == null)
                 return new FeedbackRepository(_context);
@@ -24,7 +27,7 @@ namespace HospitalAPI.Repository
                 return FeedbackRepository;
         }
 
-        public override PatientRepository GetPatientRepository()
+        public override IPatientRepository GetPatientRepository()
         {
             if (PersonRepository == null)
                 return new PatientRepository(_context);
@@ -32,7 +35,7 @@ namespace HospitalAPI.Repository
                 return PersonRepository;
         }
 
-        public override SurveyRepository GetSurveyRepository()
+        public override ISurveyRepository GetSurveyRepository()
         {
             if (SurveyRepository == null)
                 return new SurveyRepository(_context);
@@ -40,5 +43,19 @@ namespace HospitalAPI.Repository
                 return SurveyRepository;
         }
 
+        public override IAllergyRepository GetAllergyRepository()
+        {
+            if (AllergyRepository == null)
+                return new AllergyRepository(_context);
+            else
+                return AllergyRepository;
+        }
+        public override IDoctorRepository GetDoctorRepository() 
+        {
+            if (DoctorRepository == null)
+                return new DoctorRepository(_context);
+            else
+                return DoctorRepository;
+        }
     }
 }

@@ -1,9 +1,7 @@
 ﻿using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.TestHost;
 using System;
-using System.Collections.Generic;
 using System.Net.Http;
-using System.Text;
 
 namespace HospitalIntegrationTests
 {
@@ -24,7 +22,7 @@ namespace HospitalIntegrationTests
         }
 
         // From ServiceProvider we can get all services which are in startuo class (controller, repository, service, mapper)
-        // Iz ovog se moze dobiti bilo koji servis koji je registrovan u startup klasi (controleri, repositorijumi, servisi, maperi)
+        // Pokrecemo sve sto se nalazi u servisu startup od testu
         public IServiceProvider ServiceProvider => server.Host.Services;
 
         // Dispose objects after testing 

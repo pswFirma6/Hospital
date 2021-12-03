@@ -2,11 +2,6 @@
 using HospitalAPI.DTO;
 using HospitalAPI.DTO.SurveyDTO;
 using HospitalLibrary.MedicalRecords.Model;
-using HospitalLibrary.Model;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace HospitalAPI.Mapper
 {
@@ -23,8 +18,12 @@ namespace HospitalAPI.Mapper
                 CreateMap<Feedback, FeedbackStateChangeDTO>();
                 CreateMap<FeedbackStateChangeDTO, Feedback>();
 
-                CreateMap<Patient, PatientDTO>();
-                CreateMap<PatientDTO, Patient>();
+                CreateMap<Patient, PatientRegistrationDTO>();
+
+                CreateMap<PatientRegistrationDTO, Patient>();
+
+                CreateMap<PatientRegistration, PatientRegistrationDTO>();
+                CreateMap<PatientRegistrationDTO, PatientRegistration>();
 
                 CreateMap<SurveyQuestion, TakeSurveyDTO>();
                 CreateMap<TakeSurveyDTO, SurveyQuestion>();

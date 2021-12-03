@@ -1,9 +1,10 @@
 using AutoMapper;
 using HospitalAPI.DTO.SurveyDTO;
 using HospitalAPI.ImplService;
+using HospitalAPI.Validation;
 using HospitalLibrary.MedicalRecords.Model;
+using HospitalLibrary.MedicalRecords.Service;
 using Microsoft.AspNetCore.Mvc;
-using System;
 using System.Collections.Generic;
 
 namespace HospitalAPI.Controller
@@ -12,17 +13,18 @@ namespace HospitalAPI.Controller
     [ApiController]
     public class SurveyController : ControllerBase
     {
-        private SurveyService _surveyService;
         // Create a field to store the mapper object
         private readonly IMapper _mapper;
-
+        private readonly ISurveyService _surveyService;
+        private SurveyValidation _surveyValidation;
 
         // Assign the object in the constructor for dependency injection
 
-        public SurveyController(SurveyService surveyService, IMapper mapper)
+        public SurveyController(ISurveyService surveyService, IMapper mapper, SurveyValidation surveyValidation)
         {
             _surveyService = surveyService;
             _mapper = mapper;
+            _surveyValidation = surveyValidation;
         }
 
         [HttpGet]
@@ -77,7 +79,7 @@ namespace HospitalAPI.Controller
             List<SurveyQuestion> surveyQuestions = new List<SurveyQuestion>();
             foreach (TakeSurveyDTO questionDTO in surveyQuestionsDTO)
             {
-                if (questionDTO.Rate == 0)
+                if (!_surveyValidation.IsValid(questionDTO))
                 {
                     return BadRequest();
                 }
@@ -89,7 +91,21 @@ namespace HospitalAPI.Controller
             }
 
             _surveyService.Add(surveyQuestions);
-            return Ok();
+            return Ok(surveyQuestions);
         }
+
+        //[HttpGet]
+        //[Route("GetAllSurveys")]
+        //public IActionResult GetAllSurveys()
+        //{
+        //    return Ok(_surveyService.GetGroupedByQuestion());
+        //}
+
+        //[HttpGet]
+        //[Route("GetAllSurveyCategoryRates")]
+        //public IActionResult GetAllSurveyCategoryRates()
+        //{
+        //    return Ok(_surveyService.GetGroupedByCategory());
+        //}
     }
 }

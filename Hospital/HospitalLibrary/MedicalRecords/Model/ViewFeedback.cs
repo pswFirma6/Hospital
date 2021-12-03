@@ -1,17 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
-namespace HospitalAPI.DTO
+namespace HospitalLibrary.MedicalRecords.Model
 {
-    public class ViewFeedbackDTO
+    public class ViewFeedback
     {
         public string PersonName { get; set; }
         public string Text { get; set; }
         public DateTime? Date { get; set; }
 
-        public ViewFeedbackDTO(string personName, string text, DateTime? date)
+        public ViewFeedback(string personName, string text, DateTime? date)
         {
             PersonName = personName;
             Text = text;
