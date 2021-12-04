@@ -121,17 +121,17 @@ namespace HospitalIntegrationTests
         {
             List<Patient> listOfPatients = new List<Patient>();
             Doctor doctor = new Doctor();
-            doctor.Id = "1";
+            doctor.Id = 1;
             List<Allergy> allergies = new List<Allergy>();
 
-            Patient newPatientA1 = new Patient("2", "Slavko", "Vranjes", DateTime.Now,
+            Patient newPatientA1 = new Patient(2, "Slavko", "Vranjes", DateTime.Now,
                 "054236971333", "Partizanskih baza 8.", "0666423699", "slavko@gmail.com",
                 "slavko", "slavko123", Gender.male,
                 "Novi Sad", "Serbia", UserType.patient, BloodType.B, RhFactor.positive,
                 189, 85, allergies, doctor);
 
 
-            Patient newPatientB2 = new Patient("3", "Marko", "Markovic", DateTime.Now,
+            Patient newPatientB2 = new Patient(3, "Marko", "Markovic", DateTime.Now,
                 "0542369712546", "Partizanskih baza 7.", "0666423599", "marko@gmail.com",
                 "SeekEquilibrium", "mira123", Gender.female,
                 "Novi Sad", "Serbia", UserType.patient, BloodType.A, RhFactor.negative,

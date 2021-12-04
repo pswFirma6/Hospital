@@ -46,7 +46,7 @@ namespace HospitalIntegrationTests
             var retVal = new List<object[]>();
 
             Patient patient = new Patient();
-            patient.Id = "1";
+            patient.Id = 1;
 
             TakeSurveyDTO takeSurveyDTOHospital = new TakeSurveyDTO("1", "Question 1", 5, HospitalLibrary.MedicalRecords.Model.Enums.SurveyQuestionCategory.hospital);
             TakeSurveyDTO takeSurveyDTOApplication = new TakeSurveyDTO("1", "Question 2", 5, HospitalLibrary.MedicalRecords.Model.Enums.SurveyQuestionCategory.application);
