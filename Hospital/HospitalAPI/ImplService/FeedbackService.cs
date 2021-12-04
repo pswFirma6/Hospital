@@ -88,7 +88,7 @@ namespace HospitalAPI.Service
             return feedbacks;
         }
 
-        public void ChangeState(string id, string state)
+        public void ChangeState(int id, string state)
         {
             Feedback feedback = _repositoryFactory.GetFeedbackRepository().GetOne(id);
             switch (state)

@@ -9,7 +9,7 @@ namespace HospitalLibrary.MedicalRecords.Service
         void Add(Feedback feedback);
         List<ViewFeedback> GetAllApproved();
         List<Feedback> GetAll();
-        void ChangeState(string id, string state);
+        void ChangeState(int id, string state);
     }
         
 }

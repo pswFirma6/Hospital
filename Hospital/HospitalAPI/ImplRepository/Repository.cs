@@ -23,7 +23,7 @@ namespace HospitalLibrary.MedicalRecords.Repository
         {
             return entities.ToList();
         }
-        public Entity GetOne(string id)
+        public Entity GetOne(int id)
         {
             return entities.SingleOrDefault(s => s.Id == id);
         }
