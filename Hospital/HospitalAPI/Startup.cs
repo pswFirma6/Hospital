@@ -69,6 +69,9 @@ namespace HospitalAPI
             services.AddScoped<ISurveyService, SurveyService>();
 
 
+            services.AddScoped<IMedicineService, MedicineService>();
+
+
             services.AddScoped<BuildingService>();
             services.AddScoped<EquipmentService>();
             services.AddScoped<FloorService>();

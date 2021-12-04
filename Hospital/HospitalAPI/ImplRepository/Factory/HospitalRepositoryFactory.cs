@@ -18,6 +18,7 @@ namespace HospitalAPI.Repository
         public ISurveyRepository SurveyRepository { get; set; }
         public IAllergyRepository AllergyRepository { get; set; }
         public IDoctorRepository DoctorRepository { get; set; }
+        public IMedicineRepository MedicineRepository { get; set; }
 
         public override IFeedbackRepository GetFeedbackRepository()
         {
@@ -56,6 +57,14 @@ namespace HospitalAPI.Repository
                 return new DoctorRepository(_context);
             else
                 return DoctorRepository;
+        }
+
+        public override IMedicineRepository GetMedicineRepository()
+        {
+            if (MedicineRepository == null)
+                return new MedicineRepository(_context);
+            else
+                return MedicineRepository;
         }
     }
 }
