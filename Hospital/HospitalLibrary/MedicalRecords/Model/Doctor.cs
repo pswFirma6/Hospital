@@ -21,5 +21,10 @@ namespace HospitalLibrary.MedicalRecords.Model
             DoctorType = doctorType;
             Appointments = appointments;
         }
+        public Doctor( string name , string surname)
+        {
+            Name = name;
+            Surname = surname;
+        }
     }
 }
