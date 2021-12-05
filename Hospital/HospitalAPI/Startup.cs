@@ -70,6 +70,7 @@ namespace HospitalAPI
 
 
             services.AddScoped<IMedicineService, MedicineService>();
+            services.AddScoped<IPrescriptionService, PrescriptionService>();
 
 
             services.AddScoped<BuildingService>();

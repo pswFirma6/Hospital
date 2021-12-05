@@ -16,6 +16,7 @@ namespace HospitalAPI
         public DbSet<Equipment> Equipments { get; set; }
 
         public DbSet<Medicine> Medicines { get; set; }
+        public DbSet<Prescription> Prescriptions { get; set; }
 
         public DbSet<Room> Rooms { get; set; }
         public DbSet<Floor> Floors { get; set; }
