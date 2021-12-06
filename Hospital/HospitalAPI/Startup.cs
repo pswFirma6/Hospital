@@ -68,6 +68,7 @@ namespace HospitalAPI
             services.AddScoped<IRegistrationService, RegistrationService>();
             services.AddScoped<ISurveyService, SurveyService>();
 
+            services.AddScoped<IAppointmentService, AppointmentService>();
 
             services.AddScoped<BuildingService>();
             services.AddScoped<EquipmentService>();
@@ -77,6 +78,7 @@ namespace HospitalAPI
             // Need to AddScoped for every dependency injection validation
             services.AddScoped<FeedbackValidation>();
             services.AddScoped<RegistrationValidation>();
+            services.AddScoped<AppointmentValidation>();
 
             // Repository dependency injection
             services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
