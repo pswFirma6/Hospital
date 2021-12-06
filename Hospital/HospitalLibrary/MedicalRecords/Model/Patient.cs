@@ -12,7 +12,7 @@ namespace HospitalLibrary.MedicalRecords.Model
         public int Height { get; set; }
         public int Weight { get; set; }
         public virtual ICollection<Allergy> Allergies { get; set; }
-        public int DoctorId { get; set; }
+        public string DoctorId { get; set; }
         public virtual Doctor Doctor { get; set; }
 
         public Patient() 

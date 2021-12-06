@@ -9,7 +9,7 @@ namespace HospitalLibrary.MedicalRecords.Repository.Interface
     {
         List<Feedback> GetAll();
         Feedback Add(Feedback feedback);
-        Feedback GetOne(int id);
+        Feedback GetOne(string id);
         Feedback Update(Feedback feedback);
     }
 }
