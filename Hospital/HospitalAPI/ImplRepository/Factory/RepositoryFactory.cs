@@ -18,5 +18,6 @@ namespace HospitalAPI.Repository
         public abstract IDoctorRepository GetDoctorRepository();
 
         public abstract IMedicineRepository GetMedicineRepository();
+        public abstract IPrescriptionRepository GetPrescriptionRepository();
     }
 }
