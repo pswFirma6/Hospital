@@ -9,6 +9,7 @@ namespace HospitalAPI.Repository
     {
         public FeedbackRepository(MyDbContext context)
             : base(context)
-        { }
+        { 
+        }
     }
 }
