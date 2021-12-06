@@ -9,5 +9,7 @@ namespace Hospital_library.MedicalRecords.Service
     {
         List<Prescription> GetPrescriptions();
         void AddPrescription(Prescription prescription);
+
+        void SendPrescription(Prescription prescription);
     }
 }
