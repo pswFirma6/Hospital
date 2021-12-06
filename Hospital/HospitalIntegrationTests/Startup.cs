@@ -5,9 +5,9 @@ using HospitalAPI.ImplService;
 using HospitalAPI.Repository;
 using HospitalAPI.Validation;
 using HospitalLibrary.MedicalRecords.Model;
+using HospitalLibrary.MedicalRecords.Model.Enums;
 using HospitalLibrary.MedicalRecords.Repository.Repository.Interface;
 using HospitalLibrary.MedicalRecords.Service;
-using HospitalLibrary.MedicalRecords.Model.Enums;
 using HospitalLibrary.Model.Enums;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -16,6 +16,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System;
+using System.Collections.Generic;
 using System.Reflection;
 using static HospitalAPI.Mapper.Mapper;
 using System.Collections.Generic;
@@ -98,10 +99,9 @@ namespace HospitalIntegrationTests
                 using (var db = scope.ServiceProvider.GetRequiredService<MyDbContext>())
                     try
                     {
-
-
                         db.Database.EnsureCreated();
-                        InitializeDbForTests(db);
+                        
+                    //    InitializeDbForTests(db);
                     }
                     catch (Exception ex)
                     {
@@ -110,39 +110,39 @@ namespace HospitalIntegrationTests
             }
         }
 
-
+    /*
         public static void InitializeDbForTests(MyDbContext db)
         {
-            CreatePatients();
+            CreatePatients(db);
             db.SaveChanges();
         }
-
-        public static List<Patient> CreatePatients()
+    
+        public static void CreatePatients(MyDbContext db)
         {
             List<Patient> listOfPatients = new List<Patient>();
             Doctor doctor = new Doctor();
-            doctor.Id = "1";
+            doctor.Id = 1;
             List<Allergy> allergies = new List<Allergy>();
 
-            Patient newPatientA1 = new Patient("2", "Slavko", "Vranjes", DateTime.Now,
+            Patient newPatientA1 = new Patient(2, "Slavko", "Vranjes", DateTime.Now,
                 "054236971333", "Partizanskih baza 8.", "0666423699", "slavko@gmail.com",
                 "slavko", "slavko123", Gender.male,
                 "Novi Sad", "Serbia", UserType.patient, BloodType.B, RhFactor.positive,
-                189, 85, allergies, doctor);
+                189, 85, doctor, allergies);
 
 
-            Patient newPatientB2 = new Patient("3", "Marko", "Markovic", DateTime.Now,
+            Patient newPatientB2 = new Patient(3, "Marko", "Markovic", DateTime.Now,
                 "0542369712546", "Partizanskih baza 7.", "0666423599", "marko@gmail.com",
                 "SeekEquilibrium", "mira123", Gender.female,
                 "Novi Sad", "Serbia", UserType.patient, BloodType.A, RhFactor.negative,
-                180, 85, allergies, doctor);
+                180, 85, doctor, allergies);
 
-            listOfPatients.Add(newPatientA1);
-            listOfPatients.Add(newPatientB2);
+            db.Patients.Add(newPatientA1);
+            db.Patients.Add(newPatientB2);
 
-            return listOfPatients;
+            
         }
-
+    */
         public void Configure(IApplicationBuilder app)
         {
             app.UseCors();

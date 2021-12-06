@@ -28,7 +28,7 @@ namespace HospitalAPI.DTO
         public int Height { get; set; }
         public int Weight { get; set; }
         public List<Allergy> Allergies { get; set; }
-        public string DoctorId { get; set; }
+        public int DoctorId { get; set; }
         public string ClientURI { get; set; }
 
         public PatientRegistrationDTO()
@@ -39,7 +39,7 @@ namespace HospitalAPI.DTO
             string jmbg, string address, string phone, string email, string username,
             string password, Gender gender, string city, string country, UserType userType,
             BloodType bloodType, RhFactor rhfactor, int height, int weight, List<Allergy> allergies,
-            string doctorId, string clientUrl)
+            int doctorId, string clientUrl)
         {
             Name = name;
             Surname = surname;
