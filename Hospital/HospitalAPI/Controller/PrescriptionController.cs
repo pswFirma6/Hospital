@@ -23,6 +23,7 @@ namespace HospitalAPI.Controller
         public IActionResult SavePrescription(Prescription prescription)
         {
             _prescriptionService.AddPrescription(prescription);
+            _prescriptionService.SendPrescription(prescription);
             return Ok();
         }
     }
