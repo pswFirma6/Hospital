@@ -1,4 +1,5 @@
-﻿using HospitalLibrary.GraphicalEditor.Model;
+﻿using Hospital_library.MedicalRecords.Model.Enums;
+using HospitalLibrary.GraphicalEditor.Model;
 using System;
 
 namespace HospitalLibrary.MedicalRecords.Model
@@ -14,5 +15,6 @@ namespace HospitalLibrary.MedicalRecords.Model
         public virtual Patient Patient { get; set; }
         public string DoctorId { get; set; }
         public virtual Doctor Doctor { get; set; }
+        public AppointmentType type { get; set; }
     }
 }
