@@ -1,4 +1,4 @@
-﻿using Hospital_library.MedicalRecords.Model;
+﻿﻿using Hospital_library.MedicalRecords.Model;
 using HospitalLibrary.GraphicalEditor.Model;
 using HospitalLibrary.MedicalRecords.Model;
 using HospitalLibrary.Model;
@@ -14,8 +14,10 @@ namespace HospitalAPI
         public DbSet<Allergy> Allergies { get; set; }
         public DbSet<SurveyQuestion> SurveyQuestion { get; set; }
         public DbSet<Equipment> Equipments { get; set; }
+        public DbSet<Appointment> Appointments {get ; set ;}
 
         public DbSet<Medicine> Medicines { get; set; }
+        public DbSet<Prescription> Prescriptions { get; set; }
 
         public DbSet<Room> Rooms { get; set; }
         public DbSet<Floor> Floors { get; set; }

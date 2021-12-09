@@ -19,7 +19,8 @@ namespace HospitalAPI.Repository
         public IDoctorRepository DoctorRepository { get; set; }
         public IAppointmentRepository AppointmentRepository { get; set; }
         public IMedicineRepository MedicineRepository{get; set;}
-        
+        public IPrescriptionRepository MedicineRepository{get; set;}
+
         public override IFeedbackRepository GetFeedbackRepository()
         {
             if (FeedbackRepository == null)
@@ -65,12 +66,19 @@ namespace HospitalAPI.Repository
             else
                 return AppointmentRepository;
         }
-         public override IMedicineRepository GetMedicineRepository()
+        public override IMedicineRepository GetMedicineRepository()
         {
             if (MedicineRepository == null)
                 return new MedicineRepository(_context);
             else
                 return MedicineRepository;
+        }
+        public override IPrescriptionRepository GetPrescriptionRepository()
+        {
+            if (PrescriptionRepository == null)
+                return new PrescriptionRepository(_context);
+            else
+                return PrescriptionRepository;
         }
     }
 }
