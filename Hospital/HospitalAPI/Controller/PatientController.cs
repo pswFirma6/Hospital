@@ -28,10 +28,10 @@ namespace HospitalAPI.Controller
         }
 
         [HttpGet]
-        [Route("{Malicious}")]
         public IActionResult GetMaliciousPatients()
         {
-            return Ok(_patientService.GetMaliciousPatients());
+            return Ok("nice");
+            //return Ok(_patientService.GetMaliciousPatients());
         }
 
 

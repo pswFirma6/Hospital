@@ -57,6 +57,15 @@ namespace HospitalAPI.ImplService
             foreach (Patient patient in allPatients)
             {
                 var appointmentList = GetCancelledAppointmentsByPatient(patient.Id);
+
+                foreach(Appointment appointment in appointmentList)
+                {
+                    if(appointment.AppointmentType != Hospital_library.MedicalRecords.Model.Enums.AppointmentType.Cancelled)
+                    {
+                        appointmentList.Remove(appointment);
+                    }
+                }
+
                 if (appointmentList.Count > 2)
                 {
                     if (appointmentList[appointmentList.Count - 3].StartTime > DateTime.Now.AddDays(-30))

@@ -43,9 +43,5 @@
     <ProjectReference Include="..\HospitalLibrary\HospitalLibrary.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Migrations\" />
-  </ItemGroup>
-
 
 </Project>

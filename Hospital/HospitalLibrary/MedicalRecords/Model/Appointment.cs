@@ -1,4 +1,5 @@
-﻿using HospitalLibrary.GraphicalEditor.Model;
+﻿using Hospital_library.MedicalRecords.Model.Enums;
+using HospitalLibrary.GraphicalEditor.Model;
 using System;
 
 namespace HospitalLibrary.MedicalRecords.Model
@@ -12,11 +13,12 @@ namespace HospitalLibrary.MedicalRecords.Model
         public virtual Patient Patient { get; set; }
         public string DoctorId { get; set; }
         public virtual Doctor Doctor { get; set; }
+        public AppointmentType AppointmentType { get; set; }
 
         public Appointment() 
         {
         }
-        public Appointment(DateTime startDate, int roomId, Room room, string patientId, Patient patient, string doctorId, Doctor doctor)
+        public Appointment(DateTime startDate, int roomId, Room room, string patientId, Patient patient, string doctorId, Doctor doctor, AppointmentType appointmentType)
         {
             StartTime = startDate;
             RoomId = roomId;
@@ -25,6 +27,7 @@ namespace HospitalLibrary.MedicalRecords.Model
             Patient = patient;
             DoctorId = doctorId;
             Doctor = doctor;
+            AppointmentType = appointmentType;
         }
     }
 }
