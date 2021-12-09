@@ -84,13 +84,13 @@ namespace HospitalIntegrationTests
                 "0542369712546", "Partizanskih baza 7.", "0666423599", "pacijentmira@gmail.com",
                 "Mirami", "mira123", Gender.female,
                 "Novi Sad", "Serbia", UserType.patient, BloodType.B, RhFactor.positive,
-                189, 85, allergies, doctor, true);
+                189, 85, allergies, doctor, true, true, null);
 
             Patient patient2 = new Patient(2, "Mira", "Miric", DateTime.Now,
                 "0542369712546", "Partizanskih baza 7.", "0666423599", "pacijentmira@gmail.com",
                 "Mirami", "mira123", Gender.female,
                 "Novi Sad", "Serbia", UserType.patient, BloodType.B, RhFactor.positive,
-                189, 85, allergies, doctor, false);
+                189, 85, allergies, doctor, false, true, null);
 
             retVal.Add(new object[] { patient ,patient2});
 

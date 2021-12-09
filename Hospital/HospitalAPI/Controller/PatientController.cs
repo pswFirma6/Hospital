@@ -2,7 +2,9 @@
 using HospitalAPI.DTO;
 using HospitalAPI.ImplService;
 using HospitalLibrary.MedicalRecords.Model;
+using HospitalLibrary.MedicalRecords.Model.Enums;
 using HospitalLibrary.MedicalRecords.Service;
+using HospitalLibrary.Model.Enums;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
