@@ -41,5 +41,18 @@ namespace HospitalAPI.Controller
             return Ok(mapper);
         }
 
+        [HttpPost]
+        [Route("Priority")]
+        public IActionResult GetPriorityAppointments(PreferredAppointmentRequestDTO preferredAppointmentRequestDTO)
+        {
+            if (preferredAppointmentRequestDTO.Preferred.Equals("doctor"))
+            {
+                return Ok(_appointmentService.GetDoctorsFreeAppointments(preferredAppointmentRequestDTO.DoctorId, preferredAppointmentRequestDTO.Date));
+            }else if (preferredAppointmentRequestDTO.Preferred.Equals("date"))
+            {
+                return Ok();
+            }
+            return BadRequest();
+        }
     }
 }

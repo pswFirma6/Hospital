@@ -63,13 +63,11 @@ namespace HospitalUnitTests
             var dateString1 = "1/12/2022 8:30:00 AM";
             DateTime date1 = DateTime.Parse(dateString1,
                                       System.Globalization.CultureInfo.InvariantCulture);
-            Appointment appointment1 = new Appointment(date1, 30.00,
-                date1, room.id, room, patient.Id, patient, "1", doc);
+            Appointment appointment1 = new Appointment(date1, room.id, room, patient.Id, patient, "1", doc);
             var dateString2 = "1/14/2022 8:30:00 AM";
             DateTime date2 = DateTime.Parse(dateString2,
                                       System.Globalization.CultureInfo.InvariantCulture);
-            Appointment appointment2 = new Appointment(date2, 30.00,
-                date2, room.id, room, patient.Id, patient, "1", doc);
+            Appointment appointment2 = new Appointment(date2, room.id, room, patient.Id, patient, "1", doc);
 
             appointments.Add(appointment1);
             appointments.Add(appointment2);
@@ -98,13 +96,11 @@ namespace HospitalUnitTests
             var dateString1 = "1/12/2022 8:30:00 AM";
             DateTime date1 = DateTime.Parse(dateString1,
                                       System.Globalization.CultureInfo.InvariantCulture);
-            Appointment appointment1 = new Appointment(date1, 30.00,
-                date1, room.id, room, patient.Id, patient, "1", doc);
+            Appointment appointment1 = new Appointment(date1, room.id, room, patient.Id, patient, "1", doc);
             var dateString2 = "1/14/2022 8:37:00 AM";
             DateTime date2 = DateTime.Parse(dateString2,
                                       System.Globalization.CultureInfo.InvariantCulture);
-            Appointment appointment2 = new Appointment(date2, 30.00,
-                date2, room.id, room, patient.Id, patient, "1", doc);
+            Appointment appointment2 = new Appointment(date2, room.id, room, patient.Id, patient, "1", doc);
 
             retVal.Add(new object[] { appointment1, appointment2 });
 
@@ -126,13 +122,11 @@ namespace HospitalUnitTests
             var dateString1 = "2/12/2022 8:30:00 AM";
             DateTime date1 = DateTime.Parse(dateString1,
                                       System.Globalization.CultureInfo.InvariantCulture);
-            Appointment appointment1 = new Appointment(date1, 30.00,
-                date1, room.id, room, patient.Id, patient, "1", doc);
+            Appointment appointment1 = new Appointment(date1, room.id, room, patient.Id, patient, "1", doc);
             var dateString2 = "1/12/2022 9:10:00 AM";
             DateTime date2 = DateTime.Parse(dateString2,
                                       System.Globalization.CultureInfo.InvariantCulture);
-            Appointment appointment2 = new Appointment(date2, 30.00,
-                date2, room.id, room, patient.Id, patient, "1", doc);
+            Appointment appointment2 = new Appointment(date2, room.id, room, patient.Id, patient, "1", doc);
 
             retVal.Add(new object[] { appointment1, appointment2 });
 

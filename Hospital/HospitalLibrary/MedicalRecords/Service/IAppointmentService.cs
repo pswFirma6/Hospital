@@ -9,5 +9,6 @@ namespace Hospital_library.MedicalRecords.Service
     {
         public bool CheckDoctorAppointments(Appointment newAppointment);
         public void Add(Appointment appointment);
+        public List<string> GetDoctorsFreeAppointments(string doctorId, string dateString);
     }
 }
