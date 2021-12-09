@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Hospital_library.MedicalRecords.Model;
 using HospitalAPI.DTO;
 using HospitalAPI.DTO.SurveyDTO;
 using HospitalLibrary.MedicalRecords.Model;
@@ -26,6 +27,9 @@ namespace HospitalAPI.Mapper
 
                 CreateMap<SurveyQuestion, TakeSurveyDTO>();
                 CreateMap<TakeSurveyDTO, SurveyQuestion>();
+
+                CreateMap<Prescription, PrescriptionDto>();
+                CreateMap<PrescriptionDto, Prescription>();
             }
         }
     } 

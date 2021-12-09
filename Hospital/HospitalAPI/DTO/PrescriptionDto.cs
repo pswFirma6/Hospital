@@ -1,12 +1,13 @@
-﻿using HospitalLibrary.MedicalRecords.Model;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Text;
+using System.Linq;
+using System.Threading.Tasks;
 
-namespace Hospital_library.MedicalRecords.Model
+namespace HospitalAPI.DTO
 {
-    public class Prescription : Entity
+    public class PrescriptionDto
     {
+        public int Id { get; set; }
         public string MedicineName { get; set; }
         public int Quantity { get; set; }
         public string Description { get; set; }
@@ -20,10 +21,11 @@ namespace Hospital_library.MedicalRecords.Model
         public string Diagnosis { get; set; }
         public string PharmacyName { get; set; }
 
-        public Prescription() { }
+        public PrescriptionDto() { }
 
-        public Prescription(string medicineName, int quantity, string description, string recommendedDose, string prescriptionDate, string doctorName, string patientName, string patientId, string therapyStart, string therapyEnd, string diagnosis, string pharmacyName)
+        public PrescriptionDto(int id, string medicineName, int quantity, string description, string recommendedDose, string prescriptionDate, string doctorName, string patientName, string patientId, string therapyStart, string therapyEnd, string diagnosis, string pharmacyName)
         {
+            Id = id;
             MedicineName = medicineName;
             Quantity = quantity;
             Description = description;
@@ -37,6 +39,5 @@ namespace Hospital_library.MedicalRecords.Model
             Diagnosis = diagnosis;
             PharmacyName = pharmacyName;
         }
-
     }
 }
