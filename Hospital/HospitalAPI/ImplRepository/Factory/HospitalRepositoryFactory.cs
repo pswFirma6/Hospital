@@ -19,7 +19,7 @@ namespace HospitalAPI.Repository
         public IDoctorRepository DoctorRepository { get; set; }
         public IAppointmentRepository AppointmentRepository { get; set; }
         public IMedicineRepository MedicineRepository{get; set;}
-        public IPrescriptionRepository MedicineRepository{get; set;}
+        public IPrescriptionRepository PrescriptionRepository { get; set;}
 
         public override IFeedbackRepository GetFeedbackRepository()
         {
