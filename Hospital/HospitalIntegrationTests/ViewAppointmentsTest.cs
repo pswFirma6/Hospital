@@ -50,9 +50,9 @@ namespace HospitalIntegrationTests
             // Assert.Equal(0, result[1].Doctorid);
         }
         [Fact]
-        public async Task Get_All_Patient_Pending_AppointmentsAsync()
+        public async Task Get_All_Patient_Awaiting_AppointmentsAsync()
         {
-            var url = "api/appointment/pending";
+            var url = "api/appointment/awaiting";
 
             var response = await injection.Client.GetAsync(url);
 

@@ -1,6 +1,8 @@
-﻿using Hospital_library.MedicalRecords.Service;
+﻿using Hospital_library.MedicalRecords.Model.Enums;
+using Hospital_library.MedicalRecords.Service;
 using HospitalAPI.Repository;
 using HospitalLibrary.MedicalRecords.Model;
+using System.Collections.Generic;
 using System.Linq;
 
 
@@ -28,5 +30,57 @@ namespace HospitalAPI.ImplService
                     || ( newAppointment.StartTime <= x.StartTime.AddMinutes(30)  
                     &&  x.StartTime <= newAppointment.StartTime)); 
         }
+
+        public List<Appointment> getAll(int id)
+        {
+            List<Appointment> allAppointments = new List<Appointment>();
+            List<Appointment> appointmentsList = _hospitalRepositoryFactory.GetAppointmentsRepository().GetAll();
+            foreach (Appointment appointment in appointmentsList)
+            {
+                if(appointment.PatientId == id)
+                {
+                    allAppointments.Add(appointment);
+                }
+            }
+            return allAppointments;
+        }
+
+        public List<Appointment> getAwaiting(int id)
+        {
+            List<Appointment> allAppointments = new List<Appointment>();
+            List<Appointment> appointmentsList = _hospitalRepositoryFactory.GetAppointmentsRepository().GetAll();
+            foreach (Appointment appointment in appointmentsList)
+            {
+                if (appointment.PatientId == id)
+                {
+                    if(appointment.Type == AppointmentType.Awaiting)
+                    {
+                        allAppointments.Add(appointment);
+
+                    }
+                }
+            }
+            return allAppointments;
+        }
+
+        public List<Appointment> getCancelled(int id)
+        {
+            List<Appointment> allAppointments = new List<Appointment>();
+            List<Appointment> appointmentsList = _hospitalRepositoryFactory.GetAppointmentsRepository().GetAll();
+            foreach (Appointment appointment in appointmentsList)
+            {
+                if (appointment.PatientId == id)
+                {
+                    if (appointment.Type == AppointmentType.Cancelled)
+                    {
+                        allAppointments.Add(appointment);
+
+                    }
+                }
+            }
+            return allAppointments;
+        }
+
+        
     }
 }

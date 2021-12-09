@@ -23,7 +23,7 @@ namespace HospitalIntegrationTests
         [Theory]
         [MemberData(nameof(DataSuccessfully))]
         public async Task Create_New_Appointment_Successfully(NewAppointmentDTO newAppointment,
-                DateTime expectedStartTime, string patientId, string doctorId)  
+                DateTime expectedStartTime, int patientId, int doctorId)  
         {
             // Arrange //
             var json = JsonConvert.SerializeObject(newAppointment);
@@ -83,10 +83,10 @@ namespace HospitalIntegrationTests
             room.id = 1;
 
             Doctor doctor = new Doctor();
-            doctor.Id = "1";
+            doctor.Id = 1;
 
             Patient patient = new Patient();
-            patient.Id = "1";
+            patient.Id = 1;
 
             var dateString = "1/12/2022 8:30:00 AM";
             DateTime date = DateTime.Parse(dateString,
@@ -95,8 +95,8 @@ namespace HospitalIntegrationTests
                 date, room.id, room, patient.Id, patient, doctor.Id, doctor);
 
             var expectedStartTime = date;
-            var expectedPatientId = "1";
-            var expectedDoctorId = "1";
+            var expectedPatientId = 1;
+            var expectedDoctorId = 1;
 
             retVal.Add(new object[] { appointmentDTO, expectedStartTime, expectedPatientId, expectedDoctorId });
 
@@ -111,10 +111,10 @@ namespace HospitalIntegrationTests
             room.id = 1;
 
             Doctor doctor = new Doctor();
-            doctor.Id = "1";
+            doctor.Id = 1;
 
             Patient patient = new Patient();
-            patient.Id = "1";
+            patient.Id = 1;
 
             var dateString1 = "1/12/2022 8:30:00 AM";
             DateTime date1 = DateTime.Parse(dateString1,

@@ -25,7 +25,7 @@ namespace HospitalAPI.Controller
            
         }
         [HttpGet("{id}")]
-        public IActionResult GetPatient(string id )
+        public IActionResult GetPatient(int id )
         {
             Patient patient = _patientService.GetPatient(id);
             var model = _mapper.Map<PatientRegistrationDTO>(patient);
