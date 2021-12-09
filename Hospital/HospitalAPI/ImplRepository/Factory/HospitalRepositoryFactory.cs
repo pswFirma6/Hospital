@@ -1,6 +1,5 @@
 ﻿using Hospital_library.MedicalRecords.Repository.Repository.Interface;
 using HospitalAPI.ImplRepository;
-using HospitalLibrary.MedicalRecords.Repository;
 using HospitalLibrary.MedicalRecords.Repository.Interface;
 using HospitalLibrary.MedicalRecords.Repository.Repository.Interface;
 
@@ -18,8 +17,9 @@ namespace HospitalAPI.Repository
         public ISurveyRepository SurveyRepository { get; set; }
         public IAllergyRepository AllergyRepository { get; set; }
         public IDoctorRepository DoctorRepository { get; set; }
+        public IAppointmentRepository AppointmentRepository { get; set; }
+        public IPrescriptionRepository PrescriptionRepository { get; set;}
         public IMedicineRepository MedicineRepository { get; set; }
-        public IPrescriptionRepository PrescriptionRepository { get; set; }
 
         public override IFeedbackRepository GetFeedbackRepository()
         {
@@ -52,7 +52,7 @@ namespace HospitalAPI.Repository
             else
                 return AllergyRepository;
         }
-        public override IDoctorRepository GetDoctorRepository() 
+        public override IDoctorRepository GetDoctorsRepository() 
         {
             if (DoctorRepository == null)
                 return new DoctorRepository(_context);
@@ -60,6 +60,21 @@ namespace HospitalAPI.Repository
                 return DoctorRepository;
         }
 
+        public override IDoctorRepository GetDoctorRepository() 
+        {
+            if (DoctorRepository == null)
+                return new DoctorRepository(_context);
+            else
+                return DoctorRepository;
+        }
+        public override IAppointmentRepository GetAppointmentsRepository()
+        {
+            if (AppointmentRepository == null)
+                return new AppointmentRepository(_context);
+            else
+                return AppointmentRepository;
+        }
+        
         public override IMedicineRepository GetMedicineRepository()
         {
             if (MedicineRepository == null)

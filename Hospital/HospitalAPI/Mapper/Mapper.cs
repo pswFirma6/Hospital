@@ -24,8 +24,12 @@ namespace HospitalAPI.Mapper
                 CreateMap<PatientRegistration, PatientRegistrationDTO>();
                 CreateMap<PatientRegistrationDTO, PatientRegistration>();
 
+                CreateMap<Appointment, NewAppointmentDTO>();
+                CreateMap<NewAppointmentDTO, Appointment>();
+
                 CreateMap<SurveyQuestion, TakeSurveyDTO>();
                 CreateMap<TakeSurveyDTO, SurveyQuestion>();
+
             }
         }
     } 

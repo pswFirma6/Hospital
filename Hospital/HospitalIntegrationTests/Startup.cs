@@ -21,6 +21,7 @@ using System.Reflection;
 using static HospitalAPI.Mapper.Mapper;
 using System.Collections.Generic;
 using HospitalAPI.Service;
+using Hospital_library.MedicalRecords.Service;
 
 namespace HospitalIntegrationTests
 {
@@ -75,11 +76,14 @@ namespace HospitalIntegrationTests
             services.AddScoped<IPatientService,PatientService>();
             services.AddScoped<IFeedbackService, FeedbackService>();
             services.AddScoped<ISurveyService, SurveyService>();
+            services.AddScoped<IAppointmentService, AppointmentService>();
+
             services.AddScoped<RepositoryFactory, HospitalRepositoryFactory>();
 
             // Validation
             services.AddScoped<RegistrationValidation>();
             services.AddScoped<SurveyValidation>();
+            services.AddScoped<AppointmentValidation>();
 
             services.AddScoped<HospitalRepositoryFactory>();
             services.AddScoped<IPatientRepository, PatientRepository>();
@@ -103,7 +107,7 @@ namespace HospitalIntegrationTests
                         
                     //    InitializeDbForTests(db);
                     }
-                    catch (Exception ex)
+                    catch (Exception)
                     {
                         throw;
                     }

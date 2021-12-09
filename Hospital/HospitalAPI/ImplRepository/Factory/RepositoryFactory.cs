@@ -2,6 +2,7 @@
 using HospitalAPI.ImplRepository;
 using HospitalLibrary.MedicalRecords.Repository.Interface;
 using HospitalLibrary.MedicalRecords.Repository.Repository.Interface;
+using System;
 
 namespace HospitalAPI.Repository
 {
@@ -19,5 +20,9 @@ namespace HospitalAPI.Repository
 
         public abstract IMedicineRepository GetMedicineRepository();
         public abstract IPrescriptionRepository GetPrescriptionRepository();
+        public abstract IDoctorRepository GetDoctorsRepository();
+
+        public abstract IAppointmentRepository GetAppointmentsRepository();
+
     }
 }
