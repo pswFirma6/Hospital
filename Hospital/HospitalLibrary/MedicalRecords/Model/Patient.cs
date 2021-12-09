@@ -16,15 +16,18 @@ namespace HospitalLibrary.MedicalRecords.Model
         public virtual Doctor Doctor { get; set; }
         public bool Blocked { get; set; }
 
-        public Patient() 
+        public bool Malicious { get; set; }
+        public List<DateTime> CanceledAppointments { get; set; }
+
+        public Patient()
         {
         }
-        public Patient(int id, string name, string surname, DateTime birthDate, 
-            string jmbg, string address, string phone, string email, string username, 
-            string password, Gender gender, string city, string country, UserType userType, 
-            BloodType bloodType, RhFactor rhfactor, int height, int weight, List<Allergy> allergies, 
-            Doctor doctor,bool blocked)
-            : base(id, name, surname, birthDate, jmbg, address, phone, email, username, 
+        public Patient(int id, string name, string surname, DateTime birthDate,
+            string jmbg, string address, string phone, string email, string username,
+            string password, Gender gender, string city, string country, UserType userType,
+            BloodType bloodType, RhFactor rhfactor, int height, int weight, List<Allergy> allergies,
+            Doctor doctor, bool blocked, bool malicious, List<DateTime> canceledAppointments)
+            : base(id, name, surname, birthDate, jmbg, address, phone, email, username,
                   password, gender, city, country, userType)
         {
             BloodType = bloodType;
@@ -34,6 +37,8 @@ namespace HospitalLibrary.MedicalRecords.Model
             Allergies = allergies;
             Doctor = doctor;
             Blocked = blocked;
+            Malicious = malicious;
+            CanceledAppointments = canceledAppointments;
         }
     }
 }

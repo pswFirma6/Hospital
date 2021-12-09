@@ -62,6 +62,24 @@ namespace HospitalAPI.ImplService
             patient.Allergies = allergies;
 
             return patient;
-        } 
+        }
+        
+        public List<Patient> GetMaliciousPatients()
+        {
+            List<Patient> allPatients = _hospitalRepositoryFactory.GetPatientRepository().GetAll();
+            List<DateTime> canceledAppointments;
+            foreach(Patient patient in allPatients)
+            {
+                canceledAppointments = patient.CanceledAppointments;
+                if(canceledAppointments.Count > 2)
+                {
+                    if(canceledAppointments[canceledAppointments.Count - 3] > DateTime.Now.AddDays(-30))
+                    {
+                        patient.Malicious = true;
+                    }
+                }
+            }
+            return allPatients;
+        }
     }
 }

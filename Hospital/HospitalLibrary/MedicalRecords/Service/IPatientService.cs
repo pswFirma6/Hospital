@@ -1,4 +1,5 @@
 ﻿using HospitalLibrary.MedicalRecords.Model;
+using System.Collections.Generic;
 
 namespace HospitalLibrary.MedicalRecords.Service
 {
@@ -7,5 +8,6 @@ namespace HospitalLibrary.MedicalRecords.Service
         Patient Register(Patient patient);
         bool CheckExisting(Patient patient);
         Patient GetPatient(int id);
+        List<Patient> GetMaliciousPatients();
     }
 }
