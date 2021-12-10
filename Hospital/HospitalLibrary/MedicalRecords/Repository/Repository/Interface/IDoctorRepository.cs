@@ -7,5 +7,6 @@ namespace Hospital_library.MedicalRecords.Repository.Repository.Interface
     public interface IDoctorRepository
     {
         List<Doctor> GetAll();
+        Doctor GetOne(int id);
     }
 }

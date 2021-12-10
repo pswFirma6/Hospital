@@ -1,18 +1,53 @@
-﻿using HospitalLibrary.GraphicalEditor.Model;
+﻿using Hospital_library.MedicalRecords.Model.Enums;
+using HospitalLibrary.GraphicalEditor.Model;
 using System;
 
 namespace HospitalLibrary.MedicalRecords.Model
 {
     public class Appointment : Entity
     {
-        public string StartTime { get; set; }
+        public DateTime StartTime { get; set; }
         public double Duration { get; set; }
         public DateTime Date { get; set; }
-        public string RoomId { get; set; }
+        public int RoomId { get; set; }
         public virtual Room Room { get; set; }
-        public string PatientId { get; set; }
+        public int PatientId { get; set; }
         public virtual Patient Patient { get; set; }
-        public string DoctorId { get; set; }
+        public int DoctorId { get; set; }
         public virtual Doctor Doctor { get; set; }
+        public bool SurveyTaken { get; set; }
+
+        public AppointmentType Type { get; set; }
+
+        public Appointment() 
+        {
+        }
+        public Appointment(DateTime startDate, double duration, DateTime date, int roomId, Room room, int patientId, Patient patient, int doctorId, Doctor doctor, AppointmentType type)
+        {
+            StartTime = startDate;
+            Duration = duration;
+            Date = date;
+            RoomId = roomId;
+            Room = room;
+            PatientId = patientId;
+            Patient = patient;
+            DoctorId = doctorId;
+            Doctor = doctor;
+            Type = type;
+        }
+        public Appointment(DateTime startDate, double duration, DateTime date, int roomId, Room room, int patientId, Patient patient, int doctorId, Doctor doctor, AppointmentType type, bool surveyTaken)
+        {
+            StartTime = startDate;
+            Duration = duration;
+            Date = date;
+            RoomId = roomId;
+            Room = room;
+            PatientId = patientId;
+            Patient = patient;
+            DoctorId = doctorId;
+            Doctor = doctor;
+            Type = type;
+            SurveyTaken = surveyTaken;
+        }
     }
 }

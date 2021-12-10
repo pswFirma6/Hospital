@@ -15,7 +15,7 @@ namespace HospitalAPI.Validation
                 return false;
             }
 
-            if (dto.Text.Length <= 0 || String.IsNullOrEmpty(dto.PersonId))
+            if (dto.Text.Length <= 0 || dto.PersonId <= 0)
             {
                 return false;
             }

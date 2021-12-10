@@ -1,18 +1,14 @@
 ﻿using Hospital_library.MedicalRecords.Repository.Repository.Interface;
 using HospitalLibrary.MedicalRecords.Model;
 using HospitalLibrary.MedicalRecords.Repository;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace HospitalAPI.ImplRepository
 {
-    public class DoctorRepository : Repository<Doctor>, IDoctorRepository
+    public class AppointmentRepository : Repository<Appointment>, IAppointmentRepository
     {
-        public DoctorRepository(MyDbContext context)
+        public AppointmentRepository(MyDbContext context)
             : base(context)
         {
         }
-
     }
 }
