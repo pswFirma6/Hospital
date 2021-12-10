@@ -23,21 +23,5 @@ namespace HospitalAPI.DTO
 
         public PrescriptionDto() { }
 
-        public PrescriptionDto(int id, string medicineName, int quantity, string description, string recommendedDose, string prescriptionDate, string doctorName, string patientName, string patientId, string therapyStart, string therapyEnd, string diagnosis, string pharmacyName)
-        {
-            Id = id;
-            MedicineName = medicineName;
-            Quantity = quantity;
-            Description = description;
-            RecommendedDose = recommendedDose;
-            PrescriptionDate = prescriptionDate;
-            DoctorName = doctorName;
-            PatientName = patientName;
-            PatientId = patientId;
-            TherapyStart = therapyStart;
-            TherapyEnd = therapyEnd;
-            Diagnosis = diagnosis;
-            PharmacyName = pharmacyName;
-        }
     }
 }
