@@ -27,9 +27,6 @@ namespace HospitalAPI.Mapper
 
                 CreateMap<SurveyQuestion, TakeSurveyDTO>();
                 CreateMap<TakeSurveyDTO, SurveyQuestion>();
-
-                CreateMap<Prescription, PrescriptionDto>();
-                CreateMap<PrescriptionDto, Prescription>();
             }
         }
     } 

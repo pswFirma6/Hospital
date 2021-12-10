@@ -17,13 +17,11 @@ namespace HospitalAPI.Controller
     public class PrescriptionController : ControllerBase
     {
         private readonly IPrescriptionService _prescriptionService;
-        private readonly IMapper _mapper;
-        private readonly string integrationServer = "https://localhost:44317";
+        private readonly string integrationServer = "https://localhost:44325";
 
         public PrescriptionController(IPrescriptionService prescriptionService, IMapper mapper)
         {
             _prescriptionService = prescriptionService;
-            _mapper = mapper;
         }
 
         [HttpPost]
@@ -31,12 +29,11 @@ namespace HospitalAPI.Controller
         public IActionResult SavePrescription(Prescription prescription)
         {
             _prescriptionService.AddPrescription(prescription);
-            DTO.PrescriptionDto dto = _mapper.Map<DTO.PrescriptionDto>(prescription);
-            SendPrescription(dto);
+            SendPrescription(prescription);
             return Ok();
         }
 
-        private void SendPrescription(DTO.PrescriptionDto prescription)
+        private void SendPrescription(Prescription prescription)
         {
             var client = new RestClient(integrationServer);
             var request = new RestRequest("/sendPrescription", Method.POST);
