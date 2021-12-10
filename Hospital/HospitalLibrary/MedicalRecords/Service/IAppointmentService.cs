@@ -13,5 +13,7 @@ namespace Hospital_library.MedicalRecords.Service
         public List<Appointment> getAwaiting(int id);
 
         public List<Appointment> getCancelled(int id);
+        public bool CheckExistingAppointment(Appointment appointment);
+        public void CancelAppointment(Appointment appointment);
     }
 }

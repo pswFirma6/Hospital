@@ -1,4 +1,5 @@
-﻿using HospitalAPI.ImplService;
+﻿using Hospital_library.MedicalRecords.Model.Enums;
+using HospitalAPI.ImplService;
 using HospitalAPI.Repository;
 using HospitalLibrary.GraphicalEditor.Model;
 using HospitalLibrary.MedicalRecords.Model;
@@ -53,7 +54,7 @@ namespace HospitalUnitTests
             Room room = new Room();
             room.id = 1;
             Patient patient = new Patient();
-            patient.Id = "1";
+            patient.Id = 1;
             List<Patient> patients = new List<Patient>();
             patients.Add(patient);
             Doctor doc = new Doctor();
@@ -64,16 +65,16 @@ namespace HospitalUnitTests
             DateTime date1 = DateTime.Parse(dateString1,
                                       System.Globalization.CultureInfo.InvariantCulture);
             Appointment appointment1 = new Appointment(date1, 30.00,
-                date1, room.id, room, patient.Id, patient, "1", doc);
+                date1, room.id, room, patient.Id, patient, 1, doc, AppointmentType.Awaiting);
             var dateString2 = "1/14/2022 8:30:00 AM";
             DateTime date2 = DateTime.Parse(dateString2,
                                       System.Globalization.CultureInfo.InvariantCulture);
             Appointment appointment2 = new Appointment(date2, 30.00,
-                date2, room.id, room, patient.Id, patient, "1", doc);
+                date2, room.id, room, patient.Id, patient, 1, doc, AppointmentType.Awaiting);
 
             appointments.Add(appointment1);
             appointments.Add(appointment2);
-            Doctor doctor = new Doctor("1", "Miroslav", "Mikic", DateTime.Now, "2456874215478", "Marka Veselinovica 5."
+            Doctor doctor = new Doctor(1, "Miroslav", "Mikic", DateTime.Now, "2456874215478", "Marka Veselinovica 5."
                     , "0665789461", "milovan@bch.com", "Dr. Miroslav Mikic", "mire123", Gender.male, "Novi Sad"
                     , "Serbia", UserType.doctor, patients, DoctorType.generalPractitioner, appointments);
 
@@ -90,7 +91,7 @@ namespace HospitalUnitTests
             Room room = new Room();
             room.id = 1;
             Patient patient = new Patient();
-            patient.Id = "1";
+            patient.Id = 1;
             List<Patient> patients = new List<Patient>();
             patients.Add(patient);
             Doctor doc = new Doctor();
@@ -99,12 +100,12 @@ namespace HospitalUnitTests
             DateTime date1 = DateTime.Parse(dateString1,
                                       System.Globalization.CultureInfo.InvariantCulture);
             Appointment appointment1 = new Appointment(date1, 30.00,
-                date1, room.id, room, patient.Id, patient, "1", doc);
+                date1, room.id, room, patient.Id, patient, 1, doc, AppointmentType.Awaiting);
             var dateString2 = "1/14/2022 8:37:00 AM";
             DateTime date2 = DateTime.Parse(dateString2,
                                       System.Globalization.CultureInfo.InvariantCulture);
             Appointment appointment2 = new Appointment(date2, 30.00,
-                date2, room.id, room, patient.Id, patient, "1", doc);
+                date2, room.id, room, patient.Id, patient, 1, doc, AppointmentType.Awaiting);
 
             retVal.Add(new object[] { appointment1, appointment2 });
 
@@ -118,7 +119,7 @@ namespace HospitalUnitTests
             Room room = new Room();
             room.id = 1;
             Patient patient = new Patient();
-            patient.Id = "1";
+            patient.Id = 1;
             List<Patient> patients = new List<Patient>();
             patients.Add(patient);
             Doctor doc = new Doctor();
@@ -127,12 +128,12 @@ namespace HospitalUnitTests
             DateTime date1 = DateTime.Parse(dateString1,
                                       System.Globalization.CultureInfo.InvariantCulture);
             Appointment appointment1 = new Appointment(date1, 30.00,
-                date1, room.id, room, patient.Id, patient, "1", doc);
+                date1, room.id, room, patient.Id, patient, 1, doc, AppointmentType.Awaiting);
             var dateString2 = "1/12/2022 9:10:00 AM";
             DateTime date2 = DateTime.Parse(dateString2,
                                       System.Globalization.CultureInfo.InvariantCulture);
             Appointment appointment2 = new Appointment(date2, 30.00,
-                date2, room.id, room, patient.Id, patient, "1", doc);
+                date2, room.id, room, patient.Id, patient, 1, doc, AppointmentType.Awaiting);
 
             retVal.Add(new object[] { appointment1, appointment2 });
 

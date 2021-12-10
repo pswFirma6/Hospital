@@ -58,6 +58,22 @@ namespace HospitalAPI.Controller
         {
             return Ok(_appointmentService.getCancelled(id));
         }
+        [HttpPut]
+        public IActionResult CancelAppointment(Appointment appointment)
+        {
+            if (!_appointmentService.CheckExistingAppointment(appointment))
+            {
+                return Conflict(new { message = $"The appointment does not exist in the database" });
+            }
+            if (!_appointmentValidation.IsAwaiting(appointment))
+            {
+                return BadRequest();
+            }
+
+            _appointmentService.CancelAppointment(appointment);
+
+            return Ok(appointment);
+        }
 
     }
 }

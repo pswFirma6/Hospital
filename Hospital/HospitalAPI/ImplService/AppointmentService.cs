@@ -22,6 +22,12 @@ namespace HospitalAPI.ImplService
             _hospitalRepositoryFactory.GetAppointmentsRepository().Add(appointment);
         }
 
+        public void CancelAppointment(Appointment appointment)
+        {
+            appointment.Type = AppointmentType.Cancelled;
+            _hospitalRepositoryFactory.GetAppointmentsRepository().Update(appointment);
+        }
+
         public bool CheckDoctorAppointments(Appointment newAppointment) 
         {
             var existingDoctor = _hospitalRepositoryFactory.GetDoctorsRepository().GetOne(newAppointment.DoctorId);
@@ -29,6 +35,13 @@ namespace HospitalAPI.ImplService
             return existingDoctor.Appointments.Any( x => x.StartTime.Equals(newAppointment.StartTime) 
                     || ( newAppointment.StartTime <= x.StartTime.AddMinutes(30)  
                     &&  x.StartTime <= newAppointment.StartTime)); 
+        }
+
+        public bool CheckExistingAppointment(Appointment appointment)
+        {
+
+            var existingAppointments = _hospitalRepositoryFactory.GetAppointmentsRepository().GetAll();
+            return existingAppointments.Any(x => x.Date.Equals(appointment.Date) || x.StartTime.Equals(appointment.StartTime));
         }
 
         public List<Appointment> getAll(int id)
