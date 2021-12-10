@@ -12,8 +12,8 @@ namespace HospitalAPI.Controller
     [ApiController]
     public class AppointmentController : ControllerBase
     {
-        private IAppointmentService _appointmentService;
-        private AppointmentValidation _appointmentValidation;
+        private readonly IAppointmentService _appointmentService;
+        private readonly AppointmentValidation _appointmentValidation;
         private readonly IMapper _mapper;
 
         public AppointmentController(IAppointmentService appointmentService, AppointmentValidation appointmentValidation, IMapper mapper) 

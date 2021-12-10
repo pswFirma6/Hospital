@@ -51,13 +51,10 @@ namespace HospitalAPI.ImplService
             List<Appointment> appointmentsList = _hospitalRepositoryFactory.GetAppointmentsRepository().GetAll();
             foreach (Appointment appointment in appointmentsList)
             {
-                if (appointment.PatientId == id)
+                if (appointment.PatientId == id && appointment.Type == AppointmentType.Awaiting)
                 {
-                    if(appointment.Type == AppointmentType.Awaiting)
-                    {
-                        allAppointments.Add(appointment);
+                     allAppointments.Add(appointment);
 
-                    }
                 }
             }
             return allAppointments;
@@ -69,13 +66,9 @@ namespace HospitalAPI.ImplService
             List<Appointment> appointmentsList = _hospitalRepositoryFactory.GetAppointmentsRepository().GetAll();
             foreach (Appointment appointment in appointmentsList)
             {
-                if (appointment.PatientId == id)
+                if (appointment.PatientId == id && appointment.Type == AppointmentType.Cancelled)
                 {
-                    if (appointment.Type == AppointmentType.Cancelled)
-                    {
-                        allAppointments.Add(appointment);
-
-                    }
+                    allAppointments.Add(appointment);
                 }
             }
             return allAppointments;

@@ -26,6 +26,7 @@ namespace HospitalIntegrationTests
 {
     public class Startup
     {
+        [Obsolete]
         public Startup(IHostingEnvironment env)
         {
             var builder = new ConfigurationBuilder()

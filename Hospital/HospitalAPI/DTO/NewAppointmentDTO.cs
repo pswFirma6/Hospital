@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 ﻿using HospitalLibrary.GraphicalEditor.Model;
 using HospitalLibrary.MedicalRecords.Model;
-using System;
+
 
 namespace HospitalAPI.DTO
 {

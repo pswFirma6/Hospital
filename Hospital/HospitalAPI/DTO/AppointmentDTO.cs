@@ -5,7 +5,7 @@ using System;
 
 namespace HospitalAPI.DTO
 {
-    public class AppointmentDTO
+    public class AppointmentDto
     {
         public DateTime StartTime { get; set; }
         public double Duration { get; set; }
@@ -17,7 +17,7 @@ namespace HospitalAPI.DTO
         public int DoctorId { get; set; }
         public virtual Doctor Doctor { get; set; }
 
-        public AppointmentDTO(DateTime startDate, double duration, DateTime date, int roomId, Room room, int patientId, Patient patient, int doctorId, Doctor doctor)
+        public AppointmentDto(DateTime startDate, double duration, DateTime date, int roomId, Room room, int patientId, Patient patient, int doctorId, Doctor doctor)
         {
             this.StartTime = startDate;
             this.Duration = duration;
