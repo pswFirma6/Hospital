@@ -6,11 +6,10 @@ namespace HospitalLibrary.MedicalRecords.Repository.Repository.Interface
 {
     public interface IPatientRepository
     {
-        Patient GetByUniqueFields(string username, string email, string jmbg);
         Patient Add(Patient patient);
         List<Patient> GetAll();
-        Patient GetOne(int id);
         Patient Update(Patient patient);
         Patient GetByEmail(string email);
+        Patient GetOne(int id);
     }
 }

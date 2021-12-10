@@ -19,23 +19,7 @@ namespace HospitalAPI.Service
 
         public List<ViewFeedback> GetAllApproved()
         {
-          /* Person person1 = new Person
-            ( 
-                "1",
-                "Marko",
-                "Markovic",
-                new DateTime(2012,12,25),
-                "213122121",
-                "Aaaaaaaaa",
-                "aaaaaaaaaaaa",
-                "aaaaaaaaaaaa",
-                "aaaaaaaaaaaa",
-                "aaaaaaaaaaaa",
-                Hospital_library.Model.Enumeration.Gender.male
-           );
-
-            _repositoryFactory.GetPersonRepository().Add(person1);
-            */
+         
             List<Feedback> feedbacks = _repositoryFactory.GetFeedbackRepository().GetAll();
             List<Patient> patients = _repositoryFactory.GetPatientRepository().GetAll();
             List<ViewFeedback> feedbackDTOs = new List<ViewFeedback>();
