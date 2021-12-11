@@ -1,8 +1,7 @@
 ﻿using Hospital_library.MedicalRecords.Service;
-using HospitalAPI.DTO.AppointmentDTO;
-using HospitalAPI.Repository;
 using HospitalLibrary.MedicalRecords.Model;
 using HospitalLibrary.MedicalRecords.Model.Enums;
+using HospitalLibraryHospital_library.MedicalRecords.Repository;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -44,7 +43,7 @@ namespace HospitalAPI.ImplService
                     || ( newAppointment.StartTime <= x.StartTime.AddMinutes(30)  
                     &&  x.StartTime <= newAppointment.StartTime)); 
         }
-
+        /*
         public FreeTermsDTO GetTerms(FreeTermsRequestDTO freeTermsRequestDTO)
         {
             var doctor = _hospitalRepositoryFactory.GetDoctorsRepository().GetOne(freeTermsRequestDTO.DoctorId);
@@ -71,9 +70,9 @@ namespace HospitalAPI.ImplService
 
             return null;
         }
+        */
 
-
-        public List<string> GetDoctorsFreeAppointments(string doctorId, string dateString)
+        public List<string> GetDoctorsFreeAppointments(int doctorId, string dateString)
         {
             DateTime date = DateTime.ParseExact(dateString, "MM/dd/yyyy", null);
             List<string> terms = InitializedTerms;
@@ -95,7 +94,7 @@ namespace HospitalAPI.ImplService
             }
             return terms;
         }
-
+        /*
         public FreeTermsDTO GetAlternativeDate(Doctor doctor, string dateString)
         {
             DateTime date = DateTime.ParseExact(dateString, "MM/dd/yyyy", null);
@@ -127,7 +126,7 @@ namespace HospitalAPI.ImplService
                 , GetDoctorsFreeAppointments(minAppDoc.Id, dateString),minAppDoc.Id , minAppDoc);
             return freeTermsDTO;
         }
-
+        */
         public List<Doctor> GetTypeDoctors(DoctorType type)
         {
              return _hospitalRepositoryFactory.GetDoctorsRepository().GetAll().Where(x => x.DoctorType == type).ToList();

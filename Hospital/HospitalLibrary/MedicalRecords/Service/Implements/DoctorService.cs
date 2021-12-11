@@ -1,8 +1,7 @@
 ﻿using Hospital_library.MedicalRecords.Service;
-using HospitalAPI.Repository;
 using HospitalLibrary.MedicalRecords.Model;
 using HospitalLibrary.MedicalRecords.Model.Enums;
-using Microsoft.EntityFrameworkCore;
+using HospitalLibraryHospital_library.MedicalRecords.Repository;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -10,26 +9,20 @@ namespace HospitalAPI.ImplService
 {
     public class DoctorService : IDoctorService
     {
-        private readonly RepositoryFactory _hospitalRepositoryFactory;
+        private readonly RepositoryFactory _repositoryFactory;
 
-        public DoctorService(RepositoryFactory hospitalRepositoryFactory)
+        public DoctorService(RepositoryFactory repositoryFactory)
         {
-            _hospitalRepositoryFactory = hospitalRepositoryFactory;
+            _repositoryFactory = repositoryFactory;
         }
-
-        public void Create(Doctor doctor)
+        public List<Doctor> GetSpecialists(DoctorType type)
         {
-            throw new System.NotImplementedException();
-        }
-
-        public List<Doctor> GetAll()
-        {
-            throw new System.NotImplementedException();
+            return _repositoryFactory.GetDoctorsRepository().GetSpecialists(type);
         }
 
         public List<Doctor> GetAvailable()
         {
-            List<Doctor> doctors = _hospitalRepositoryFactory.GetDoctorsRepository().GetAll()
+            List<Doctor> doctors = _repositoryFactory.GetDoctorsRepository().GetAll()
                 .Where(x => x.DoctorType.Equals(DoctorType.generalPractitioner)).ToList();
             var minPatients = doctors.Select(x => x.Patients.Count).Min();
             return doctors.Where(x => x.Patients.Count <= minPatients + 2).ToList();

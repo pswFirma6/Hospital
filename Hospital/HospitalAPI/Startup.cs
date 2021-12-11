@@ -1,6 +1,5 @@
 using AutoMapper;
 using Hospital_library.MedicalRecords.Service;
-using HospitalAPI.EditorService;
 using HospitalAPI.ImplRepository;
 using HospitalAPI.ImplService;
 using HospitalAPI.Repository;
@@ -11,6 +10,7 @@ using HospitalLibrary.MedicalRecords.Repository;
 using HospitalLibrary.MedicalRecords.Repository.Interface;
 using HospitalLibrary.MedicalRecords.Repository.Repository.Interface;
 using HospitalLibrary.MedicalRecords.Service;
+using HospitalLibraryHospital_library.MedicalRecords.Repository;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
@@ -19,6 +19,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using static HospitalAPI.Mapper.Mapper;
+using DoctorService = HospitalAPI.ImplService.DoctorService;
 
 namespace HospitalAPI
 {
@@ -63,18 +64,13 @@ namespace HospitalAPI
             services.AddScoped<IFeedbackService, FeedbackService>();
             services.AddScoped<IPatientService, PatientService>();
             services.AddScoped<IAllergyService, AllergyService>();
-            services.AddScoped<IDoctorService, HospitalAPI.ImplService.DoctorService>();
+            services.AddScoped<IDoctorService, DoctorService>();
             services.AddScoped<RepositoryFactory, HospitalRepositoryFactory>();
             services.AddScoped<IRegistrationService, RegistrationService>();
             services.AddScoped<ISurveyService, SurveyService>();
 
             services.AddScoped<IAppointmentService, AppointmentService>();
 
-            services.AddScoped<BuildingService>();
-            services.AddScoped<EquipmentService>();
-            services.AddScoped<FloorService>();
-            services.AddScoped<RoomService>();
-            services.AddScoped<HospitalAPI.EditorService.DoctorService>();
             // Need to AddScoped for every dependency injection validation
             services.AddScoped<FeedbackValidation>();
             services.AddScoped<RegistrationValidation>();

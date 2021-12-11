@@ -24,7 +24,7 @@ namespace HospitalLibrary.MedicalRecords.Model
         public User() 
         {
         }
-        public User(string id, string name, string surname, DateTime birthDate, string jmbg, string address, string phone, string email, string username, string password, Gender gender, string city, string country, UserType userType)
+        public User(int id, string name, string surname, DateTime birthDate, string jmbg, string address, string phone, string email, string username, string password, Gender gender, string city, string country, UserType userType)
         {
             Id = id;
             Name = name;

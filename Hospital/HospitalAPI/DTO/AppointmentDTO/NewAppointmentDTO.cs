@@ -7,18 +7,14 @@ namespace HospitalAPI.DTO
     public class NewAppointmentDTO
     {
         public DateTime StartTime { get; set; }
-        public int RoomId { get; set; }
-        public virtual Room Room { get; set; }
-        public string PatientId { get; set; }
+        public int PatientId { get; set; }
         public virtual Patient Patient { get; set; }
-        public string DoctorId { get; set; }
+        public int DoctorId { get; set; }
         public virtual Doctor Doctor { get; set; }
 
-        public NewAppointmentDTO(DateTime startDate, int roomId, Room room, string patientId, Patient patient, string doctorId, Doctor doctor)
+        public NewAppointmentDTO(DateTime startDate, int patientId, Patient patient, int doctorId, Doctor doctor)
         {
             this.StartTime = startDate;
-            this.RoomId = roomId;
-            this.Room = room;
             this.PatientId = patientId;
             this.Patient = patient;
             this.DoctorId = doctorId;

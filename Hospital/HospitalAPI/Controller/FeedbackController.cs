@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
 using HospitalAPI.DTO;
-using HospitalAPI.Service;
 using HospitalAPI.Validation;
 using HospitalLibrary.MedicalRecords.Model;
 using HospitalLibrary.MedicalRecords.Service;

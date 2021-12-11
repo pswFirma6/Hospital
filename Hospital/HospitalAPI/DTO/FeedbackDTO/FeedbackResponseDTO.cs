@@ -8,7 +8,7 @@ namespace HospitalAPI.DTO
 {
     public class FeedbackResponseDTO
     {
-        public string PersonId { get; set; }
+        public int PersonId { get; set; }
         public string Text { get; set; }
         public FeedbackState State { get; set; }
     }

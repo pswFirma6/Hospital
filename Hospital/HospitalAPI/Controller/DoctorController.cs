@@ -1,6 +1,5 @@
 ﻿using Hospital_library.MedicalRecords.Service;
-using HospitalAPI.EditorService;
-using HospitalLibrary.MedicalRecords.Model;
+using HospitalLibrary.MedicalRecords.Model.Enums;
 using Microsoft.AspNetCore.Mvc;
 
 namespace HospitalAPI.Controller
@@ -9,29 +8,13 @@ namespace HospitalAPI.Controller
     [ApiController]
     public class DoctorController : ControllerBase
     {
-        private readonly DoctorService doctorEditorService;
+
         private readonly IDoctorService _doctorService;
-        public DoctorController(DoctorService doctorEditorService,
-            IDoctorService doctorService)
+        
+        public DoctorController(IDoctorService doctorService)
         {
-            this.doctorEditorService = doctorEditorService;
             _doctorService = doctorService;
         }
-
-
-        [HttpGet]
-        public IActionResult GetAll()
-        {
-            return Ok(doctorEditorService.getAll());
-        }
-
-        [HttpPost]      // kreiranje  , put update
-        public IActionResult Create(Doctor doctor)
-        {
-            doctorEditorService.create(doctor);
-            return Ok();
-        }
-
 
         [HttpGet]
         [Route("{Available}")]
@@ -39,5 +22,13 @@ namespace HospitalAPI.Controller
         {
             return Ok(_doctorService.GetAvailable());
         }
+
+        [HttpGet]
+        [Route("{Specialists}/{type}")]
+        public IActionResult GetSpecialistDoctors(DoctorType type)
+        {
+            return Ok(_doctorService.GetSpecialists(type));
+        }
+
     }
 }

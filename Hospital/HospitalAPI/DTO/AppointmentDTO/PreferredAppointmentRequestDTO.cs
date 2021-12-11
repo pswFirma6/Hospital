@@ -7,7 +7,7 @@ namespace HospitalAPI.DTO
 {
     public class PreferredAppointmentRequestDTO
     {
-        public PreferredAppointmentRequestDTO(string date, string doctorId, DoctorType doctorType, string preferred)
+        public PreferredAppointmentRequestDTO(string date, int doctorId, DoctorType doctorType, string preferred)
         {
             Date = date;
             DoctorId = doctorId;
@@ -16,7 +16,7 @@ namespace HospitalAPI.DTO
         }
 
         public string Date { get; set; }
-        public string DoctorId { get; set; }
+        public int DoctorId { get; set; }
         public DoctorType DoctorType { get; set; }
         public string Preferred { get; set; }
     }

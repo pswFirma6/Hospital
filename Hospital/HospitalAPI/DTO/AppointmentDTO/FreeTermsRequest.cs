@@ -8,7 +8,7 @@ namespace HospitalAPI.DTO.AppointmentDTO
 {
     public class FreeTermsRequestDTO
     {
-        public FreeTermsRequestDTO(string date, string doctorId, string priority)
+        public FreeTermsRequestDTO(string date, int doctorId, string priority)
         {
             Date = date;
             DoctorId = doctorId;
@@ -16,7 +16,7 @@ namespace HospitalAPI.DTO.AppointmentDTO
         }
 
         public string Date { get; set; }
-        public string DoctorId { get; set; }
+        public int DoctorId { get; set; }
         public string Priority { get; set; }
 
     }

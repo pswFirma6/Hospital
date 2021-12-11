@@ -1,7 +1,5 @@
 ﻿using HospitalLibrary.MedicalRecords.Model;
-using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace Hospital_library.MedicalRecords.Service
 {
@@ -9,6 +7,6 @@ namespace Hospital_library.MedicalRecords.Service
     {
         public bool CheckDoctorAppointments(Appointment newAppointment);
         public void Add(Appointment appointment);
-        public List<string> GetDoctorsFreeAppointments(string doctorId, string dateString);
+        public List<string> GetDoctorsFreeAppointments(int doctorId, string dateString);
     }
 }

@@ -53,7 +53,7 @@ namespace HospitalIntegrationTests
             var retVal = new List<object[]>();
 
             Doctor doctor = new Doctor();
-            doctor.Id = "1";
+            doctor.Id = 1;
             List<Allergy> allergies = new List<Allergy>();
 
             PatientRegistrationDTO newPatient = new PatientRegistrationDTO("Mira", "Miric", DateTime.Now,

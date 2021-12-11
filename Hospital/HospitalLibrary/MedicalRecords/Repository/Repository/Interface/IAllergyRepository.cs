@@ -8,6 +8,6 @@ namespace Hospital_library.MedicalRecords.Repository.Repository.Interface
     public interface IAllergyRepository
     {
         List<Allergy> GetAll();
-        Allergy GetOne(string id);
+        Allergy GetOne(int id);
     }
 }
