@@ -18,26 +18,18 @@ namespace HospitalLibrary.MedicalRecords.Model
         public Appointment() 
         {
         }
-        public Appointment(DateTime startDate, double duration, DateTime date, int roomId, Room room, int patientId, Patient patient, int doctorId, Doctor doctor, AppointmentType type)
+        public Appointment(DateTime startDate, int patientId, Patient patient, int doctorId, Doctor doctor, AppointmentType type)
         {
             StartTime = startDate;
-            Duration = duration;
-            Date = date;
-            RoomId = roomId;
-            Room = room;
             PatientId = patientId;
             Patient = patient;
             DoctorId = doctorId;
             Doctor = doctor;
             Type = type;
         }
-        public Appointment(DateTime startDate, double duration, DateTime date, int roomId, Room room, int patientId, Patient patient, int doctorId, Doctor doctor, AppointmentType type, bool surveyTaken)
+        public Appointment(DateTime startDate, int patientId, Patient patient, int doctorId, Doctor doctor, AppointmentType type, bool surveyTaken)
         {
             StartTime = startDate;
-            Duration = duration;
-            Date = date;
-            RoomId = roomId;
-            Room = room;
             PatientId = patientId;
             Patient = patient;
             DoctorId = doctorId;
@@ -46,9 +38,6 @@ namespace HospitalLibrary.MedicalRecords.Model
             SurveyTaken = surveyTaken;
         }
 
-        public Appointment() 
-        {
-        }
         public Appointment(DateTime startDate, int patientId, Patient patient, int doctorId, Doctor doctor)
         {
             StartTime = startDate;

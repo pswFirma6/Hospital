@@ -114,11 +114,11 @@ namespace HospitalIntegrationTests
             }
         }
 
-    /*
+    
         public static void InitializeDbForTests(MyDbContext db)
         {
             AddTestDoctor(db);
-            CreatePatients();
+            CreatePatients(db);
             db.SaveChanges();
         }
 
@@ -140,12 +140,13 @@ namespace HospitalIntegrationTests
             context.Add(doctor);
         }
 
-        public static List<Patient> CreatePatients()
+        public static void CreatePatients(MyDbContext db)
         {
             List<Patient> listOfPatients = new List<Patient>();
-            Doctor doctor = new Doctor();
-            doctor.Id = 1;
+           
             List<Allergy> allergies = new List<Allergy>();
+
+            var doctor = db.Doctors.Find(1);
 
             Patient newPatientA1 = new Patient(2, "Slavko", "Vranjes", DateTime.Now,
                 "054236971333", "Partizanskih baza 8.", "0666423699", "slavko@gmail.com",
@@ -155,8 +156,8 @@ namespace HospitalIntegrationTests
 
 
             Patient newPatientB2 = new Patient(3, "Marko", "Markovic", DateTime.Now,
-                "0542369712546", "Partizanskih baza 7.", "0666423599", "marko@gmail.com",
-                "SeekEquilibrium", "mira123", Gender.female,
+                "0542369712588", "Partizanskih baza 7.", "0666423599", "marko@gmail.com",
+                "SeekEquilibrium", "marko123", Gender.female,
                 "Novi Sad", "Serbia", UserType.patient, BloodType.A, RhFactor.negative,
                 180, 85, allergies, doctor);
 
@@ -165,7 +166,7 @@ namespace HospitalIntegrationTests
 
             
         }
-    */
+    
         public void Configure(IApplicationBuilder app)
         {
             app.UseCors();

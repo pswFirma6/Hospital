@@ -1,14 +1,10 @@
 ﻿
 
-using HospitalAPI.DTO;
 using HospitalLibrary.MedicalRecords.Model;
-using HospitalLibrary.MedicalRecords.Model.Enums;
-using HospitalLibrary.MedicalRecords.Repository.Repository.Interface;
 using HospitalLibrary.MedicalRecords.Service;
 using HospitalLibraryHospital_library.MedicalRecords.Repository;
 
 using System;
-﻿using HospitalAPI.Repository;
 using System.Collections.Generic;
 using System.Linq;
 

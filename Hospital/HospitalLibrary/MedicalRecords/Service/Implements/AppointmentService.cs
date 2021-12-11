@@ -1,7 +1,7 @@
 ﻿using Hospital_library.MedicalRecords.Model.Enums;
 using Hospital_library.MedicalRecords.Service;
-using HospitalAPI.Repository;
 using HospitalLibrary.MedicalRecords.Model;
+using HospitalLibraryHospital_library.MedicalRecords.Repository;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -19,6 +19,8 @@ namespace HospitalAPI.ImplService
 
         public void Add(Appointment appointment)
         {
+            appointment.Doctor = _hospitalRepositoryFactory.GetDoctorsRepository().GetOne(appointment.DoctorId);
+            appointment.Patient = _hospitalRepositoryFactory.GetPatientRepository().GetOne(appointment.PatientId);
             _hospitalRepositoryFactory.GetAppointmentsRepository().Add(appointment);
         }
 
@@ -73,7 +75,37 @@ namespace HospitalAPI.ImplService
             }
             return allAppointments;
         }
-
-        
+        private List<string> InitializedTerms = new List<string>{
+                "07:00", "07:30",
+                "08:00", "08:30",
+                "09:00", "09:30",
+                "10:00", "10:30",
+                "11:00", "11:30",
+                "12:00", "12:30",
+                "13:00", "13:30",
+                "14:00", "14:30",
+                "15:00"
+            };
+        public List<string> GetDoctorsFreeAppointments(int doctorId, string dateString)
+        {
+            List<string> terms = new List<string>(InitializedTerms);
+            var existingDoctor = _hospitalRepositoryFactory.GetDoctorsRepository().GetOne(doctorId);
+            List<Appointment> DoctorAppointments = existingDoctor.Appointments.Where(x => x.StartTime.ToString("dd/MM/yyyy").Equals(dateString)).ToList();
+            if (DoctorAppointments.Count != 0)
+            {
+                foreach (Appointment appointment in DoctorAppointments)
+                {
+                    foreach (string time in terms.ToArray())
+                    {
+                        if (appointment.StartTime.ToString("HH:mm").Equals(time))
+                        {
+                            terms.Remove(time);
+                            break;
+                        }
+                    }
+                }
+            }
+            return terms;
+        }
     }
 }

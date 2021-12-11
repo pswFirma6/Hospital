@@ -11,6 +11,5 @@ namespace HospitalLibrary.MedicalRecords.Repository.Repository.Interface
         Patient GetOne(int id);
         Patient Update(Patient patient);
         Patient GetByEmail(string email);
-        Patient GetOne(int id);
     }
 }

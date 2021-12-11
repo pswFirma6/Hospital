@@ -22,9 +22,6 @@ namespace HospitalLibraryHospital_library.MedicalRecords.Repository
         public abstract IMedicineRepository GetMedicineRepository();
         
         public abstract IPrescriptionRepository GetPrescriptionRepository();
-        public abstract IDoctorRepository GetDoctorsRepository();
-
-        public abstract IAppointmentRepository GetAppointmentsRepository();
 
     }
 }
