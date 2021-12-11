@@ -37,5 +37,6 @@ namespace Hospital_library.MedicalRecords.Model
             Diagnosis = diagnosis;
             PharmacyName = pharmacyName;
         }
+
     }
 }

@@ -12,7 +12,6 @@ namespace HospitalAPI.ImplService
     public class PrescriptionService : IPrescriptionService
     {
         private readonly RepositoryFactory _hospitalRepositoryFactory;
-        private readonly string integrationServer = "https://localhost:44317";
 
         public PrescriptionService(RepositoryFactory hospitalRepositoryFactory)
         {
@@ -30,12 +29,9 @@ namespace HospitalAPI.ImplService
             return _hospitalRepositoryFactory.GetPrescriptionRepository().GetAll();
         }
 
-        public void SendPrescription(Prescription prescription)
+        public void SendPrescription(PrescriptionDto prescription)
         {
-            var client = new RestClient(integrationServer);
-            var request = new RestRequest("/sendPrescription");
-            request.AddJsonBody(prescription);
-            var response = client.Post(request);
+            throw new NotImplementedException();
         }
     }
 }

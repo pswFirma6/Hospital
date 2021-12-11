@@ -5,6 +5,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
+using HospitalAPI.DTO;
+using RestSharp;
+using System.Text.Json.Serialization;
+using System.Text.Json;
 
 namespace HospitalAPI.Controller
 {
@@ -12,8 +17,9 @@ namespace HospitalAPI.Controller
     public class PrescriptionController : ControllerBase
     {
         private readonly IPrescriptionService _prescriptionService;
+        private readonly string integrationServer = "https://localhost:44325";
 
-        public PrescriptionController(IPrescriptionService prescriptionService)
+        public PrescriptionController(IPrescriptionService prescriptionService, IMapper mapper)
         {
             _prescriptionService = prescriptionService;
         }
@@ -23,8 +29,18 @@ namespace HospitalAPI.Controller
         public IActionResult SavePrescription(Prescription prescription)
         {
             _prescriptionService.AddPrescription(prescription);
-            _prescriptionService.SendPrescription(prescription);
+            SendPrescription(prescription);
             return Ok();
         }
+
+        private void SendPrescription(Prescription prescription)
+        {
+            var client = new RestClient(integrationServer);
+            var request = new RestRequest("/sendPrescription", Method.POST);
+            request.AddJsonBody(prescription);
+            client.Post(request);
+        }
+
+
     }
 }
