@@ -13,19 +13,17 @@ namespace HospitalAPI.ImplService
     public class AppointmentService : IAppointmentService
     {
         private readonly RepositoryFactory _hospitalRepositoryFactory;
-
-        private List<string> InitializedTerms = new List<string> { 
-            "07:00", "07:30",
-            "08:00", "08:30",
-            "09:00", "09:30",
-            "10:00", "10:30",
-            "11:00", "11:30",
-            "12:00", "12:30",
-            "13:00", "13:30",
-            "14:00", "14:30",
-            "15:00"
-        };
-
+        private List<string> InitializedTerms = new List<string>{
+                "07:00", "07:30",
+                "08:00", "08:30",
+                "09:00", "09:30",
+                "10:00", "10:30",
+                "11:00", "11:30",
+                "12:00", "12:30",
+                "13:00", "13:30",
+                "14:00", "14:30",
+                "15:00"
+            };
         public AppointmentService(RepositoryFactory hospitalRepositoryFactory) 
         {
             _hospitalRepositoryFactory = hospitalRepositoryFactory;
@@ -65,7 +63,7 @@ namespace HospitalAPI.ImplService
                 List<string> terms = GetDoctorsFreeAppointments(freeTermsRequestDTO.DoctorId, freeTermsRequestDTO.Date);
                 if(terms.Count == 0)
                 {
-
+                    return GetAlternativeDoctor(doctor, freeTermsRequestDTO.Date);
                 }
             }
 
@@ -76,10 +74,10 @@ namespace HospitalAPI.ImplService
         public List<string> GetDoctorsFreeAppointments(string doctorId, string dateString)
         {
             DateTime date = DateTime.ParseExact(dateString, "MM/dd/yyyy", null);
-            List<string> terms = InitializedTerms;
+            List<string> terms = new List<string>(InitializedTerms);
             var existingDoctor = _hospitalRepositoryFactory.GetDoctorsRepository().GetOne(doctorId);
             List<Appointment> DoctorAppointments = existingDoctor.Appointments.Where(x => x.StartTime.ToString("dd/MM/yyyy").Equals(date.ToString("dd/MM/yyyy"))).ToList();
-            if(DoctorAppointments != null)
+            if(DoctorAppointments.Count != 0)
             {
                 foreach (Appointment appointment in DoctorAppointments)
                 {
@@ -108,16 +106,19 @@ namespace HospitalAPI.ImplService
         public FreeTermsDTO GetAlternativeDoctor(Doctor doctor, string dateString)
         {
             List<Doctor> doctors = GetTypeDoctors(doctor.DoctorType);
-            if(doctors == null)
+            if(doctors == null || doctors.Count == 1)
             {
                 return null;
             }
             Doctor minAppDoc = doctors.First();
+            int MaxFreeTerms = InitializedTerms.Count;
             foreach(Doctor appDoc in doctors)
-            {   
-                if(GetDoctorsFreeAppointments(minAppDoc.Id, dateString).Count != InitializedTerms.Count)
+            {
+                var minAppDoctorsFreeAppintments = GetDoctorsFreeAppointments(minAppDoc.Id, dateString).Count;
+                if (minAppDoctorsFreeAppintments != MaxFreeTerms)
                 {
-                    if(GetDoctorsFreeAppointments(appDoc.Id, dateString).Count > GetDoctorsFreeAppointments(minAppDoc.Id, dateString).Count)
+                    var appDocFreeTerms = GetDoctorsFreeAppointments(appDoc.Id, dateString);
+                    if (appDocFreeTerms.Count > minAppDoctorsFreeAppintments)
                     {
                         minAppDoc = appDoc;
                     }

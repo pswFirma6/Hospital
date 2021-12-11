@@ -1,4 +1,5 @@
 ﻿using HospitalAPI.DTO;
+using HospitalAPI.DTO.AppointmentDTO;
 using HospitalAPI.ImplService;
 using HospitalAPI.Repository;
 using HospitalLibrary.GraphicalEditor.Model;
@@ -24,10 +25,10 @@ namespace HospitalIntegrationTests
 
         [Theory]
         [MemberData(nameof(DataSuccessfully))]
-        public async System.Threading.Tasks.Task Get_Doctors_Appointments(PreferredAppointmentRequestDTO appointmentRequestDTO)
+        public async System.Threading.Tasks.Task Get_Doctors_Appointments(FreeTermsRequestDTO freeTermsRequestDTO)
         {
             AppointmentService appointmentService = new AppointmentService(CreateStubRepository());
-            var json = JsonConvert.SerializeObject(appointmentRequestDTO);
+            var json = JsonConvert.SerializeObject(freeTermsRequestDTO);
             var data = new StringContent(json, Encoding.UTF8, "application/json");
             var url = "api/appointment/priority";
 
@@ -45,11 +46,11 @@ namespace HospitalIntegrationTests
 
             Doctor doctor = new Doctor();
             doctor.Id = "1";
-            PreferredAppointmentRequestDTO appointmentRequestDTO = new PreferredAppointmentRequestDTO(
-                    "01/12/2021", doctor.Id, DoctorType.surgeon, "doctor"
+            FreeTermsRequestDTO freeTermsRequestDTO = new FreeTermsRequestDTO(
+                    "01/12/2021", doctor.Id, "doctor"
                 );
 
-            retVal.Add(new object[] { appointmentRequestDTO });
+            retVal.Add(new object[] { freeTermsRequestDTO });
 
             return retVal;
         }
