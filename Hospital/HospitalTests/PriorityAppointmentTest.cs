@@ -1,4 +1,5 @@
-﻿using HospitalAPI.DTO.AppointmentDTO;
+﻿using Hospital_library.MedicalRecords.Model;
+using HospitalAPI.DTO.AppointmentDTO;
 using HospitalAPI.ImplService;
 using HospitalAPI.Repository;
 using HospitalLibrary.GraphicalEditor.Model;
@@ -18,7 +19,7 @@ namespace HospitalUnitTests
     {
         [Theory]
         [MemberData(nameof(DataGetFreeTerms))]
-        public void GetFreeTerms(Doctor doctor, string date, List<string> expectedTerms)
+        public void GetFreeTerms(Doctor doctor, DateTime date, List<string> expectedTerms)
         {
             //  Arrange  //
             AppointmentService service = new AppointmentService(CreateStubRepository());
@@ -35,50 +36,44 @@ namespace HospitalUnitTests
 
         [Theory]
         [MemberData(nameof(DataNoFreeTerms))]
-        public void NoFreeTerms(Doctor doctor, string date, int expectedValue)
+        public void NoFreeTerms(Doctor doctor, DateTime date, int expectedValue)
         {
             //  Arrange  //
             AppointmentService service = new AppointmentService(CreateNoFreeTermStubRepository());
-
             //  Act  //
             List<string> TermList = service.GetDoctorsFreeAppointments(doctor.Id, date);
-
-
             //  Assert  //
-            
-
             Assert.Equal(TermList.Count, expectedValue);
         }
 
 
         [Theory]
         [MemberData(nameof(DataAlternativeDate))]
-        public void AlternativeDate(Doctor doctor, string date, List<string> expectedTerms, string expectedDate)
+        public void AlternativeDate(Doctor doctor, DateTime date, List<string> expectedTerms, DateTime expectedDate)
         {
             //  Arragnge  //
             AppointmentService service = new AppointmentService(CreateNoFreeTermStubRepository());
             //  Act  //
-            FreeTermsDTO freeTermsDTO = service.GetAlternativeDate(doctor, date);
+            FreeTerms freeTerms = service.GetAlternativeDate(doctor, date);
             //  Assert  //
             
-            var freeTermsDTODateString = freeTermsDTO.Date.ToString("MM/dd/yyyy", CultureInfo.InvariantCulture);
-            Assert.Equal(expectedDate, freeTermsDTODateString);
-            Assert.Equal(expectedTerms, freeTermsDTO.Terms);
+            Assert.Equal(expectedDate, freeTerms.Date);
+            Assert.Equal(expectedTerms, freeTerms.Terms);
 
         }
 
         [Theory]
         [MemberData(nameof(DataAlternativeDoctor))]
-        public void AlternativeDoctor(Doctor doctor, string date, List<string> expectedTerms, string expectedDoctorId)
+        public void AlternativeDoctor(Doctor doctor, DateTime date, List<string> expectedTerms, string expectedDoctorId)
         {
             //  Arragnge  //
             AppointmentService service = new AppointmentService(CreateNoFreeTermStubRepository());
             //  Act  //
-            FreeTermsDTO freeTermsDTO = service.GetAlternativeDoctor(doctor, date);
+            FreeTerms freeTerms = service.GetAlternativeDoctor(doctor, date);
             //  Assert  //
 
-            Assert.Equal(freeTermsDTO.Terms, expectedTerms);
-            Assert.Equal(freeTermsDTO.DoctorId, expectedDoctorId);
+            Assert.Equal(freeTerms.Terms, expectedTerms);
+            Assert.Equal(freeTerms.DoctorId, expectedDoctorId);
         }
 
 
@@ -87,7 +82,9 @@ namespace HospitalUnitTests
             var retVal = new List<object[]>();
             Doctor doctor = new Doctor();
             doctor.Id = "1";
-            string dateString = "12/01/2022";
+            string dateString = "12/01/2022 00:00:00 AM";
+            DateTime date = DateTime.Parse(dateString,
+                                      System.Globalization.CultureInfo.InvariantCulture);
 
             List<string> ExpectedTerms = new List<string> {
                 "07:00", "07:30",
@@ -101,7 +98,7 @@ namespace HospitalUnitTests
                 "15:00"
             };
 
-            retVal.Add(new object[] { doctor, dateString, ExpectedTerms });
+            retVal.Add(new object[] { doctor, date, ExpectedTerms });
             return retVal;
         }
 
@@ -110,11 +107,13 @@ namespace HospitalUnitTests
             var retVal = new List<object[]>();
             Doctor doctor = new Doctor();
             doctor.Id = "1";
-            string dateString = "12/01/2022";
+            string dateString = "12/01/2022 00:00:00 AM";
+            DateTime date = DateTime.Parse(dateString,
+                                      System.Globalization.CultureInfo.InvariantCulture);
 
             int ExpectedValue = 0;
 
-            retVal.Add(new object[] { doctor, dateString, ExpectedValue });
+            retVal.Add(new object[] { doctor, date, ExpectedValue });
             return retVal;
         }
 
@@ -123,7 +122,9 @@ namespace HospitalUnitTests
             var retVal = new List<object[]>();
             Doctor doctor = new Doctor();
             doctor.Id = "1";
-            string dateString = "12/01/2022";
+            string dateString = "12/01/2022 00:00:00 AM";
+            DateTime date = DateTime.Parse(dateString,
+                                      System.Globalization.CultureInfo.InvariantCulture);
 
             List<string> ExpectedTerms = new List<string> {
                 "07:00", "07:30",
@@ -137,9 +138,10 @@ namespace HospitalUnitTests
                 "15:00"
             };
 
-            var expectedDate = "12/02/2022";
-
-            retVal.Add(new object[] { doctor, dateString, ExpectedTerms, expectedDate });
+            var expectedDateString = "12/02/2022";
+            DateTime expectedDate = DateTime.Parse(expectedDateString,
+                                      System.Globalization.CultureInfo.InvariantCulture);
+            retVal.Add(new object[] { doctor, date, ExpectedTerms, expectedDate });
             return retVal;
         }
 
@@ -148,7 +150,9 @@ namespace HospitalUnitTests
             var retVal = new List<object[]>();
             Doctor doctor = new Doctor();
             doctor.Id = "1";
-            string dateString = "12/01/2022";
+            string dateString = "12/01/2022 00:00:00 AM";
+            DateTime date = DateTime.Parse(dateString,
+                                      System.Globalization.CultureInfo.InvariantCulture);
 
             List<string> ExpectedTerms = new List<string> {
                 "07:00", "07:30",
@@ -164,7 +168,7 @@ namespace HospitalUnitTests
 
             string expectedDoctorId = "2";
 
-            retVal.Add(new object[] { doctor, dateString, ExpectedTerms, expectedDoctorId });
+            retVal.Add(new object[] { doctor, date, ExpectedTerms, expectedDoctorId });
             return retVal;
         }
 

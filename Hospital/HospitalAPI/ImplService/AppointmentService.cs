@@ -1,4 +1,5 @@
-﻿using Hospital_library.MedicalRecords.Service;
+﻿using Hospital_library.MedicalRecords.Model;
+using Hospital_library.MedicalRecords.Service;
 using HospitalAPI.DTO.AppointmentDTO;
 using HospitalAPI.Repository;
 using HospitalLibrary.MedicalRecords.Model;
@@ -43,37 +44,32 @@ namespace HospitalAPI.ImplService
                     &&  x.StartTime <= newAppointment.StartTime)); 
         }
 
-        public FreeTermsDTO GetTerms(FreeTermsRequestDTO freeTermsRequestDTO)
+        public FreeTerms GetTerms(FreeTerms freeTermsRequest)
         {
-            var doctor = _hospitalRepositoryFactory.GetDoctorsRepository().GetOne(freeTermsRequestDTO.DoctorId);
-            if (freeTermsRequestDTO.Priority.Equals("doctor"))
+            var doctor = _hospitalRepositoryFactory.GetDoctorsRepository().GetOne(freeTermsRequest.DoctorId);
+            List<string> terms = GetDoctorsFreeAppointments(doctor.Id, freeTermsRequest.Date);
+            if (terms.Count != 0)
             {
-                List<string> terms = GetDoctorsFreeAppointments(doctor.Id, freeTermsRequestDTO.Date);
-                if(terms.Count == 0)
-                {
-                    return GetAlternativeDate(doctor, freeTermsRequestDTO.Date);
-                }
-                else
-                {
-                    FreeTermsDTO freeTermsDTO = new FreeTermsDTO(DateTime.ParseExact(freeTermsRequestDTO.Date, "MM/dd/yyyy", null),
-                            terms, doctor.Id, doctor);
-                }
-            }else if (freeTermsRequestDTO.Priority.Equals("date"))
+                FreeTerms freeTerms = new FreeTerms(freeTermsRequest.Date, doctor.Id, terms);
+                return freeTerms;
+            }
+            else
             {
-                List<string> terms = GetDoctorsFreeAppointments(freeTermsRequestDTO.DoctorId, freeTermsRequestDTO.Date);
-                if(terms.Count == 0)
+                if (freeTermsRequest.Priority.Equals("doctor"))
                 {
-                    return GetAlternativeDoctor(doctor, freeTermsRequestDTO.Date);
+                    return GetAlternativeDate(doctor, freeTermsRequest.Date);
+                }
+                else if (freeTermsRequest.Priority.Equals("date"))
+                {
+                    return GetAlternativeDoctor(doctor, freeTermsRequest.Date);
                 }
             }
-
             return null;
         }
 
 
-        public List<string> GetDoctorsFreeAppointments(string doctorId, string dateString)
+        public List<string> GetDoctorsFreeAppointments(string doctorId, DateTime date)
         {
-            DateTime date = DateTime.ParseExact(dateString, "MM/dd/yyyy", null);
             List<string> terms = new List<string>(InitializedTerms);
             var existingDoctor = _hospitalRepositoryFactory.GetDoctorsRepository().GetOne(doctorId);
             List<Appointment> DoctorAppointments = existingDoctor.Appointments.Where(x => x.StartTime.ToString("dd/MM/yyyy").Equals(date.ToString("dd/MM/yyyy"))).ToList();
@@ -94,16 +90,15 @@ namespace HospitalAPI.ImplService
             return terms;
         }
 
-        public FreeTermsDTO GetAlternativeDate(Doctor doctor, string dateString)
+        public FreeTerms GetAlternativeDate(Doctor doctor, DateTime date)
         {
-            DateTime date = DateTime.ParseExact(dateString, "MM/dd/yyyy", null);
             DateTime alternativeDate = date.AddDays(1);
-            List<string> freeTerms = GetDoctorsFreeAppointments(doctor.Id, alternativeDate.ToString("dd/MM/yyyy"));
-            FreeTermsDTO freeTermsDTO = new FreeTermsDTO(alternativeDate, freeTerms, doctor.Id, doctor);
-            return freeTermsDTO;
+            List<string> terms = GetDoctorsFreeAppointments(doctor.Id, alternativeDate);
+            FreeTerms freeTerms = new FreeTerms(alternativeDate, doctor.Id, terms);
+            return freeTerms;
         }
 
-        public FreeTermsDTO GetAlternativeDoctor(Doctor doctor, string dateString)
+        public FreeTerms GetAlternativeDoctor(Doctor doctor, DateTime date)
         {
             List<Doctor> doctors = GetTypeDoctors(doctor.DoctorType);
             if(doctors == null || doctors.Count == 1)
@@ -114,24 +109,23 @@ namespace HospitalAPI.ImplService
             int MaxFreeTerms = InitializedTerms.Count;
             foreach(Doctor appDoc in doctors)
             {
-                var minAppDoctorsFreeAppintments = GetDoctorsFreeAppointments(minAppDoc.Id, dateString).Count;
+                var minAppDoctorsFreeAppintments = GetDoctorsFreeAppointments(minAppDoc.Id, date).Count;
                 if (minAppDoctorsFreeAppintments != MaxFreeTerms)
                 {
-                    var appDocFreeTerms = GetDoctorsFreeAppointments(appDoc.Id, dateString);
+                    var appDocFreeTerms = GetDoctorsFreeAppointments(appDoc.Id, date);
                     if (appDocFreeTerms.Count > minAppDoctorsFreeAppintments)
                     {
                         minAppDoc = appDoc;
                     }
                 }
             }
-            FreeTermsDTO freeTermsDTO = new FreeTermsDTO(DateTime.ParseExact(dateString, "MM/dd/yyyy", null)
-                , GetDoctorsFreeAppointments(minAppDoc.Id, dateString),minAppDoc.Id , minAppDoc);
-            return freeTermsDTO;
-        }
+            FreeTerms freeTerms = new FreeTerms(date, minAppDoc.Id, GetDoctorsFreeAppointments(minAppDoc.Id, date));
 
+            return freeTerms;
+        }
         public List<Doctor> GetTypeDoctors(DoctorType type)
         {
-             return _hospitalRepositoryFactory.GetDoctorsRepository().GetAll().Where(x => x.DoctorType == type).ToList();
+            return _hospitalRepositoryFactory.GetDoctorsRepository().GetAll().Where(x => x.DoctorType == type).ToList();
         }
     }
 }
