@@ -55,7 +55,8 @@ namespace HospitalAPI.Controller
         [HttpPut]
         public IActionResult ApproveFeedback(FeedbackStateChangeDTO dto)
         {
-            _feedbackService.ChangeState(dto.Id, dto.State);
+            var model = _mapper.Map<Feedback>(dto);
+            _feedbackService.ChangeState(model.Id, dto.State);
             return Ok();
         } 
     }

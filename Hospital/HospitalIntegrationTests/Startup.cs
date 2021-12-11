@@ -27,6 +27,7 @@ namespace HospitalIntegrationTests
 {
     public class Startup
     {
+        [Obsolete]
         public Startup(IHostingEnvironment env)
         {
             var builder = new ConfigurationBuilder()
@@ -103,8 +104,6 @@ namespace HospitalIntegrationTests
                 using (var db = scope.ServiceProvider.GetRequiredService<MyDbContext>())
                     try
                     {
-
-
                         db.Database.EnsureCreated();
                         InitializeDbForTests(db);
                     }
@@ -115,7 +114,7 @@ namespace HospitalIntegrationTests
             }
         }
 
-
+    /*
         public static void InitializeDbForTests(MyDbContext db)
         {
             AddTestDoctor(db);
@@ -161,12 +160,12 @@ namespace HospitalIntegrationTests
                 "Novi Sad", "Serbia", UserType.patient, BloodType.A, RhFactor.negative,
                 180, 85, allergies, doctor);
 
-            listOfPatients.Add(newPatientA1);
-            listOfPatients.Add(newPatientB2);
+            db.Patients.Add(newPatientA1);
+            db.Patients.Add(newPatientB2);
 
-            return listOfPatients;
+            
         }
-
+    */
         public void Configure(IApplicationBuilder app)
         {
             app.UseCors();

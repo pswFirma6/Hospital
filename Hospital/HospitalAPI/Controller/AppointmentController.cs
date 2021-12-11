@@ -4,6 +4,7 @@ using HospitalAPI.DTO;
 using HospitalAPI.Validation;
 using HospitalLibrary.MedicalRecords.Model;
 using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
 
 namespace HospitalAPI.Controller
 {
@@ -11,8 +12,8 @@ namespace HospitalAPI.Controller
     [ApiController]
     public class AppointmentController : ControllerBase
     {
-        private IAppointmentService _appointmentService;
-        private AppointmentValidation _appointmentValidation;
+        private readonly IAppointmentService _appointmentService;
+        private readonly AppointmentValidation _appointmentValidation;
         private readonly IMapper _mapper;
 
         public AppointmentController(IAppointmentService appointmentService, AppointmentValidation appointmentValidation, IMapper mapper) 
@@ -40,6 +41,26 @@ namespace HospitalAPI.Controller
 
             return Ok(mapper);
         }
+        
+        [HttpGet]
+        public IActionResult GetAllAppointment(int id)
+        {
+            return Ok(_appointmentService.getAll(id));
+        }
+        
+        [HttpGet]
+        [Route("{awaiting}")]
+        public IActionResult GetAwaitingAppointment(int id)
+        {
+            return Ok(_appointmentService.getAwaiting(id));
+        }
+
+        [HttpGet]
+        [Route("{cancelled}")]
+        public IActionResult GetCancelledAppointment(int id)
+        {
+            return Ok(_appointmentService.getCancelled(id));
+        }
 
         [HttpPost]
         [Route("Priority")]
@@ -48,11 +69,14 @@ namespace HospitalAPI.Controller
             if (preferredAppointmentRequestDTO.Preferred.Equals("doctor"))
             {
                 return Ok(_appointmentService.GetDoctorsFreeAppointments(preferredAppointmentRequestDTO.DoctorId, preferredAppointmentRequestDTO.Date));
-            }else if (preferredAppointmentRequestDTO.Preferred.Equals("date"))
+            }
+            else if (preferredAppointmentRequestDTO.Preferred.Equals("date"))
             {
                 return Ok();
             }
             return BadRequest();
         }
+    
     }
 }
+
