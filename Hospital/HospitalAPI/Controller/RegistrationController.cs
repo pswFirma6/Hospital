@@ -1,11 +1,11 @@
-﻿using AutoMapper;
-using HospitalLibrary.MedicalRecords.Repository.Repository.Interface;
+﻿using HospitalLibrary.MedicalRecords.Repository.Repository.Interface;
 using HospitalAPI.DTO;
 using HospitalAPI.Validation;
 using HospitalLibrary.MedicalRecords.Model;
 using HospitalLibrary.MedicalRecords.Service;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
+using AutoMapper;
 
 namespace HospitalAPI.Controller
 {

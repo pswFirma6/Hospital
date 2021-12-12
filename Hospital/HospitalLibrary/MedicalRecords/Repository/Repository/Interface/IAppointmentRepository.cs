@@ -9,6 +9,5 @@ namespace Hospital_library.MedicalRecords.Repository.Repository.Interface
     {
         List<Appointment> GetAll();
         Appointment Add(Appointment appointment);
-       
     }
 }

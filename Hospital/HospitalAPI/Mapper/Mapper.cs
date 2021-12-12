@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using HospitalAPI.DTO;
+using HospitalAPI.DTO.SurveyDTO;
 using HospitalLibrary.MedicalRecords.Model;
 
 namespace HospitalAPI.Mapper
@@ -22,6 +23,12 @@ namespace HospitalAPI.Mapper
 
                 CreateMap<PatientRegistration, PatientRegistrationDTO>();
                 CreateMap<PatientRegistrationDTO, PatientRegistration>();
+
+                CreateMap<Appointment, NewAppointmentDTO>();
+                CreateMap<NewAppointmentDTO, Appointment>();
+
+                CreateMap<SurveyQuestion, TakeSurveyDTO>();
+                CreateMap<TakeSurveyDTO, SurveyQuestion>();
 
                 CreateMap<Appointment, NewAppointmentDTO>();
                 CreateMap<NewAppointmentDTO, Appointment>();
