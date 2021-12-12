@@ -94,18 +94,18 @@ namespace HospitalAPI.Controller
             return Ok(surveyQuestions);
         }
 
-        //[HttpGet]
-        //[Route("GetAllSurveys")]
-        //public IActionResult GetAllSurveys()
-        //{
-        //    return Ok(_surveyService.GetGroupedByQuestion());
-        //}
+        [HttpGet]
+        [Route("GetAllSurveys")]
+        public IActionResult GetAllSurveys()
+        {
+            return Ok(_surveyService.GetGroupedByQuestion());
+        }
 
-        //[HttpGet]
-        //[Route("GetAllSurveyCategoryRates")]
-        //public IActionResult GetAllSurveyCategoryRates()
-        //{
-        //    return Ok(_surveyService.GetGroupedByCategory());
-        //}
+        [HttpGet]
+        [Route("GetAllSurveyCategoryRates")]
+        public IActionResult GetAllSurveyCategoryRates()
+        {
+            return Ok(_surveyService.GetGroupedByCategory());
+        }
     }
 }

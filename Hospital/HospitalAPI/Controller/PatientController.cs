@@ -30,8 +30,7 @@ namespace HospitalAPI.Controller
         [HttpGet]
         public IActionResult GetMaliciousPatients()
         {
-            return Ok("nice");
-            //return Ok(_patientService.GetMaliciousPatients());
+            return Ok(_patientService.GetMaliciousPatients());
         }
 
 

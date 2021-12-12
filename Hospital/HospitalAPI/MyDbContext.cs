@@ -13,7 +13,7 @@ namespace HospitalAPI
         public DbSet<Allergy> Allergies { get; set; }
         public DbSet<SurveyQuestion> SurveyQuestion { get; set; }
         public DbSet<Equipment> Equipments { get; set; }
-
+        public DbSet<Appointment> Appointments { get; set; }
         public DbSet<Room> Rooms { get; set; }
         public DbSet<Floor> Floors { get; set; }
         public DbSet<Building> Buildings { get; set; }
