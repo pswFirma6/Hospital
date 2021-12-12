@@ -59,6 +59,38 @@ namespace HospitalAPI.ImplService
             patient.Allergies = allergies;
 
             return patient;
-        } 
+        }
+
+        public List<Patient> GetMaliciousPatients()
+        {
+            List<Patient> allPatients = _hospitalRepositoryFactory.GetPatientRepository().GetAll();
+
+            foreach (Patient patient in allPatients)
+            {
+                var appointmentList = GetCancelledAppointmentsByPatient(patient.Id);
+
+                foreach (Appointment appointment in appointmentList)
+                {
+                    if (appointment.Type != Hospital_library.MedicalRecords.Model.Enums.AppointmentType.Cancelled)
+                    {
+                        appointmentList.Remove(appointment);
+                    }
+                }
+
+                if (appointmentList.Count > 2)
+                {
+                    if (appointmentList[appointmentList.Count - 3].StartTime > DateTime.Now.AddDays(-30))
+                    {
+                        patient.Malicious = true;
+                    }
+                }
+            }
+            return allPatients;
+        }
+
+        private List<Appointment> GetCancelledAppointmentsByPatient(int id)
+        {
+            return _hospitalRepositoryFactory.GetAppointmentsRepository().GetAll().Where(x => x.PatientId == id).ToList();
+        }
     }
 }
