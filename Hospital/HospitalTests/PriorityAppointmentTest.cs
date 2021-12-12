@@ -1,4 +1,7 @@
-﻿using HospitalAPI.ImplService;
+﻿using Hospital_library.MedicalRecords.Model;
+using HospitalAPI.DTO.AppointmentDTO;
+using HospitalAPI.ImplService;
+using HospitalAPI.Repository;
 using HospitalLibrary.GraphicalEditor.Model;
 using HospitalLibrary.MedicalRecords.Model;
 using HospitalLibrary.MedicalRecords.Model.Enums;
@@ -7,15 +10,17 @@ using HospitalLibraryHospital_library.MedicalRecords.Repository;
 using Moq;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
+using System.Text;
 using Xunit;
 
 namespace HospitalUnitTests
 {
-    public class DoctorPriorityAppointment
+    public class PriorityAppointmentTest
     {
         [Theory]
-        [MemberData(nameof(Data))]
-        public void GetFreeTerms(Doctor doctor, string date)
+        [MemberData(nameof(DataGetFreeTerms))]
+        public void GetFreeTerms(Doctor doctor, DateTime date, List<string> expectedTerms)
         {
             //  Arrange  //
             AppointmentService service = new AppointmentService(CreateStubRepository());
@@ -25,9 +30,67 @@ namespace HospitalUnitTests
 
 
             //  Assert  //
-            List<string> ExpectedList = new List<string> {
-                "07:00", "07:30",
+
+            Assert.Equal(expectedTerms, TermList);
+        }
+
+
+        [Theory]
+        [MemberData(nameof(DataNoFreeTerms))]
+        public void NoFreeTerms(Doctor doctor, DateTime date, int expectedValue)
+        {
+            //  Arrange  //
+            AppointmentService service = new AppointmentService(CreateNoFreeTermStubRepository());
+            //  Act  //
+            List<string> TermList = service.GetDoctorsFreeAppointments(doctor.Id, date);
+            //  Assert  //
+            Assert.Equal(TermList.Count, expectedValue);
+        }
+
+
+        [Theory]
+        [MemberData(nameof(DataAlternativeDate))]
+        public void AlternativeDate(Doctor doctor, DateTime date, List<string> expectedTerms, DateTime expectedDate)
+        {
+            //  Arragnge  //
+            AppointmentService service = new AppointmentService(CreateNoFreeTermStubRepository());
+            //  Act  //
+            FreeTerms freeTerms = service.GetAlternativeDate(doctor, date);
+            //  Assert  //
             
+            Assert.Equal(expectedDate, freeTerms.Date);
+            Assert.Equal(expectedTerms, freeTerms.Terms);
+
+        }
+
+        [Theory]
+        [MemberData(nameof(DataAlternativeDoctor))]
+        public void AlternativeDoctor(Doctor doctor, DateTime date, List<string> expectedTerms, int expectedDoctorId)
+        {
+            //  Arragnge  //
+            AppointmentService service = new AppointmentService(CreateNoFreeTermStubRepository());
+            //  Act  //
+            FreeTerms freeTerms = service.GetAlternativeDoctor(doctor, date);
+            //  Assert  //
+
+            Assert.Equal(freeTerms.Terms, expectedTerms);
+            Assert.Equal(freeTerms.DoctorId, expectedDoctorId);
+        }
+
+
+        public static IEnumerable<object[]> DataGetFreeTerms()
+        {
+            var retVal = new List<object[]>();
+            Doctor doctor = new Doctor();
+            doctor.Id = 1;
+            doctor.DoctorType = DoctorType.generalPractitioner;
+            string dateString = "12/01/2022 00:00:00 AM";
+            DateTime date = DateTime.Parse(dateString,
+                                      System.Globalization.CultureInfo.InvariantCulture);
+
+            List<string> ExpectedTerms = new List<string> {
+                "07:00", "07:30",
+
                 "09:00", "09:30",
                 "10:00", "10:30",
                 "11:00", "11:30",
@@ -37,35 +100,36 @@ namespace HospitalUnitTests
                 "15:00"
             };
 
-            Assert.Equal(ExpectedList, TermList);
+            retVal.Add(new object[] { doctor, date, ExpectedTerms });
+            return retVal;
         }
 
-
-        [Theory]
-        [MemberData(nameof(Data))]
-        public void NoFreeTerms(Doctor doctor, string date)
+        public static IEnumerable<object[]> DataNoFreeTerms()
         {
-            //  Arrange  //
-            AppointmentService service = new AppointmentService(CreateNoFreeTermStubRepository());
+            var retVal = new List<object[]>();
+            Doctor doctor = new Doctor();
+            doctor.Id = 1;
+            doctor.DoctorType = DoctorType.generalPractitioner;
+            string dateString = "12/01/2022 00:00:00 AM";
+            DateTime date = DateTime.Parse(dateString,
+                                      System.Globalization.CultureInfo.InvariantCulture);
 
-            //  Act  //
-            List<string> TermList = service.GetDoctorsFreeAppointments(doctor.Id, date);
+            int ExpectedValue = 0;
 
-            //  Assert  //
-            
-            Assert.Equal(TermList.Count, 0);
+            retVal.Add(new object[] { doctor, date, ExpectedValue });
+            return retVal;
         }
 
-        /*
-        [Theory]
-        [MemberData(nameof(Data))]
-        public void AlternativeDate(Doctor doctor, string date)
+        public static IEnumerable<object[]> DataAlternativeDate()
         {
-            //  Arragnge  //
-            AppointmentService service = new AppointmentService(CreateNoFreeTermStubRepository());
-            //  Act  //
-            FreeTermsDTO freeTermsDTO = service.GetAlternativeDate(doctor, date);
-            //  Assert  //
+            var retVal = new List<object[]>();
+            Doctor doctor = new Doctor();
+            doctor.Id = 1;
+            doctor.DoctorType = DoctorType.generalPractitioner;
+            string dateString = "12/01/2022 00:00:00 AM";
+            DateTime date = DateTime.Parse(dateString,
+                                      System.Globalization.CultureInfo.InvariantCulture);
+
             List<string> ExpectedTerms = new List<string> {
                 "07:00", "07:30",
                 "08:00", "08:30",
@@ -77,31 +141,46 @@ namespace HospitalUnitTests
                 "14:00", "14:30",
                 "15:00"
             };
-            var expectedDate = "12/02/2022";
-            var newDate = freeTermsDTO.Date.ToString("MM/dd/yyyy", CultureInfo.InvariantCulture);
-            Assert.Equal(expectedDate, newDate);
-            Assert.Equal(ExpectedTerms, freeTermsDTO.Terms);
 
+            var expectedDateString = "12/02/2022";
+            DateTime expectedDate = DateTime.Parse(expectedDateString,
+                                      System.Globalization.CultureInfo.InvariantCulture);
+            retVal.Add(new object[] { doctor, date, ExpectedTerms, expectedDate });
+            return retVal;
         }
 
-        [Theory]
-        [MemberData(nameof(Data))]
-        public void AlternativeDoctor(Doctor doctor, string date)
+        public static IEnumerable<object[]> DataAlternativeDoctor()
         {
-            //  Arragnge  //
-            AppointmentService service = new AppointmentService(CreateNoFreeTermStubRepository());
-            //  Act  //
-            FreeTermsDTO freeTermsDTO = service.GetAlternativeDoctor(doctor, date);
-            //  Assert  //
-            
+            var retVal = new List<object[]>();
+            Doctor doctor = new Doctor();
+            doctor.Id = 1;
+            doctor.DoctorType = DoctorType.generalPractitioner;
+            string dateString = "12/01/2022 00:00:00 AM";
+            DateTime date = DateTime.Parse(dateString,
+                                      System.Globalization.CultureInfo.InvariantCulture);
+
+            List<string> ExpectedTerms = new List<string> {
+                "07:00", "07:30",
+                "08:00", "08:30",
+                "09:00", "09:30",
+                "10:00", "10:30",
+                "11:00", "11:30",
+                "12:00", "12:30",
+                "13:00", "13:30",
+                "14:00", "14:30",
+                "15:00"
+            };
+
+            int expectedDoctorId = 2;
+
+            retVal.Add(new object[] { doctor, date, ExpectedTerms, expectedDoctorId });
+            return retVal;
         }
-        */
+
         public RepositoryFactory CreateStubRepository()
         {
             var stubRepository = new Mock<RepositoryFactory>();
 
-            Room room = new Room();
-            room.id = 1;
             Patient patient = new Patient();
             patient.Id = 1;
             List<Patient> patients = new List<Patient>();
@@ -251,20 +330,14 @@ namespace HospitalUnitTests
                     , "0665789461", "milovan@bch.com", "Dr. Miroslav Mikic", "mire123", Gender.male, "Novi Sad"
                     , "Serbia", UserType.doctor, patients, DoctorType.generalPractitioner, appointments2);
 
+            List<Doctor> doctors = new List<Doctor>() { doctor, doctor2 };
+
             stubRepository.Setup(m => m.GetDoctorsRepository().GetOne(doctor.Id)).Returns(doctor);
+            stubRepository.Setup(m => m.GetDoctorsRepository().GetOne(doctor2.Id)).Returns(doctor2);
+            stubRepository.Setup(m => m.GetDoctorsRepository().GetSpecialists(doctor.DoctorType)).Returns(doctors);
+            stubRepository.Setup(m => m.GetDoctorsRepository().GetAll()).Returns(doctors);
 
             return stubRepository.Object;
-        }
-
-        public static IEnumerable<object[]> Data()
-        {
-            var retVal = new List<object[]>();
-            Doctor doctor = new Doctor();
-            doctor.Id = 1;
-            string dateString = "12/01/2022";
-
-            retVal.Add(new object[] { doctor, dateString });
-            return retVal;
         }
     }
 }
