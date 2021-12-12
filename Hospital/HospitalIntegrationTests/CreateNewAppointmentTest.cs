@@ -23,7 +23,7 @@ namespace HospitalIntegrationTests
         [Theory]
         [MemberData(nameof(DataSuccessfully))]
         public async Task Create_New_Appointment_Successfully(NewAppointmentDTO newAppointment,
-                DateTime expectedStartTime, string patientId, string doctorId)  
+                DateTime expectedStartTime, int patientId, int doctorId)  
         {
             // Arrange //
             var json = JsonConvert.SerializeObject(newAppointment);
@@ -79,23 +79,21 @@ namespace HospitalIntegrationTests
         {
             var retVal = new List<object[]>();
 
-            Room room = new Room();
-            room.id = 1;
 
             Doctor doctor = new Doctor();
-            doctor.Id = "1";
+            doctor.Id = 1;
 
             Patient patient = new Patient();
-            patient.Id = "1";
+            patient.Id = 2;
 
             var dateString = "1/12/2022 8:30:00 AM";
             DateTime date = DateTime.Parse(dateString,
                                       System.Globalization.CultureInfo.InvariantCulture);
-            NewAppointmentDTO appointmentDTO = new NewAppointmentDTO(date, room.id, room, patient.Id, patient, doctor.Id, doctor);
+            NewAppointmentDTO appointmentDTO = new NewAppointmentDTO(date, patient.Id, patient, doctor.Id, doctor);
 
             var expectedStartTime = date;
-            var expectedPatientId = "1";
-            var expectedDoctorId = "1";
+            var expectedPatientId = 2;
+            var expectedDoctorId = 1;
 
             retVal.Add(new object[] { appointmentDTO, expectedStartTime, expectedPatientId, expectedDoctorId });
 
@@ -110,24 +108,24 @@ namespace HospitalIntegrationTests
             room.id = 1;
 
             Doctor doctor = new Doctor();
-            doctor.Id = "1";
+            doctor.Id = 1;
 
             Patient patient = new Patient();
-            patient.Id = "1";
+            patient.Id = 1;
 
             var dateString1 = "1/12/2022 8:30:00 AM";
             DateTime date1 = DateTime.Parse(dateString1,
                                       System.Globalization.CultureInfo.InvariantCulture);
-            NewAppointmentDTO appointmentDTO1 = new NewAppointmentDTO(date1, -2, room, patient.Id, patient, doctor.Id, doctor);
+            NewAppointmentDTO appointmentDTO1 = new NewAppointmentDTO(date1, -2, patient, doctor.Id, doctor);
 
             var dateString2 = "1/12/2019 8:30:00 AM";
             DateTime date2 = DateTime.Parse(dateString2,
                                       System.Globalization.CultureInfo.InvariantCulture);
-            NewAppointmentDTO appointmentDTO2 = new NewAppointmentDTO(date2, room.id, room, patient.Id, patient, doctor.Id, doctor);
+            NewAppointmentDTO appointmentDTO2 = new NewAppointmentDTO(date2, patient.Id, patient, doctor.Id, doctor);
 
-            NewAppointmentDTO appointmentDTO3 = new NewAppointmentDTO(date1, room.id, room, patient.Id, null, doctor.Id, doctor);
+            NewAppointmentDTO appointmentDTO3 = new NewAppointmentDTO(date1, patient.Id, null, doctor.Id, doctor);
 
-            NewAppointmentDTO appointmentDTO4 = new NewAppointmentDTO(date1, room.id, room, patient.Id, null, doctor.Id, doctor);
+            NewAppointmentDTO appointmentDTO4 = new NewAppointmentDTO(date1, patient.Id, null, doctor.Id, doctor);
 
             retVal.Add(new object[] { appointmentDTO1, appointmentDTO2,  appointmentDTO3, appointmentDTO4});
 

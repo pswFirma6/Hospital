@@ -62,21 +62,21 @@ namespace HospitalIntegrationTests
             Room room = new Room();
             room.id = 1;
             Doctor doctor = new Doctor();
-            doctor.Id = "1";
+            doctor.Id = 1;
             Patient patient = new Patient();
-            patient.Id = "1";
+            patient.Id = 1;
             var dateString1 = "01/12/2021 8:30:00 AM";
             DateTime date1 = DateTime.Parse(dateString1,
                                       System.Globalization.CultureInfo.InvariantCulture);
-            Appointment appointment1 = new Appointment(date1, -2, room, patient.Id, patient, doctor.Id, doctor);
+            Appointment appointment1 = new Appointment(date1, patient.Id, patient, doctor.Id, doctor);
             var dateString2 = "01/12/2021 9:00:00 AM";
             DateTime date2 = DateTime.Parse(dateString2,
                                       System.Globalization.CultureInfo.InvariantCulture);
-            Appointment appointment2 = new Appointment(date2, -2, room, patient.Id, patient, doctor.Id, doctor);
+            Appointment appointment2 = new Appointment(date2, patient.Id, patient, doctor.Id, doctor);
             var dateString3 = "01/12/2021 9:30:00 AM";
             DateTime date3 = DateTime.Parse(dateString3,
                                       System.Globalization.CultureInfo.InvariantCulture);
-            Appointment appointment3 = new Appointment(date3, -2, room, patient.Id, patient, doctor.Id, doctor);
+            Appointment appointment3 = new Appointment(date3, patient.Id, patient, doctor.Id, doctor);
 
             
             List<Appointment> doctorsAppointments = new List<Appointment>();

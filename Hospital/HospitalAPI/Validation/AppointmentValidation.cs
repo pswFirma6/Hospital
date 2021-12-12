@@ -1,8 +1,5 @@
 ﻿using HospitalAPI.DTO;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace HospitalAPI.Validation
 {
@@ -15,8 +12,7 @@ namespace HospitalAPI.Validation
                 return false;
             }
             if (dto.StartTime <= DateTime.Now
-                || dto.RoomId <= 0 || dto.Room == null
-                || dto.PatientId == ("") || dto.Patient == null || dto.DoctorId == ("")
+                || dto.PatientId <= 0 || dto.Patient == null || dto.DoctorId <= 0
                 || dto.Doctor == null)
             {
                 return false;

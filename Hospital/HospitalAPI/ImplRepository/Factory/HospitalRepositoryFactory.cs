@@ -2,6 +2,7 @@
 using HospitalAPI.ImplRepository;
 using HospitalLibrary.MedicalRecords.Repository.Interface;
 using HospitalLibrary.MedicalRecords.Repository.Repository.Interface;
+using HospitalLibraryHospital_library.MedicalRecords.Repository;
 
 namespace HospitalAPI.Repository
 {
@@ -18,6 +19,9 @@ namespace HospitalAPI.Repository
         public IAllergyRepository AllergyRepository { get; set; }
         public IDoctorRepository DoctorRepository { get; set; }
         public IAppointmentRepository AppointmentRepository { get; set; }
+        public IMedicineRepository MedicineRepository{get; set;}
+        public IPrescriptionRepository PrescriptionRepository { get; set;}
+
         public override IFeedbackRepository GetFeedbackRepository()
         {
             if (FeedbackRepository == null)
@@ -62,6 +66,20 @@ namespace HospitalAPI.Repository
                 return new AppointmentRepository(_context);
             else
                 return AppointmentRepository;
+        }
+        public override IMedicineRepository GetMedicineRepository()
+        {
+            if (MedicineRepository == null)
+                return new MedicineRepository(_context);
+            else
+                return MedicineRepository;
+        }
+        public override IPrescriptionRepository GetPrescriptionRepository()
+        {
+            if (PrescriptionRepository == null)
+                return new PrescriptionRepository(_context);
+            else
+                return PrescriptionRepository;
         }
     }
 }
