@@ -5,6 +5,7 @@ using HospitalLibrary.MedicalRecords.Model;
 using HospitalLibrary.MedicalRecords.Model.Enums;
 using HospitalLibrary.MedicalRecords.Service;
 using HospitalLibrary.Model.Enums;
+using HospitalLibrary.MedicalRecords.Service;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -34,6 +35,16 @@ namespace HospitalAPI.Controller
         }
 
 
+           
+        }
+        [HttpGet("{id}")]
+        public IActionResult GetPatient(int id )
+        {
+            Patient patient = _patientService.GetPatient(id);
+            var model = _mapper.Map<PatientRegistrationDTO>(patient);
+            return Ok(model);
+        }
+       
 
     }
 }

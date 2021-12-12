@@ -21,11 +21,13 @@ using static HospitalAPI.Mapper.Mapper;
 using System.Collections.Generic;
 using HospitalAPI.Service;
 using Hospital_library.MedicalRecords.Service;
+using HospitalLibraryHospital_library.MedicalRecords.Repository;
 
 namespace HospitalIntegrationTests
 {
     public class Startup
     {
+        [Obsolete]
         public Startup(IHostingEnvironment env)
         {
             var builder = new ConfigurationBuilder()
@@ -76,15 +78,15 @@ namespace HospitalIntegrationTests
             services.AddScoped<IFeedbackService, FeedbackService>();
             services.AddScoped<ISurveyService, SurveyService>();
             services.AddScoped<IAppointmentService, AppointmentService>();
-
-            services.AddScoped<RepositoryFactory, HospitalRepositoryFactory>();
+            services.AddScoped<IDoctorService, DoctorService>();
 
             // Validation
             services.AddScoped<RegistrationValidation>();
             services.AddScoped<SurveyValidation>();
             services.AddScoped<AppointmentValidation>();
 
-            services.AddScoped<HospitalRepositoryFactory>();
+            // Repository
+            services.AddScoped<RepositoryFactory, HospitalRepositoryFactory>();
             services.AddScoped<IPatientRepository, PatientRepository>();
 
             services.AddControllers().AddNewtonsoftJson(options =>
@@ -93,7 +95,7 @@ namespace HospitalIntegrationTests
 
             services.AddDbContext<MyDbContext>(options =>
             {
-                options.UseInMemoryDatabase("InMemoryDbForTesting");
+                options.UseInMemoryDatabase("InMemoryDbForTesting").UseLazyLoadingProxies();
             });
             var serviceProvider = services.BuildServiceProvider();
 
@@ -102,8 +104,6 @@ namespace HospitalIntegrationTests
                 using (var db = scope.ServiceProvider.GetRequiredService<MyDbContext>())
                     try
                     {
-
-
                         db.Database.EnsureCreated();
                         InitializeDbForTests(db);
                     }
@@ -114,39 +114,167 @@ namespace HospitalIntegrationTests
             }
         }
 
-
+    
         public static void InitializeDbForTests(MyDbContext db)
         {
-            CreatePatients();
+            AddTestDoctor(db);
+            CreatePatients(db);
             db.SaveChanges();
         }
 
-        public static List<Patient> CreatePatients()
+        // In Memory DB for tests
+        private static void AddTestDoctor(MyDbContext context)
+        {
+            //  Add fake data
+
+            List<Patient> patients = new List<Patient>();
+            Patient patient = new Patient();
+            patient.Id = 5;
+            var dateString = "2/12/2022 8:30:00 AM";
+            DateTime date = DateTime.Parse(dateString,
+                          System.Globalization.CultureInfo.InvariantCulture);
+
+            //appointments
+            Doctor doc = new Doctor();
+
+            var dateString1 = "12/01/2022 7:00:00 AM";
+            DateTime date1 = DateTime.Parse(dateString1,
+                                      System.Globalization.CultureInfo.InvariantCulture);
+            Appointment appointment1 = new Appointment(date1, patient.Id, patient, 1, doc);
+
+            var dateString2 = "12/01/2022 7:30:00 AM";
+            DateTime date2 = DateTime.Parse(dateString2,
+                                      System.Globalization.CultureInfo.InvariantCulture);
+            Appointment appointment2 = new Appointment(date2, patient.Id, patient, 1, doc);
+
+            var dateString3 = "12/01/2022 8:00:00 AM";
+            DateTime date3 = DateTime.Parse(dateString3,
+                                      System.Globalization.CultureInfo.InvariantCulture);
+            Appointment appointment3 = new Appointment(date3, patient.Id, patient, 1, doc);
+
+            var dateString4 = "12/01/2022 8:30:00 AM";
+            DateTime date4 = DateTime.Parse(dateString4,
+                                      System.Globalization.CultureInfo.InvariantCulture);
+            Appointment appointment4 = new Appointment(date4, patient.Id, patient, 1, doc);
+
+            var dateString5 = "12/01/2022 9:00:00 AM";
+            DateTime date5 = DateTime.Parse(dateString5,
+                                      System.Globalization.CultureInfo.InvariantCulture);
+            Appointment appointment5 = new Appointment(date5, patient.Id, patient, 1, doc);
+
+            var dateString6 = "12/01/2022 9:30:00 AM";
+            DateTime date6 = DateTime.Parse(dateString6,
+                                      System.Globalization.CultureInfo.InvariantCulture);
+            Appointment appointment6 = new Appointment(date6, patient.Id, patient, 1, doc);
+
+            var dateString7 = "12/01/2022 10:00:00 AM";
+            DateTime date7 = DateTime.Parse(dateString7,
+                                      System.Globalization.CultureInfo.InvariantCulture);
+            Appointment appointment7 = new Appointment(date7, patient.Id, patient, 1, doc);
+
+            var dateString8 = "12/01/2022 10:30:00 AM";
+            DateTime date8 = DateTime.Parse(dateString8,
+                                      System.Globalization.CultureInfo.InvariantCulture);
+            Appointment appointment8 = new Appointment(date8, patient.Id, patient, 1, doc);
+
+            var dateString9 = "12/01/2022 11:00:00 AM";
+            DateTime date9 = DateTime.Parse(dateString9,
+                                      System.Globalization.CultureInfo.InvariantCulture);
+            Appointment appointment9 = new Appointment(date9, patient.Id, patient, 1, doc);
+
+            var dateString10 = "12/01/2022 11:30:00 AM";
+            DateTime date10 = DateTime.Parse(dateString10,
+                                      System.Globalization.CultureInfo.InvariantCulture);
+            Appointment appointment10 = new Appointment(date10, patient.Id, patient, 1, doc);
+
+            var dateString11 = "12/01/2022 12:00:00 PM";
+            DateTime date11 = DateTime.Parse(dateString11,
+                                      System.Globalization.CultureInfo.InvariantCulture);
+            Appointment appointment11 = new Appointment(date11, patient.Id, patient, 1, doc);
+
+            var dateString12 = "12/01/2022 12:30:00 PM";
+            DateTime date12 = DateTime.Parse(dateString12,
+                                      System.Globalization.CultureInfo.InvariantCulture);
+            Appointment appointment12 = new Appointment(date12, patient.Id, patient, 1, doc);
+
+            var dateString13 = "12/01/2022 01:00:00 PM";
+            DateTime date13 = DateTime.Parse(dateString13,
+                                      System.Globalization.CultureInfo.InvariantCulture);
+            Appointment appointment13 = new Appointment(date13, patient.Id, patient, 1, doc);
+
+            var dateString14 = "12/01/2022 01:30:00 PM";
+            DateTime date14 = DateTime.Parse(dateString14,
+                                      System.Globalization.CultureInfo.InvariantCulture);
+            Appointment appointment14 = new Appointment(date14, patient.Id, patient, 1, doc);
+
+            var dateString15 = "12/01/2022 02:00:00 PM";
+            DateTime date15 = DateTime.Parse(dateString15,
+                                      System.Globalization.CultureInfo.InvariantCulture);
+            Appointment appointment15 = new Appointment(date15, patient.Id, patient, 1, doc);
+
+            var dateString16 = "12/01/2022 02:30:00 PM";
+            DateTime date16 = DateTime.Parse(dateString16,
+                                      System.Globalization.CultureInfo.InvariantCulture);
+            Appointment appointment16 = new Appointment(date16, patient.Id, patient, 1, doc);
+
+            var dateString17 = "12/01/2022 03:00:00 PM";
+            DateTime date17 = DateTime.Parse(dateString17,
+                                      System.Globalization.CultureInfo.InvariantCulture);
+            Appointment appointment17 = new Appointment(date17, patient.Id, patient, 1, doc);
+
+            List<Appointment> Doctor1appointments = new List<Appointment>() {
+                appointment1, appointment2,
+                appointment3, appointment4,
+                appointment5, appointment6,
+                appointment7, appointment8,
+                appointment9, appointment10,
+                appointment11, appointment12,
+                appointment13, appointment14,
+                appointment15, appointment16,
+                appointment17,
+            };
+
+            List<Appointment> Doctor2appointments = new List<Appointment>();
+
+            Doctor doctor = new Doctor( 1, "Mirko", "Mirkovic", date, "9981902895421", "Jase Tomic 44."
+                    , "0645796684", "drmirkovic@bch.com", "Dr Mirko", "Mirko123", Gender.male
+                    , "Novi Sad", "Serbia", UserType.doctor, patients, DoctorType.allergy_and_immunology, Doctor1appointments);
+
+            Doctor doctor2 = new Doctor(2, "Marko", "Markovic", date, "9981902895422", "Jase Tomic 45."
+                    , "0635796684", "1drsirkovic@bch.com", "Dr Mirko", "Mirko123", Gender.male
+                    , "Novi Sad", "Serbia", UserType.doctor, patients, DoctorType.allergy_and_immunology, Doctor2appointments);
+
+            context.Add(doctor);
+            context.Add(doctor2);
+        }
+
+        public static void CreatePatients(MyDbContext db)
         {
             List<Patient> listOfPatients = new List<Patient>();
-            Doctor doctor = new Doctor();
-            doctor.Id = "1";
+           
             List<Allergy> allergies = new List<Allergy>();
 
-            Patient newPatientA1 = new Patient("2", "Slavko", "Vranjes", DateTime.Now,
+            var doctor = db.Doctors.Find(1);
+
+            Patient newPatientA1 = new Patient(2, "Slavko", "Vranjes", DateTime.Now,
                 "054236971333", "Partizanskih baza 8.", "0666423699", "slavko@gmail.com",
                 "slavko", "slavko123", Gender.male,
                 "Novi Sad", "Serbia", UserType.patient, BloodType.B, RhFactor.positive,
                 189, 85, allergies, doctor, false, false);
 
 
-            Patient newPatientB2 = new Patient("3", "Marko", "Markovic", DateTime.Now,
-                "0542369712546", "Partizanskih baza 7.", "0666423599", "marko@gmail.com",
-                "SeekEquilibrium", "mira123", Gender.female,
+            Patient newPatientB2 = new Patient(3, "Marko", "Markovic", DateTime.Now,
+                "0542369712588", "Partizanskih baza 7.", "0666423599", "marko@gmail.com",
+                "SeekEquilibrium", "marko123", Gender.female,
                 "Novi Sad", "Serbia", UserType.patient, BloodType.A, RhFactor.negative,
                 180, 85, allergies, doctor, false, false);
 
-            listOfPatients.Add(newPatientA1);
-            listOfPatients.Add(newPatientB2);
+            db.Patients.Add(newPatientA1);
+            db.Patients.Add(newPatientB2);
 
-            return listOfPatients;
+            
         }
-
+    
         public void Configure(IApplicationBuilder app)
         {
             app.UseCors();

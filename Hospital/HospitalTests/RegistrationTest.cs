@@ -1,9 +1,8 @@
-using HospitalAPI;
 using HospitalAPI.ImplService;
-using HospitalAPI.Repository;
 using HospitalLibrary.MedicalRecords.Model;
 using HospitalLibrary.MedicalRecords.Model.Enums;
 using HospitalLibrary.Model.Enums;
+using HospitalLibraryHospital_library.MedicalRecords.Repository;
 using MimeKit;
 using Moq;
 using System;
@@ -43,7 +42,7 @@ namespace HospitalTests.UnitTests
             // Arrange //
             Doctor doctor = new Doctor();
             List<Allergy> allergies = new List<Allergy>();
-            Patient newPatient = new Patient("2", "Mira", "Miric", DateTime.Now,
+            Patient newPatient = new Patient(2, "Mira", "Miric", DateTime.Now,
                 "0542369712546", "Partizanskih baza 7.", "0666423599", "marko@gmail.com",
                 "Mirami", "mira123", Gender.female,
                 "Novi Sad", "Serbia", UserType.patient, BloodType.B, RhFactor.positive,
@@ -65,7 +64,7 @@ namespace HospitalTests.UnitTests
             // Arrange //
             Doctor doctor = new Doctor();
             List<Allergy> allergies = new List<Allergy>();
-            Patient newPatient = new Patient("2", "Mira", "Miric", DateTime.Now,
+            Patient newPatient = new Patient(1, "Mira", "Miric", DateTime.Now,
             "0542369719085", "Partizanskih baza 7.", "0666423599", "mara@gmail.com",
             "Mirami", "mira123", Gender.female,
             "Novi Sad", "Serbia", UserType.patient, BloodType.B, RhFactor.positive,
@@ -86,7 +85,7 @@ namespace HospitalTests.UnitTests
 
             Doctor doctor = new Doctor();
             List<Allergy> allergies = new List<Allergy>();
-            Patient existingPatient = new Patient("1", "Marko", "Markovic", DateTime.Now,
+            Patient existingPatient = new Patient(1, "Marko", "Markovic", DateTime.Now,
                 "0542369712546", "Maksima Gorkog 7.", "0656423599", "marko@gmail.com",
                 "Markoni", "marko123", Gender.male,
                 "Novi Sad", "Serbia", UserType.patient, BloodType.A, RhFactor.positive,

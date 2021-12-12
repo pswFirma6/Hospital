@@ -8,6 +8,7 @@ namespace HospitalLibrary.MedicalRecords.Repository.Repository.Interface
     {
         Patient Add(Patient patient);
         List<Patient> GetAll();
+        Patient GetOne(int id);
         Patient Update(Patient patient);
         Patient GetByEmail(string email);
     }

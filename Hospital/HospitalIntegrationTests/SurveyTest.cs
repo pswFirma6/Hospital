@@ -46,11 +46,11 @@ namespace HospitalIntegrationTests
             var retVal = new List<object[]>();
 
             Patient patient = new Patient();
-            patient.Id = "1";
+            patient.Id = 1;
 
-            TakeSurveyDTO takeSurveyDTOHospital = new TakeSurveyDTO("1", "Question 1", 5, HospitalLibrary.MedicalRecords.Model.Enums.SurveyQuestionCategory.hospital);
-            TakeSurveyDTO takeSurveyDTOApplication = new TakeSurveyDTO("1", "Question 2", 5, HospitalLibrary.MedicalRecords.Model.Enums.SurveyQuestionCategory.application);
-            TakeSurveyDTO takeSurveyDTOStaff = new TakeSurveyDTO("1", "Question 3", 5, HospitalLibrary.MedicalRecords.Model.Enums.SurveyQuestionCategory.staff);
+            TakeSurveyDTO takeSurveyDTOHospital = new TakeSurveyDTO(1, "Question 1", 5, HospitalLibrary.MedicalRecords.Model.Enums.SurveyQuestionCategory.hospital);
+            TakeSurveyDTO takeSurveyDTOApplication = new TakeSurveyDTO(1, "Question 2", 5, HospitalLibrary.MedicalRecords.Model.Enums.SurveyQuestionCategory.application);
+            TakeSurveyDTO takeSurveyDTOStaff = new TakeSurveyDTO(1, "Question 3", 5, HospitalLibrary.MedicalRecords.Model.Enums.SurveyQuestionCategory.staff);
             List<TakeSurveyDTO> Survey = new List<TakeSurveyDTO> { takeSurveyDTOHospital, takeSurveyDTOApplication, takeSurveyDTOStaff };
 
             int notExpectedRate = 0;

@@ -12,7 +12,7 @@ namespace HospitalLibrary.MedicalRecords.Model
         public int Height { get; set; }
         public int Weight { get; set; }
         public virtual ICollection<Allergy> Allergies { get; set; }
-        public string DoctorId { get; set; }
+        public int DoctorId { get; set; }
         public virtual Doctor Doctor { get; set; }
         public bool Blocked { get; set; }
         public bool Malicious { get; set; }
@@ -20,7 +20,7 @@ namespace HospitalLibrary.MedicalRecords.Model
         public Patient() 
         {
         }
-        public Patient(string id, string name, string surname, DateTime birthDate, 
+        public Patient(int id, string name, string surname, DateTime birthDate, 
             string jmbg, string address, string phone, string email, string username, 
             string password, Gender gender, string city, string country, UserType userType, 
             BloodType bloodType, RhFactor rhfactor, int height, int weight, List<Allergy> allergies, 
