@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Hospital_library.MedicalRecords.Model;
 using HospitalAPI.DTO;
+using HospitalAPI.DTO.AppointmentDTO;
 using HospitalAPI.DTO.SurveyDTO;
 using HospitalLibrary.MedicalRecords.Model;
 

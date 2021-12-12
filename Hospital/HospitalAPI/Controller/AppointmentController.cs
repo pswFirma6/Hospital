@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Hospital_library.MedicalRecords.Service;
 using HospitalAPI.DTO;
+using HospitalAPI.DTO.AppointmentDTO;
 using HospitalAPI.Validation;
 using HospitalLibrary.MedicalRecords.Model;
 using Microsoft.AspNetCore.Mvc;
@@ -64,17 +65,9 @@ namespace HospitalAPI.Controller
 
         [HttpPost]
         [Route("Priority")]
-        public IActionResult GetPriorityAppointments(PreferredAppointmentRequestDTO preferredAppointmentRequestDTO)
+        public IActionResult GetPriorityAppointments(FreeTermsRequestDTO freeTermsRequestDTO)
         {
-            if (preferredAppointmentRequestDTO.Preferred.Equals("doctor"))
-            {
-                return Ok(_appointmentService.GetDoctorsFreeAppointments(preferredAppointmentRequestDTO.DoctorId, preferredAppointmentRequestDTO.Date));
-            }
-            else if (preferredAppointmentRequestDTO.Preferred.Equals("date"))
-            {
-                return Ok();
-            }
-            return BadRequest();
+            return Ok();
         }
     
     }

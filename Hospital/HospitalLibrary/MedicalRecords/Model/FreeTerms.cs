@@ -6,7 +6,7 @@ namespace Hospital_library.MedicalRecords.Model
 {
     public class FreeTerms
     {
-        public FreeTerms(DateTime date, string doctorId, string priority, List<string> terms)
+        public FreeTerms(DateTime date, int doctorId, string priority, List<string> terms)
         {
             Date = date;
             DoctorId = doctorId;
@@ -14,7 +14,7 @@ namespace Hospital_library.MedicalRecords.Model
             Terms = terms;
         }
 
-        public FreeTerms(DateTime date, string doctorId, List<string> terms)
+        public FreeTerms(DateTime date, int doctorId, List<string> terms)
         {
             Date = date;
             DoctorId = doctorId;
@@ -22,7 +22,7 @@ namespace Hospital_library.MedicalRecords.Model
         }
 
         public DateTime Date { get; set; }
-        public string DoctorId { get; set; }
+        public int DoctorId { get; set; }
         public string Priority { get; set; }
         public List<string> Terms { get; set; }
     }

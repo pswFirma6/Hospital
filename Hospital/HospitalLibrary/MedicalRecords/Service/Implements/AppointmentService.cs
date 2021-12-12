@@ -1,9 +1,9 @@
 ﻿using Hospital_library.MedicalRecords.Model;
+using Hospital_library.MedicalRecords.Model.Enums;
 using Hospital_library.MedicalRecords.Service;
-using HospitalAPI.DTO.AppointmentDTO;
-using HospitalAPI.Repository;
 using HospitalLibrary.MedicalRecords.Model;
 using HospitalLibrary.MedicalRecords.Model.Enums;
+using HospitalLibraryHospital_library.MedicalRecords.Repository;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -32,16 +32,61 @@ namespace HospitalAPI.ImplService
 
         public void Add(Appointment appointment)
         {
+            appointment.Doctor = _hospitalRepositoryFactory.GetDoctorsRepository().GetOne(appointment.DoctorId);
+            appointment.Patient = _hospitalRepositoryFactory.GetPatientRepository().GetOne(appointment.PatientId);
             _hospitalRepositoryFactory.GetAppointmentsRepository().Add(appointment);
         }
 
-        public bool CheckDoctorAppointments(Appointment newAppointment) 
+        public bool CheckDoctorAppointments(Appointment newAppointment)
         {
             var existingDoctor = _hospitalRepositoryFactory.GetDoctorsRepository().GetOne(newAppointment.DoctorId);
 
-            return existingDoctor.Appointments.Any( x => x.StartTime.Equals(newAppointment.StartTime) 
-                    || ( newAppointment.StartTime <= x.StartTime.AddMinutes(30)  
-                    &&  x.StartTime <= newAppointment.StartTime)); 
+            return existingDoctor.Appointments.Any(x => x.StartTime.Equals(newAppointment.StartTime)
+                   || (newAppointment.StartTime <= x.StartTime.AddMinutes(30)
+                   && x.StartTime <= newAppointment.StartTime));
+        }
+
+        public List<Appointment> getAll(int id)
+        {
+            List<Appointment> allAppointments = new List<Appointment>();
+            List<Appointment> appointmentsList = _hospitalRepositoryFactory.GetAppointmentsRepository().GetAll();
+            foreach (Appointment appointment in appointmentsList)
+            {
+                if (appointment.PatientId == id)
+                {
+                    allAppointments.Add(appointment);
+                }
+            }
+            return allAppointments;
+        }
+
+        public List<Appointment> getAwaiting(int id)
+        {
+            List<Appointment> allAppointments = new List<Appointment>();
+            List<Appointment> appointmentsList = _hospitalRepositoryFactory.GetAppointmentsRepository().GetAll();
+            foreach (Appointment appointment in appointmentsList)
+            {
+                if (appointment.PatientId == id && appointment.Type == AppointmentType.Awaiting)
+                {
+                    allAppointments.Add(appointment);
+
+                }
+            }
+            return allAppointments;
+        }
+
+        public List<Appointment> getCancelled(int id)
+        {
+            List<Appointment> allAppointments = new List<Appointment>();
+            List<Appointment> appointmentsList = _hospitalRepositoryFactory.GetAppointmentsRepository().GetAll();
+            foreach (Appointment appointment in appointmentsList)
+            {
+                if (appointment.PatientId == id && appointment.Type == AppointmentType.Cancelled)
+                {
+                    allAppointments.Add(appointment);
+                }
+            }
+            return allAppointments;
         }
 
         public FreeTerms GetTerms(FreeTerms freeTermsRequest)
@@ -68,7 +113,7 @@ namespace HospitalAPI.ImplService
         }
 
 
-        public List<string> GetDoctorsFreeAppointments(string doctorId, DateTime date)
+        public List<string> GetDoctorsFreeAppointments(int doctorId, DateTime date)
         {
             List<string> terms = new List<string>(InitializedTerms);
             var existingDoctor = _hospitalRepositoryFactory.GetDoctorsRepository().GetOne(doctorId);
@@ -125,7 +170,7 @@ namespace HospitalAPI.ImplService
         }
         public List<Doctor> GetTypeDoctors(DoctorType type)
         {
-            return _hospitalRepositoryFactory.GetDoctorsRepository().GetAll().Where(x => x.DoctorType == type).ToList();
+            return _hospitalRepositoryFactory.GetDoctorsRepository().GetSpecialists(type);
         }
     }
 }
