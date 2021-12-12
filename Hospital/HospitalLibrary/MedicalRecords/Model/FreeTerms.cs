@@ -21,6 +21,10 @@ namespace Hospital_library.MedicalRecords.Model
             Terms = terms;
         }
 
+        public FreeTerms()
+        {
+        }
+
         public DateTime Date { get; set; }
         public int DoctorId { get; set; }
         public string Priority { get; set; }

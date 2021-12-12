@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Hospital_library.MedicalRecords.Model;
 using Hospital_library.MedicalRecords.Service;
 using HospitalAPI.DTO;
 using HospitalAPI.DTO.AppointmentDTO;
@@ -67,7 +68,13 @@ namespace HospitalAPI.Controller
         [Route("Priority")]
         public IActionResult GetPriorityAppointments(FreeTermsRequestDTO freeTermsRequestDTO)
         {
-            return Ok();
+            if (!_appointmentValidation.RequestIsValid(freeTermsRequestDTO))
+            {
+                return BadRequest();
+            }
+            var mapper = _mapper.Map<FreeTerms>(freeTermsRequestDTO);
+            FreeTerms freeTerms = _appointmentService.GetTerms(mapper);
+            return Ok(freeTerms);
         }
     
     }
