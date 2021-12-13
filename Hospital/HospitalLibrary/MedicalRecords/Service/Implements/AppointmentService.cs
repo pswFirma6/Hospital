@@ -101,6 +101,17 @@ namespace HospitalAPI.ImplService
             }
             return allAppointments;
         }
+        public void CancelAppointment(Appointment appointment)
+        {
+            appointment.Type = AppointmentType.Cancelled;
+            _hospitalRepositoryFactory.GetAppointmentsRepository().Update(appointment);
+        }
+        public bool CheckExistingAppointment(Appointment appointment)
+        {
+
+            var existingAppointments = _hospitalRepositoryFactory.GetAppointmentsRepository().GetAll();
+            return existingAppointments.Any(x => x.StartTime.Equals(appointment.StartTime));
+        }
 
         public FreeTerms GetTerms(FreeTerms freeTermsRequest)
         {

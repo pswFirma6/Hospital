@@ -15,6 +15,8 @@ namespace Hospital_library.MedicalRecords.Service
         public List<Appointment> getAwaiting(int id);
         public List<Appointment> getCancelled(int id);
         public List<Appointment> getCompleted(int id);
+        public bool CheckExistingAppointment(Appointment appointment);
+        public void CancelAppointment(Appointment appointment);
         public FreeTerms GetTerms(FreeTerms freeTermsRequest);
         public FreeTerms GetAlternativeDate(Doctor doctor, DateTime date);
         public FreeTerms GetAlternativeDoctor(Doctor doctor, DateTime date);
