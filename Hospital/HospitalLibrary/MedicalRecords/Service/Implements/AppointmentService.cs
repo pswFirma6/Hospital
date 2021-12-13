@@ -25,6 +25,7 @@ namespace HospitalAPI.ImplService
                 "14:00", "14:30",
                 "15:00"
             };
+
         public AppointmentService(RepositoryFactory hospitalRepositoryFactory)
         {
             _hospitalRepositoryFactory = hospitalRepositoryFactory;
@@ -88,6 +89,7 @@ namespace HospitalAPI.ImplService
             }
             return allAppointments;
         }
+
         public List<Appointment> getCompleted(int id)
         {
             List<Appointment> allAppointments = new List<Appointment>();
@@ -101,11 +103,13 @@ namespace HospitalAPI.ImplService
             }
             return allAppointments;
         }
+
         public void CancelAppointment(Appointment appointment)
         {
             appointment.Type = AppointmentType.Cancelled;
             _hospitalRepositoryFactory.GetAppointmentsRepository().Update(appointment);
         }
+
         public bool CheckExistingAppointment(Appointment appointment)
         {
 
@@ -136,27 +140,37 @@ namespace HospitalAPI.ImplService
             return null;
         }
 
-
         public List<string> GetDoctorsFreeAppointments(int doctorId, DateTime date)
         {
             List<string> terms = new List<string>(InitializedTerms);
             var existingDoctor = _hospitalRepositoryFactory.GetDoctorsRepository().GetOne(doctorId);
             List<Appointment> DoctorAppointments = existingDoctor.Appointments.Where(x => x.StartTime.ToString("dd/MM/yyyy").Equals(date.ToString("dd/MM/yyyy"))).ToList();
+            GetAvailableTerms(terms, DoctorAppointments);
+            return terms;
+        }
+
+
+        private static void GetAvailableTerms(List<string> terms, List<Appointment> DoctorAppointments)
+        {
             if (DoctorAppointments.Count != 0)
             {
-                foreach (Appointment appointment in DoctorAppointments)
+                CalculateFreeTerms(terms, DoctorAppointments);
+            }
+        }
+
+        private static void CalculateFreeTerms(List<string> terms, List<Appointment> DoctorAppointments)
+        {
+            foreach (Appointment appointment in DoctorAppointments)
+            {
+                foreach (string time in terms.ToArray())
                 {
-                    foreach (string time in terms.ToArray())
+                    if (appointment.StartTime.ToString("HH:mm").Equals(time))
                     {
-                        if (appointment.StartTime.ToString("HH:mm").Equals(time))
-                        {
-                            terms.Remove(time);
-                            break;
-                        }
+                        terms.Remove(time);
+                        break;
                     }
                 }
             }
-            return terms;
         }
 
         public FreeTerms GetAlternativeDate(Doctor doctor, DateTime date)
@@ -175,6 +189,14 @@ namespace HospitalAPI.ImplService
                 return null;
             }
             Doctor minAppDoc = doctors.First();
+            minAppDoc = FindTheLeastLoadedDoctor(date, doctors, minAppDoc);
+            FreeTerms freeTerms = new FreeTerms(date, minAppDoc.Id, minAppDoc, GetDoctorsFreeAppointments(minAppDoc.Id, date));
+
+            return freeTerms;
+        }
+
+        private Doctor FindTheLeastLoadedDoctor(DateTime date, List<Doctor> doctors, Doctor minAppDoc)
+        {
             int MaxFreeTerms = InitializedTerms.Count;
             foreach (Doctor appDoc in doctors)
             {
@@ -188,10 +210,10 @@ namespace HospitalAPI.ImplService
                     }
                 }
             }
-            FreeTerms freeTerms = new FreeTerms(date, minAppDoc.Id, minAppDoc, GetDoctorsFreeAppointments(minAppDoc.Id, date));
 
-            return freeTerms;
+            return minAppDoc;
         }
+
         public List<Doctor> GetTypeDoctors(DoctorType type)
         {
             return _hospitalRepositoryFactory.GetDoctorsRepository().GetSpecialists(type);
