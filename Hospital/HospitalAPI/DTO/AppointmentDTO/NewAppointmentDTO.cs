@@ -12,13 +12,20 @@ namespace HospitalAPI.DTO
         public int DoctorId { get; set; }
         public virtual Doctor Doctor { get; set; }
 
-        public NewAppointmentDTO(DateTime startDate, int patientId, Patient patient, int doctorId, Doctor doctor)
+        //public NewAppointmentDTO(string startDate, int patientId, Patient patient, int doctorId, Doctor doctor)
+        //{
+        //    this.StartTime = startDate;
+        //    this.PatientId = patientId;
+        //    this.Patient = patient;
+        //    this.DoctorId = doctorId;
+        //    this.Doctor = doctor;
+        //}
+
+        public NewAppointmentDTO(DateTime startTime, int patientId, int doctorId)
         {
-            this.StartTime = startDate;
-            this.PatientId = patientId;
-            this.Patient = patient;
-            this.DoctorId = doctorId;
-            this.Doctor = doctor;
+            StartTime = startTime;
+            PatientId = patientId;
+            DoctorId = doctorId;
         }
     }
 }
