@@ -5,7 +5,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-
 namespace HospitalLibrary.MedicalRecords.Repository
 {
     public class Repository<Entity> : IRepository<Entity> where Entity : Model.Entity
@@ -23,10 +22,12 @@ namespace HospitalLibrary.MedicalRecords.Repository
         {
             return entities.ToList();
         }
+
         public Entity GetOne(int id)
         {
             return entities.SingleOrDefault(s => s.Id == id);
         }
+
         public Entity Add(Entity entity)
         {
             if (entity == null)

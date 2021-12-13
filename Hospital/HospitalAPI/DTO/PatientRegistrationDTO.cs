@@ -28,7 +28,7 @@ namespace HospitalAPI.DTO
         public int Height { get; set; }
         public int Weight { get; set; }
         public List<Allergy> Allergies { get; set; }
-        public int DoctorId { get; set; }
+        public int? DoctorId { get; set; }
         public string ClientURI { get; set; }
 
         public PatientRegistrationDTO()

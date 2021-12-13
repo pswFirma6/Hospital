@@ -1,6 +1,8 @@
 ﻿using AutoMapper;
+using Hospital_library.MedicalRecords.Model;
 using Hospital_library.MedicalRecords.Service;
 using HospitalAPI.DTO;
+using HospitalAPI.DTO.AppointmentDTO;
 using HospitalAPI.Validation;
 using HospitalLibrary.MedicalRecords.Model;
 using Microsoft.AspNetCore.Mvc;
@@ -41,11 +43,13 @@ namespace HospitalAPI.Controller
 
             return Ok(mapper);
         }
+        
         [HttpGet]
         public IActionResult GetAllAppointment(int id)
         {
             return Ok(_appointmentService.getAll(id));
         }
+        
         [HttpGet]
         [Route("{awaiting}")]
         public IActionResult GetAwaitingAppointment(int id)
@@ -59,5 +63,19 @@ namespace HospitalAPI.Controller
             return Ok(_appointmentService.getCancelled(id));
         }
 
+        [HttpPost]
+        [Route("Priority")]
+        public IActionResult GetPriorityAppointments(FreeTermsRequestDTO freeTermsRequestDTO)
+        {
+            if (!_appointmentValidation.RequestIsValid(freeTermsRequestDTO))
+            {
+                return BadRequest();
+            }
+            var mapper = _mapper.Map<FreeTerms>(freeTermsRequestDTO);
+            FreeTerms freeTerms = _appointmentService.GetTerms(mapper);
+            return Ok(freeTerms);
+        }
+    
     }
 }
+

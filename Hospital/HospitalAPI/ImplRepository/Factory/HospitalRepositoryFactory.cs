@@ -2,6 +2,7 @@
 using HospitalAPI.ImplRepository;
 using HospitalLibrary.MedicalRecords.Repository.Interface;
 using HospitalLibrary.MedicalRecords.Repository.Repository.Interface;
+using HospitalLibraryHospital_library.MedicalRecords.Repository;
 
 namespace HospitalAPI.Repository
 {

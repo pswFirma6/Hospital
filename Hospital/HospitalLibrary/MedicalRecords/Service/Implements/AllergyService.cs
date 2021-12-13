@@ -1,6 +1,6 @@
 ﻿using Hospital_library.MedicalRecords.Service;
-using HospitalAPI.Repository;
 using HospitalLibrary.MedicalRecords.Model;
+using HospitalLibraryHospital_library.MedicalRecords.Repository;
 using System.Collections.Generic;
 
 namespace HospitalAPI.ImplService

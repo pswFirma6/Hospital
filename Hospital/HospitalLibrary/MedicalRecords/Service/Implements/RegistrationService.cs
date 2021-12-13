@@ -1,7 +1,7 @@
-﻿using HospitalAPI.Repository;
-using HospitalLibrary.MedicalRecords.Model;
+﻿using HospitalLibrary.MedicalRecords.Model;
 using HospitalLibrary.MedicalRecords.Repository.Repository.Interface;
 using HospitalLibrary.MedicalRecords.Service;
+using HospitalLibraryHospital_library.MedicalRecords.Repository;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.WebUtilities;
 using System.Collections.Generic;

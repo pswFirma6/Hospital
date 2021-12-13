@@ -1,9 +1,8 @@
-using HospitalAPI;
 using HospitalAPI.ImplService;
-using HospitalAPI.Repository;
 using HospitalLibrary.MedicalRecords.Model;
 using HospitalLibrary.MedicalRecords.Model.Enums;
 using HospitalLibrary.Model.Enums;
+using HospitalLibraryHospital_library.MedicalRecords.Repository;
 using MimeKit;
 using Moq;
 using System;
@@ -65,7 +64,7 @@ namespace HospitalTests.UnitTests
             // Arrange //
             Doctor doctor = new Doctor();
             List<Allergy> allergies = new List<Allergy>();
-            Patient newPatient = new Patient(2, "Mira", "Miric", DateTime.Now,
+            Patient newPatient = new Patient(1, "Mira", "Miric", DateTime.Now,
             "0542369719085", "Partizanskih baza 7.", "0666423599", "mara@gmail.com",
             "Mirami", "mira123", Gender.female,
             "Novi Sad", "Serbia", UserType.patient, BloodType.B, RhFactor.positive,

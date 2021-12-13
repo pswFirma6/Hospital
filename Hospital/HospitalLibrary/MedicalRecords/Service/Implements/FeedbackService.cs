@@ -1,7 +1,7 @@
-﻿using HospitalAPI.Repository;
-using HospitalLibrary.MedicalRecords.Model;
+﻿using HospitalLibrary.MedicalRecords.Model;
 using HospitalLibrary.MedicalRecords.Model.Enums;
 using HospitalLibrary.MedicalRecords.Service;
+using HospitalLibraryHospital_library.MedicalRecords.Repository;
 using System;
 using System.Collections.Generic;
 
@@ -10,9 +10,9 @@ namespace HospitalAPI.Service
 
     public class FeedbackService : IFeedbackService
     {
-        public HospitalRepositoryFactory _repositoryFactory;
+        public RepositoryFactory _repositoryFactory;
 
-        public FeedbackService(HospitalRepositoryFactory repositoryFactory, MyDbContext aa) 
+        public FeedbackService(RepositoryFactory repositoryFactory) 
         {
             _repositoryFactory = repositoryFactory;
         }
