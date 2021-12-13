@@ -44,27 +44,50 @@ namespace HospitalAPI.Controller
             return Ok(mapper);
         }
         
-        [HttpGet]
+        [HttpGet("{id}")]
+
         public IActionResult GetAllAppointment(int id)
         {
+
             return Ok(_appointmentService.getAll(id));
         }
         
-        [HttpGet]
+        [HttpGet("{id}")]
         [Route("{awaiting}")]
         public IActionResult GetAwaitingAppointment(int id)
         {
             return Ok(_appointmentService.getAwaiting(id));
         }
-
-        [HttpGet]
+        [HttpGet("{id}")]
         [Route("{cancelled}")]
         public IActionResult GetCancelledAppointment(int id)
         {
             return Ok(_appointmentService.getCancelled(id));
         }
+        [HttpGet("{id}")]
+        [Route("{completed}")]
+        public IActionResult GetCompletedAppointment(int id)
+        {
+            return Ok(_appointmentService.getCompleted(id));
+        }
+        [HttpPut]
+        public IActionResult CancelAppointment(Appointment appointment)
+        {
+            if (!_appointmentService.CheckExistingAppointment(appointment))
+            {
+                return Conflict(new { message = $"The appointment does not exist in the database" });
+            }
+            if (!_appointmentValidation.IsAwaiting(appointment))
+            {
+                return BadRequest();
+            }
 
-        [HttpPost]
+            _appointmentService.CancelAppointment(appointment);
+
+            return Ok(appointment);
+        }
+
+        [HttpPost("{id}")]
         [Route("Priority")]
         public IActionResult GetPriorityAppointments(FreeTermsRequestDTO freeTermsRequestDTO)
         {

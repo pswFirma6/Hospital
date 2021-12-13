@@ -1,5 +1,7 @@
-﻿using HospitalAPI.DTO;
+﻿using Hospital_library.MedicalRecords.Model.Enums;
+using HospitalAPI.DTO;
 using HospitalAPI.DTO.AppointmentDTO;
+using HospitalLibrary.MedicalRecords.Model;
 using System;
 
 namespace HospitalAPI.Validation
@@ -31,6 +33,18 @@ namespace HospitalAPI.Validation
             DateTime date = DateTime.Parse(dto.Date,
                                       System.Globalization.CultureInfo.InvariantCulture);
             if (date <= DateTime.Now || dto.DoctorId <= 0 || !dto.Equals("date") && !dto.Equals("doctor"))
+            {
+                return false;
+            }
+            return true;
+        }
+        public bool IsAwaiting(Appointment appointment)
+        {
+            if (appointment == null)
+            {
+                return false;
+            }
+            if (appointment.Type != AppointmentType.Awaiting)
             {
                 return false;
             }
