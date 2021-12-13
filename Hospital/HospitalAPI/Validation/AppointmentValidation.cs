@@ -4,6 +4,7 @@ using HospitalAPI.DTO.AppointmentDTO;
 using HospitalLibrary.MedicalRecords.Model.Enums;
 using HospitalLibrary.MedicalRecords.Model;
 using System;
+using Hospital_library.MedicalRecords.Model.Enums;
 
 namespace HospitalAPI.Validation
 {
