@@ -11,9 +11,8 @@ namespace HospitalAPI.Validation
             {
                 return false;
             }
-            if (dto.StartTime <= DateTime.Now
-                || dto.PatientId <= 0 || dto.Patient == null || dto.DoctorId <= 0
-                || dto.Doctor == null)
+            if ( dto.StartTime <= DateTime.Now
+                || dto.PatientId <= 0  || dto.DoctorId <= 0 )
             {
                 return false;
             }

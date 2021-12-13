@@ -1,7 +1,9 @@
-﻿using Hospital_library.MedicalRecords.Model.Enums;
+﻿using Hospital_library.MedicalRecords.Model;
+using Hospital_library.MedicalRecords.Model.Enums;
 using Hospital_library.MedicalRecords.Service;
 using HospitalLibrary.MedicalRecords.Model;
 using HospitalLibraryHospital_library.MedicalRecords.Repository;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -17,6 +19,17 @@ namespace HospitalAPI.ImplService
             _hospitalRepositoryFactory = hospitalRepositoryFactory;
         }
 
+        private List<string> InitializedTerms = new List<string>{
+                "07:00", "07:30",
+                "08:00", "08:30",
+                "09:00", "09:30",
+                "10:00", "10:30",
+                "11:00", "11:30",
+                "12:00", "12:30",
+                "13:00", "13:30",
+                "14:00", "14:30",
+                "15:00"
+        };
         public void Add(Appointment appointment)
         {
             appointment.Doctor = _hospitalRepositoryFactory.GetDoctorsRepository().GetOne(appointment.DoctorId);
@@ -75,17 +88,7 @@ namespace HospitalAPI.ImplService
             }
             return allAppointments;
         }
-        private List<string> InitializedTerms = new List<string>{
-                "07:00", "07:30",
-                "08:00", "08:30",
-                "09:00", "09:30",
-                "10:00", "10:30",
-                "11:00", "11:30",
-                "12:00", "12:30",
-                "13:00", "13:30",
-                "14:00", "14:30",
-                "15:00"
-            };
+
         public List<string> GetDoctorsFreeAppointments(int doctorId, string dateString)
         {
             List<string> terms = new List<string>(InitializedTerms);
@@ -106,6 +109,68 @@ namespace HospitalAPI.ImplService
                 }
             }
             return terms;
+        }
+
+        public FreeTermsForApp GetAllFreeTerms(int doctorId, DateTime startDate) 
+        {
+
+            DateTime datePlus = startDate.AddDays(2);
+            DateTime dateMinus = startDate.AddDays(-2);
+
+            FreeTermsForApp terms = GetDomen(doctorId, dateMinus);
+
+            Doctor doctor = _hospitalRepositoryFactory.GetDoctorsRepository().GetOne(doctorId);
+            
+            List<Appointment> appointments = doctor.Appointments.Where( x => x.StartTime >= dateMinus || x.StartTime <= datePlus ).ToList();
+            
+
+            return GetTerms(appointments, terms);
+        }
+
+        public FreeTermsForApp GetDomen(int doctorId, DateTime dateMinus) 
+        {
+            FreeTermsForApp freeTerms = new FreeTermsForApp();
+            freeTerms.DoctorId = doctorId;
+            freeTerms.Terms = new List<DateTime>();
+
+            List<string> terms = new List<string>(InitializedTerms);
+            foreach (string term in terms)
+            {
+                var stringTime = term;
+                var time = stringTime.Split(':');
+
+                DateTime d1 = new DateTime(dateMinus.Year, dateMinus.Month, dateMinus.Day,
+                            Int32.Parse(time[0]), Int32.Parse(time[1]), 0);
+                DateTime d2 = d1.AddDays(1);
+                DateTime d3 = d2.AddDays(1);
+                DateTime d4 = d3.AddDays(1);
+                DateTime d5 = d4.AddDays(1);
+
+                freeTerms.Terms.Add(d1);
+                freeTerms.Terms.Add(d2);
+                freeTerms.Terms.Add(d3);
+                freeTerms.Terms.Add(d4);
+                freeTerms.Terms.Add(d5);
+            }
+
+            return freeTerms;
+        }
+
+        public FreeTermsForApp GetTerms(List<Appointment> appointments, FreeTermsForApp terms) 
+        {
+            FreeTermsForApp freeTerms = new FreeTermsForApp();
+            freeTerms.DoctorId = terms.DoctorId;
+            freeTerms.Terms = new List<DateTime>();
+
+            foreach (DateTime term in terms.Terms) 
+            {
+                if (!appointments.Any(x => x.StartTime.Equals(term)))
+                {
+                    freeTerms.Terms.Add(term);
+                }
+            }
+
+            return freeTerms;
         }
     }
 }

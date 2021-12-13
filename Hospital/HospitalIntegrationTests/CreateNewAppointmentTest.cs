@@ -1,4 +1,5 @@
 ﻿using HospitalAPI.DTO;
+using HospitalAPI.DTO.AppointmentDTO;
 using HospitalLibrary.GraphicalEditor.Model;
 using HospitalLibrary.MedicalRecords.Model;
 using Newtonsoft.Json;
@@ -75,7 +76,71 @@ namespace HospitalIntegrationTests
 
         }
 
-        public static IEnumerable<object[]> DataSuccessfully()
+        [Theory]
+        [MemberData(nameof(TermSuccessfully))]
+        public async Task Return_Free_Appointments_Successfully(TermDTO newTerm, DateTime expectedTermDate, int expectedTermDoctorId)
+        {
+            // Arrange // 
+            var json = JsonConvert.SerializeObject(newTerm);
+            var data = new StringContent(json, Encoding.UTF8, "application/json");
+            var url = "api/appointment/doctorAppintments";
+
+            // Act //
+            var response = await injection.Client.PostAsync(url, data);
+
+            // Assert //
+            response.EnsureSuccessStatusCode();
+
+            var resultString = await response.Content.ReadAsStringAsync();
+            var result = JsonConvert.DeserializeObject<Appointment>(resultString);
+
+            Assert.Equal(HttpStatusCode.OK, response.StatusCode);
+            Assert.Equal(result.DoctorId, expectedTermDoctorId);
+           
+        }
+        /*
+        [Theory]
+        [MemberData(nameof(TermUnsuccessfully))]
+        public async Task Return_Free_Appointments_Successfully(TermDTO newTerm, DateTime expectedTermDate, int expectedTermDoctorId)
+        {
+            // Arrange // 
+            var json = JsonConvert.SerializeObject(newTerm);
+            var data = new StringContent(json, Encoding.UTF8, "application/json");
+            var url = "api/appointment/doctorAppintments";
+
+            // Act //
+            var response = await injection.Client.PostAsync(url, data);
+
+            // Assert //
+            response.EnsureSuccessStatusCode();
+            var resultString = await response.Content.ReadAsStringAsync();
+            var result = JsonConvert.DeserializeObject<Appointment>(resultString);
+
+            Assert.Equal(HttpStatusCode.OK, response.StatusCode);
+            Assert.Equal(result.DoctorId, expectedTermDoctorId);
+            Assert.Equal(result.StartTime, expectedTermDate);
+
+        }
+        */
+        public static IEnumerable<object[]> TermSuccessfully()
+        {
+            var retVal = new List<object[]>();
+
+            var dateString = "1/12/2022 9:00:00 AM";
+            DateTime date = DateTime.Parse(dateString,
+                                      System.Globalization.CultureInfo.InvariantCulture);
+
+            TermDTO newTerm = new TermDTO( 1,  date);
+
+            var expectedTermDoctorId = 1;
+            var expectedTermDate = date;
+
+            retVal.Add(new object[] { newTerm, expectedTermDate, expectedTermDoctorId });
+
+            return retVal;
+        }
+
+            public static IEnumerable<object[]> DataSuccessfully()
         {
             var retVal = new List<object[]>();
 

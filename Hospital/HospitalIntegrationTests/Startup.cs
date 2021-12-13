@@ -128,10 +128,24 @@ namespace HospitalIntegrationTests
             //  Add fake data
 
             List<Patient> patients = new List<Patient>();
+            Patient patient = new Patient();
+            Doctor doc = new Doctor();
             List<Appointment> appointments = new List<Appointment>();
             var dateString = "2/12/2022 8:30:00 AM";
             DateTime date = DateTime.Parse(dateString,
                           System.Globalization.CultureInfo.InvariantCulture);
+
+            var dateString1 = "1/12/2022 8:30:00 AM";
+            DateTime date1 = DateTime.Parse(dateString1,
+                                      System.Globalization.CultureInfo.InvariantCulture);
+            Appointment appointment1 = new Appointment(date1, 1, patient, 1, doc);
+            var dateString2 = "1/14/2022 8:30:00 AM";
+            DateTime date2 = DateTime.Parse(dateString2,
+                                      System.Globalization.CultureInfo.InvariantCulture);
+            Appointment appointment2 = new Appointment(date2, 2, patient, 1, doc);
+
+            appointments.Add(appointment1);
+            appointments.Add(appointment2);
 
             Doctor doctor = new Doctor( 1, "Mirko", "Mirkovic", date, "9981902895421", "Jase Tomic 44."
                     , "0645796684", "drmirkovic@bch.com", "Dr Mirko", "Mirko123", Gender.male
