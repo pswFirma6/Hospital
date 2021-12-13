@@ -119,7 +119,7 @@ namespace HospitalAPI.ImplService
             List<string> terms = GetDoctorsFreeAppointments(doctor.Id, freeTermsRequest.Date);
             if (terms.Count != 0)
             {
-                FreeTerms freeTerms = new FreeTerms(freeTermsRequest.Date, doctor.Id, terms);
+                FreeTerms freeTerms = new FreeTerms(freeTermsRequest.Date, doctor.Id, doctor, terms);
                 return freeTerms;
             }
             else
@@ -163,7 +163,7 @@ namespace HospitalAPI.ImplService
         {
             DateTime alternativeDate = date.AddDays(1);
             List<string> terms = GetDoctorsFreeAppointments(doctor.Id, alternativeDate);
-            FreeTerms freeTerms = new FreeTerms(alternativeDate, doctor.Id, terms);
+            FreeTerms freeTerms = new FreeTerms(alternativeDate, doctor.Id, doctor, terms);
             return freeTerms;
         }
 
@@ -188,7 +188,7 @@ namespace HospitalAPI.ImplService
                     }
                 }
             }
-            FreeTerms freeTerms = new FreeTerms(date, minAppDoc.Id, GetDoctorsFreeAppointments(minAppDoc.Id, date));
+            FreeTerms freeTerms = new FreeTerms(date, minAppDoc.Id, minAppDoc, GetDoctorsFreeAppointments(minAppDoc.Id, date));
 
             return freeTerms;
         }

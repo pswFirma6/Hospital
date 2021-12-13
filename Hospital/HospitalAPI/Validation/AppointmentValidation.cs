@@ -1,8 +1,10 @@
-﻿using Hospital_library.MedicalRecords.Model.Enums;
+
 using HospitalAPI.DTO;
 using HospitalAPI.DTO.AppointmentDTO;
+using HospitalLibrary.MedicalRecords.Model.Enums;
 using HospitalLibrary.MedicalRecords.Model;
 using System;
+using Hospital_library.MedicalRecords.Model.Enums;
 
 namespace HospitalAPI.Validation
 {
@@ -14,9 +16,7 @@ namespace HospitalAPI.Validation
             {
                 return false;
             }
-            if (dto.StartTime <= DateTime.Now
-                || dto.PatientId <= 0 || dto.Patient == null || dto.DoctorId <= 0
-                || dto.Doctor == null)
+            if ( dto.PatientId <= 0 || dto.DoctorId <= 0)
             {
                 return false;
             }
@@ -30,9 +30,21 @@ namespace HospitalAPI.Validation
             {
                 return false;
             }
-            DateTime date = DateTime.Parse(dto.Date,
-                                      System.Globalization.CultureInfo.InvariantCulture);
-            if (date <= DateTime.Now || dto.DoctorId <= 0 || !dto.Equals("date") && !dto.Equals("doctor"))
+           
+            if (dto.DoctorId <= 0 || !(dto.Priority == "doctor" || dto.Priority == "date"))
+            {
+                return false;
+            }
+            return true;
+        }
+
+        public bool DoctorTypeRequestIsValid(string doctorType)
+        {
+            try
+            {
+                DoctorType type = (DoctorType)Enum.Parse(typeof(DoctorType), doctorType);
+            }
+            catch
             {
                 return false;
             }
