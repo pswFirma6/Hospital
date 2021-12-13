@@ -105,6 +105,20 @@ namespace HospitalAPI.ImplService
         {
             appointment.Type = AppointmentType.Cancelled;
             _hospitalRepositoryFactory.GetAppointmentsRepository().Update(appointment);
+            CheckIfPatientIsMalicious(appointment.PatientId);
+        }
+
+        private void CheckIfPatientIsMalicious(int patientID)
+        {
+            List<Appointment> cancelledApointmentsListByPatient = _hospitalRepositoryFactory.GetAppointmentsRepository().GetAll().Where(x => x.PatientId == patientID && x.Type == AppointmentType.Cancelled).ToList();
+            if (cancelledApointmentsListByPatient.Count > 2)
+            {
+                if (cancelledApointmentsListByPatient[cancelledApointmentsListByPatient.Count - 3].StartTime > DateTime.Now.AddDays(-30))
+                {
+                    _hospitalRepositoryFactory.GetPatientRepository().GetOne(patientID).Malicious = true;
+                    _hospitalRepositoryFactory.GetPatientRepository().Update(_hospitalRepositoryFactory.GetPatientRepository().GetOne(patientID));
+                }
+            }
         }
         public bool CheckExistingAppointment(Appointment appointment)
         {
