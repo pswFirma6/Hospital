@@ -124,7 +124,6 @@ namespace HospitalAPI
                 app.UseDeveloperExceptionPage();
             }
 
-            app.UseHttpsRedirection();
 
             app.UseRouting();
 
