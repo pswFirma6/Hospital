@@ -1,6 +1,8 @@
-﻿using HospitalAPI.DTO;
+
+using HospitalAPI.DTO;
 using HospitalAPI.DTO.AppointmentDTO;
 using HospitalLibrary.MedicalRecords.Model.Enums;
+using HospitalLibrary.MedicalRecords.Model;
 using System;
 
 namespace HospitalAPI.Validation
@@ -42,6 +44,18 @@ namespace HospitalAPI.Validation
                 DoctorType type = (DoctorType)Enum.Parse(typeof(DoctorType), doctorType);
             }
             catch
+            {
+                return false;
+            }
+            return true;
+        }
+        public bool IsAwaiting(Appointment appointment)
+        {
+            if (appointment == null)
+            {
+                return false;
+            }
+            if (appointment.Type != AppointmentType.Awaiting)
             {
                 return false;
             }
