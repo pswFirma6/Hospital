@@ -2,6 +2,7 @@
 using Hospital_library.MedicalRecords.Model.Enums;
 using Hospital_library.MedicalRecords.Service;
 using HospitalLibrary.MedicalRecords.Model;
+using HospitalLibrary.MedicalRecords.Model.Enums;
 using HospitalLibraryHospital_library.MedicalRecords.Repository;
 using System;
 using System.Collections.Generic;
@@ -13,12 +14,6 @@ namespace HospitalAPI.ImplService
     public class AppointmentService : IAppointmentService
     {
         private readonly RepositoryFactory _hospitalRepositoryFactory;
-
-        public AppointmentService(RepositoryFactory hospitalRepositoryFactory) 
-        {
-            _hospitalRepositoryFactory = hospitalRepositoryFactory;
-        }
-
         private List<string> InitializedTerms = new List<string>{
                 "07:00", "07:30",
                 "08:00", "08:30",
@@ -29,7 +24,12 @@ namespace HospitalAPI.ImplService
                 "13:00", "13:30",
                 "14:00", "14:30",
                 "15:00"
-        };
+            };
+        public AppointmentService(RepositoryFactory hospitalRepositoryFactory)
+        {
+            _hospitalRepositoryFactory = hospitalRepositoryFactory;
+        }
+
         public void Add(Appointment appointment)
         {
             appointment.Doctor = _hospitalRepositoryFactory.GetDoctorsRepository().GetOne(appointment.DoctorId);
@@ -37,13 +37,13 @@ namespace HospitalAPI.ImplService
             _hospitalRepositoryFactory.GetAppointmentsRepository().Add(appointment);
         }
 
-        public bool CheckDoctorAppointments(Appointment newAppointment) 
+        public bool CheckDoctorAppointments(Appointment newAppointment)
         {
             var existingDoctor = _hospitalRepositoryFactory.GetDoctorsRepository().GetOne(newAppointment.DoctorId);
 
-            return existingDoctor.Appointments.Any( x => x.StartTime.Equals(newAppointment.StartTime) 
-                    || ( newAppointment.StartTime <= x.StartTime.AddMinutes(30)  
-                    &&  x.StartTime <= newAppointment.StartTime)); 
+            return existingDoctor.Appointments.Any(x => x.StartTime.Equals(newAppointment.StartTime)
+                   || (newAppointment.StartTime <= x.StartTime.AddMinutes(30)
+                   && x.StartTime <= newAppointment.StartTime));
         }
 
         public List<Appointment> getAll(int id)
@@ -52,7 +52,7 @@ namespace HospitalAPI.ImplService
             List<Appointment> appointmentsList = _hospitalRepositoryFactory.GetAppointmentsRepository().GetAll();
             foreach (Appointment appointment in appointmentsList)
             {
-                if(appointment.PatientId == id)
+                if (appointment.PatientId == id)
                 {
                     allAppointments.Add(appointment);
                 }
@@ -68,7 +68,7 @@ namespace HospitalAPI.ImplService
             {
                 if (appointment.PatientId == id && appointment.Type == AppointmentType.Awaiting)
                 {
-                     allAppointments.Add(appointment);
+                    allAppointments.Add(appointment);
 
                 }
             }
@@ -88,12 +88,60 @@ namespace HospitalAPI.ImplService
             }
             return allAppointments;
         }
+        public List<Appointment> getCompleted(int id)
+        {
+            List<Appointment> allAppointments = new List<Appointment>();
+            List<Appointment> appointmentsList = _hospitalRepositoryFactory.GetAppointmentsRepository().GetAll();
+            foreach (Appointment appointment in appointmentsList)
+            {
+                if (appointment.PatientId == id && appointment.Type == AppointmentType.Completed)
+                {
+                    allAppointments.Add(appointment);
+                }
+            }
+            return allAppointments;
+        }
+        public void CancelAppointment(Appointment appointment)
+        {
+            appointment.Type = AppointmentType.Cancelled;
+            _hospitalRepositoryFactory.GetAppointmentsRepository().Update(appointment);
+        }
+        public bool CheckExistingAppointment(Appointment appointment)
+        {
 
-        public List<string> GetDoctorsFreeAppointments(int doctorId, string dateString)
+            var existingAppointments = _hospitalRepositoryFactory.GetAppointmentsRepository().GetAll();
+            return existingAppointments.Any(x => x.StartTime.Equals(appointment.StartTime));
+        }
+
+        public FreeTerms GetTerms(FreeTerms freeTermsRequest)
+        {
+            var doctor = _hospitalRepositoryFactory.GetDoctorsRepository().GetOne(freeTermsRequest.DoctorId);
+            List<string> terms = GetDoctorsFreeAppointments(doctor.Id, freeTermsRequest.Date);
+            if (terms.Count != 0)
+            {
+                FreeTerms freeTerms = new FreeTerms(freeTermsRequest.Date, doctor.Id, doctor, terms);
+                return freeTerms;
+            }
+            else
+            {
+                if (freeTermsRequest.Priority.Equals("doctor"))
+                {
+                    return GetAlternativeDate(doctor, freeTermsRequest.Date);
+                }
+                else if (freeTermsRequest.Priority.Equals("date"))
+                {
+                    return GetAlternativeDoctor(doctor, freeTermsRequest.Date);
+                }
+            }
+            return null;
+        }
+
+
+        public List<string> GetDoctorsFreeAppointments(int doctorId, DateTime date)
         {
             List<string> terms = new List<string>(InitializedTerms);
             var existingDoctor = _hospitalRepositoryFactory.GetDoctorsRepository().GetOne(doctorId);
-            List<Appointment> DoctorAppointments = existingDoctor.Appointments.Where(x => x.StartTime.ToString("dd/MM/yyyy").Equals(dateString)).ToList();
+            List<Appointment> DoctorAppointments = existingDoctor.Appointments.Where(x => x.StartTime.ToString("dd/MM/yyyy").Equals(date.ToString("dd/MM/yyyy"))).ToList();
             if (DoctorAppointments.Count != 0)
             {
                 foreach (Appointment appointment in DoctorAppointments)
@@ -111,66 +159,42 @@ namespace HospitalAPI.ImplService
             return terms;
         }
 
-        public FreeTermsForApp GetAllFreeTerms(int doctorId, DateTime startDate) 
+        public FreeTerms GetAlternativeDate(Doctor doctor, DateTime date)
         {
-
-            DateTime datePlus = startDate.AddDays(2);
-            DateTime dateMinus = startDate.AddDays(-2);
-
-            FreeTermsForApp terms = GetDomen(doctorId, dateMinus);
-
-            Doctor doctor = _hospitalRepositoryFactory.GetDoctorsRepository().GetOne(doctorId);
-            
-            List<Appointment> appointments = doctor.Appointments.Where( x => x.StartTime >= dateMinus || x.StartTime <= datePlus ).ToList();
-            
-
-            return GetTerms(appointments, terms);
-        }
-
-        public FreeTermsForApp GetDomen(int doctorId, DateTime dateMinus) 
-        {
-            FreeTermsForApp freeTerms = new FreeTermsForApp();
-            freeTerms.DoctorId = doctorId;
-            freeTerms.Terms = new List<DateTime>();
-
-            List<string> terms = new List<string>(InitializedTerms);
-            foreach (string term in terms)
-            {
-                var stringTime = term;
-                var time = stringTime.Split(':');
-
-                DateTime d1 = new DateTime(dateMinus.Year, dateMinus.Month, dateMinus.Day,
-                            Int32.Parse(time[0]), Int32.Parse(time[1]), 0);
-                DateTime d2 = d1.AddDays(1);
-                DateTime d3 = d2.AddDays(1);
-                DateTime d4 = d3.AddDays(1);
-                DateTime d5 = d4.AddDays(1);
-
-                freeTerms.Terms.Add(d1);
-                freeTerms.Terms.Add(d2);
-                freeTerms.Terms.Add(d3);
-                freeTerms.Terms.Add(d4);
-                freeTerms.Terms.Add(d5);
-            }
-
+            DateTime alternativeDate = date.AddDays(1);
+            List<string> terms = GetDoctorsFreeAppointments(doctor.Id, alternativeDate);
+            FreeTerms freeTerms = new FreeTerms(alternativeDate, doctor.Id, doctor, terms);
             return freeTerms;
         }
 
-        public FreeTermsForApp GetTerms(List<Appointment> appointments, FreeTermsForApp terms) 
+        public FreeTerms GetAlternativeDoctor(Doctor doctor, DateTime date)
         {
-            FreeTermsForApp freeTerms = new FreeTermsForApp();
-            freeTerms.DoctorId = terms.DoctorId;
-            freeTerms.Terms = new List<DateTime>();
-
-            foreach (DateTime term in terms.Terms) 
+            List<Doctor> doctors = GetTypeDoctors(doctor.DoctorType);
+            if (doctors == null || doctors.Count == 1)
             {
-                if (!appointments.Any(x => x.StartTime.Equals(term)))
+                return null;
+            }
+            Doctor minAppDoc = doctors.First();
+            int MaxFreeTerms = InitializedTerms.Count;
+            foreach (Doctor appDoc in doctors)
+            {
+                var minAppDoctorsFreeAppintments = GetDoctorsFreeAppointments(minAppDoc.Id, date).Count;
+                if (minAppDoctorsFreeAppintments != MaxFreeTerms)
                 {
-                    freeTerms.Terms.Add(term);
+                    var appDocFreeTerms = GetDoctorsFreeAppointments(appDoc.Id, date);
+                    if (appDocFreeTerms.Count > minAppDoctorsFreeAppintments)
+                    {
+                        minAppDoc = appDoc;
+                    }
                 }
             }
+            FreeTerms freeTerms = new FreeTerms(date, minAppDoc.Id, minAppDoc, GetDoctorsFreeAppointments(minAppDoc.Id, date));
 
             return freeTerms;
+        }
+        public List<Doctor> GetTypeDoctors(DoctorType type)
+        {
+            return _hospitalRepositoryFactory.GetDoctorsRepository().GetSpecialists(type);
         }
     }
 }

@@ -10,5 +10,6 @@ namespace Hospital_library.MedicalRecords.Service
     {
         public List<Doctor> GetAvailable();
         public List<Doctor> GetSpecialists(DoctorType type);
+        public List<Doctor> GetAllDoctors();
     }
 }

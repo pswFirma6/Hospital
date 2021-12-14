@@ -31,7 +31,13 @@ namespace HospitalAPI.Controller
             var model = _mapper.Map<PatientRegistrationDTO>(patient);
             return Ok(model);
         }
-       
+
+        [HttpGet]
+        public IActionResult GetMaliciousPatients()
+        {
+            return Ok(_patientService.GetMaliciousPatients());
+        }
+
 
     }
 }

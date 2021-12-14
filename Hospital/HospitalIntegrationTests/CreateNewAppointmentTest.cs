@@ -154,7 +154,7 @@ namespace HospitalIntegrationTests
             var dateString = "1/12/2022 8:30:00 AM";
             DateTime date = DateTime.Parse(dateString,
                                       System.Globalization.CultureInfo.InvariantCulture);
-            NewAppointmentDTO appointmentDTO = new NewAppointmentDTO(date, patient.Id, patient, doctor.Id, doctor);
+            NewAppointmentDTO appointmentDTO = new NewAppointmentDTO(date, patient.Id, doctor.Id);
 
             var expectedStartTime = date;
             var expectedPatientId = 2;

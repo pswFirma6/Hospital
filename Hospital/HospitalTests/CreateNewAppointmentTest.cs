@@ -119,7 +119,7 @@ namespace HospitalUnitTests
 
             appointments.Add(appointment1);
             appointments.Add(appointment2);
-            Doctor doctor = new Doctor(1, "Miroslav", "Mikic", DateTime.Now, "2456874215478", "Marka Veselinovica 5."
+            Doctor doctor = new Doctor( 1 , "Miroslav", "Mikic", DateTime.Now, "2456874215478", "Marka Veselinovica 5."
                     , "0665789461", "milovan@bch.com", "Dr. Miroslav Mikic", "mire123", Gender.male, "Novi Sad"
                     , "Serbia", UserType.doctor, patients, DoctorType.generalPractitioner, appointments);
 

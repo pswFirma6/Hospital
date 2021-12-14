@@ -1,10 +1,14 @@
 ﻿using AutoMapper;
+using Hospital_library.MedicalRecords.Model;
 using Hospital_library.MedicalRecords.Service;
 using HospitalAPI.DTO;
 using HospitalAPI.DTO.AppointmentDTO;
 using HospitalAPI.Validation;
 using HospitalLibrary.MedicalRecords.Model;
+using HospitalLibrary.MedicalRecords.Model.Enums;
 using Microsoft.AspNetCore.Mvc;
+using System;
+using System.Collections.Generic;
 
 namespace HospitalAPI.Controller
 {
@@ -42,9 +46,11 @@ namespace HospitalAPI.Controller
             return Ok(mapper);
         }
         
-        [HttpGet]
+        [HttpGet("{id}")]
+
         public IActionResult GetAllAppointment(int id)
         {
+
             return Ok(_appointmentService.getAll(id));
         }
 
@@ -62,29 +68,60 @@ namespace HospitalAPI.Controller
         {
             return Ok(_appointmentService.getAwaiting(id));
         }
-
-        [HttpGet]
+        [HttpGet("{id}")]
         [Route("{cancelled}")]
         public IActionResult GetCancelledAppointment(int id)
         {
             return Ok(_appointmentService.getCancelled(id));
         }
-
-        [HttpPost]
-        [Route("Priority")]
-        public IActionResult GetPriorityAppointments(PreferredAppointmentRequestDTO preferredAppointmentRequestDTO)
+        [HttpGet("{id}")]
+        [Route("{completed}")]
+        public IActionResult GetCompletedAppointment(int id)
         {
-            if (preferredAppointmentRequestDTO.Preferred.Equals("doctor"))
-            {
-                return Ok(_appointmentService.GetDoctorsFreeAppointments(preferredAppointmentRequestDTO.DoctorId, preferredAppointmentRequestDTO.Date));
-            }
-            else if (preferredAppointmentRequestDTO.Preferred.Equals("date"))
-            {
-                return Ok();
-            }
-            return BadRequest();
+            return Ok(_appointmentService.getCompleted(id));
         }
-    
+        [HttpPut]
+        public IActionResult CancelAppointment(Appointment appointment)
+        {
+            if (!_appointmentService.CheckExistingAppointment(appointment))
+            {
+                return Conflict(new { message = $"The appointment does not exist in the database" });
+            }
+            if (!_appointmentValidation.IsAwaiting(appointment))
+            {
+                return BadRequest();
+            }
+
+            _appointmentService.CancelAppointment(appointment);
+
+            return Ok(appointment);
+        }
+
+        [HttpPost("{id}")]
+        [Route("Priority")]
+        public IActionResult GetPriorityAppointments(FreeTermsRequestDTO freeTermsRequestDTO)
+        {
+            if (!_appointmentValidation.RequestIsValid(freeTermsRequestDTO))
+            {
+                return BadRequest();
+            }
+            var mapper = _mapper.Map<FreeTerms>(freeTermsRequestDTO);
+            FreeTerms freeTerms = _appointmentService.GetTerms(mapper);
+            return Ok(freeTerms);
+        }
+
+        //[HttpGet]
+        //[Route("{AppointmentForm}")]
+        //public IActionResult GetDoctorsAndTypes(string doctorType)
+        //{
+        //    if (!_appointmentValidation.DoctorTypeRequestIsValid(doctorType))
+        //    {
+        //        return BadRequest();
+        //    }
+        //    DoctorType type = (DoctorType)Enum.Parse(typeof(DoctorType), doctorType);
+
+        //    return Ok(_appointmentService.GetTypeDoctors(type));
+        //}
     }
 }
 
