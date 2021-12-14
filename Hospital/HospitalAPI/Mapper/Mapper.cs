@@ -35,6 +35,10 @@ namespace HospitalAPI.Mapper
                 
                 CreateMap<Appointment, NewAppointmentDTO>();
                 CreateMap<NewAppointmentDTO, Appointment>();
+
+
+                CreateMap<Appointment, NewAppointmentDTO>();
+                CreateMap<NewAppointmentDTO, Appointment>();
             }
         }
     } 
