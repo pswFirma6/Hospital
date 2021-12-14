@@ -53,8 +53,16 @@ namespace HospitalAPI.Controller
 
             return Ok(_appointmentService.getAll(id));
         }
-        
-        [HttpGet("{id}")]
+
+        [HttpPost]
+        [Route("{doctorAppintments}")]
+        public IActionResult GetDoctorAppointments(TermDTO termDTO)
+        {
+            return Ok(_appointmentService.GetAllFreeTerms(termDTO.DoctorId, termDTO.StartDate));
+        }
+
+
+        [HttpGet]
         [Route("{awaiting}")]
         public IActionResult GetAwaitingAppointment(int id)
         {

@@ -59,6 +59,23 @@ namespace HospitalAPI.ImplService
             patient.Allergies = allergies;
 
             return patient;
-        } 
+        }
+
+        public List<Patient> GetMaliciousPatients()
+        {
+            return _hospitalRepositoryFactory.GetPatientRepository().GetAll().Where(x => x.Malicious == true).ToList();
+        }
+
+        public void BlockPatient(Patient patient)
+        {
+            _hospitalRepositoryFactory.GetPatientRepository().GetOne(patient.Id).Blocked = true;
+            _hospitalRepositoryFactory.GetPatientRepository().Update(patient);
+        }
+
+        public void UnblockPatient(Patient patient)
+        {
+            _hospitalRepositoryFactory.GetPatientRepository().GetOne(patient.Id).Blocked = false;
+            _hospitalRepositoryFactory.GetPatientRepository().Update(patient);
+        }
     }
 }

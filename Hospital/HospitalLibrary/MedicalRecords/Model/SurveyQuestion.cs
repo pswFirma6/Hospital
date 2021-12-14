@@ -21,7 +21,7 @@ namespace HospitalLibrary.MedicalRecords.Model
         public SurveyQuestion() { }
         public int PersonId { get; set; }
         public string QuestionText { get; set; }
-        public int Rate { get; set; }
+        public double Rate { get; set; }
         public SurveyQuestionCategory Category { get; set; }
     }
 }

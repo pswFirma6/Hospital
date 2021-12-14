@@ -7,6 +7,7 @@ namespace HospitalLibrary.MedicalRecords.Service
     public interface ISurveyService
     {
         public void Add(List<SurveyQuestion> surveyQuestions);
-
+        public List<SurveyQuestion> GetGroupedByQuestion();
+        public List<SurveyQuestion> GetGroupedByCategory();
     }
 }
