@@ -9,10 +9,16 @@ namespace Hospital_library.MedicalRecords.Service
     {
         public bool CheckDoctorAppointments(Appointment newAppointment);
         public void Add(Appointment appointment);
-        public FreeTermsForApp GetAllFreeTerms(int DoctorId, DateTime startDate);
-        public List<string> GetDoctorsFreeAppointments(int doctorId, string dateString);
+        //public FreeTermsForApp GetAllFreeTerms(int DoctorId, DateTime startDate);
+        //public List<string> GetDoctorsFreeAppointments(int doctorId, string dateString);
         public List<Appointment> getAll(int id);
         public List<Appointment> getAwaiting(int id);
         public List<Appointment> getCancelled(int id);
+        public FreeTerms GetTerms(FreeTerms freeTermsRequest);
+        public List<Appointment> getCompleted(int id);
+        public bool CheckExistingAppointment(Appointment appointment);
+        public void CancelAppointment(Appointment appointment);
+
+
     }
 }

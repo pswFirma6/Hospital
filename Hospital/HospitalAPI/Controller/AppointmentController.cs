@@ -54,12 +54,12 @@ namespace HospitalAPI.Controller
             return Ok(_appointmentService.getAll(id));
         }
 
-        [HttpPost]
-        [Route("{doctorAppintments}")]
-        public IActionResult GetDoctorAppointments(TermDTO termDTO)
-        {
-            return Ok(_appointmentService.GetAllFreeTerms(termDTO.DoctorId, termDTO.StartDate));
-        }
+        //[HttpPost]
+        //[Route("{doctorAppintments}")]
+        //public IActionResult GetDoctorAppointments(TermDTO termDTO)
+        //{
+        //    return Ok(_appointmentService.GetAllFreeTerms(termDTO.DoctorId, termDTO.StartDate));
+        //}
 
 
         [HttpGet]
@@ -68,18 +68,21 @@ namespace HospitalAPI.Controller
         {
             return Ok(_appointmentService.getAwaiting(id));
         }
+
         [HttpGet("{id}")]
         [Route("{cancelled}")]
         public IActionResult GetCancelledAppointment(int id)
         {
             return Ok(_appointmentService.getCancelled(id));
         }
+
         [HttpGet("{id}")]
         [Route("{completed}")]
         public IActionResult GetCompletedAppointment(int id)
         {
             return Ok(_appointmentService.getCompleted(id));
         }
+
         [HttpPut]
         public IActionResult CancelAppointment(Appointment appointment)
         {
