@@ -109,8 +109,8 @@ namespace HospitalAPI.Controller
                 return BadRequest();
             }
             var mapper = _mapper.Map<FreeTerms>(freeTermsRequestDTO);
-            FreeTerms freeTerms = _appointmentService.GetTerms(mapper);
-            return Ok(freeTerms);
+            AllFreeTerms allFreeTerms = _appointmentService.GetTerms(mapper);
+            return Ok(allFreeTerms);
         }
     }
 }

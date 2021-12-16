@@ -131,24 +131,30 @@ namespace HospitalAPI.ImplService
             return existingAppointments.Any(x => x.StartTime.Equals(appointment.StartTime));
         }
 
-        public FreeTerms GetTerms(FreeTerms freeTermsRequest)
+        public AllFreeTerms GetTerms( FreeTerms freeTermsRequest)
         {
             var doctor = _hospitalRepositoryFactory.GetDoctorsRepository().GetOne(freeTermsRequest.DoctorId);
             List<string> terms = GetDoctorsFreeAppointments(doctor.Id, freeTermsRequest.Date);
             if (terms.Count != 0)
             {
                 FreeTerms freeTerms = new FreeTerms(freeTermsRequest.Date, doctor.Id, doctor, terms);
-                return freeTerms;
+                List<FreeTerms> freeTermsList = new List<FreeTerms> { freeTerms };
+                AllFreeTerms allFreeTerms = new AllFreeTerms(freeTermsList);
+                return allFreeTerms;
             }
             else
             {
                 if (freeTermsRequest.Priority.Equals("doctor"))
                 {
-                    return GetAlternativeDate(doctor, freeTermsRequest.Date);
+                    FreeTerms freeTerms = GetAlternativeDate(doctor, freeTermsRequest.Date);
+                    List<FreeTerms> freeTermsList = new List<FreeTerms>() { freeTerms };
+                    AllFreeTerms allFreeTerms = new AllFreeTerms(freeTermsList);
+                    return allFreeTerms;
                 }
                 else if (freeTermsRequest.Priority.Equals("date"))
                 {
-                    return GetAlternativeDoctor(doctor, freeTermsRequest.Date);
+                    AllFreeTerms allFreeTerms = new AllFreeTerms(GetAlternativeDoctor(doctor, freeTermsRequest.Date));
+                    return allFreeTerms;
                 }
             }
             return null;
@@ -195,37 +201,26 @@ namespace HospitalAPI.ImplService
             return freeTerms;
         }
 
-        public FreeTerms GetAlternativeDoctor(Doctor doctor, DateTime date)
+        public List<FreeTerms> GetAlternativeDoctor(Doctor doctor, DateTime date)
         {
             List<Doctor> doctors = GetTypeDoctors(doctor.DoctorType);
             if (doctors == null || doctors.Count == 1)
             {
                 return null;
             }
-            Doctor minAppDoc = doctors.First();
-            minAppDoc = FindTheLeastLoadedDoctor(date, doctors, minAppDoc);
-            FreeTerms freeTerms = new FreeTerms(date, minAppDoc.Id, minAppDoc, GetDoctorsFreeAppointments(minAppDoc.Id, date));
 
-            return freeTerms;
-        }
+            List<FreeTerms> freeTermsList = new List<FreeTerms>();
 
-        private Doctor FindTheLeastLoadedDoctor(DateTime date, List<Doctor> doctors, Doctor minAppDoc)
-        {
-            int MaxFreeTerms = InitializedTerms.Count;
-            foreach (Doctor appDoc in doctors)
+            foreach(Doctor doctorIterator in doctors)
             {
-                var minAppDoctorsFreeAppintments = GetDoctorsFreeAppointments(minAppDoc.Id, date).Count;
-                if (minAppDoctorsFreeAppintments != MaxFreeTerms)
+                if(doctorIterator.Id != doctor.Id)
                 {
-                    var appDocFreeTerms = GetDoctorsFreeAppointments(appDoc.Id, date);
-                    if (appDocFreeTerms.Count > minAppDoctorsFreeAppintments)
-                    {
-                        minAppDoc = appDoc;
-                    }
+                    FreeTerms freeTerms = new FreeTerms(date, doctorIterator.Id, doctorIterator, GetDoctorsFreeAppointments(doctorIterator.Id, date));
+                    freeTermsList.Add(freeTerms);
                 }
             }
 
-            return minAppDoc;
+            return freeTermsList;
         }
 
         public List<Doctor> GetTypeDoctors(DoctorType type)
