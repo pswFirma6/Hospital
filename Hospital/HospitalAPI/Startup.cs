@@ -42,7 +42,9 @@ namespace HospitalAPI
                 options.AddDefaultPolicy(
                     builder =>
                     {
-                        builder.WithOrigins("http://localhost:4202")
+                        builder.WithOrigins("http://localhost:4202",
+                                            "http://localhost:4201",
+                                            "http://localhost:4200")
                                             .AllowAnyHeader()
                                             .AllowAnyMethod();
                     });
