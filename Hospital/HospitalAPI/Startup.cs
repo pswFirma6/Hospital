@@ -18,6 +18,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using System;
 using static HospitalAPI.Mapper.Mapper;
 using DoctorService = HospitalAPI.ImplService.DoctorService;
 
@@ -41,7 +42,9 @@ namespace HospitalAPI
                 options.AddDefaultPolicy(
                     builder =>
                     {
-                        builder.WithOrigins("http://localhost:4200")
+                        builder.WithOrigins("http://localhost:4202",
+                                            "http://localhost:4201",
+                                            "http://localhost:4200")
                                             .AllowAnyHeader()
                                             .AllowAnyMethod();
                     });
@@ -110,7 +113,7 @@ namespace HospitalAPI
             // Connection with PostgreSQL
 
             services.AddDbContext<MyDbContext>(options => 
-                    options.UseNpgsql(Configuration.GetConnectionString("MyDbContextConnectionString")).UseLazyLoadingProxies());
+                    options.UseNpgsql(CreateConnectionStringFromEnvironment()).UseLazyLoadingProxies());
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -123,7 +126,6 @@ namespace HospitalAPI
                 app.UseDeveloperExceptionPage();
             }
 
-            app.UseHttpsRedirection();
 
             app.UseRouting();
 
@@ -133,6 +135,20 @@ namespace HospitalAPI
             {
                 endpoints.MapControllers();
             });
+        }
+
+        private static string CreateConnectionStringFromEnvironment()
+        {
+            var server = Environment.GetEnvironmentVariable("DATABASE_HOST") ?? "localhost";
+            var port = Environment.GetEnvironmentVariable("DATABASE_PORT") ?? "5432";
+            var database = Environment.GetEnvironmentVariable("DATABASE_SCHEMA") ?? "hospitaldb";
+            var user = Environment.GetEnvironmentVariable("DATABASE_USERNAME") ?? "root";
+            var password = Environment.GetEnvironmentVariable("DATABASE_PASSWORD") ?? "root";
+            var integratedSecurity = Environment.GetEnvironmentVariable("DATABASE_INTEGRATED_SECURITY") ?? "true";
+            var pooling = Environment.GetEnvironmentVariable("DATABASE_POOLING") ?? "true";
+
+            string retVal = "Server=" + server + ";Port=" + port + ";Database=" + database + ";User ID=" + user + ";Password=" + password + ";Integrated Security=" + integratedSecurity + ";Pooling=" + pooling + ";";
+            return retVal;
         }
     }
 }

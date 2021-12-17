@@ -33,6 +33,7 @@ namespace HospitalAPI.Controller
         }
 
         [HttpPost]
+        [Route("{leave}")]
         public IActionResult Add(FeedbackDTO dto) 
         {
             if (!_feedbackValidation.IsValid(dto)) 
