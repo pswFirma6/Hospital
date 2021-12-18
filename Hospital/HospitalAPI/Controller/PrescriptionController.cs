@@ -1,15 +1,8 @@
 ﻿using Hospital_library.MedicalRecords.Model;
 using Hospital_library.MedicalRecords.Service;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using AutoMapper;
-using HospitalAPI.DTO;
 using RestSharp;
-using System.Text.Json.Serialization;
-using System.Text.Json;
 
 namespace HospitalAPI.Controller
 {

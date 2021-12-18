@@ -65,16 +65,16 @@ namespace HospitalUnitTests
 
         [Theory]
         [MemberData(nameof(DataAlternativeDoctor))]
-        public void AlternativeDoctor(Doctor doctor, DateTime date, List<string> expectedTerms, int expectedDoctorId)
+        public void AlternativeDoctor(Doctor doctor, DateTime date, List<string> expectedTerms, List<int> expectedDoctorIds)
         {
             //  Arragnge  //
             AppointmentService service = new AppointmentService(CreateNoFreeTermStubRepository());
             //  Act  //
-            FreeTerms freeTerms = service.GetAlternativeDoctor(doctor, date);
+            List<FreeTerms> freeTermsList = service.GetAlternativeDoctor(doctor, date);
             //  Assert  //
 
-            Assert.Equal(freeTerms.Terms, expectedTerms);
-            Assert.Equal(freeTerms.DoctorId, expectedDoctorId);
+            Assert.Equal(freeTermsList[0].DoctorId, expectedDoctorIds[0]);
+            Assert.Equal(freeTermsList[1].DoctorId, expectedDoctorIds[1]);
         }
 
 
@@ -170,10 +170,9 @@ namespace HospitalUnitTests
                 "14:00", "14:30",
                 "15:00"
             };
+            List<int> expectedDoctorIds = new List<int>() { 2, 3 };
 
-            int expectedDoctorId = 2;
-
-            retVal.Add(new object[] { doctor, date, ExpectedTerms, expectedDoctorId });
+            retVal.Add(new object[] { doctor, date, ExpectedTerms, expectedDoctorIds });
             return retVal;
         }
 
@@ -330,10 +329,16 @@ namespace HospitalUnitTests
                     , "0665789461", "milovan@bch.com", "Dr. Miroslav Mikic", "mire123", Gender.male, "Novi Sad"
                     , "Serbia", UserType.doctor, patients, DoctorType.generalPractitioner, appointments2);
 
-            List<Doctor> doctors = new List<Doctor>() { doctor, doctor2 };
+            List<Appointment> appointments3 = new List<Appointment>();
+            Doctor doctor3 = new Doctor(3, "Stefan", "Stefanovic", DateTime.Now, "2456874215478", "Marka Veselinovica 5."
+                    , "0665789461", "milovan@bch.com", "Dr. Miroslav Mikic", "mire123", Gender.male, "Novi Sad"
+                    , "Serbia", UserType.doctor, patients, DoctorType.generalPractitioner, appointments3);
+
+            List<Doctor> doctors = new List<Doctor>() { doctor, doctor2, doctor3 };
 
             stubRepository.Setup(m => m.GetDoctorsRepository().GetOne(doctor.Id)).Returns(doctor);
             stubRepository.Setup(m => m.GetDoctorsRepository().GetOne(doctor2.Id)).Returns(doctor2);
+            stubRepository.Setup(m => m.GetDoctorsRepository().GetOne(doctor3.Id)).Returns(doctor3);
             stubRepository.Setup(m => m.GetDoctorsRepository().GetSpecialists(doctor.DoctorType)).Returns(doctors);
             stubRepository.Setup(m => m.GetDoctorsRepository().GetAll()).Returns(doctors);
 

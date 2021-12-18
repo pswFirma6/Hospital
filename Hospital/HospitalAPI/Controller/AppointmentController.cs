@@ -37,10 +37,10 @@ namespace HospitalAPI.Controller
 
             var mapper = _mapper.Map<Appointment>(newAppointment);
 
-            //if (_appointmentService.CheckDoctorAppointments(mapper)) 
-            //{
-            //    return Conflict(new { message = $"An existing appointment was found in doctor appointment list." });
-            //}
+            if (_appointmentService.CheckDoctorAppointments(mapper))
+            {
+                return Conflict(new { message = $"An existing appointment was found in doctor appointment list." });
+            }
             _appointmentService.Add(mapper);
 
             return Ok(mapper);
@@ -53,25 +53,36 @@ namespace HospitalAPI.Controller
 
             return Ok(_appointmentService.getAll(id));
         }
-        
-        [HttpGet("{id}")]
+
+        //[HttpPost]
+        //[Route("{doctorAppintments}")]
+        //public IActionResult GetDoctorAppointments(TermDTO termDTO)
+        //{
+        //    return Ok(_appointmentService.GetAllFreeTerms(termDTO.DoctorId, termDTO.StartDate));
+        //}
+
+
+        [HttpGet]
         [Route("{awaiting}")]
         public IActionResult GetAwaitingAppointment(int id)
         {
             return Ok(_appointmentService.getAwaiting(id));
         }
+
         [HttpGet("{id}")]
         [Route("{cancelled}")]
         public IActionResult GetCancelledAppointment(int id)
         {
             return Ok(_appointmentService.getCancelled(id));
         }
+
         [HttpGet("{id}")]
         [Route("{completed}")]
         public IActionResult GetCompletedAppointment(int id)
         {
             return Ok(_appointmentService.getCompleted(id));
         }
+
         [HttpPut]
         public IActionResult CancelAppointment(Appointment appointment)
         {
@@ -89,7 +100,7 @@ namespace HospitalAPI.Controller
             return Ok(appointment);
         }
 
-        [HttpPost("{id}")]
+        [HttpPost]
         [Route("Priority")]
         public IActionResult GetPriorityAppointments(FreeTermsRequestDTO freeTermsRequestDTO)
         {
@@ -98,22 +109,9 @@ namespace HospitalAPI.Controller
                 return BadRequest();
             }
             var mapper = _mapper.Map<FreeTerms>(freeTermsRequestDTO);
-            FreeTerms freeTerms = _appointmentService.GetTerms(mapper);
-            return Ok(freeTerms);
+            AllFreeTerms allFreeTerms = _appointmentService.GetTerms(mapper);
+            return Ok(allFreeTerms);
         }
-
-        //[HttpGet]
-        //[Route("{AppointmentForm}")]
-        //public IActionResult GetDoctorsAndTypes(string doctorType)
-        //{
-        //    if (!_appointmentValidation.DoctorTypeRequestIsValid(doctorType))
-        //    {
-        //        return BadRequest();
-        //    }
-        //    DoctorType type = (DoctorType)Enum.Parse(typeof(DoctorType), doctorType);
-
-        //    return Ok(_appointmentService.GetTypeDoctors(type));
-        //}
     }
 }
 
