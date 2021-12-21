@@ -20,11 +20,11 @@ namespace HospitalIntegrationTests
         {
             this.injection = injection;
         }
- 
+
         [Theory]
         [MemberData(nameof(DataSuccessfully))]
         public async Task Create_New_Appointment_Successfully(NewAppointmentDTO newAppointment,
-                DateTime expectedStartTime, int patientId, int doctorId)  
+               DateTime expectedStartTime, int patientId, int doctorId)
         {
             // Arrange //
             var json = JsonConvert.SerializeObject(newAppointment);
@@ -48,37 +48,32 @@ namespace HospitalIntegrationTests
         [Theory]
         [MemberData(nameof(DataUnsuccessfully))]
         public async Task Create_New_Appointment_Unsuccessfully(NewAppointmentDTO newAppointment1,
-            NewAppointmentDTO newAppointment2, NewAppointmentDTO newAppointment3, 
-            NewAppointmentDTO newAppointment4)
+            NewAppointmentDTO newAppointment2)
         {
             // Arrange //
             var json1 = JsonConvert.SerializeObject(newAppointment1);
             var json2 = JsonConvert.SerializeObject(newAppointment2);
-            var json3 = JsonConvert.SerializeObject(newAppointment3);
-            var json4 = JsonConvert.SerializeObject(newAppointment4);
+
             var data1 = new StringContent(json1, Encoding.UTF8, "application/json");
             var data2 = new StringContent(json2, Encoding.UTF8, "application/json");
-            var data3 = new StringContent(json3, Encoding.UTF8, "application/json");
-            var data4 = new StringContent(json4, Encoding.UTF8, "application/json");
+
             var url = "api/appointment";
 
             // Act //
             var response1 = await injection.Client.PostAsync(url, data1);
             var response2 = await injection.Client.PostAsync(url, data2);
-            var response3 = await injection.Client.PostAsync(url, data3);
-            var response4 = await injection.Client.PostAsync(url, data4);
+
 
             // Assert //
             Assert.Equal(HttpStatusCode.BadRequest, response1.StatusCode);
             Assert.Equal(HttpStatusCode.BadRequest, response2.StatusCode);
-            Assert.Equal(HttpStatusCode.BadRequest, response3.StatusCode);
-            Assert.Equal(HttpStatusCode.BadRequest, response4.StatusCode);
+
 
         }
 
         [Theory]
         [MemberData(nameof(TermSuccessfully))]
-        public async Task Return_Free_Appointments_Successfully(TermDTO newTerm, DateTime expectedTermDate, int expectedTermDoctorId)
+        public async Task Return_Free_Appointments_Successfully(TermDTO newTerm, int expectedTermDoctorId)
         {
             // Arrange // 
             var json = JsonConvert.SerializeObject(newTerm);
@@ -98,6 +93,25 @@ namespace HospitalIntegrationTests
             Assert.Equal(result.DoctorId, expectedTermDoctorId);
            
         }
+       
+        public static IEnumerable<object[]> TermSuccessfully()
+        {
+            var retVal = new List<object[]>();
+
+            var dateString = "1/12/2022 9:00:00 AM";
+            DateTime date = DateTime.Parse(dateString,
+                                      System.Globalization.CultureInfo.InvariantCulture);
+
+            TermDTO newTerm = new TermDTO( 1,  date);
+
+            var expectedTermDoctorId = 1;
+            var expectedTermDate = date;
+
+            retVal.Add(new object[] { newTerm, expectedTermDoctorId });
+
+            return retVal;
+        }
+
         /*
         [Theory]
         [MemberData(nameof(TermUnsuccessfully))]
@@ -121,7 +135,7 @@ namespace HospitalIntegrationTests
             Assert.Equal(result.StartTime, expectedTermDate);
 
         }
-        */
+        
         public static IEnumerable<object[]> TermSuccessfully()
         {
             var retVal = new List<object[]>();
@@ -139,8 +153,8 @@ namespace HospitalIntegrationTests
 
             return retVal;
         }
-
-            public static IEnumerable<object[]> DataSuccessfully()
+        */
+        public static IEnumerable<object[]> DataSuccessfully()
         {
             var retVal = new List<object[]>();
 
@@ -181,18 +195,16 @@ namespace HospitalIntegrationTests
             var dateString1 = "1/12/2022 8:30:00 AM";
             DateTime date1 = DateTime.Parse(dateString1,
                                       System.Globalization.CultureInfo.InvariantCulture);
-            NewAppointmentDTO appointmentDTO1 = new NewAppointmentDTO(date1, -2, doctor.Id);
+            NewAppointmentDTO appointmentDTO1 = new NewAppointmentDTO(date1, -2, patient, doctor.Id, doctor);
 
             var dateString2 = "1/12/2019 8:30:00 AM";
             DateTime date2 = DateTime.Parse(dateString2,
                                       System.Globalization.CultureInfo.InvariantCulture);
-            NewAppointmentDTO appointmentDTO2 = new NewAppointmentDTO(date2, patient.Id, doctor.Id);
+            NewAppointmentDTO appointmentDTO2 = new NewAppointmentDTO(date2, patient.Id, patient, 0, doctor);
 
-            NewAppointmentDTO appointmentDTO3 = new NewAppointmentDTO(date1, patient.Id, doctor.Id);
 
-            NewAppointmentDTO appointmentDTO4 = new NewAppointmentDTO(date1, patient.Id, doctor.Id);
 
-            retVal.Add(new object[] { appointmentDTO1, appointmentDTO2,  appointmentDTO3, appointmentDTO4});
+            retVal.Add(new object[] { appointmentDTO1, appointmentDTO2 });
 
             return retVal;
         }

@@ -37,7 +37,7 @@ namespace HospitalAPI.Controller
 
             var mapper = _mapper.Map<Appointment>(newAppointment);
 
-            if (_appointmentService.CheckDoctorAppointments(mapper))
+            if (_appointmentService.CheckDoctorAppointments(mapper)) 
             {
                 return Conflict(new { message = $"An existing appointment was found in doctor appointment list." });
             }
@@ -54,12 +54,12 @@ namespace HospitalAPI.Controller
             return Ok(_appointmentService.getAll(id));
         }
 
-        //[HttpPost]
-        //[Route("{doctorAppintments}")]
-        //public IActionResult GetDoctorAppointments(TermDTO termDTO)
-        //{
-        //    return Ok(_appointmentService.GetAllFreeTerms(termDTO.DoctorId, termDTO.StartDate));
-        //}
+        [HttpPost]
+        [Route("{doctorAppintments}")]
+        public IActionResult GetDoctorAppointments(TermDTO termDTO)
+        {
+            return Ok(_appointmentService.GetAllFreeTerms(termDTO.DoctorId, termDTO.StartDate));
+        }
 
 
         [HttpGet]
@@ -100,8 +100,7 @@ namespace HospitalAPI.Controller
             return Ok(appointment);
         }
 
-        [HttpPost]
-        [Route("Priority")]
+        [HttpPost("Priority")]
         public IActionResult GetPriorityAppointments(FreeTermsRequestDTO freeTermsRequestDTO)
         {
             if (!_appointmentValidation.RequestIsValid(freeTermsRequestDTO))
