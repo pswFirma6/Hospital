@@ -63,34 +63,19 @@ namespace HospitalAPI.ImplService
 
         public List<Patient> GetMaliciousPatients()
         {
-            List<Patient> allPatients = _hospitalRepositoryFactory.GetPatientRepository().GetAll();
-
-            foreach (Patient patient in allPatients)
-            {
-                var appointmentList = GetCancelledAppointmentsByPatient(patient.Id);
-
-                foreach (Appointment appointment in appointmentList)
-                {
-                    if (appointment.Type != Hospital_library.MedicalRecords.Model.Enums.AppointmentType.Cancelled)
-                    {
-                        appointmentList.Remove(appointment);
-                    }
-                }
-
-                if (appointmentList.Count > 2)
-                {
-                    if (appointmentList[appointmentList.Count - 3].StartTime > DateTime.Now.AddDays(-30))
-                    {
-                        patient.Malicious = true;
-                    }
-                }
-            }
-            return allPatients;
+            return _hospitalRepositoryFactory.GetPatientRepository().GetAll().Where(x => x.Malicious == true).ToList();
         }
 
-        private List<Appointment> GetCancelledAppointmentsByPatient(int id)
+        public void BlockPatient(Patient patient)
         {
-            return _hospitalRepositoryFactory.GetAppointmentsRepository().GetAll().Where(x => x.PatientId == id).ToList();
+            _hospitalRepositoryFactory.GetPatientRepository().GetOne(patient.Id).Blocked = true;
+            _hospitalRepositoryFactory.GetPatientRepository().Update(patient);
+        }
+
+        public void UnblockPatient(Patient patient)
+        {
+            _hospitalRepositoryFactory.GetPatientRepository().GetOne(patient.Id).Blocked = false;
+            _hospitalRepositoryFactory.GetPatientRepository().Update(patient);
         }
     }
 }

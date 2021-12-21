@@ -3,6 +3,7 @@ using HospitalLibrary.GraphicalEditor.Model;
 using HospitalLibrary.MedicalRecords.Model;
 using HospitalLibrary.Model;
 using Microsoft.EntityFrameworkCore;
+using System;
 
 namespace HospitalAPI
 {
@@ -18,8 +19,6 @@ namespace HospitalAPI
         public DbSet<Prescription> Prescriptions { get; set; }
 
         public MyDbContext(DbContextOptions<MyDbContext> options) : base(options) { }
-
-
 
     }
 }

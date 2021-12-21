@@ -75,12 +75,14 @@ namespace HospitalAPI.Controller
         {
             return Ok(_appointmentService.getCancelled(id));
         }
+
         [HttpGet("{id}")]
         [Route("{completed}")]
         public IActionResult GetCompletedAppointment(int id)
         {
             return Ok(_appointmentService.getCompleted(id));
         }
+
         [HttpPut]
         public IActionResult CancelAppointment(Appointment appointment)
         {
@@ -106,22 +108,9 @@ namespace HospitalAPI.Controller
                 return BadRequest();
             }
             var mapper = _mapper.Map<FreeTerms>(freeTermsRequestDTO);
-            FreeTerms freeTerms = _appointmentService.GetTerms(mapper);
-            return Ok(freeTerms);
+            AllFreeTerms allFreeTerms = _appointmentService.GetTerms(mapper);
+            return Ok(allFreeTerms);
         }
-
-        //[HttpGet]
-        //[Route("{AppointmentForm}")]
-        //public IActionResult GetDoctorsAndTypes(string doctorType)
-        //{
-        //    if (!_appointmentValidation.DoctorTypeRequestIsValid(doctorType))
-        //    {
-        //        return BadRequest();
-        //    }
-        //    DoctorType type = (DoctorType)Enum.Parse(typeof(DoctorType), doctorType);
-
-        //    return Ok(_appointmentService.GetTypeDoctors(type));
-        //}
     }
 }
 

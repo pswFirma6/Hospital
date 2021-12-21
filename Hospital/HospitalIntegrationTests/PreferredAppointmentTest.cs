@@ -29,7 +29,7 @@ namespace HospitalIntegrationTests
 
         [Theory]
         [MemberData(nameof(DoctorPriorityDataSuccessfully))]
-        public async Task Doctor_Priority_Request(FreeTermsRequestDTO freeTermsRequestDTO, FreeTerms expectedFreeTerms)
+        public async Task Doctor_Priority_Request(FreeTermsRequestDTO freeTermsRequestDTO, AllFreeTerms expectedAllFreeTerms)
         {
             var json = JsonConvert.SerializeObject(freeTermsRequestDTO);
             var data = new StringContent(json, Encoding.UTF8, "application/json");
@@ -40,16 +40,17 @@ namespace HospitalIntegrationTests
             response.EnsureSuccessStatusCode();
 
             var resultString = await response.Content.ReadAsStringAsync();
-            var result = JsonConvert.DeserializeObject<FreeTerms>(resultString);
+            var result = JsonConvert.DeserializeObject<AllFreeTerms>(resultString);
 
             Assert.NotNull(result);
-            Assert.Equal(result.Date, expectedFreeTerms.Date);
-            Assert.Equal(result.DoctorId, expectedFreeTerms.DoctorId);
+            Assert.Equal(result.FreeTermsList[0].Date, expectedAllFreeTerms.FreeTermsList[0].Date);
+            Assert.Equal(result.FreeTermsList[0].DoctorId, expectedAllFreeTerms.FreeTermsList[0].DoctorId);
+            Assert.Equal(result.FreeTermsList[0].Terms.Count, expectedAllFreeTerms.FreeTermsList[0].Terms.Count);
         }
 
         [Theory]
         [MemberData(nameof(DatePriorityDataSuccessfully))]
-        public async Task Date_Priority_Request(FreeTermsRequestDTO freeTermsRequestDTO, FreeTerms expectedFreeTerms)
+        public async Task Date_Priority_Request(FreeTermsRequestDTO freeTermsRequestDTO, AllFreeTerms expectedAllFreeTerms)
         {
             var json = JsonConvert.SerializeObject(freeTermsRequestDTO);
             var data = new StringContent(json, Encoding.UTF8, "application/json");
@@ -60,11 +61,14 @@ namespace HospitalIntegrationTests
             response.EnsureSuccessStatusCode();
 
             var resultString = await response.Content.ReadAsStringAsync();
-            var result = JsonConvert.DeserializeObject<FreeTerms>(resultString);
+            var result = JsonConvert.DeserializeObject<AllFreeTerms>(resultString);
 
             Assert.NotNull(result);
-            Assert.Equal(result.Date, expectedFreeTerms.Date);
-            Assert.Equal(result.DoctorId, expectedFreeTerms.DoctorId);
+            Assert.Equal(result.FreeTermsList[0].Date, expectedAllFreeTerms.FreeTermsList[0].Date);
+            Assert.Equal(result.FreeTermsList[0].DoctorId, expectedAllFreeTerms.FreeTermsList[0].DoctorId);
+            Assert.Equal(result.FreeTermsList[0].Terms.Count, expectedAllFreeTerms.FreeTermsList[0].Terms.Count);
+            Assert.Equal(result.FreeTermsList[1].DoctorId, expectedAllFreeTerms.FreeTermsList[1].DoctorId);
+            Assert.Equal(result.FreeTermsList[1].Terms.Count, expectedAllFreeTerms.FreeTermsList[1].Terms.Count);
         }
 
 
@@ -107,9 +111,11 @@ namespace HospitalIntegrationTests
             DateTime date = DateTime.Parse(dateString,
                                       System.Globalization.CultureInfo.InvariantCulture);
             FreeTerms expectedFreeTerms = new FreeTerms(date, doctor.Id, expectedTerms);
-            
+            List<FreeTerms> expectedAllFreeTermsList = new List<FreeTerms>() { expectedFreeTerms };
 
-            retVal.Add(new object[] { freeTermsRequestDTO, expectedFreeTerms });
+            AllFreeTerms expectedAllFreeTerms = new AllFreeTerms(expectedAllFreeTermsList);
+
+            retVal.Add(new object[] { freeTermsRequestDTO, expectedAllFreeTerms });
             return retVal;
         }
 
@@ -138,10 +144,13 @@ namespace HospitalIntegrationTests
             var dateString = "12/01/2022 12:00:00 AM";
             DateTime date = DateTime.Parse(dateString,
                                       System.Globalization.CultureInfo.InvariantCulture);
-            FreeTerms expectedFreeTerms = new FreeTerms(date, 2, expectedTerms);
+            FreeTerms expectedFreeTerms1 = new FreeTerms(date, 2, expectedTerms);
+            FreeTerms expectedFreeTerms2 = new FreeTerms(date, 3, expectedTerms);
 
+            List<FreeTerms> expectedFreeTermsList = new List<FreeTerms>() { expectedFreeTerms1, expectedFreeTerms2 };
+            AllFreeTerms expecetedAllFreeTerms = new AllFreeTerms(expectedFreeTermsList);
 
-            retVal.Add(new object[] { freeTermsRequestDTO, expectedFreeTerms });
+            retVal.Add(new object[] { freeTermsRequestDTO, expecetedAllFreeTerms });
             return retVal;
         }
 

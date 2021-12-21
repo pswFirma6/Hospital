@@ -236,6 +236,7 @@ namespace HospitalIntegrationTests
             };
 
             List<Appointment> Doctor2appointments = new List<Appointment>();
+            List<Appointment> Doctor3appointments = new List<Appointment>();
 
             Doctor doctor = new Doctor( 1, "Mirko", "Mirkovic", date, "9981902895421", "Jase Tomic 44."
                     , "0645796684", "drmirkovic@bch.com", "Dr Mirko", "Mirko123", Gender.male
@@ -245,8 +246,13 @@ namespace HospitalIntegrationTests
                     , "0635796684", "1drsirkovic@bch.com", "Dr Mirko", "Mirko123", Gender.male
                     , "Novi Sad", "Serbia", UserType.doctor, patients, DoctorType.allergy_and_immunology, Doctor2appointments);
 
+            Doctor doctor3 = new Doctor(3, "Stefan", "Stefanovic", date, "9981902895423", "Jase Tomic 46."
+                    , "0635796684", "1drsirkovic@bch.com", "Dr Mirko", "Mirko123", Gender.male
+                    , "Novi Sad", "Serbia", UserType.doctor, patients, DoctorType.allergy_and_immunology, Doctor3appointments);
+
             context.Add(doctor);
             context.Add(doctor2);
+            context.Add(doctor3);
         }
 
         public static void CreatePatients(MyDbContext db)
