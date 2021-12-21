@@ -73,7 +73,7 @@ namespace HospitalIntegrationTests
 
         [Theory]
         [MemberData(nameof(TermSuccessfully))]
-        public async Task Return_Free_Appointments_Successfully(TermDTO newTerm, DateTime expectedTermDate, int expectedTermDoctorId)
+        public async Task Return_Free_Appointments_Successfully(TermDTO newTerm, int expectedTermDoctorId)
         {
             // Arrange // 
             var json = JsonConvert.SerializeObject(newTerm);
@@ -107,33 +107,11 @@ namespace HospitalIntegrationTests
             var expectedTermDoctorId = 1;
             var expectedTermDate = date;
 
-            retVal.Add(new object[] { newTerm, expectedTermDate, expectedTermDoctorId });
+            retVal.Add(new object[] { newTerm, expectedTermDoctorId });
 
             return retVal;
         }
 
-        [Theory]
-        [MemberData(nameof(TermSuccessfully))]
-        public async Task Return_Free_Appointments_Successfully(TermDTO newTerm, DateTime expectedTermDate, int expectedTermDoctorId)
-        {
-            // Arrange // 
-            var json = JsonConvert.SerializeObject(newTerm);
-            var data = new StringContent(json, Encoding.UTF8, "application/json");
-            var url = "api/appointment/doctorAppintments";
-
-            // Act //
-            var response = await injection.Client.PostAsync(url, data);
-
-            // Assert //
-            response.EnsureSuccessStatusCode();
-
-            var resultString = await response.Content.ReadAsStringAsync();
-            var result = JsonConvert.DeserializeObject<Appointment>(resultString);
-
-            Assert.Equal(HttpStatusCode.OK, response.StatusCode);
-            Assert.Equal(result.DoctorId, expectedTermDoctorId);
-           
-        }
         /*
         [Theory]
         [MemberData(nameof(TermUnsuccessfully))]
@@ -157,7 +135,7 @@ namespace HospitalIntegrationTests
             Assert.Equal(result.StartTime, expectedTermDate);
 
         }
-        */
+        
         public static IEnumerable<object[]> TermSuccessfully()
         {
             var retVal = new List<object[]>();
@@ -175,8 +153,8 @@ namespace HospitalIntegrationTests
 
             return retVal;
         }
-
-            public static IEnumerable<object[]> DataSuccessfully()
+        */
+        public static IEnumerable<object[]> DataSuccessfully()
         {
             var retVal = new List<object[]>();
 
