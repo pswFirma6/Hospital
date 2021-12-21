@@ -68,6 +68,7 @@ namespace HospitalAPI.Controller
         {
             return Ok(_appointmentService.getAwaiting(id));
         }
+
         [HttpGet("{id}")]
         [Route("{cancelled}")]
         public IActionResult GetCancelledAppointment(int id)
@@ -97,8 +98,7 @@ namespace HospitalAPI.Controller
             return Ok(appointment);
         }
 
-        [HttpPost("{id}")]
-        [Route("Priority")]
+        [HttpPost("Priority")]
         public IActionResult GetPriorityAppointments(FreeTermsRequestDTO freeTermsRequestDTO)
         {
             if (!_appointmentValidation.RequestIsValid(freeTermsRequestDTO))

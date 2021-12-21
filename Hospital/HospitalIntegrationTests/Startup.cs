@@ -117,8 +117,8 @@ namespace HospitalIntegrationTests
     
         public static void InitializeDbForTests(MyDbContext db)
         {
-            AddTestDoctor(db);
             CreatePatients(db);
+            AddTestDoctor(db);
             db.SaveChanges();
         }
 
@@ -128,8 +128,9 @@ namespace HospitalIntegrationTests
             //  Add fake data
 
             List<Patient> patients = new List<Patient>();
-            Patient patient = new Patient();
-            patient.Id = 5;
+
+            var patient = context.Patients.Find(2);
+
             var dateString = "2/12/2022 8:30:00 AM";
             DateTime date = DateTime.Parse(dateString,
                           System.Globalization.CultureInfo.InvariantCulture);

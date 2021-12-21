@@ -74,7 +74,7 @@ namespace HospitalIntegrationTests
         {
             var json = JsonConvert.SerializeObject(freeTermsRequestDTO);
             var data = new StringContent(json, Encoding.UTF8, "application/json");
-            var url = "api/appointment/priority";
+            var url = "api/appointment/Priority";
 
             var response = await injection.Client.PostAsync(url, data);
 
@@ -88,7 +88,7 @@ namespace HospitalIntegrationTests
             Doctor doctor = new Doctor();
             doctor.Id = 1;
             FreeTermsRequestDTO freeTermsRequestDTO = new FreeTermsRequestDTO(
-                    "01/12/2022", doctor.Id, "doctor"
+                    "12/01/2022", doctor.Id, "doctor"
                 );
 
             //expected value
@@ -120,7 +120,7 @@ namespace HospitalIntegrationTests
             Doctor doctor = new Doctor();
             doctor.Id = 1;
             FreeTermsRequestDTO freeTermsRequestDTO = new FreeTermsRequestDTO(
-                    "01/12/2022", doctor.Id, "date"
+                    "12/01/2022", doctor.Id, "date"
                 );
 
             //expected value
