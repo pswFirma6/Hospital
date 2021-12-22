@@ -24,6 +24,8 @@ namespace HospitalAPI.ImplService
         {
             List<Doctor> doctors = _repositoryFactory.GetDoctorsRepository().GetAll()
                 .Where(x => x.DoctorType.Equals(DoctorType.generalPractitioner)).ToList();
+            if (doctors.Count.Equals(0))
+                return doctors;
             var minPatients = doctors.Select(x => x.Patients.Count).Min();
             return doctors.Where(x => x.Patients.Count <= minPatients + 2).ToList();
         }
