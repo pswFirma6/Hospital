@@ -10,7 +10,7 @@ namespace HospitalAPI.Controller
     public class PrescriptionController : ControllerBase
     {
         private readonly IPrescriptionService _prescriptionService;
-        private readonly string integrationServer = "https://localhost:44325";
+        private readonly string integrationServer = "http://localhost:44317";
 
         public PrescriptionController(IPrescriptionService prescriptionService, IMapper mapper)
         {
