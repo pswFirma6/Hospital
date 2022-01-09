@@ -11,7 +11,7 @@ namespace HospitalLibrary.MedicalRecords.Service
         public List<Patient> GetMaliciousPatients();
         public void BlockPatient(Patient patient);
         public void UnblockPatient(Patient patient);
-
+        public Patient GetPatientByUsername(string username);
 
     }
 }
