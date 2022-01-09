@@ -29,7 +29,7 @@ namespace HospitalAPI.ImplService
             {
                 return null;
             }
-
+            patient.Id = _hospitalRepositoryFactory.GetPatientRepository().GetAll().Count + 1;
             return _hospitalRepositoryFactory.GetPatientRepository().Add(MapAllergies(patient));
         }
         public Patient GetPatient(int id)

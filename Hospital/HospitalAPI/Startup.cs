@@ -105,6 +105,7 @@ namespace HospitalAPI
             services.AddScoped<FeedbackValidation>();
             services.AddScoped<RegistrationValidation>();
             services.AddScoped<AppointmentValidation>();
+            services.AddScoped<SurveyValidation>();
             services.AddScoped<LoginValidation>();
 
             // Repository dependency injection
