@@ -9,10 +9,13 @@
 /Hospital/HospitalIntegrationTests/bin
 /Hospital/HospitalIntegrationTests/obj
 /Hospital/HospitalAPI/Migrations
+/Hospital/SeleniumTestProject/bin
+/Hospital/SeleniumTestProject/obj
 
 *.log
 .DS_Store
 dist
 node_modules
+*.cache
 
 

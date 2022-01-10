@@ -22,6 +22,11 @@ using System.Collections.Generic;
 using HospitalAPI.Service;
 using Hospital_library.MedicalRecords.Service;
 using HospitalLibraryHospital_library.MedicalRecords.Repository;
+using Hospital_library.MedicalRecords.Service.Interfaces;
+using Hospital_library.MedicalRecords.Service.Implements;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 
 namespace HospitalIntegrationTests
 {
@@ -54,16 +59,29 @@ namespace HospitalIntegrationTests
             IMapper mapper = mapperConfig.CreateMapper();
             services.AddSingleton(mapper);
 
-            services.AddMvc();
-
 
             services.AddIdentity<PatientRegistration, IdentityRole>(options =>
             {
                 options.User.RequireUniqueEmail = false;
             })
              .AddEntityFrameworkStores<MyDbContext>()
-             .AddDefaultTokenProviders(); 
+             .AddDefaultTokenProviders();
 
+            // Security 
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+            .AddJwtBearer(options =>
+            {
+                options.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuer = true,
+                    ValidateAudience = true,
+                    ValidateLifetime = true,
+                    ValidateIssuerSigningKey = true,
+                    ValidIssuer = Configuration["Jwt:Issuer"],
+                    ValidAudience = Configuration["Jwt:Issuer"],
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["Jwt:Key"]))
+                };
+            });
 
             // Registration 
             var emailConfig = Configuration
@@ -79,11 +97,13 @@ namespace HospitalIntegrationTests
             services.AddScoped<ISurveyService, SurveyService>();
             services.AddScoped<IAppointmentService, AppointmentService>();
             services.AddScoped<IDoctorService, DoctorService>();
+            services.AddScoped<ILoginService, LoginService>();
 
             // Validation
             services.AddScoped<RegistrationValidation>();
             services.AddScoped<SurveyValidation>();
             services.AddScoped<AppointmentValidation>();
+            services.AddScoped<LoginValidation>();
 
             // Repository
             services.AddScoped<RepositoryFactory, HospitalRepositoryFactory>();
@@ -276,10 +296,18 @@ namespace HospitalIntegrationTests
                 "Novi Sad", "Serbia", UserType.patient, BloodType.A, RhFactor.negative,
                 180, 85, allergies, doctor);
 
+
+            Patient newPatientC3 = new Patient(4, "Monika", "Beluci", DateTime.Now,
+                "054236971333", "Partizanskih baza 8.", "0666423699", "seve@gmail.com",
+                "Monika", "pacijent123", Gender.female,
+                "Novi Sad", "Serbia", UserType.patient, true, BloodType.B, RhFactor.positive,
+                189, 85, allergies, doctor);    
+
+
             db.Patients.Add(newPatientA1);
             db.Patients.Add(newPatientB2);
+            db.Patients.Add(newPatientC3);
 
-            
         }
     
         public void Configure(IApplicationBuilder app)
