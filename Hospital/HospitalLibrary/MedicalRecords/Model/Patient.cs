@@ -7,10 +7,7 @@ namespace HospitalLibrary.MedicalRecords.Model
 {
     public class Patient : User
     {
-        public BloodType BloodType { get; set; }
-        public RhFactor RhFactor { get; set; }
-        public int Height { get; set; }
-        public int Weight { get; set; }
+        public virtual MedicalRecord Record { get; set; }
         public virtual ICollection<Allergy> Allergies { get; set; }
         public int DoctorId { get; set; }
         public virtual Doctor Doctor { get; set; }
@@ -28,10 +25,7 @@ namespace HospitalLibrary.MedicalRecords.Model
             : base(id, name, surname, birthDate, jmbg, address, phone, email, username, 
                   password, gender, city, country, userType)
         {
-            BloodType = bloodType;
-            RhFactor = rhfactor;
-            Height = height;
-            Weight = weight;
+            Record = new MedicalRecord(id,bloodType, rhfactor, height, weight);
             Allergies = allergies;
             Doctor = doctor;   
         }
@@ -43,10 +37,7 @@ namespace HospitalLibrary.MedicalRecords.Model
         : base(id, name, surname, birthDate, jmbg, address, phone, email, username,
           password, gender, city, country, userType, activated)
         {
-            BloodType = bloodType;
-            RhFactor = rhfactor;
-            Height = height;
-            Weight = weight;
+            Record = new MedicalRecord(id,bloodType, rhfactor, height, weight);
             Allergies = allergies;
             Doctor = doctor;
         }

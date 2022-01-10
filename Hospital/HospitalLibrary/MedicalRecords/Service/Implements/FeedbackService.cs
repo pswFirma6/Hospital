@@ -27,15 +27,15 @@ namespace HospitalAPI.Service
             foreach (Feedback feedback in feedbacks)
             {
                 Patient patient = patients.Find(id => id.Id == feedback.PersonId);
-                if (feedback.State == FeedbackState.approved)
+                if (feedback.Information.State == FeedbackState.approved)
                 {
                     if (feedback.Anonymous)
                     {
-                        feedbackDTOs.Add(new ViewFeedback("Anonymous", feedback.Text, feedback.Date));
+                        feedbackDTOs.Add(new ViewFeedback("Anonymous", feedback.Information.Text, feedback.Information.Date));
                     }
                     else
                     {
-                        feedbackDTOs.Add(new ViewFeedback(patient.Name + " " + patient.Surname, feedback.Text, feedback.Date));
+                        feedbackDTOs.Add(new ViewFeedback(patient.Name + " " + patient.Surname, feedback.Information.Text, feedback.Information.Date));
                     }
                 }
             }
