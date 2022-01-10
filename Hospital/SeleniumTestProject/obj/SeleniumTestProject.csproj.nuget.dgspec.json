@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Georgije\\Desktop\\PSW_UPLOAD\\Hospital\\Hospital\\Hospital\\SeleniumTestProject\\SeleniumTestProject.csproj": {}
+    "C:\\Users\\nikol\\Documents\\FTN\\Projektovanje_softvera\\Projekat\\Hospital\\Hospital\\Hospital\\SeleniumTestProject\\SeleniumTestProject.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Georgije\\Desktop\\PSW_UPLOAD\\Hospital\\Hospital\\Hospital\\SeleniumTestProject\\SeleniumTestProject.csproj": {
+    "C:\\Users\\nikol\\Documents\\FTN\\Projektovanje_softvera\\Projekat\\Hospital\\Hospital\\Hospital\\SeleniumTestProject\\SeleniumTestProject.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Georgije\\Desktop\\PSW_UPLOAD\\Hospital\\Hospital\\Hospital\\SeleniumTestProject\\SeleniumTestProject.csproj",
+        "projectUniqueName": "C:\\Users\\nikol\\Documents\\FTN\\Projektovanje_softvera\\Projekat\\Hospital\\Hospital\\Hospital\\SeleniumTestProject\\SeleniumTestProject.csproj",
         "projectName": "SeleniumTestProject",
-        "projectPath": "C:\\Users\\Georgije\\Desktop\\PSW_UPLOAD\\Hospital\\Hospital\\Hospital\\SeleniumTestProject\\SeleniumTestProject.csproj",
-        "packagesPath": "C:\\Users\\Georgije\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Georgije\\Desktop\\PSW_UPLOAD\\Hospital\\Hospital\\Hospital\\SeleniumTestProject\\obj\\",
+        "projectPath": "C:\\Users\\nikol\\Documents\\FTN\\Projektovanje_softvera\\Projekat\\Hospital\\Hospital\\Hospital\\SeleniumTestProject\\SeleniumTestProject.csproj",
+        "packagesPath": "C:\\Users\\nikol\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\nikol\\Documents\\FTN\\Projektovanje_softvera\\Projekat\\Hospital\\Hospital\\Hospital\\SeleniumTestProject\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Georgije\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\nikol\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -90,7 +90,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.100\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.101\\RuntimeIdentifierGraph.json"
         }
       }
     }
