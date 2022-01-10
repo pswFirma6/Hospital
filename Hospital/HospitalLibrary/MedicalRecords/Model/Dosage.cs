@@ -33,6 +33,10 @@ namespace Hospital_library.MedicalRecords.Model
                 throw new ConnectionInfoException("Values cannot be less then 0 or empty strings");
         }
         
+        public void SetPrescriptionDate(String newDate)
+        {
+            PrescriptionDate = newDate;
+        }
         
     }
 }

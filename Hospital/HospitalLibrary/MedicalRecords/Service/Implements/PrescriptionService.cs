@@ -19,7 +19,7 @@ namespace HospitalAPI.ImplService
 
         public void AddPrescription(Prescription prescription)
         {
-            prescription.Dosage.PrescriptionDate = DateTime.Now.ToString();
+            prescription.Dosage.SetPrescriptionDate(DateTime.Now.ToString());
             _hospitalRepositoryFactory.GetPrescriptionRepository().Add(prescription);
         }
 

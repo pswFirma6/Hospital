@@ -26,5 +26,7 @@ namespace Hospital_library.MedicalRecords.Model
             PharmacyName = pharmacyName;
         }
 
+        
+
     }
 }

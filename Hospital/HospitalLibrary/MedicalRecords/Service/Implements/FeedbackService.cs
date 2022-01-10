@@ -1,4 +1,5 @@
-﻿using HospitalLibrary.MedicalRecords.Model;
+﻿using Hospital_library.MedicalRecords.Model;
+using HospitalLibrary.MedicalRecords.Model;
 using HospitalLibrary.MedicalRecords.Model.Enums;
 using HospitalLibrary.MedicalRecords.Service;
 using HospitalLibraryHospital_library.MedicalRecords.Repository;
@@ -44,9 +45,9 @@ namespace HospitalAPI.Service
 
         public void Add(Feedback feedback)
         {
-            if (feedback.Date == null)
+            if (feedback.Information.Date == null)
             {
-                feedback.Date = DateTime.Now;
+                feedback.Information.SetDate(DateTime.Now);
             }
             feedback.Id = _repositoryFactory.GetFeedbackRepository().GetAll().Count + 1;
             _repositoryFactory.GetFeedbackRepository().Add(feedback);
@@ -79,13 +80,13 @@ namespace HospitalAPI.Service
             switch (state)
             {
                 case "approved":
-                    feedback.State = FeedbackState.approved;
+                    feedback.Information.ChangeFeedbackState(FeedbackState.approved);
                     break;
                 case "rejected":
-                    feedback.State = FeedbackState.rejected;
+                    feedback.Information.ChangeFeedbackState(FeedbackState.rejected);
                     break;
                 case "pending":
-                    feedback.State = FeedbackState.pending;
+                    feedback.Information.ChangeFeedbackState(FeedbackState.pending);
                     break;
             }
             _repositoryFactory.GetFeedbackRepository().Update(feedback);

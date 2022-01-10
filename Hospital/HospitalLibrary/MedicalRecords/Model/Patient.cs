@@ -1,18 +1,19 @@
-﻿using HospitalLibrary.MedicalRecords.Model.Enums;
+﻿using Hospital_library.SharedModel.Model;
+using HospitalLibrary.MedicalRecords.Model.Enums;
 using HospitalLibrary.Model.Enums;
 using System;
 using System.Collections.Generic;
 
 namespace HospitalLibrary.MedicalRecords.Model
 {
-    public class Patient : User
+    public class Patient : User, IAggregateRoot
     {
-        public virtual MedicalRecord Record { get; set; }
-        public virtual ICollection<Allergy> Allergies { get; set; }
-        public int DoctorId { get; set; }
-        public virtual Doctor Doctor { get; set; }
-        public bool Blocked { get; set; }
-        public bool Malicious { get; set; }
+        public virtual MedicalRecord Record { get; private set; }
+        public virtual ICollection<Allergy> Allergies { get; private set; }
+        public int DoctorId { get; private set; }
+        public virtual Doctor Doctor { get; private set; }
+        public bool Blocked { get; private set; }
+        public bool Malicious { get; private set; }
 
         public Patient() 
         {
@@ -40,6 +41,19 @@ namespace HospitalLibrary.MedicalRecords.Model
             Record = new MedicalRecord(id,bloodType, rhfactor, height, weight);
             Allergies = allergies;
             Doctor = doctor;
+        }
+
+        public void ChangePatientsBlockedStatus(bool state)
+        {
+            Blocked = state;
+        }
+        public void ChangePatientsMaliciousStatus(bool state)
+        {
+            Malicious = state;
+        }
+        public void AddAllergiesToPatient(List<Allergy> listAllergies)
+        {
+            Allergies = listAllergies;
         }
     }
 }

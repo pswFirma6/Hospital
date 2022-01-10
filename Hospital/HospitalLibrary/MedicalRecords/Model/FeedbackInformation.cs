@@ -47,6 +47,15 @@ namespace Hospital_library.MedicalRecords.Model
             ValidateDate();
             ValidateText();
         }
-        
+
+        public void ChangeFeedbackState(FeedbackState state)
+        {
+            State = state;
+            
+        }
+        public void SetDate (DateTime newDate)
+        {
+            Date = newDate;
+        }
     }
 }
