@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Selenium.Pages
+namespace Selenium.Pages.AppForManager
 {
     internal class LandingPage
     {
