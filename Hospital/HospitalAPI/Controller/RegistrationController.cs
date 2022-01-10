@@ -6,6 +6,7 @@ using HospitalLibrary.MedicalRecords.Service;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 using AutoMapper;
+using System;
 
 namespace HospitalAPI.Controller
 {
@@ -41,9 +42,8 @@ namespace HospitalAPI.Controller
             
             var model = _mapper.Map<Patient>(patientDTO);
 
-            Patient patient = _patientService.Register(model);
-            
-            
+            Patient patient = _patientService.Register(model);         
+                      
             if (patient == null)
             {
                 return Conflict(new { message = $"An existing record patient was already found." });
