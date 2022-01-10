@@ -55,11 +55,16 @@ namespace HospitalAPI
                 nav.Property(mdr => mdr.Quantity).HasColumnName("Quantity");
                 nav.Property(mdr => mdr.PrescriptionDate).HasColumnName("PrescriptionDate");
                 nav.Property(mdr => mdr.RecommendedDose).HasColumnName("RecommendedDose");
-                
-
-
+              
             });
 
+            modelBuilder.Entity<Feedback>().OwnsOne(p => p.Information, nav =>
+            {
+                nav.Property(mdr => mdr.FdbInfId).HasColumnName("FeedbackId");
+                nav.Property(mdr => mdr.Text).HasColumnName("Text");
+                nav.Property(mdr => mdr.Date).HasColumnName("Date");
+                nav.Property(mdr => mdr.State).HasColumnName("State");
+            });
 
         }
     }

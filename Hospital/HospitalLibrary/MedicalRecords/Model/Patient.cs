@@ -8,6 +8,7 @@ namespace HospitalLibrary.MedicalRecords.Model
 {
     public class Patient : User, IAggregateRoot
     {
+        
         public virtual MedicalRecord Record { get; private set; }
         public virtual ICollection<Allergy> Allergies { get; private set; }
         public int DoctorId { get; private set; }
