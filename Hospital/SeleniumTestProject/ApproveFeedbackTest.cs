@@ -1,7 +1,6 @@
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
-using Selenium.Pages;
-using System;
+using Selenium.Pages.AppForManager;
 using Xunit;
 
 namespace Selenium
