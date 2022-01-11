@@ -28,6 +28,7 @@ namespace HospitalAPI.Repository
         public IMedicineRepository MedicineRepository{get; set;}
         public IPrescriptionRepository PrescriptionRepository { get; set;}
         public IEventRepository EventRepository { get; set; }
+        public IManagerRepository ManagerRepository { get; set; }
 
         public override IFeedbackRepository GetFeedbackRepository()
         {
@@ -95,6 +96,12 @@ namespace HospitalAPI.Repository
                 return new EventRepository(_eventContext);
             else
                 return EventRepository;
+        public override IManagerRepository GetManagerRepository()
+        {
+            if (ManagerRepository == null)
+                return new ManagerRepository(_context);
+            else
+                return ManagerRepository;
         }
     }
 }

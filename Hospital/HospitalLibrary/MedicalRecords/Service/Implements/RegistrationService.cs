@@ -43,7 +43,7 @@ namespace HospitalAPI.ImplService
                 {"token", token },
                 {"email", patient.Email }
             };
-            var callback = QueryHelpers.AddQueryString("http://localhost:4200/authentication/emailconfirmation", param);
+            var callback = QueryHelpers.AddQueryString("http://localhost:4202/authentication/emailconfirmation", param);
             var message = new Message(new string[] { patient.Email }, "Email Confirmation token", callback);
             await _emailSender.SendEmailAsync(message);
         }

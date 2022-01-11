@@ -25,5 +25,8 @@ namespace HospitalLibraryHospital_library.MedicalRecords.Repository
 
         public abstract IEventRepository GetEventRepository();
 
+        public abstract IManagerRepository GetManagerRepository();
+
+
     }
 }

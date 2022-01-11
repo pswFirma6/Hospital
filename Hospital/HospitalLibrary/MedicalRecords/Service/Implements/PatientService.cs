@@ -1,10 +1,6 @@
-﻿
-
-using HospitalLibrary.MedicalRecords.Model;
+﻿using HospitalLibrary.MedicalRecords.Model;
 using HospitalLibrary.MedicalRecords.Service;
 using HospitalLibraryHospital_library.MedicalRecords.Repository;
-
-using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -28,12 +24,12 @@ namespace HospitalAPI.ImplService
 
         public Patient Register(Patient patient)
         {
-            
-            if (CheckExisting(patient) )
+
+            if (CheckExisting(patient))
             {
                 return null;
             }
-
+            patient.Id = _hospitalRepositoryFactory.GetPatientRepository().GetAll().Count + 1;
             return _hospitalRepositoryFactory.GetPatientRepository().Add(MapAllergies(patient));
         }
         public Patient GetPatient(int id)
@@ -45,10 +41,10 @@ namespace HospitalAPI.ImplService
             return _hospitalRepositoryFactory.GetPatientRepository().GetAll();
         }
 
-        public Patient MapAllergies(Patient patient) 
+        public Patient MapAllergies(Patient patient)
         {
             List<Allergy> allergies = new List<Allergy>();
-            foreach (var allergy in patient.Allergies) 
+            foreach (var allergy in patient.Allergies)
             {
 
                 Allergy allergyFromDB = _hospitalRepositoryFactory.GetAllergyRepository().GetOne(allergy.Id);
@@ -77,5 +73,11 @@ namespace HospitalAPI.ImplService
             _hospitalRepositoryFactory.GetPatientRepository().GetOne(patient.Id).Blocked = false;
             _hospitalRepositoryFactory.GetPatientRepository().Update(patient);
         }
+
+        public Patient GetPatientByUsername(string username) 
+        {
+            return _hospitalRepositoryFactory.GetPatientRepository().GetByUsername(username);
+        }
+
     }
 }

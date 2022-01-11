@@ -3,11 +3,14 @@ using HospitalAPI.DTO;
 using HospitalAPI.Validation;
 using HospitalLibrary.MedicalRecords.Model;
 using HospitalLibrary.MedicalRecords.Service;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 
 namespace HospitalAPI.Controller
 {
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     [Route("api/[controller]")]
     [ApiController]
     public class FeedbackController : ControllerBase
@@ -25,6 +28,7 @@ namespace HospitalAPI.Controller
             _feedbackValidation = feedbackValidation;
         }
 
+        [Authorize(Roles  = "patient")]
         [HttpGet]
         [Route("{Approved}")]
         public IActionResult GetApprovedFeedbacks()
@@ -32,6 +36,7 @@ namespace HospitalAPI.Controller
             return Ok(_feedbackService.GetAllApproved());
         }
 
+        [Authorize(Roles = "patient")]
         [HttpPost]
         [Route("{leave}")]
         public IActionResult Add(FeedbackDTO dto) 

@@ -35,6 +35,7 @@ namespace HospitalAPI.ImplService
         {
             appointment.Doctor = _hospitalRepositoryFactory.GetDoctorsRepository().GetOne(appointment.DoctorId);
             appointment.Patient = _hospitalRepositoryFactory.GetPatientRepository().GetOne(appointment.PatientId);
+            appointment.Id = _hospitalRepositoryFactory.GetAppointmentsRepository().GetAll().Count + 1;
             _hospitalRepositoryFactory.GetAppointmentsRepository().Add(appointment);
         }
 

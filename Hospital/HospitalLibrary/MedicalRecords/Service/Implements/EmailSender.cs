@@ -13,6 +13,13 @@ namespace HospitalAPI.ImplService
         public EmailSender(EmailConfiguration emailConfig)
         {
             _emailConfig = emailConfig;
+
+            _emailConfig.From = "HospitalBeyondCare@gmail.com";
+            _emailConfig.SmtpServer = "smtp.gmail.com";
+            _emailConfig.Port = 465;
+            _emailConfig.UserName = "HospitalBeyondCare@gmail.com";
+            _emailConfig.Password = "hospital12345";
+
         }
 
         public void SendEmail(Message message)
@@ -35,7 +42,6 @@ namespace HospitalAPI.ImplService
             emailMessage.From.Add(new MailboxAddress(_emailConfig.From));
             emailMessage.To.AddRange(message.To);
             emailMessage.Subject = message.Subject;
-
 
             var bodyBuilder = new BodyBuilder 
             { 
