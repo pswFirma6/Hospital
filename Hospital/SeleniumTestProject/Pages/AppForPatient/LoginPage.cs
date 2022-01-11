@@ -12,7 +12,7 @@ namespace SeleniumTestProject.Pages.AppForPatient
     internal class LoginPage
     {
         private readonly IWebDriver driver;
-        public const string URI = "http://localhost:4201/login";
+        public const string URI = "http://localhost:4202/login";
         public const string InvalidCredentialsMessage = "Username or password is incorrect!";
         public const string LoginSuccessfulMessage = "Login successful!";
         private IWebElement UsernameElement => driver.FindElement(By.Id("username"));
