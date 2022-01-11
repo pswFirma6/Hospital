@@ -1,10 +1,13 @@
 ﻿using AutoMapper;
+using Hospital_library.MedicalRecords.Service;
 using HospitalAPI.DTO;
 using HospitalLibrary.MedicalRecords.Model;
 using HospitalLibrary.MedicalRecords.Service;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace HospitalAPI.Controller
 {
@@ -14,13 +17,14 @@ namespace HospitalAPI.Controller
     public class PatientController : ControllerBase
     {
         private IPatientService _patientService;
+        private IAppointmentService _appointmentService;
         private readonly IMapper _mapper;
 
-        public PatientController(IPatientService patientService, IMapper mapper)
+        public PatientController(IPatientService patientService, IMapper mapper, IAppointmentService appointmentService)
         {
             _patientService = patientService;
             _mapper = mapper;
-           
+            _appointmentService = appointmentService;
         }
 
         [Authorize(Roles = "patient")]
@@ -35,17 +39,33 @@ namespace HospitalAPI.Controller
         [HttpGet]
         public IActionResult GetMaliciousPatients()
         {
-            return Ok(_patientService.GetMaliciousPatients());
+            List<Patient> patients = _patientService.GetMaliciousPatients();
+
+            if(patients == null)
+            {
+                return Ok(new List<Patient>());
+            }
+            foreach (Patient patient in patients.AsEnumerable())
+            {
+                int numberOfCancelledAppointments = _appointmentService.GetNumberOfCancelledApointmentByPatientId(patient.Id);
+                if (numberOfCancelledAppointments == 0)
+                {
+                    _patientService.SetPatientMaliciousStatus(patient.Id, false);
+                    patients.Remove(patient);
+                }
+            }
+            
+            return Ok(patients);
         }
 
-        [HttpPut]
+        [HttpPut("BlockPatient")]
         public IActionResult BlockPatient(Patient patient)
         {
             _patientService.BlockPatient(patient);
             return Ok(patient);
         }
 
-        [HttpPut]
+        [HttpPut("Unblockpatient")]
         public IActionResult UnblockPatient(Patient patient)
         {
             _patientService.UnblockPatient(patient);
@@ -64,6 +84,5 @@ namespace HospitalAPI.Controller
 
             return BadRequest();
         }
-
     }
 }

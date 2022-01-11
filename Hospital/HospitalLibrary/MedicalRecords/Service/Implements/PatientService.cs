@@ -79,5 +79,9 @@ namespace HospitalAPI.ImplService
             return _hospitalRepositoryFactory.GetPatientRepository().GetByUsername(username);
         }
 
+        public void SetPatientMaliciousStatus(int id, bool status)
+        {
+            _hospitalRepositoryFactory.GetPatientRepository().SetPatientMaliciousStatus(id, status);
+        }
     }
 }

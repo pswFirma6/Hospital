@@ -108,6 +108,7 @@ namespace HospitalAPI.ImplService
         public void CancelAppointment(Appointment appointment)
         {
             appointment.Type = AppointmentType.Cancelled;
+            appointment.DateCancelled = DateTime.Now;
             _hospitalRepositoryFactory.GetAppointmentsRepository().Update(appointment);
             CheckIfPatientIsMalicious(appointment.PatientId);
         }
@@ -290,6 +291,11 @@ namespace HospitalAPI.ImplService
             }
 
             return freeTerms;
+        }
+
+        public int GetNumberOfCancelledApointmentByPatientId(int id)
+        {
+             return _hospitalRepositoryFactory.GetAppointmentsRepository().GetNumberOfCancelledApointmentByPatientId(id);  
         }
     }
 }
