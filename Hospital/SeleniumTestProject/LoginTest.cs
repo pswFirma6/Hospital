@@ -39,6 +39,7 @@ namespace SeleniumTestProject
             Assert.True(loginPage.PasswordFieldDisplayed());
 
         }
+
         [Fact]
         public void TestLogInSuccessful()
         {
@@ -58,6 +59,22 @@ namespace SeleniumTestProject
 
             patientMedicalRecordPage = new PatientMedicalRecordPage(driver);
             Assert.Equal(driver.Url, PatientMedicalRecordPage.URI);
+        }
+
+        [Fact]
+        public void TestLogInUnSuccessful()
+        {
+            loginPage.InsertUsername("Marko");
+            loginPage.InsertPassword("Mira1234");
+            loginPage.Submit();
+
+            Assert.Equal(LoginPage.InvalidCredentialsMessage, loginPage.GetDialogMessage());
+
+            var token = loginPage.GetTokenFromLocalStorage();
+            Assert.Null(token);
+
+            patientMedicalRecordPage = new PatientMedicalRecordPage(driver);
+            Assert.NotEqual(driver.Url, PatientMedicalRecordPage.URI);
         }
 
         public void Dispose()
