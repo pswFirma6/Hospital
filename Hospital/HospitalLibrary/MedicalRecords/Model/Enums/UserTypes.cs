@@ -7,6 +7,7 @@ namespace HospitalLibrary.MedicalRecords.Model.Enums
         patient,
         director,
         secretary,
-        admin
+        admin,
+        manager
     }
 }

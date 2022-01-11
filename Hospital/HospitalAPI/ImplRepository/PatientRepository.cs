@@ -2,6 +2,7 @@
 using HospitalLibrary.MedicalRecords.Model;
 using HospitalLibrary.MedicalRecords.Repository.Repository.Interface;
 using System.Linq;
+using HospitalLibrary.MedicalRecords.Model.Enums;
 
 namespace HospitalAPI.ImplRepository
 {
@@ -22,6 +23,15 @@ namespace HospitalAPI.ImplRepository
         {
             return _context.Patients.SingleOrDefault(s => s.Email == email);
         }
+        public Patient GetByLoginCredentials(string username, string password, UserType userType)
+        {
+            return _context.Patients.SingleOrDefault(p => p.Username == username && p.Password == password && p.UserType == userType);
+        }
+        public Patient GetByUsername(string username)
+        {
+            return _context.Patients.SingleOrDefault(p => p.Username == username);
+        }
+
     }
 }
 

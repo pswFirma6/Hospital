@@ -1,9 +1,6 @@
 ﻿﻿using Hospital_library.MedicalRecords.Model;
-using HospitalLibrary.GraphicalEditor.Model;
 using HospitalLibrary.MedicalRecords.Model;
-using HospitalLibrary.Model;
 using Microsoft.EntityFrameworkCore;
-using System;
 
 namespace HospitalAPI
 {
@@ -17,6 +14,7 @@ namespace HospitalAPI
         public DbSet<Appointment> Appointments {get ; set ;}
         public DbSet<Medicine> Medicines { get; set; }
         public DbSet<Prescription> Prescriptions { get; set; }
+        public DbSet<Manager> Managers { get; set; }
 
         public MyDbContext(DbContextOptions<MyDbContext> options) : base(options) { }
 

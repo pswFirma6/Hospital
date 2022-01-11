@@ -18,9 +18,14 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using System;
 using static HospitalAPI.Mapper.Mapper;
 using DoctorService = HospitalAPI.ImplService.DoctorService;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
+using Hospital_library.MedicalRecords.Service.Implements;
+using Hospital_library.MedicalRecords.Service.Interfaces;
 
 namespace HospitalAPI
 {
@@ -50,6 +55,27 @@ namespace HospitalAPI
                     });
             });
 
+            // Security 
+            services.AddAuthentication(option =>
+            {
+                option.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                option.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            })
+            .AddJwtBearer(options =>
+            {
+                options.SaveToken = true;
+                options.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuer = true,
+                    ValidateAudience = true,
+                    ValidateLifetime = true,
+                    ValidateIssuerSigningKey = true,
+                    ValidIssuer = Configuration["Jwt:Issuer"],
+                    ValidAudience = Configuration["Jwt:Issuer"],
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["Jwt:Key"]))
+                };
+            });
+
             // Auto Mapper Configurations
             var mapperConfig = new MapperConfiguration(mc =>
             {
@@ -59,36 +85,32 @@ namespace HospitalAPI
             IMapper mapper = mapperConfig.CreateMapper();
             services.AddSingleton(mapper);
 
-            services.AddMvc();
-            
-
             // The AddScoped method registers the service with a scoped lifetime, the lifetime of a single request
-
             services.AddScoped<IFeedbackService, FeedbackService>();
             services.AddScoped<IPatientService, PatientService>();
             services.AddScoped<IAllergyService, AllergyService>();
             services.AddScoped<IDoctorService, DoctorService>();
-            services.AddScoped<RepositoryFactory, HospitalRepositoryFactory>();
             services.AddScoped<IRegistrationService, RegistrationService>();
             services.AddScoped<ISurveyService, SurveyService>();
-
             services.AddScoped<IAppointmentService, AppointmentService>();
-
             services.AddScoped<IMedicineService, MedicineService>();
             services.AddScoped<IPrescriptionService, PrescriptionService>();
-
             services.AddScoped<IAppointmentService, AppointmentService>();
+            services.AddScoped<ILoginService, LoginService>();
+
+            // Repository
+            services.AddScoped<RepositoryFactory, HospitalRepositoryFactory>();
 
             // Need to AddScoped for every dependency injection validation
             services.AddScoped<FeedbackValidation>();
             services.AddScoped<RegistrationValidation>();
             services.AddScoped<AppointmentValidation>();
             services.AddScoped<SurveyValidation>();
+            services.AddScoped<LoginValidation>();
 
             // Repository dependency injection
             services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
-
-           
+   
             services.AddIdentity<PatientRegistration, IdentityRole>(options =>
             {
                 options.User.RequireUniqueEmail = false;
@@ -112,7 +134,6 @@ namespace HospitalAPI
             ); 
 
             // Connection with PostgreSQL
-
             services.AddDbContext<MyDbContext>(options => 
                     options.UseNpgsql(CreateConnectionStringFromEnvironment()).UseLazyLoadingProxies());
         }
@@ -130,6 +151,7 @@ namespace HospitalAPI
 
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>

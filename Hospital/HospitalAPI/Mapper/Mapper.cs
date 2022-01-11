@@ -26,7 +26,6 @@ namespace HospitalAPI.Mapper
                 CreateMap<PatientRegistration, PatientRegistrationDTO>();
                 CreateMap<PatientRegistrationDTO, PatientRegistration>();
 
-                
                 CreateMap<SurveyQuestion, TakeSurveyDTO>();
                 CreateMap<TakeSurveyDTO, SurveyQuestion>();
 
@@ -36,9 +35,12 @@ namespace HospitalAPI.Mapper
                 CreateMap<Appointment, NewAppointmentDTO>();
                 CreateMap<NewAppointmentDTO, Appointment>();
 
-
                 CreateMap<Appointment, NewAppointmentDTO>();
                 CreateMap<NewAppointmentDTO, Appointment>();
+
+                CreateMap<User, LoginDTO>();
+                CreateMap<LoginDTO, User>();
+
             }
         }
     } 

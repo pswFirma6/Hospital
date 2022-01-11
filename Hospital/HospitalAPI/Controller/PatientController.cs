@@ -1,16 +1,14 @@
 ﻿using AutoMapper;
 using HospitalAPI.DTO;
-using HospitalAPI.ImplService;
 using HospitalLibrary.MedicalRecords.Model;
 using HospitalLibrary.MedicalRecords.Service;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace HospitalAPI.Controller
 {
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     [Route("api/[controller]")]
     [ApiController]
     public class PatientController : ControllerBase
@@ -24,14 +22,16 @@ namespace HospitalAPI.Controller
             _mapper = mapper;
            
         }
+
+        [Authorize(Roles = "patient")]
         [HttpGet("{id}")]
-        public IActionResult GetPatient(int id )
+        public IActionResult GetPatient(int id)
         {
             Patient patient = _patientService.GetPatient(id);
             var model = _mapper.Map<PatientRegistrationDTO>(patient);
             return Ok(model);
         }
-
+ 
         [HttpGet]
         public IActionResult GetMaliciousPatients()
         {
@@ -50,6 +50,19 @@ namespace HospitalAPI.Controller
         {
             _patientService.UnblockPatient(patient);
             return Ok(patient);
+        }
+
+        [Authorize(Roles = "patient")]
+        [HttpGet]
+        [Route("getByUsername/{username}")]
+        public IActionResult GetPatientByUsername(string username)
+        {
+            if (username != null)
+            {
+                return Ok(_patientService.GetPatientByUsername(username));
+            }
+
+            return BadRequest();
         }
 
     }

@@ -5,13 +5,13 @@ using HospitalAPI.DTO;
 using HospitalAPI.DTO.AppointmentDTO;
 using HospitalAPI.Validation;
 using HospitalLibrary.MedicalRecords.Model;
-using HospitalLibrary.MedicalRecords.Model.Enums;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
 
 namespace HospitalAPI.Controller
 {
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     [Route("api/[controller]")]
     [ApiController]
     public class AppointmentController : ControllerBase
@@ -27,6 +27,7 @@ namespace HospitalAPI.Controller
             _mapper = mapper;
         }
 
+        [Authorize(Roles = "patient")]
         [HttpPost]
         public IActionResult AddAppointment(NewAppointmentDTO newAppointment)
         {
@@ -100,6 +101,7 @@ namespace HospitalAPI.Controller
             return Ok(appointment);
         }
 
+        [Authorize(Roles = "patient")]
         [HttpPost("Priority")]
         public IActionResult GetPriorityAppointments(FreeTermsRequestDTO freeTermsRequestDTO)
         {
