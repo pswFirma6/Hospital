@@ -11,7 +11,7 @@ namespace Hospital_library.MedicalRecords.Service
         public void Add(Appointment appointment);
         public FreeTermsForApp GetAllFreeTerms(int DoctorId, DateTime startDate);
         public List<string> GetDoctorsFreeAppointments(int doctorId, DateTime date);
-        public List<Appointment> getAll(int id);
+        public List<Appointment> getAll(string username);
         public List<Appointment> getAwaiting(int id);
         public List<Appointment> getCancelled(int id);
         public AllFreeTerms GetTerms(FreeTerms freeTermsRequest);

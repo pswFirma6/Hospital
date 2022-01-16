@@ -48,13 +48,14 @@ namespace HospitalAPI.ImplService
                    && x.StartTime <= newAppointment.StartTime));
         }
 
-        public List<Appointment> getAll(int id)
+        public List<Appointment> getAll(String username)
         {
             List<Appointment> allAppointments = new List<Appointment>();
             List<Appointment> appointmentsList = _hospitalRepositoryFactory.GetAppointmentsRepository().GetAll();
+            Patient patient = _hospitalRepositoryFactory.GetPatientRepository().GetByUsername(username);
             foreach (Appointment appointment in appointmentsList)
             {
-                if (appointment.PatientId == id)
+                if (appointment.PatientId == patient.Id)
                 {
                     allAppointments.Add(appointment);
                 }
