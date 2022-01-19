@@ -9,10 +9,16 @@ namespace HospitalAPI.Repository
     public class HospitalRepositoryFactory : RepositoryFactory
     {
         private MyDbContext _context;
+        private DatabaseEventContext _eventContext;
         public HospitalRepositoryFactory(MyDbContext context)
         {
             _context = context;
         }
+        public HospitalRepositoryFactory(DatabaseEventContext context)
+        {
+            _eventContext = context;
+        }
+
         public IFeedbackRepository FeedbackRepository { get; set; }
         public IPatientRepository PersonRepository { get; set; }
         public ISurveyRepository SurveyRepository { get; set; }
@@ -21,7 +27,9 @@ namespace HospitalAPI.Repository
         public IAppointmentRepository AppointmentRepository { get; set; }
         public IMedicineRepository MedicineRepository{get; set;}
         public IPrescriptionRepository PrescriptionRepository { get; set;}
+        public IEventRepository EventRepository { get; set; }
         public IManagerRepository ManagerRepository { get; set; }
+
         public override IFeedbackRepository GetFeedbackRepository()
         {
             if (FeedbackRepository == null)
@@ -81,6 +89,13 @@ namespace HospitalAPI.Repository
             else
                 return PrescriptionRepository;
         }
+
+        public override IEventRepository GetEventRepository()
+        {
+            if (EventRepository == null)
+                return new EventRepository(_eventContext);
+            else
+                return EventRepository;
         public override IManagerRepository GetManagerRepository()
         {
             if (ManagerRepository == null)

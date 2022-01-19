@@ -10,12 +10,18 @@ namespace HospitalLibrary.MedicalRecords.Repository
     public class Repository<Entity> : IRepository<Entity> where Entity : Model.Entity
     {
         private MyDbContext _context;
+        protected readonly DatabaseEventContext _eventContext;
         private DbSet<Entity> entities;
 
         public Repository(MyDbContext context)
         {
             _context = context;
             entities = _context.Set<Entity>();
+        }
+        public Repository(DatabaseEventContext context)
+        {
+            _eventContext = context;
+            entities = _eventContext.Set<Entity>();
         }
 
         public virtual List<Entity> GetAll()
