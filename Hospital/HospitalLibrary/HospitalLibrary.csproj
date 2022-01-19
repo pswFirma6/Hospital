@@ -24,7 +24,6 @@
     <Folder Include="Schedule\Model\" />
     <Folder Include="Schedule\Repository\" />
     <Folder Include="Schedule\Service\" />
-    <Folder Include="SharedModel\" />
   </ItemGroup>
 
   <ItemGroup>

@@ -65,7 +65,6 @@ namespace HospitalAPI.Controller
         {
             return Ok(_appointmentService.getAwaiting(id));
         }
-
         [Authorize(Roles = "patient")]
         [HttpGet]
         [Route("cancelled/{id}")]
@@ -73,7 +72,6 @@ namespace HospitalAPI.Controller
         {
             return Ok(_appointmentService.getCancelled(id));
         }
-
         [Authorize(Roles = "patient")]
         [HttpGet]
         [Route("completed/{id}")]
@@ -81,7 +79,7 @@ namespace HospitalAPI.Controller
         {
             return Ok(_appointmentService.getCompleted(id));
         }
-
+        [Authorize(Roles = "patient")]
         [HttpPut]
         public IActionResult CancelAppointment(Appointment appointment)
         {

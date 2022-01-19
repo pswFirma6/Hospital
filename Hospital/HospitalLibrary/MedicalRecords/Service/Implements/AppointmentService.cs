@@ -108,7 +108,7 @@ namespace HospitalAPI.ImplService
             {
                 if (cancelledApointmentsListByPatient[cancelledApointmentsListByPatient.Count - 3].StartTime > DateTime.Now.AddDays(-30))
                 {
-                    _hospitalRepositoryFactory.GetPatientRepository().GetOne(patientID).Malicious = true;
+                    _hospitalRepositoryFactory.GetPatientRepository().GetOne(patientID).ChangePatientsMaliciousStatus(true);
                     _hospitalRepositoryFactory.GetPatientRepository().Update(_hospitalRepositoryFactory.GetPatientRepository().GetOne(patientID));
                 }
             }
