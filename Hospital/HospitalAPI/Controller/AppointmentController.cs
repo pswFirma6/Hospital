@@ -58,7 +58,7 @@ namespace HospitalAPI.Controller
             return Ok(_appointmentService.GetAllFreeTerms(termDTO.DoctorId, termDTO.StartDate));
         }
 
-        
+        [Authorize(Roles = "patient")]
         [HttpGet]
         [Route("awaiting/{id}")]
         public IActionResult GetAwaitingAppointment(int id)
