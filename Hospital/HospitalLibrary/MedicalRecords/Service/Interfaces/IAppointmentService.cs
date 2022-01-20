@@ -18,5 +18,6 @@ namespace Hospital_library.MedicalRecords.Service
         public bool CheckExistingAppointment(Appointment appointment);
         public void CancelAppointment(Appointment appointment);
         public int GetNumberOfCancelledApointmentByPatientId(int id);
+        public Prescription GetPrescription(int id);
     }
 }

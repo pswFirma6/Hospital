@@ -14,6 +14,9 @@ namespace Hospital_library.MedicalRecords.Model
         public Therapy Therapy { get; set; }
         public string PharmacyName { get; set; }
 
+        public virtual Appointment Appointment { get; set; }
+
+
         public Prescription() { }
 
         public Prescription(string medicineName, int quantity, string recommendedDose, string prescriptionDate, string doctorName, string patientName, string therapyStart, string therapyEnd, string diagnosis, string pharmacyName)

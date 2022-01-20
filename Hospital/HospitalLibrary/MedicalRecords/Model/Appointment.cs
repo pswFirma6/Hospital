@@ -1,4 +1,5 @@
-﻿using Hospital_library.MedicalRecords.Model.Enums;
+﻿using Hospital_library.MedicalRecords.Model;
+using Hospital_library.MedicalRecords.Model.Enums;
 using HospitalLibrary.GraphicalEditor.Model;
 using System;
 
@@ -14,6 +15,10 @@ namespace HospitalLibrary.MedicalRecords.Model
         public bool SurveyTaken { get; set; }
         public DateTime? DateCancelled { get; set; } 
         public AppointmentType Type { get; set; }
+        public int PrescriptionID { get; set; }
+        public virtual Prescription Prescription { get; set; }
+        public string Report { get; set; }
+        
 
         public Appointment() 
         {

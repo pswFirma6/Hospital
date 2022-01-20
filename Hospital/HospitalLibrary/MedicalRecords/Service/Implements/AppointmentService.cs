@@ -168,6 +168,11 @@ namespace HospitalAPI.ImplService
             }
         }
 
+        public Prescription GetPrescription(int id)
+        {
+            return _hospitalRepositoryFactory.GetAppointmentsRepository().GetPrescription(id);
+        }
+
         private static void CalculateFreeTerms(List<string> terms, List<Appointment> DoctorAppointments)
         {
             foreach (Appointment appointment in DoctorAppointments)

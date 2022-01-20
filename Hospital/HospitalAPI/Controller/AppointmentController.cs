@@ -116,6 +116,13 @@ namespace HospitalAPI.Controller
             AllFreeTerms allFreeTerms = _appointmentService.GetTerms(mapper);
             return Ok(allFreeTerms);
         }
+
+        [HttpGet]
+        [Route("{prescription/{id}}")]
+        public IActionResult GetPrescription(int id)
+        {
+            return Ok(_appointmentService.GetPrescription(id));
+        }
     }
 }
 
