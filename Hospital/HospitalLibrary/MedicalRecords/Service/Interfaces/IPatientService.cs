@@ -12,6 +12,7 @@ namespace HospitalLibrary.MedicalRecords.Service
         public void BlockPatient(Patient patient);
         public void UnblockPatient(Patient patient);
         public Patient GetPatientByUsername(string username);
+        public void SetPatientMaliciousStatus(int id, bool status);
 
     }
 }

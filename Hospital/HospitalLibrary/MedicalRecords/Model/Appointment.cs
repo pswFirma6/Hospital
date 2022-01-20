@@ -12,7 +12,7 @@ namespace HospitalLibrary.MedicalRecords.Model
         public int DoctorId { get; set; }
         public virtual Doctor Doctor { get; set; }
         public bool SurveyTaken { get; set; }
-
+        public DateTime? DateCancelled { get; set; } 
         public AppointmentType Type { get; set; }
 
         public Appointment() 

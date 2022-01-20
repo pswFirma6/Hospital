@@ -32,6 +32,14 @@ namespace HospitalAPI.ImplRepository
             return _context.Patients.SingleOrDefault(p => p.Username == username);
         }
 
+        public void SetPatientMaliciousStatus(int id, bool status)
+        {
+            Patient patient = _context.Patients.First(x => x.Id == id);
+
+            patient.Malicious = status;
+
+            _context.SaveChanges();
+        }
     }
 }
 

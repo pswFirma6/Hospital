@@ -5,6 +5,7 @@ using HospitalAPI.DTO;
 using HospitalAPI.DTO.AppointmentDTO;
 using HospitalAPI.Validation;
 using HospitalLibrary.MedicalRecords.Model;
+using HospitalLibrary.MedicalRecords.Service;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -17,14 +18,16 @@ namespace HospitalAPI.Controller
     public class AppointmentController : ControllerBase
     {
         private readonly IAppointmentService _appointmentService;
+        private readonly IPatientService _patientService;
         private readonly AppointmentValidation _appointmentValidation;
         private readonly IMapper _mapper;
 
-        public AppointmentController(IAppointmentService appointmentService, AppointmentValidation appointmentValidation, IMapper mapper) 
+        public AppointmentController(IAppointmentService appointmentService, AppointmentValidation appointmentValidation, IMapper mapper, IPatientService patientService)
         {
             _appointmentService = appointmentService;
             _appointmentValidation = appointmentValidation;
             _mapper = mapper;
+            _patientService = patientService;
         }
 
         [Authorize(Roles = "patient")]
@@ -47,14 +50,7 @@ namespace HospitalAPI.Controller
             return Ok(mapper);
         }
         
-        [HttpGet("{id}")]
-
-        public IActionResult GetAllAppointment(int id)
-        {
-
-            return Ok(_appointmentService.getAll(id));
-        }
-
+        
         [HttpPost]
         [Route("doctorAppintments")]
         public IActionResult GetDoctorAppointments(TermDTO termDTO)
@@ -62,28 +58,28 @@ namespace HospitalAPI.Controller
             return Ok(_appointmentService.GetAllFreeTerms(termDTO.DoctorId, termDTO.StartDate));
         }
 
-
+        [Authorize(Roles = "patient")]
         [HttpGet]
         [Route("awaiting/{id}")]
         public IActionResult GetAwaitingAppointment(int id)
         {
             return Ok(_appointmentService.getAwaiting(id));
         }
-
+        [Authorize(Roles = "patient")]
         [HttpGet]
         [Route("cancelled/{id}")]
         public IActionResult GetCancelledAppointment(int id)
         {
             return Ok(_appointmentService.getCancelled(id));
         }
-
+        [Authorize(Roles = "patient")]
         [HttpGet]
         [Route("completed/{id}")]
         public IActionResult GetCompletedAppointment(int id)
         {
             return Ok(_appointmentService.getCompleted(id));
         }
-
+        [Authorize(Roles = "patient")]
         [HttpPut]
         public IActionResult CancelAppointment(Appointment appointment)
         {
@@ -98,6 +94,13 @@ namespace HospitalAPI.Controller
 
             _appointmentService.CancelAppointment(appointment);
 
+            int numberOfCancelledAppointments = _appointmentService.GetNumberOfCancelledApointmentByPatientId(appointment.PatientId);
+
+            if (numberOfCancelledAppointments >= 3)
+            {
+                _patientService.SetPatientMaliciousStatus(appointment.PatientId, true);
+            }
+    
             return Ok(appointment);
         }
 

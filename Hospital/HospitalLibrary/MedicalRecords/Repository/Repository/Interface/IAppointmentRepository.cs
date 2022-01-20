@@ -9,5 +9,7 @@ namespace Hospital_library.MedicalRecords.Repository.Repository.Interface
         Appointment Add(Appointment appointment);
         Appointment GetOne(int id);
         Appointment Update(Appointment appointment);
+
+        int GetNumberOfCancelledApointmentByPatientId(int id);
     }
 }

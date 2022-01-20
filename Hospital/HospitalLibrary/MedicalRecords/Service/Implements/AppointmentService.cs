@@ -35,7 +35,7 @@ namespace HospitalAPI.ImplService
         {
             appointment.Doctor = _hospitalRepositoryFactory.GetDoctorsRepository().GetOne(appointment.DoctorId);
             appointment.Patient = _hospitalRepositoryFactory.GetPatientRepository().GetOne(appointment.PatientId);
-            appointment.Id = _hospitalRepositoryFactory.GetAppointmentsRepository().GetAll().Count + 1;
+            appointment.Type = AppointmentType.Awaiting;
             _hospitalRepositoryFactory.GetAppointmentsRepository().Add(appointment);
         }
 
@@ -48,19 +48,7 @@ namespace HospitalAPI.ImplService
                    && x.StartTime <= newAppointment.StartTime));
         }
 
-        public List<Appointment> getAll(int id)
-        {
-            List<Appointment> allAppointments = new List<Appointment>();
-            List<Appointment> appointmentsList = _hospitalRepositoryFactory.GetAppointmentsRepository().GetAll();
-            foreach (Appointment appointment in appointmentsList)
-            {
-                if (appointment.PatientId == id)
-                {
-                    allAppointments.Add(appointment);
-                }
-            }
-            return allAppointments;
-        }
+      
 
         public List<Appointment> getAwaiting(int id)
         {
@@ -108,6 +96,7 @@ namespace HospitalAPI.ImplService
         public void CancelAppointment(Appointment appointment)
         {
             appointment.Type = AppointmentType.Cancelled;
+            appointment.DateCancelled = DateTime.Now;
             _hospitalRepositoryFactory.GetAppointmentsRepository().Update(appointment);
             CheckIfPatientIsMalicious(appointment.PatientId);
         }
@@ -119,7 +108,7 @@ namespace HospitalAPI.ImplService
             {
                 if (cancelledApointmentsListByPatient[cancelledApointmentsListByPatient.Count - 3].StartTime > DateTime.Now.AddDays(-30))
                 {
-                    _hospitalRepositoryFactory.GetPatientRepository().GetOne(patientID).Malicious = true;
+                    _hospitalRepositoryFactory.GetPatientRepository().GetOne(patientID).ChangePatientsMaliciousStatus(true);
                     _hospitalRepositoryFactory.GetPatientRepository().Update(_hospitalRepositoryFactory.GetPatientRepository().GetOne(patientID));
                 }
             }
@@ -290,6 +279,11 @@ namespace HospitalAPI.ImplService
             }
 
             return freeTerms;
+        }
+
+        public int GetNumberOfCancelledApointmentByPatientId(int id)
+        {
+             return _hospitalRepositoryFactory.GetAppointmentsRepository().GetNumberOfCancelledApointmentByPatientId(id);  
         }
     }
 }

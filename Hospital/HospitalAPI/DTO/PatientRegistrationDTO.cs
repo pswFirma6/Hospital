@@ -1,6 +1,7 @@
 ﻿using HospitalLibrary.MedicalRecords.Model;
 using HospitalLibrary.MedicalRecords.Model.Enums;
 using HospitalLibrary.Model.Enums;
+using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
 
@@ -30,6 +31,7 @@ namespace HospitalAPI.DTO
         public List<Allergy> Allergies { get; set; }
         public int? DoctorId { get; set; }
         public string ClientURI { get; set; }
+        public byte[] Picture { get; set; }
 
         public PatientRegistrationDTO()
         {

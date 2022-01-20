@@ -26,21 +26,17 @@ namespace HospitalUnitTests
             {
                 Id = 2,
                 MedicineName = "Brufen",
-                Quantity = 2,
-                RecommendedDose = "2 times a day",
-                PrescriptionDate = "22.11.2021.",
+                Dosage = new Dosage(2, "2 times a day", "22.11.2021."),
+                Therapy = new Therapy("Dec 1, 2021", "Dec 31, 2021", "Headache"),
                 DoctorName = "Branimir Nestorovic",
                 PatientName = "Ognjen Bogdanovic",
-                TherapyStart = "Dec 1, 2021",
-                TherapyEnd = "Dec 31, 2021",
-                Diagnosis = "Headache",
                 PharmacyName = "Benu"
             };
 
             stubRepository.Setup(m => m.GetPrescriptionRepository().Add(prescription)).Callback((Prescription p) => prescriptions.Add(p));
 
             // Act //
-            prescriptionValidation.AreDatesValid(prescription.TherapyStart, prescription.TherapyEnd);
+            prescriptionValidation.AreDatesValid(prescription.Therapy.TherapyStart, prescription.Therapy.TherapyEnd);
             service.AddPrescription(prescription);
 
             // Assert //

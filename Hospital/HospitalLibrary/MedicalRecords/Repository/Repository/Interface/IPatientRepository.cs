@@ -14,6 +14,6 @@ namespace HospitalLibrary.MedicalRecords.Repository.Repository.Interface
         Patient GetByEmail(string email);
         Patient GetByLoginCredentials(string username, string password, UserType userType);
         Patient GetByUsername(string username);
-
+        void SetPatientMaliciousStatus(int id, bool status);
     }
 }

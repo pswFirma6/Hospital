@@ -29,7 +29,7 @@ namespace HospitalAPI.ImplService
             {
                 return null;
             }
-            patient.Id = _hospitalRepositoryFactory.GetPatientRepository().GetAll().Count + 1;
+            //patient.Id = _hospitalRepositoryFactory.GetPatientRepository().GetAll().Count + 1;
             return _hospitalRepositoryFactory.GetPatientRepository().Add(MapAllergies(patient));
         }
         public Patient GetPatient(int id)
@@ -52,7 +52,7 @@ namespace HospitalAPI.ImplService
 
             }
 
-            patient.Allergies = allergies;
+            patient.AddAllergiesToPatient(allergies);
 
             return patient;
         }
@@ -64,13 +64,13 @@ namespace HospitalAPI.ImplService
 
         public void BlockPatient(Patient patient)
         {
-            _hospitalRepositoryFactory.GetPatientRepository().GetOne(patient.Id).Blocked = true;
+            _hospitalRepositoryFactory.GetPatientRepository().GetOne(patient.Id).ChangePatientsBlockedStatus(true);
             _hospitalRepositoryFactory.GetPatientRepository().Update(patient);
         }
 
         public void UnblockPatient(Patient patient)
         {
-            _hospitalRepositoryFactory.GetPatientRepository().GetOne(patient.Id).Blocked = false;
+            _hospitalRepositoryFactory.GetPatientRepository().GetOne(patient.Id).ChangePatientsBlockedStatus(false);
             _hospitalRepositoryFactory.GetPatientRepository().Update(patient);
         }
 
@@ -79,5 +79,9 @@ namespace HospitalAPI.ImplService
             return _hospitalRepositoryFactory.GetPatientRepository().GetByUsername(username);
         }
 
+        public void SetPatientMaliciousStatus(int id, bool status)
+        {
+            _hospitalRepositoryFactory.GetPatientRepository().SetPatientMaliciousStatus(id, status);
+        }
     }
 }
