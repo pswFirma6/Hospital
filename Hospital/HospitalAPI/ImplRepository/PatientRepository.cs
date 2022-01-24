@@ -36,7 +36,7 @@ namespace HospitalAPI.ImplRepository
         {
             Patient patient = _context.Patients.First(x => x.Id == id);
 
-            patient.Malicious = status;
+            patient.ChangePatientsMaliciousStatus(status);
 
             _context.SaveChanges();
         }
