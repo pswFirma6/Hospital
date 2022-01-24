@@ -12,6 +12,7 @@ namespace HospitalLibrary.MedicalRecords.Repository
         private MyDbContext _context;
         protected readonly DatabaseEventContext _eventContext;
         private DbSet<Entity> entities;
+        private DbSet<Entity> entitiesEvent;
 
         public Repository(MyDbContext context)
         {
@@ -21,7 +22,7 @@ namespace HospitalLibrary.MedicalRecords.Repository
         public Repository(DatabaseEventContext context)
         {
             _eventContext = context;
-            entities = _eventContext.Set<Entity>();
+            entitiesEvent = _eventContext.Set<Entity>();
         }
 
         public virtual List<Entity> GetAll()
@@ -44,6 +45,18 @@ namespace HospitalLibrary.MedicalRecords.Repository
             _context.SaveChanges();
             return entity;
         }
+
+        public Entity AddEvent(Entity entity)
+        {
+            if (entity == null)
+            {
+                throw new ArgumentNullException("entity");
+            }
+            entitiesEvent.Add(entity);
+            _eventContext.SaveChanges();
+            return entity;
+        }
+
         public Entity Update(Entity entity)
         {
             if (entity == null)

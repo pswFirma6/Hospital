@@ -1,10 +1,10 @@
 ﻿using Hospital_library.MedicalRecords.Model.Events;
 
+
 namespace Hospital_library.MedicalRecords.Repository.Repository.Interface
 {
-    public interface IEventRepository 
+    public interface IEventStepRepository
     {
-        AppointmentEvent AddEvent(AppointmentEvent e);
-        
+        EventStep AddEvent(EventStep e);
     }
 }

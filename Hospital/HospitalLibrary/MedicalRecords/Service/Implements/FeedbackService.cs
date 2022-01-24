@@ -48,7 +48,7 @@ namespace HospitalAPI.Service
             {
                 feedback.Date = DateTime.Now;
             }
-            feedback.Id = _repositoryFactory.GetFeedbackRepository().GetAll().Count + 1;
+            //feedback.Id = _repositoryFactory.GetFeedbackRepository().GetAll().Count + 1;
             _repositoryFactory.GetFeedbackRepository().Add(feedback);
         }
 

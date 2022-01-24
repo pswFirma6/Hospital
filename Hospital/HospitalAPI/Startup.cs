@@ -96,7 +96,8 @@ namespace HospitalAPI
             services.AddScoped<IMedicineService, MedicineService>();
             services.AddScoped<IPrescriptionService, PrescriptionService>();
             services.AddScoped<IAppointmentService, AppointmentService>();
-            services.AddScoped<ILoginService, LoginService>();
+            services.AddScoped<ILoginService, LoginService>();     
+            services.AddScoped<IEventService, EventService>();
 
             // Repository
             services.AddScoped<RepositoryFactory, HospitalRepositoryFactory>();
@@ -107,6 +108,7 @@ namespace HospitalAPI
             services.AddScoped<AppointmentValidation>();
             services.AddScoped<SurveyValidation>();
             services.AddScoped<LoginValidation>();
+            services.AddScoped<EventValidation>();
 
             // Repository dependency injection
             services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
@@ -136,6 +138,10 @@ namespace HospitalAPI
             // Connection with PostgreSQL
             services.AddDbContext<MyDbContext>(options => 
                     options.UseNpgsql(CreateConnectionStringFromEnvironment()).UseLazyLoadingProxies());
+
+            // Connection with PostgreSQL for Event Sourcing
+            services.AddDbContext<DatabaseEventContext>(options =>
+                    options.UseNpgsql(CreateConnectionStringFromEnvironmentForEvent()).UseLazyLoadingProxies());
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -172,6 +178,18 @@ namespace HospitalAPI
 
             string retVal = "Server=" + server + ";Port=" + port + ";Database=" + database + ";User ID=" + user + ";Password=" + password + ";Integrated Security=" + integratedSecurity + ";Pooling=" + pooling + ";";
             return retVal;
+        }
+
+        private static string CreateConnectionStringFromEnvironmentForEvent()
+        {
+            var server = Environment.GetEnvironmentVariable("DATABASE_HOST") ?? "localhost";
+            var port = Environment.GetEnvironmentVariable("DATABASE_PORT") ?? "5432";
+            var database = Environment.GetEnvironmentVariable("DATABASE_SCHEMA") ?? "events_db";
+            var user = Environment.GetEnvironmentVariable("DATABASE_USERNAME") ?? "root";
+            var password = Environment.GetEnvironmentVariable("DATABASE_PASSWORD") ?? "root";
+            var integratedSecurity = Environment.GetEnvironmentVariable("DATABASE_INTEGRATED_SECURITY") ?? "true";
+            var pooling = Environment.GetEnvironmentVariable("DATABASE_POOLING") ?? "true";
+            return $"Server={server};Port={port};Database={database};User ID={user};Password={password};Integrated Security={integratedSecurity};Pooling={pooling};";
         }
     }
 }

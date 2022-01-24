@@ -1,5 +1,5 @@
 ﻿using Hospital_library.MedicalRecords.Model.Enums;
-using HospitalLibrary.GraphicalEditor.Model;
+using Hospital_library.MedicalRecords.Model.Events;
 using System;
 
 namespace HospitalLibrary.MedicalRecords.Model
@@ -12,7 +12,6 @@ namespace HospitalLibrary.MedicalRecords.Model
         public int DoctorId { get; set; }
         public virtual Doctor Doctor { get; set; }
         public bool SurveyTaken { get; set; }
-
         public AppointmentType Type { get; set; }
 
         public Appointment() 

@@ -1,30 +1,55 @@
-﻿using Hospital_library.MedicalRecords.Repository.Repository.Interface;
-using Hospital_library.MedicalRecords.Service.Implements;
-using HospitalAPI.ImplRepository;
+﻿using AutoMapper;
+using Hospital_library.MedicalRecords.Model.Events;
+using Hospital_library.MedicalRecords.Service.Interfaces;
+using HospitalAPI.DTO.EventDTO;
+using HospitalAPI.Validation;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+
 
 namespace HospitalAPI.Controller
 {
+    [Route("api/[controller]")]
     [ApiController]
     public class EventController : ControllerBase
     {
-        private readonly EventService eventService;
-        private IEventRepository eventRepository;
-        public EventController(DatabaseEventContext context)
+        private readonly IEventService _eventService;
+
+        private readonly EventValidation _eventValidation;
+        private readonly IMapper _mapper;
+        public EventController(IEventService eventService, EventValidation eventValidation, IMapper mapper)
         {
-            eventRepository = new EventRepository(context);
-            eventService = new EventService();
+            _eventService = eventService;
+            _eventValidation = eventValidation;
+            _mapper = mapper;
         }
 
         [HttpPost]
         [Route("addEvent")]
-        public void Add(String appName, String eventName)
+        public IActionResult AddEvent([FromBody] EventAppointmentDTO eventDTO)
         {
-            eventService.CreateEventEntry(appName, eventName);
+            if (!_eventValidation.IsValid(eventDTO)) 
+            {
+                return BadRequest();
+            }
+
+            var model = _mapper.Map<AppointmentEvent>(eventDTO);
+
+            return Ok(_eventService.CreateEventEntry(model));
         }
+        
+        [HttpPost]
+        [Route("addEventStep")]
+        public IActionResult AddEventStep([FromBody] EventStepDTO eventStepDTO)
+        {
+            if (!_eventValidation.IsValidStep(eventStepDTO))
+            {
+                return BadRequest();
+            }
+
+            var model = _mapper.Map<EventStep>(eventStepDTO);
+
+            return Ok(_eventService.CreateStepEventEntry(model));
+        }
+        
     }
 }

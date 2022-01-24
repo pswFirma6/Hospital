@@ -1,13 +1,12 @@
-﻿using Hospital_library.MedicalRecords.Model;
-using Hospital_library.MedicalRecords.Repository.Repository.Interface;
+﻿using Hospital_library.MedicalRecords.Model.Events;
+using Hospital_library.MedicalRecords.Service.Interfaces;
 using HospitalLibraryHospital_library.MedicalRecords.Repository;
 using System;
-using System.Collections.Generic;
-using System.Text;
+
 
 namespace Hospital_library.MedicalRecords.Service.Implements
 {
-    public class EventService
+    public class EventService : IEventService
     {
         private readonly RepositoryFactory _hospitalRepositoryFactory;
 
@@ -16,26 +15,32 @@ namespace Hospital_library.MedicalRecords.Service.Implements
             _hospitalRepositoryFactory = hospitalRepositoryFactory;
         }
 
-        public EventService()
+        public AppointmentEvent CreateEventEntry(AppointmentEvent ev)
         {
+            AppointmentEvent e = new AppointmentEvent();
+            e.ApplicationName = ev.ApplicationName;
+            e.ClickTime = DateTime.Now;
+            e.Name = ev.Name;
+            e.DoctorId = ev.DoctorId;  // can be null
+            e.TimeSpan = ev.TimeSpan;
+
+            _hospitalRepositoryFactory.GetEventRepository().AddEvent(e);
+            
+            return e;
         }
 
-        public List<Event> GetAll()
+        public EventStep CreateStepEventEntry(EventStep ev)
         {
-            return _hospitalRepositoryFactory.GetEventRepository().GetAll();
-        }
-        public void Add(Event e)
-        {
-            _hospitalRepositoryFactory.GetEventRepository().Add(e);
-        }
-        public void CreateEventEntry(String appName, String eventName)
-        {
-            Event e = new Event();
-            e.Id = GetAll().Count + 1;
-            e.ApplicationName = appName;
+            EventStep e = new EventStep();
+            e.AppointmentEventId = ev.AppointmentEventId;
             e.ClickTime = DateTime.Now;
-            e.Name = eventName;
-            Add(e);
+            e.Name = ev.Name;
+            e.TimeSpan = ev.TimeSpan;
+
+            _hospitalRepositoryFactory.GetEventStepRepository().AddEvent(e);
+
+            return e;
         }
+
     }
 }

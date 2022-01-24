@@ -98,12 +98,14 @@ namespace HospitalIntegrationTests
             services.AddScoped<IAppointmentService, AppointmentService>();
             services.AddScoped<IDoctorService, DoctorService>();
             services.AddScoped<ILoginService, LoginService>();
+            services.AddScoped<IEventService, EventService>();
 
             // Validation
             services.AddScoped<RegistrationValidation>();
             services.AddScoped<SurveyValidation>();
             services.AddScoped<AppointmentValidation>();
             services.AddScoped<LoginValidation>();
+            services.AddScoped<EventValidation>();
 
             // Repository
             services.AddScoped<RepositoryFactory, HospitalRepositoryFactory>();
@@ -117,6 +119,7 @@ namespace HospitalIntegrationTests
             {
                 options.UseInMemoryDatabase("InMemoryDbForTesting").UseLazyLoadingProxies();
             });
+            
             var serviceProvider = services.BuildServiceProvider();
 
             using (var scope = serviceProvider.CreateScope())
@@ -132,6 +135,7 @@ namespace HospitalIntegrationTests
                         throw;
                     }
             }
+
         }
 
     
