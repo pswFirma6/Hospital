@@ -17,6 +17,7 @@ namespace HospitalLibrary.MedicalRecords.Model
         public AppointmentType Type { get; set; }
         public int PrescriptionId { get; set; }
         public virtual Prescription Prescription { get; set; }
+        public string DoctorReport { get; set; }
 
         public Appointment() 
         {
@@ -51,6 +52,25 @@ namespace HospitalLibrary.MedicalRecords.Model
             DoctorId = doctorId;
             Doctor = doctor;
             PrescriptionId = prescriptionId;
+        }
+
+        public Appointment(DateTime startDate, int patientId, Patient patient, int doctorId, Doctor doctor)
+        {
+            StartTime = startDate;
+            PatientId = patientId;
+            Patient = patient;
+            DoctorId = doctorId;
+            Doctor = doctor;
+        }
+
+        public Appointment(DateTime startDate, int patientId, Patient patient, int doctorId, Doctor doctor, Prescription prescription, string doctorReport)
+        {
+            StartTime = startDate;
+            PatientId = patientId;
+            Patient = patient;
+            DoctorId = doctorId;
+            Doctor = doctor;
+            Prescription = prescription;
         }
     }
 }

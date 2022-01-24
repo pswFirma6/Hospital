@@ -27,6 +27,7 @@ using Hospital_library.MedicalRecords.Service.Implements;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using Hospital_library.MedicalRecords.Model;
 
 namespace HospitalIntegrationTests
 {
@@ -146,10 +147,10 @@ namespace HospitalIntegrationTests
         private static void AddTestDoctor(MyDbContext context)
         {
             //  Add fake data
-
             List<Patient> patients = new List<Patient>();
 
             var patient = context.Patients.Find(2);
+            var patient3 = context.Patients.Find(3);
 
             var dateString = "2/12/2022 8:30:00 AM";
             DateTime date = DateTime.Parse(dateString,
@@ -157,11 +158,16 @@ namespace HospitalIntegrationTests
 
             //appointments
             Doctor doc = new Doctor();
+            Prescription prescription = new Prescription("Antibiotik", 4, "2 tablete na dan", "25/03/2022", "Milan Kalinic", "Ivan Ivanovic", 
+                "27/03/2022", "28/03/2022", "Temperatura", "pharmacy name");
 
             var dateString1 = "12/01/2022 7:00:00 AM";
             DateTime date1 = DateTime.Parse(dateString1,
                                       System.Globalization.CultureInfo.InvariantCulture);
-            Appointment appointment1 = new Appointment(date1, patient.Id, patient, 1, doc);
+
+            Appointment pacijent3appointment1 = new Appointment(date1, patient3.Id, patient3, 1, doc, prescription, "Pacijent ima temperaturu");
+
+            Appointment appointment1 = new Appointment(date1, patient.Id, patient, 1, doc, prescription, "Pacijent ima temperaturu");
 
             var dateString2 = "12/01/2022 7:30:00 AM";
             DateTime date2 = DateTime.Parse(dateString2,
@@ -252,7 +258,7 @@ namespace HospitalIntegrationTests
                 appointment11, appointment12,
                 appointment13, appointment14,
                 appointment15, appointment16,
-                appointment17,
+                appointment17, pacijent3appointment1
             };
 
             List<Appointment> Doctor2appointments = new List<Appointment>();
