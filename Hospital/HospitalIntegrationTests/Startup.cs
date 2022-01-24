@@ -119,7 +119,11 @@ namespace HospitalIntegrationTests
             {
                 options.UseInMemoryDatabase("InMemoryDbForTesting").UseLazyLoadingProxies();
             });
-            
+            services.AddDbContext<DatabaseEventContext>(options =>
+            {
+                options.UseInMemoryDatabase("InMemoryDbForTestingEvents").UseLazyLoadingProxies();
+            });
+
             var serviceProvider = services.BuildServiceProvider();
 
             using (var scope = serviceProvider.CreateScope())
@@ -134,6 +138,7 @@ namespace HospitalIntegrationTests
                     {
                         throw;
                     }
+              
             }
 
         }

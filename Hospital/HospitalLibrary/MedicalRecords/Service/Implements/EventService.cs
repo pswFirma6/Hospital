@@ -17,16 +17,10 @@ namespace Hospital_library.MedicalRecords.Service.Implements
 
         public AppointmentEvent CreateEventEntry(AppointmentEvent ev)
         {
-            AppointmentEvent e = new AppointmentEvent();
-            e.ApplicationName = ev.ApplicationName;
-            e.ClickTime = DateTime.Now;
-            e.Name = ev.Name;
-            e.DoctorId = ev.DoctorId;  // can be null
-            e.TimeSpan = ev.TimeSpan;
 
-            _hospitalRepositoryFactory.GetEventRepository().AddEvent(e);
+            _hospitalRepositoryFactory.GetEventRepository().AddEvent(ev);
             
-            return e;
+            return ev;
         }
 
         public EventStep CreateStepEventEntry(EventStep ev)
