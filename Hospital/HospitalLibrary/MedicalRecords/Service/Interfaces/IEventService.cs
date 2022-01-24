@@ -1,4 +1,5 @@
 ﻿using Hospital_library.MedicalRecords.Model.Events;
+using System.Collections.Generic;
 
 namespace Hospital_library.MedicalRecords.Service.Interfaces
 {
@@ -6,5 +7,6 @@ namespace Hospital_library.MedicalRecords.Service.Interfaces
     {
         public AppointmentEvent CreateEventEntry(AppointmentEvent ev);
         public EventStep CreateStepEventEntry(EventStep ev);
+        public List<AppointmentEvent> getAllAppointmentEvents();
     }
 }

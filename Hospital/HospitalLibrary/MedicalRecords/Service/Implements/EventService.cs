@@ -2,7 +2,7 @@
 using Hospital_library.MedicalRecords.Service.Interfaces;
 using HospitalLibraryHospital_library.MedicalRecords.Repository;
 using System;
-
+using System.Collections.Generic;
 
 namespace Hospital_library.MedicalRecords.Service.Implements
 {
@@ -40,6 +40,11 @@ namespace Hospital_library.MedicalRecords.Service.Implements
             _hospitalRepositoryFactory.GetEventStepRepository().AddEvent(e);
 
             return e;
+        }
+        
+        public List<AppointmentEvent> getAllAppointmentEvents()
+        {
+            return _hospitalRepositoryFactory.GetEventRepository().GetEventsAll();
         }
 
     }

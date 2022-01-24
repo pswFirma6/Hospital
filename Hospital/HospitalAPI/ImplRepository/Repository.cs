@@ -30,6 +30,11 @@ namespace HospitalLibrary.MedicalRecords.Repository
             return entities.ToList();
         }
 
+        public virtual List<Entity> GetEventsAll()
+        {
+            return entitiesEvent.ToList();
+        }
+
         public Entity GetOne(int id)
         {
             return entities.SingleOrDefault(s => s.Id == id);
@@ -75,5 +80,6 @@ namespace HospitalLibrary.MedicalRecords.Repository
             entities.Remove(entity);
             _context.SaveChanges();
         }
+
     }
 }

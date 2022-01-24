@@ -4,6 +4,7 @@ using Hospital_library.MedicalRecords.Service.Interfaces;
 using HospitalAPI.DTO.EventDTO;
 using HospitalAPI.Validation;
 using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
 
 
 namespace HospitalAPI.Controller
@@ -50,6 +51,15 @@ namespace HospitalAPI.Controller
 
             return Ok(_eventService.CreateStepEventEntry(model));
         }
+
+        [HttpGet]
+        [Route("getAllEvents")]
+        public IActionResult GetAllEvents()
+        {
+            List<AppointmentEvent> appointmentEvents = _eventService.getAllAppointmentEvents();
+            return Ok(appointmentEvents);
+        }
+
         
     }
 }
