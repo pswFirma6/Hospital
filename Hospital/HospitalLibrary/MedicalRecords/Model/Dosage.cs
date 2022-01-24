@@ -8,9 +8,9 @@ namespace Hospital_library.MedicalRecords.Model
     public class Dosage: ValueObject
     {
        
-        public int Quantity { get; private set; }
-        public string RecommendedDose { get; private  set; }
-        public string PrescriptionDate { get; private  set; }
+        public int Quantity { get; set; }
+        public string RecommendedDose { get; set; }
+        public string PrescriptionDate { get; set; }
 
         protected override IEnumerable<object> GetEqualityComponents()
         {

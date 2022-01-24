@@ -14,7 +14,7 @@ namespace HospitalLibrary.MedicalRecords.Model
         public int DoctorId { get; private set; }
         public virtual Doctor Doctor { get; private set; }
         public bool Blocked { get; private set; }
-        public bool Malicious { get; private set; }
+        public bool Malicious { get; set; }
         public byte[] Picture { get; set; }
         
         public Patient() 
