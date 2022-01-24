@@ -13,6 +13,7 @@ namespace Hospital_library.MedicalRecords.Model.Events
         public double TimeSpan { get; set; }
         public int? DoctorId { get; set; }
         public virtual ICollection<EventStep> EventsStep { get; set; }
+        public bool AppointmentCreated { get; set; }
 
     }
 }

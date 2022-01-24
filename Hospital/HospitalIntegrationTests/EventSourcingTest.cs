@@ -72,7 +72,8 @@ namespace HospitalIntegrationTests
             var dateString = DateTime.Now.ToString();
             DateTime date = DateTime.Parse(dateString,
                                       System.Globalization.CultureInfo.InvariantCulture);
-            EventAppointmentDTO eventDTO = new EventAppointmentDTO("addFeedback", date, "AppForPatient", 100, 1);
+            EventAppointmentDTO eventDTO = new EventAppointmentDTO("addFeedback", date, 
+                "AppForPatient", 100, 1, new List<EventStepDTO>(), true);
             
             var expectedClickTime = date;
             var expectedAppointmentId = 1;
