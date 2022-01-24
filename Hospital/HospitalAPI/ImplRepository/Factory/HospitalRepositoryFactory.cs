@@ -96,6 +96,7 @@ namespace HospitalAPI.Repository
                 return new EventRepository(_eventContext);
             else
                 return EventRepository;
+        }
         public override IManagerRepository GetManagerRepository()
         {
             if (ManagerRepository == null)
