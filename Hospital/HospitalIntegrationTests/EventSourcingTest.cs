@@ -3,6 +3,7 @@ using HospitalAPI.DTO.EventDTO;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Net;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
@@ -64,6 +65,41 @@ namespace HospitalIntegrationTests
             Assert.Equal(result.ClickTime, expectedClickTime);
             Assert.Equal(result.AppointmentEventId, appointmentId);
         }
+
+
+        [Fact]
+        public async Task Create_Get_ALL_Events()
+        {
+            // Arrange //
+            var url = "api/event/getAllEvents";
+
+            // Act //
+            var response = await injection.Client.GetAsync(url);
+
+            // Assert //
+            response.EnsureSuccessStatusCode();
+
+
+            Assert.Equal(HttpStatusCode.OK, response.StatusCode);
+        }
+
+
+        [Fact]
+        public async Task Get_ALL_Uncreated_Events()
+        {
+            // Arrange //
+            var url = "api/event/getAllEvents";
+
+            // Act //
+            var response = await injection.Client.GetAsync(url);
+
+            // Assert //
+            response.EnsureSuccessStatusCode();
+
+
+            Assert.Equal(HttpStatusCode.OK, response.StatusCode);
+        }
+
 
         public static IEnumerable<object[]> DataSuccessfully()
         {

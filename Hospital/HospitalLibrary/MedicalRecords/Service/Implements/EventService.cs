@@ -1,8 +1,11 @@
-﻿using Hospital_library.MedicalRecords.Model.Events;
+﻿using Hospital_library.MedicalRecords.Model;
+using Hospital_library.MedicalRecords.Model.Events;
 using Hospital_library.MedicalRecords.Service.Interfaces;
+using HospitalLibrary.MedicalRecords.Model;
 using HospitalLibraryHospital_library.MedicalRecords.Repository;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Hospital_library.MedicalRecords.Service.Implements
 {
@@ -41,5 +44,16 @@ namespace Hospital_library.MedicalRecords.Service.Implements
             return _hospitalRepositoryFactory.GetEventRepository().GetEventsAll();
         }
 
+        public List<AppointmentEvent> getAllUncreatedEvents()
+        {
+            List<AppointmentEvent> uncreatetEvents = new List<AppointmentEvent>(); 
+               uncreatetEvents = _hospitalRepositoryFactory.GetEventRepository().GetEventsAll()
+                    .Where(x => x.AppointmentCreated.Equals(false)).ToList(); ;
+            
+            return uncreatetEvents;
+        }
+
+
     }
+
 }

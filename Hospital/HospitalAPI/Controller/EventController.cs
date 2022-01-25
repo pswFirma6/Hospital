@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Hospital_library.MedicalRecords.Model;
 using Hospital_library.MedicalRecords.Model.Events;
 using Hospital_library.MedicalRecords.Service.Interfaces;
 using HospitalAPI.DTO.EventDTO;
@@ -61,5 +62,14 @@ namespace HospitalAPI.Controller
         }
 
         
+        [HttpGet]
+        [Route("allEventsUncreated")]
+        public IActionResult GetAllUncreatedEvents()
+        {
+            List<AppointmentEvent> appointmentEvents = _eventService.getAllUncreatedEvents();
+            return Ok(appointmentEvents);
+        }
+
+
     }
 }
