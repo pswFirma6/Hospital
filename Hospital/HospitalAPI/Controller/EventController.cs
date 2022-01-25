@@ -60,6 +60,21 @@ namespace HospitalAPI.Controller
             return Ok(appointmentEvents);
         }
 
-        
+        [HttpGet]
+        [Route("getStepsPerDate")]
+        public IActionResult GetTimePerStep()
+        {
+            List<int> appointmentEvents = _eventService.getAverageTimePerEventStep();
+            return Ok(appointmentEvents);
+        }
+
+        [HttpGet]
+        [Route("getAverageStepTime")]
+        public IActionResult GetAverageStepTime()
+        {
+            List<double> appointmentEvents = _eventService.GetAverageStepTimes();
+            return Ok(appointmentEvents);
+        }
+
     }
 }
