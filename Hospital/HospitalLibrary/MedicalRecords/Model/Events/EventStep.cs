@@ -12,5 +12,7 @@ namespace Hospital_library.MedicalRecords.Model.Events
         public DateTime ClickTime { get; set; }
         public int AppointmentEventId { get; set; }
         public virtual AppointmentEvent AppointmentEvent { get; set; }
+
+        
     }
 }

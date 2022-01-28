@@ -135,6 +135,45 @@ namespace HospitalIntegrationTests
 
             return retVal;
         }
-        
+        [Theory]
+        [MemberData(nameof(DataEventStepSuccessfully))]
+        public async Task Get_Average_Step_Time_Test(List<EventStep> eventSteps, double expectedAvgtime1, double expectedAvgtime2)
+        {
+            // Arrange //
+            
+          
+            var url = "api/event/getAverageStepTime";
+
+            // Act //
+            var response = await injection.Client.GetAsync(url);
+
+            // Assert //
+            response.EnsureSuccessStatusCode();
+
+            var resultString = await response.Content.ReadAsStringAsync();
+            var result = JsonConvert.DeserializeObject<List<double>>(resultString);
+
+            Assert.Equal(result[0],expectedAvgtime1);
+            Assert.Equal(result[1], expectedAvgtime2);
+        }
+        public async Task Get_Steps_Per_Month_Test(List<EventStep> eventSteps, double expectedNum1, double expectedNum2)
+        {
+            // Arrange //
+
+
+            var url = "api/event/getStepsPerDate";
+
+            // Act //
+            var response = await injection.Client.GetAsync(url);
+
+            // Assert //
+            response.EnsureSuccessStatusCode();
+
+            var resultString = await response.Content.ReadAsStringAsync();
+            var result = JsonConvert.DeserializeObject<List<double>>(resultString);
+
+            Assert.Equal(result[0], expectedNum1);
+            Assert.Equal(result[1], expectedNum2);
+        }
     }
 }
