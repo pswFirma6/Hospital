@@ -90,7 +90,7 @@ namespace HospitalUnitTests
             DateTime date = DateTime.Parse(dateString,
                                       System.Globalization.CultureInfo.InvariantCulture);
 
-            Appointment appointment = new Appointment(date, patient.Id, patient, 1, doc, AppointmentType.Awaiting);
+            Appointment appointment = new Appointment(date, patient.Id, patient, 1, doc, (int)AppointmentType.Awaiting);
 
 
             retVal.Add(new object[] { appointment });
@@ -114,7 +114,7 @@ namespace HospitalUnitTests
             DateTime date = DateTime.Parse(dateString,
                                       System.Globalization.CultureInfo.InvariantCulture);
 
-            Appointment appointment = new Appointment(date, patient.Id, patient, 1, doc, AppointmentType.Cancelled);
+            Appointment appointment = new Appointment(date, patient.Id, patient, 1, doc, (int)AppointmentType.Cancelled);
 
 
             retVal.Add(new object[] { appointment });
@@ -138,7 +138,7 @@ namespace HospitalUnitTests
             DateTime date = DateTime.Parse(dateString,
                                       System.Globalization.CultureInfo.InvariantCulture);
 
-            Appointment appointment = new Appointment(date,  patient.Id, patient, 1, doc, AppointmentType.Cancelled);
+            Appointment appointment = new Appointment(date,  patient.Id, patient, 1, doc, (int)AppointmentType.Cancelled);
 
             retVal.Add(new object[] { appointment });
 
@@ -163,7 +163,7 @@ namespace HospitalUnitTests
                                       System.Globalization.CultureInfo.InvariantCulture);
 
             Appointment appointment = new Appointment(date,
-                 patient.Id, patient, 1, doc, AppointmentType.Awaiting);
+                 patient.Id, patient, 1, doc, (int)AppointmentType.Awaiting);
 
 
 

@@ -49,7 +49,7 @@ namespace HospitalAPI.Service
             {
                 feedback.Information.SetDate(DateTime.Now);
             }
-            feedback.Id = _repositoryFactory.GetFeedbackRepository().GetAll().Count + 1;
+            //feedback.Id = _repositoryFactory.GetFeedbackRepository().GetAll().Count + 1;
             _repositoryFactory.GetFeedbackRepository().Add(feedback);
         }
 

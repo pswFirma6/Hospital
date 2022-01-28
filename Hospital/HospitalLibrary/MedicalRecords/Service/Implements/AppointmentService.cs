@@ -36,6 +36,17 @@ namespace HospitalAPI.ImplService
             appointment.Doctor = _hospitalRepositoryFactory.GetDoctorsRepository().GetOne(appointment.DoctorId);
             appointment.Patient = _hospitalRepositoryFactory.GetPatientRepository().GetOne(appointment.PatientId);
             appointment.Type = AppointmentType.Awaiting;
+            appointment.Prescription = new Prescription()
+            {
+                DoctorName = appointment.Doctor.Name,
+                Dosage = new Dosage(1, "4", new DateTime(2022, 1, 1).ToLongDateString()),
+                Id = _hospitalRepositoryFactory.GetAppointmentsRepository().GetAll().Count() + 1,
+                MedicineName = "Pracetamol",
+                PatientName = appointment.Patient.Name,
+                PharmacyName = "Benu apoteka",
+                Therapy = new Therapy("Ujutru kad ustanes", "Pred spavanje", "Piti svaki dan 3 puta")
+            };
+
             _hospitalRepositoryFactory.GetAppointmentsRepository().Add(appointment);
         }
 

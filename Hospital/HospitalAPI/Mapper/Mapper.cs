@@ -1,7 +1,9 @@
 ﻿using AutoMapper;
 using Hospital_library.MedicalRecords.Model;
+using Hospital_library.MedicalRecords.Model.Events;
 using HospitalAPI.DTO;
 using HospitalAPI.DTO.AppointmentDTO;
+using HospitalAPI.DTO.EventDTO;
 using HospitalAPI.DTO.SurveyDTO;
 using HospitalLibrary.MedicalRecords.Model;
 
@@ -40,6 +42,12 @@ namespace HospitalAPI.Mapper
 
                 CreateMap<User, LoginDTO>();
                 CreateMap<LoginDTO, User>();
+
+                CreateMap<AppointmentEvent, EventAppointmentDTO>();
+                CreateMap<EventAppointmentDTO, AppointmentEvent>();
+
+                CreateMap<EventStep, EventStepDTO>();
+                CreateMap<EventStepDTO, EventStep>();
 
             }
         }
