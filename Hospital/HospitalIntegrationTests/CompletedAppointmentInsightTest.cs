@@ -17,8 +17,8 @@ namespace HospitalIntegrationTests
         }
 
         [Theory]
-        [MemberData(nameof(ExpectedReportPrescriptionResults))]
-        public async Task ExpectedResults(string expectedDoctorReport, string expectedMedicine, string expectedDose)
+        [MemberData(nameof(ExpectedReportResults))]
+        public async Task ExpectedResults(DateTime dateTime, string expectedDoctorName, string expectedPatientName, string expectedDoctorReport)
         {
             var url = "api/appointment/completed/3";
             var response = await injection.Client.GetAsync(url);
@@ -26,20 +26,56 @@ namespace HospitalIntegrationTests
             var resultString = await response.Content.ReadAsStringAsync();
             var result = JsonConvert.DeserializeObject<List<Appointment>>(resultString);
 
+            Assert.Equal(result[0].StartTime, dateTime);
+            Assert.Equal(result[0].Doctor.Name, expectedDoctorName);
+            Assert.Equal(result[0].Patient.Name, expectedPatientName);
             Assert.Equal(result[0].DoctorReport, expectedDoctorReport);
-            Assert.Equal(result[0].Prescription.MedicineName, expectedMedicine);
-            Assert.Equal(result[0].Prescription.Dosage.RecommendedDose, expectedDose);
         }
 
-        public static IEnumerable<object[]> ExpectedReportPrescriptionResults()
+        public static IEnumerable<object[]> ExpectedReportResults()
         {
             var retVal = new List<object[]>();
 
+            DateTime dateTime = DateTime.Now;
+            string expectedDoctorName = "Nikola";
+            string expectedPatientName = "Gerogije";
             string expectedDoctorReport = "Pacijent ima temperaturu";
-            string expectedMedicine = "Antibiotik";
-            string expectedDose = "2 tablete na dan";
 
-            retVal.Add(new object[] { expectedDoctorReport, expectedMedicine, expectedDose });
+            retVal.Add(new object[] { dateTime, expectedDoctorName, expectedPatientName, expectedDoctorReport });
+            return retVal;
+        }
+
+
+        [Theory]
+        [MemberData(nameof(ExpectedPrescriptionResults))]
+        public async Task ExpectedResultsPrescription(string medicineName, string PharmacyName, int quantity, string recommendedDose, string doctorName)
+        {
+            var url = "api/appointment/completed/3";
+            var response = await injection.Client.GetAsync(url);
+            response.EnsureSuccessStatusCode();
+            var resultString = await response.Content.ReadAsStringAsync();
+            var result = JsonConvert.DeserializeObject<List<Appointment>>(resultString);
+
+           
+            Assert.Equal(result[0].Prescription.MedicineName, medicineName);
+            Assert.Equal(result[0].Prescription.PharmacyName, PharmacyName);
+            Assert.Equal(result[0].Prescription.Dosage.Quantity, quantity);
+            Assert.Equal(result[0].Prescription.Dosage.RecommendedDose, recommendedDose);
+            Assert.Equal(result[0].Doctor.Name, doctorName);
+        }
+
+        public static IEnumerable<object[]> ExpectedPrescriptionResults()
+        {
+            var retVal = new List<object[]>();
+
+
+            string medicineName = "Paracetamol";
+            string PharmacyName = "Benu apoteka";
+            int quantity = 1;
+            string recommendedDose = "4";
+            string doctorName = "Nikola";
+
+            retVal.Add(new object[] { medicineName, PharmacyName, quantity, recommendedDose, doctorName });
             return retVal;
         }
     }

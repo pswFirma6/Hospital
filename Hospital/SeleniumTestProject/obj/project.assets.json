@@ -1865,19 +1865,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Beric\\.nuget\\packages\\": {}
+    "C:\\Users\\Nikolina\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\FAKS\\IV godina\\7. semestar\\PSW-BOLNICA\\Hospital\\Hospital\\SeleniumTestProject\\SeleniumTestProject.csproj",
+      "projectUniqueName": "C:\\Users\\Nikolina\\Desktop\\PSW_NOVO\\Hospitakl\\Hospital\\Hospital\\SeleniumTestProject\\SeleniumTestProject.csproj",
       "projectName": "SeleniumTestProject",
-      "projectPath": "D:\\FAKS\\IV godina\\7. semestar\\PSW-BOLNICA\\Hospital\\Hospital\\SeleniumTestProject\\SeleniumTestProject.csproj",
-      "packagesPath": "C:\\Users\\Beric\\.nuget\\packages\\",
-      "outputPath": "D:\\FAKS\\IV godina\\7. semestar\\PSW-BOLNICA\\Hospital\\Hospital\\SeleniumTestProject\\obj\\",
+      "projectPath": "C:\\Users\\Nikolina\\Desktop\\PSW_NOVO\\Hospitakl\\Hospital\\Hospital\\SeleniumTestProject\\SeleniumTestProject.csproj",
+      "packagesPath": "C:\\Users\\Nikolina\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Nikolina\\Desktop\\PSW_NOVO\\Hospitakl\\Hospital\\Hospital\\SeleniumTestProject\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\Beric\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Nikolina\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -1965,7 +1965,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.101\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.100\\RuntimeIdentifierGraph.json"
       }
     }
   }

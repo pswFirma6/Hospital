@@ -1,6 +1,7 @@
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using Selenium.Pages.AppForManager;
+using SeleniumTestProject.Pages.AppForManager;
 using Xunit;
 
 namespace Selenium
@@ -11,6 +12,7 @@ namespace Selenium
         private HomePage homePage;
         private LandingPage landingPage;
         private PatientFeedbacksPage patientFeedbacksPage;
+        private LoginPage loginPage;
 
         public ApproveFeedbackTest()
         {
@@ -27,16 +29,22 @@ namespace Selenium
 
             landingPage = new LandingPage(driver);
             landingPage.Navigate();
-            landingPage.ButtonDisplayed();
+            Assert.True(landingPage.ButtonDisplayed());
             landingPage.ClickButton();
 
+            loginPage = new LoginPage(driver);
+            Assert.True(loginPage.ButtonDisplayed());
+            loginPage.InsertUsername("markomanager");
+            loginPage.InsertPassword("jasammanager");
+            loginPage.ClickLogInButton();
+
             homePage = new HomePage(driver);
-            homePage.ButtonDisplayed();
+            Assert.True(homePage.ButtonDisplayed());
             homePage.ClickButton();
         }
 
         [Fact]
-        public void TestApproveFeedback()
+        public void TestApproveFeedbackSuccessfully()
         {
             patientFeedbacksPage = new PatientFeedbacksPage(driver);
             if (patientFeedbacksPage.FeedbackCount() > 0)
@@ -44,8 +52,39 @@ namespace Selenium
                 patientFeedbacksPage.ApproveButonDisplayed(2);
             }
             patientFeedbacksPage.ClickApproveButton(2);
-            patientFeedbacksPage.IsFeedbackApproved(2);
-            patientFeedbacksPage.WithDrawClickable(2);
+            Assert.Equal("approved", patientFeedbacksPage.IsFeedbackApproved(2,"approved"));
+            Assert.True(patientFeedbacksPage.WithDrawClickable(2));
+        }
+
+        [Fact]
+        public void TestApproveFeedbackUnsuccessfully()
+        {
+            patientFeedbacksPage = new PatientFeedbacksPage(driver);
+            if (patientFeedbacksPage.FeedbackCount() > 0)
+            {
+                patientFeedbacksPage.ApproveButonDisplayed(2);
+            }
+            patientFeedbacksPage.ClickRejectButton(3);
+            Assert.Equal("rejected", patientFeedbacksPage.IsFeedbackApproved(3,"rejected"));
+            Assert.True(patientFeedbacksPage.WithDrawClickable(3));
+        }
+
+        [Fact]
+        public void ClickWithDrawUnsuccessfully()
+        {
+            patientFeedbacksPage = new PatientFeedbacksPage(driver);
+            if (patientFeedbacksPage.FeedbackCount() > 0)
+            {
+                patientFeedbacksPage.ApproveButonDisplayed(2);
+            }
+
+            Assert.False(patientFeedbacksPage.WithDrawClickable(3));
+        }
+
+        public void Dispose()
+        {
+            driver.Quit();
+            driver.Dispose();
         }
     }
 }

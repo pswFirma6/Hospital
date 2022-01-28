@@ -7,6 +7,8 @@ namespace HospitalLibrary.MedicalRecords.Model
 {
     public class Appointment : Entity
     {
+        private AppointmentType awaiting;
+
         public DateTime StartTime { get; set; }
         public int PatientId { get; set; }
         public virtual Patient Patient { get; set; }
@@ -71,6 +73,11 @@ namespace HospitalLibrary.MedicalRecords.Model
             DoctorId = doctorId;
             Doctor = doctor;
             Prescription = prescription;
+        }
+
+        public Appointment(DateTime startDate, int patientId, Patient patient, int doctorId, Doctor doctor, AppointmentType awaiting) : this(startDate, patientId, patient, doctorId, doctor)
+        {
+            this.awaiting = awaiting;
         }
     }
 }
