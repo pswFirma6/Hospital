@@ -9,6 +9,7 @@ namespace HospitalLibrary.MedicalRecords.Model
     {
         public virtual ICollection<Patient> Patients { get; set; }
         public DoctorType DoctorType { get; set; }
+        public int AppointmentEventId { get; set; }
         public virtual ICollection<Appointment> Appointments { get; set; }
 
         public Doctor()

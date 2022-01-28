@@ -1,6 +1,6 @@
 ﻿using Hospital_library.MedicalRecords.Model;
 using Hospital_library.MedicalRecords.Model.Enums;
-using HospitalLibrary.GraphicalEditor.Model;
+using Hospital_library.MedicalRecords.Model.Events;
 using System;
 
 namespace HospitalLibrary.MedicalRecords.Model
