@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "D:\\FAKS\\IV godina\\7. semestar\\PSW-BOLNICA\\Hospital\\Hospital\\SeleniumTestProject\\SeleniumTestProject.csproj": {}
+    "C:\\Users\\nikol\\Documents\\FTN\\Projektovanje_softvera\\Projekat\\Hospital\\Hospital\\Hospital\\SeleniumTestProject\\SeleniumTestProject.csproj": {}
   },
   "projects": {
-    "D:\\FAKS\\IV godina\\7. semestar\\PSW-BOLNICA\\Hospital\\Hospital\\SeleniumTestProject\\SeleniumTestProject.csproj": {
+    "C:\\Users\\nikol\\Documents\\FTN\\Projektovanje_softvera\\Projekat\\Hospital\\Hospital\\Hospital\\SeleniumTestProject\\SeleniumTestProject.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\FAKS\\IV godina\\7. semestar\\PSW-BOLNICA\\Hospital\\Hospital\\SeleniumTestProject\\SeleniumTestProject.csproj",
+        "projectUniqueName": "C:\\Users\\nikol\\Documents\\FTN\\Projektovanje_softvera\\Projekat\\Hospital\\Hospital\\Hospital\\SeleniumTestProject\\SeleniumTestProject.csproj",
         "projectName": "SeleniumTestProject",
-        "projectPath": "D:\\FAKS\\IV godina\\7. semestar\\PSW-BOLNICA\\Hospital\\Hospital\\SeleniumTestProject\\SeleniumTestProject.csproj",
-        "packagesPath": "C:\\Users\\Beric\\.nuget\\packages\\",
-        "outputPath": "D:\\FAKS\\IV godina\\7. semestar\\PSW-BOLNICA\\Hospital\\Hospital\\SeleniumTestProject\\obj\\",
+        "projectPath": "C:\\Users\\nikol\\Documents\\FTN\\Projektovanje_softvera\\Projekat\\Hospital\\Hospital\\Hospital\\SeleniumTestProject\\SeleniumTestProject.csproj",
+        "packagesPath": "C:\\Users\\nikol\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\nikol\\Documents\\FTN\\Projektovanje_softvera\\Projekat\\Hospital\\Hospital\\Hospital\\SeleniumTestProject\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Beric\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\nikol\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [

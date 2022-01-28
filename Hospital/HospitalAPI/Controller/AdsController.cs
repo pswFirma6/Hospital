@@ -1,5 +1,3 @@
-using Hospital_library.MedicalRecords.Service;
-using HospitalLibrary.MedicalRecords.Model;
 using Microsoft.AspNetCore.Mvc;
 using RestSharp;
 using System.Collections.Generic;
