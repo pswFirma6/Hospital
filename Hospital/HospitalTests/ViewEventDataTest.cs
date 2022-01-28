@@ -1,15 +1,9 @@
-﻿using Hospital_library.MedicalRecords.Model;
-using Hospital_library.MedicalRecords.Model.Events;
+﻿using Hospital_library.MedicalRecords.Model.Events;
 using Hospital_library.MedicalRecords.Service.Implements;
-using HospitalAPI.ImplService;
-using HospitalLibrary.MedicalRecords.Model;
-using HospitalLibrary.MedicalRecords.Model.Enums;
-using HospitalLibrary.Model.Enums;
 using HospitalLibraryHospital_library.MedicalRecords.Repository;
 using Moq;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using Xunit;
 
 namespace HospitalUnitTests

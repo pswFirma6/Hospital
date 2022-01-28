@@ -52,6 +52,15 @@ namespace Hospital_library.MedicalRecords.Service.Implements
             return completedEventslist;
         }
 
+        public List<AppointmentEvent> getAllUncreatedEvents()
+        {
+            List<AppointmentEvent> uncreatetEvents = new List<AppointmentEvent>();
+            uncreatetEvents = _hospitalRepositoryFactory.GetEventRepository().GetEventsAll()
+                 .Where(x => x.AppointmentCreated.Equals(false)).ToList(); ;
+
+            return uncreatetEvents;
+        }
+
         public List<int> getAverageTimePerEventStep()
         {
             int countJan = 0;
@@ -76,7 +85,7 @@ namespace Hospital_library.MedicalRecords.Service.Implements
                 ICollection<EventStep> eventSteps = appEvent.EventsStep;
                 foreach(EventStep step in eventSteps)
                 {
-                    if (step.ClickTime.Year.Equals(2021))
+                    if (step.ClickTime.Year.Equals(2022))
                     {
                         if (step.ClickTime.Month.Equals(1)){
                             countJan = CountInstanscesOfEventStep(step, countJan);

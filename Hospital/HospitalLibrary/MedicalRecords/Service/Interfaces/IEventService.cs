@@ -13,7 +13,6 @@ namespace Hospital_library.MedicalRecords.Service.Interfaces
         public EventStep CreateStepEventEntry(EventStep ev);
         public List<AppointmentEvent> getAllAppointmentEvents();
         public List<AppointmentEvent> getAllUncreatedEvents();
-        
         public List<AppointmentEvent> getAllCompletedAppointmentEvents();
         List<double> GetAverageStepTimes();
     }

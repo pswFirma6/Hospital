@@ -15,7 +15,10 @@ namespace Hospital_library.MedicalRecords.Model.Events
         public virtual ICollection<EventStep> EventsStep { get; set; }
         public bool AppointmentCreated { get; set; }
 
-
+        public AppointmentEvent() 
+        {
+        
+        }
         public AppointmentEvent(int id, string name, DateTime dateTime, string applicationName, double timeSpan, 
             int doctorId, bool appointmentCreated) 
         {
